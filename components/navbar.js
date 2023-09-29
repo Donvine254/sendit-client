@@ -3,9 +3,12 @@ import {
   RegisterLink,
   LoginLink,
   LogoutLink,
+  getKindeServerSession
 } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default function Navbar() {
+    const { isAuthenticated, getUser } = getKindeServerSession();
+    const user = getUser();
   return (
     <div className="navbar bg-base-100 text-white">
       <div className="navbar-start">
@@ -46,21 +49,6 @@ export default function Navbar() {
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
-        <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,8 +66,36 @@ export default function Navbar() {
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
         </button>
-        <LoginLink className="btn btn-ghost sign-in-btn">Sign in</LoginLink>
-        <RegisterLink className="btn btn-dark">Sign up</RegisterLink>
+        <div className="flex items-center gap-1">
+              {!isAuthenticated() ? (
+                <>
+                  <LoginLink className="btn btn-ghost sign-in-btn">Sign in</LoginLink>
+                  <RegisterLink className="btn btn-dark">Sign up</RegisterLink>
+                </>
+              ) : (
+                <div className="flex items-center gap-1 p-2">
+                  {user?.picture ? (
+                    <img
+                      className=" h-10 w-10 rounded-full ring-2 ring-white"
+                      src={user?.picture}
+                      alt="user profile avatar"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div className="h-10 w-10 rounded-full ring-2 ring-white">
+                      {user?.given_name?.[0]}
+                      {user?.family_name?.[0]}
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2">
+                    <p className="">
+                      {user?.given_name.toUpperCase()}
+                    </p>
+                    <LogoutLink className="btn btn-dark text-white ">Log out</LogoutLink>
+                  </div>
+                </div>
+              )}
+            </div>
       </div>
     </div>
   );
