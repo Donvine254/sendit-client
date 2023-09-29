@@ -8,7 +8,9 @@ import { useAppContext } from "@/context/context";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
+    
   const { isAdmin, setIsAutheticated } = useAppContext();
+
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");

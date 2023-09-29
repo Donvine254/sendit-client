@@ -37,6 +37,7 @@ export default function Navbar() {
             <li>
               <a>About</a>
             </li>
+            <li><LogoutLink className="text-subtle">Log out</LogoutLink></li>
           </ul>
         </div>
       </div>
