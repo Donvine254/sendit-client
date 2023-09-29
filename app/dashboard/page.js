@@ -1,25 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 
-import {registerUser} from "@/lib"
+import { registerUser } from "@/lib";
 
-import toast from 'react-hot-toast';
+import { useAppContext } from "@/context/context";
+import toast from "react-hot-toast";
 
 export default function Dashboard() {
-  const [authStatus, setAuthStatus] = useState(null);
+  const { currentUser, isAdmin, setIsAutheticated } = useAppContext();
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");
       const data = await res.json();
-			setAuthStatus(data.authenticated);
+      setIsAutheticated(data.authenticated);
       registerUser(data);
     };
 
     getKindeSession();
-    
   }, []);
- 
+  console.log(currentUser, isAdmin);
   return (
     <div className="">
       <div className="">
@@ -30,8 +30,7 @@ export default function Dashboard() {
         <button
           type="button"
           className="btn btn-info text-white font-bold text-2xl"
-          onClick={()=>toast("you clicked me!")}
-          >
+          onClick={() => toast("you clicked me!")}>
           Get Started
         </button>
       </div>
