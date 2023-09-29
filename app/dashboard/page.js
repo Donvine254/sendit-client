@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 
 import { registerUser } from "@/lib";
 
@@ -8,15 +8,16 @@ import { useAppContext } from "@/context/context";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
-    
-  const { isAdmin, setIsAutheticated } = useAppContext();
+    const [admin, setAdmin] = useState(false)
+  const { setIsAdmin, setCurrentUser, setIsAutheticated } = useAppContext();
 
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");
       const data = await res.json();
       setIsAutheticated(data.authenticated);
-      registerUser(data);
+      setAdmin(data.isAdmin)
+      registerUser(data, setIsAdmin, setCurrentUser);
       console.log(data.user)
     };
 
