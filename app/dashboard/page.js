@@ -8,29 +8,27 @@ import { useAppContext } from "@/context/context";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
-  const { currentUser, isAdmin, setIsAutheticated } = useAppContext();
+  const { isAdmin, setIsAutheticated } = useAppContext();
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");
       const data = await res.json();
       setIsAutheticated(data.authenticated);
       registerUser(data);
+      console.log(data.user)
     };
 
     getKindeSession();
   }, []);
-  console.log(currentUser, isAdmin);
+
   return (
     <div className="">
       <div className="">
-        <p className="">
-          Welcome to SENDIT, the only online courier you can trust.
-          <br />
-        </p>
+        {isAdmin?<p>Welcome admin</p>:<p>Welcome user</p>}
         <button
           type="button"
           className="btn btn-info text-white font-bold text-2xl"
-          onClick={() => toast("you clicked me!")}>
+          onClick={() => toast.success("you clicked me!")}>
           Get Started
         </button>
       </div>
