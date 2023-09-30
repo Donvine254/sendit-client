@@ -22,7 +22,7 @@ export default function Dashboard() {
     };
 
     getKindeSession();
-  }, []);
+  }, [setIsAdmin, setCurrentUser, setIsAutheticated]);
 
   return (
     <div className="mx-4">

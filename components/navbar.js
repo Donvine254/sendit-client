@@ -1,12 +1,15 @@
 import React from "react";
 
 import Link from "next/link";
+import Image from "next/image";
+
 import {
   RegisterLink,
   LoginLink,
   LogoutLink,
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
+
 
 export default function Navbar() {
   const { isAuthenticated, getUser } = getKindeServerSession();
@@ -86,7 +89,7 @@ export default function Navbar() {
                 </div>
               </button>
               {user?.picture ? (
-                <img
+                <Image
                   className=" h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
                   src={user?.picture}
                   alt="user profile avatar"
