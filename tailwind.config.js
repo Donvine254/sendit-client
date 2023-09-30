@@ -5,6 +5,10 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  daisyui: {
+    themes: ["light", "dark", "cupcake", "winter","retro"],
+    // themes:false,
+  },
   theme: {
     extend: {
       screens: {

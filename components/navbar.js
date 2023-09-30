@@ -1,4 +1,6 @@
 import React from "react";
+
+import Link from "next/link";
 import {
   RegisterLink,
   LoginLink,
@@ -10,13 +12,13 @@ export default function Navbar() {
     const { isAuthenticated, getUser } = getKindeServerSession();
     const user = getUser();
   return (
-    <div className="navbar bg-base-100 text-white">
+    <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-8 w-8"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor">
@@ -45,7 +47,7 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost normal-case text-xl">SendIT</a>
+        <Link href="/" className="normal-case text-xl font-mono">SENDIT</Link>
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
@@ -69,7 +71,7 @@ export default function Navbar() {
         <div className="flex items-center gap-1">
               {!isAuthenticated() ? (
                 <>
-                  <LoginLink className="btn btn-ghost sign-in-btn">Sign in</LoginLink>
+                  <LoginLink className="btn accent text-white hover:bg-blue-600 ">Sign in</LoginLink>
                   <RegisterLink className="btn btn-dark">Sign up</RegisterLink>
                 </>
               ) : (
@@ -88,10 +90,10 @@ export default function Navbar() {
                     </div>
                   )}
                   <div className="flex items-center gap-2">
-                    <p className="">
+                    <p className="text-base">
                       {user?.given_name.toUpperCase()}
                     </p>
-                    <LogoutLink className="btn btn-dark text-white ">Log out</LogoutLink>
+                    <LogoutLink className="btn accent hover:bg-blue-600 text-white ">Log out</LogoutLink>
                   </div>
                 </div>
               )}

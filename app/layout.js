@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import ContextProvider from "@/context/context";
 import { Toaster } from "react-hot-toast";
 import { Navbar } from "@/components";
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata = {
   title: "SendIT",
@@ -13,8 +13,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" data-theme="retro">
+      <body>
         <ContextProvider>
           <Navbar/>
           {children}</ContextProvider>

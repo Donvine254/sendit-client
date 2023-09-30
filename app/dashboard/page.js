@@ -25,12 +25,12 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="">
+    <div className="mx-4">
       <div className="">
         {admin ? <p>Welcome admin</p> : <p>Welcome user</p>}
         <button
           type="button"
-          className="btn btn-info text-white font-bold text-2xl"
+          className="btn accent text-white font-bold text-2xl"
           onClick={() => toast.success("you clicked me!")}>
           Get Started
         </button>
