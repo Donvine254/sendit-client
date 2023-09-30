@@ -92,6 +92,8 @@ export default function Navbar() {
                 <Image
                   className=" h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
                   src={user?.picture}
+                  width={40}
+                  height={40}
                   alt="user profile avatar"
                   referrerPolicy="no-referrer"
                 />
