@@ -34,13 +34,16 @@ export default function Navbar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a>Homepage</a>
+              <Link href="/">Home</Link>
             </li>
             <li>
-              <a>Portfolio</a>
+              <Link href="/orders">Orders</Link>
             </li>
             <li>
-              <a>About</a>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
             <li>
               <LogoutLink className="text-subtle">Log out</LogoutLink>
