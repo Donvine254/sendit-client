@@ -60,12 +60,12 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-      <div className="navbar-center">
+      <div className="navbar-center self-center">
         <Link href="/">
           <Image
             src="./logo.svg"
-            width={100}
-            height={80}
+            width={120}
+            height={100}
             className=""
             alt="Logo"
           />
@@ -75,7 +75,7 @@ export default function Navbar() {
         <div className="flex items-center gap-1">
           {!isAuthenticated() ? (
             <>
-              <LoginLink className="btn btn-ghost xsm:btn-sm hover:bg-blue-600 hover:text-white ">
+              <LoginLink className="btn btn-ghost xsm:btn-sm xsm:mt-2 hover:bg-blue-600 hover:text-white ">
                 Sign in
               </LoginLink>
               <RegisterLink className="btn btn-ghost xsm:hidden">
