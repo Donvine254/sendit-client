@@ -37,7 +37,7 @@ export default  function Navbar() {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52">
             <li>
               <Link href="/">Home</Link>
             </li>
@@ -68,10 +68,10 @@ export default  function Navbar() {
         <div className="flex items-center gap-1">
           {!isAuthenticated() ? (
             <>
-              <LoginLink className="btn btn-ghost hover:bg-blue-600 hover:text-white ">
+              <LoginLink className="btn btn-ghost xsm:btn-sm hover:bg-blue-600 hover:text-white ">
                 Sign in
               </LoginLink>
-              <RegisterLink className="btn btn-ghost">Sign up</RegisterLink>
+              <RegisterLink className="btn btn-ghost xsm:hidden">Sign up</RegisterLink>
             </>
           ) : (
             <div className="flex items-center gap-2 p-2">
@@ -108,7 +108,7 @@ export default  function Navbar() {
                   {user?.family_name?.[0]}
                 </div>
               )}
-              <div>
+              <div className="hidden md:inline-block">
                 <p className="text-base font-bold">{user?.given_name.toUpperCase()}</p>
                <p className="text-base text-red-600">{isAdmin? "Admin": "User"}</p>
               </div>
