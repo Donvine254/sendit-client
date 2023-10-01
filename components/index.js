@@ -1,7 +1,4 @@
 import Navbar from "./navbar";
+import Loading from "./loading";
 
-
-
-
-
-export {Navbar}
+export { Navbar, Loading };
