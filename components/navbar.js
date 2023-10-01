@@ -11,9 +11,11 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/server";
 
 
-export default function Navbar() {
-  const { isAuthenticated, getUser } = getKindeServerSession();
+export default  function Navbar() {
+  const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
   const user = getUser();
+  const isAdmin = getPermission("admin").isGranted;
+
   return (
     <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
@@ -35,7 +37,7 @@ export default function Navbar() {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-100 rounded-box w-52">
             <li>
               <Link href="/">Home</Link>
             </li>
@@ -43,14 +45,17 @@ export default function Navbar() {
               <Link href="/orders">Orders</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
               <Link href="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <LogoutLink className="text-subtle">Log out</LogoutLink>
+              <Link href="/pricing">Pricing</Link>
             </li>
+            <li>
+              <Link href="quote">Get a Quote</Link>
+            </li>
+            {isAuthenticated() && <li>
+              <LogoutLink className="text-subtle">Log out</LogoutLink>
+            </li> }
           </ul>
         </div>
       </div>
@@ -63,10 +68,10 @@ export default function Navbar() {
         <div className="flex items-center gap-1">
           {!isAuthenticated() ? (
             <>
-              <LoginLink className="btn btn-ghost hover:bg-blue-600 hover:text-white ">
+              <LoginLink className="btn btn-ghost xsm:btn-sm hover:bg-blue-600 hover:text-white ">
                 Sign in
               </LoginLink>
-              <RegisterLink className="btn btn-ghost">Sign up</RegisterLink>
+              <RegisterLink className="btn btn-ghost xsm:hidden">Sign up</RegisterLink>
             </>
           ) : (
             <div className="flex items-center gap-2 p-2">
@@ -103,11 +108,9 @@ export default function Navbar() {
                   {user?.family_name?.[0]}
                 </div>
               )}
-              <div className="flex items-center gap-2">
-                <p className="text-base">{user?.given_name.toUpperCase()}</p>
-                <LogoutLink className="btn accent hover:bg-blue-600 text-white ">
-                  Log out
-                </LogoutLink>
+              <div className="hidden md:inline-block">
+                <p className="text-base font-bold">{user?.given_name.toUpperCase()}</p>
+               <p className="text-base text-red-600">{isAdmin? "Admin": "User"}</p>
               </div>
             </div>
           )}
