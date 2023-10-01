@@ -10,8 +10,7 @@ import {
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
 
-
-export default  function Navbar() {
+export default function Navbar() {
   const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
   const user = getUser();
   const isAdmin = getPermission("admin").isGranted;
@@ -53,25 +52,35 @@ export default  function Navbar() {
             <li>
               <Link href="quote">Get a Quote</Link>
             </li>
-            {isAuthenticated() && <li>
-              <LogoutLink className="text-subtle">Log out</LogoutLink>
-            </li> }
+            {isAuthenticated() && (
+              <li>
+                <LogoutLink className="text-subtle">Log out</LogoutLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>
-      <div className="navbar-center">
-        <Link href="/" className="normal-case text-2xl font-mono font-bold">
-          SENDIT
+      <div className="navbar-center self-center">
+        <Link href="/">
+          <Image
+            src="./logo.svg"
+            width={120}
+            height={20}
+            className=""
+            alt="Logo"
+          />
         </Link>
       </div>
       <div className="navbar-end">
         <div className="flex items-center gap-1">
           {!isAuthenticated() ? (
             <>
-              <LoginLink className="btn btn-ghost xsm:btn-sm hover:bg-blue-600 hover:text-white ">
+              <LoginLink className="btn btn-ghost xsm:btn-sm xsm:mt-2 hover:bg-blue-600 hover:text-white ">
                 Sign in
               </LoginLink>
-              <RegisterLink className="btn btn-ghost xsm:hidden">Sign up</RegisterLink>
+              <RegisterLink className="btn btn-ghost xsm:hidden">
+                Sign up
+              </RegisterLink>
             </>
           ) : (
             <div className="flex items-center gap-2 p-2">
@@ -109,8 +118,12 @@ export default  function Navbar() {
                 </div>
               )}
               <div className="hidden md:inline-block">
-                <p className="text-base font-bold">{user?.given_name.toUpperCase()}</p>
-               <p className="text-base text-red-600">{isAdmin? "Admin": "User"}</p>
+                <p className="text-base font-bold">
+                  {user?.given_name.toUpperCase()}
+                </p>
+                <p className="text-base text-red-600">
+                  {isAdmin ? "Admin" : "User"}
+                </p>
               </div>
             </div>
           )}
