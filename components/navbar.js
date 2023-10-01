@@ -11,9 +11,11 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/server";
 
 
-export default function Navbar() {
-  const { isAuthenticated, getUser } = getKindeServerSession();
+export default  function Navbar() {
+  const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
   const user = getUser();
+  const isAdmin = getPermission("admin").isGranted;
+
   return (
     <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
@@ -43,14 +45,17 @@ export default function Navbar() {
               <Link href="/orders">Orders</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
               <Link href="/dashboard">Dashboard</Link>
             </li>
             <li>
-              <LogoutLink className="text-subtle">Log out</LogoutLink>
+              <Link href="/pricing">Pricing</Link>
             </li>
+            <li>
+              <Link href="quote">Get a Quote</Link>
+            </li>
+            {isAuthenticated() && <li>
+              <LogoutLink className="text-subtle">Log out</LogoutLink>
+            </li> }
           </ul>
         </div>
       </div>
@@ -103,11 +108,9 @@ export default function Navbar() {
                   {user?.family_name?.[0]}
                 </div>
               )}
-              <div className="flex items-center gap-2">
-                <p className="text-base">{user?.given_name.toUpperCase()}</p>
-                <LogoutLink className="btn accent hover:bg-blue-600 text-white ">
-                  Log out
-                </LogoutLink>
+              <div>
+                <p className="text-base font-bold">{user?.given_name.toUpperCase()}</p>
+               <p className="text-base text-red-600">{isAdmin? "Admin": "User"}</p>
               </div>
             </div>
           )}
