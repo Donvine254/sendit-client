@@ -65,7 +65,7 @@ export default function Navbar() {
           <Image
             src="./logo.svg"
             width={120}
-            height={100}
+            height={20}
             className=""
             alt="Logo"
           />
