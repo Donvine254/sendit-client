@@ -38,7 +38,7 @@ export default function page({ params }) {
         <div className="p-2 ">
           <h1 className="font-bold text-6xl text-center font-mono lg:text-8xl ">404</h1>
           <div className="bg-[url('https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif')] bg-auto bg-center h-[400px] mt-5"></div>
-            <h3 className="text-center text-2xl font-bold">Oh No! Looks like you're lost</h3>
+            <h3 className="text-center text-2xl font-bold">Oh No! Looks like you&#39;re lost </h3>
 
             <p className="text-xl text-center p-2 my-1">You must have picked the wrong door because i have not been able to lay an eye on the page you are searching for! 😢</p>
             <div className="flex items-center justify-center my-2"> <Link href="/" className="btn accent hover:btn-neutral text-white ">
