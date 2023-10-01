@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { registerUser } from "@/lib";
 
 import { useAppContext } from "@/context/context";
+import  Loading  from "../../components/loading";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
@@ -35,11 +36,12 @@ export default function Dashboard() {
           Get Started
         </button>
       </div>
-      <section className="">
+      {/* <section className="">
         <h2 className="text-2xl font-bold">
           This page is currently under development
         </h2>
-      </section>
+      </section> */}
+      <Loading/>
     </div>
   );
 }

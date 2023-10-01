@@ -1,16 +1,18 @@
-//import the loading module.css file here
-export default function Loading(){
-return (
-<div class='container'>
-  <div class='loader'>
-    <div class='loader--dot'></div>
-    <div class='loader--dot'></div>
-    <div class='loader--dot'></div>
-    <div class='loader--dot'></div>
-    <div class='loader--dot'></div>
-    <div class='loader--dot'></div>
-    <div class='loader--text'></div>
-  </div>
-</div>
-  )
+import "./loading.css"
+import React from "react";
+
+export default function Loading() {
+  return (
+    <div className="container">
+      <div className="loader">
+        <div className="loader--dot"></div>
+        <div className="loader--dot"></div>
+        <div className="loader--dot"></div>
+        <div className="loader--dot"></div>
+        <div className="loader--dot"></div>
+        <div className="loader--dot"></div>
+        <div className="loader--text"></div>
+      </div>
+    </div>
+  );
 }

@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="retro">
+    <html lang="en" data-theme="winter">
       <body>
         <ContextProvider>
           <Navbar/>
