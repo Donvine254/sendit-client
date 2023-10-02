@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^1.8.19",
+    "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.19.2",
     "axios": "^1.5.1",
     "next": "latest",

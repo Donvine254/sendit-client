@@ -41,7 +41,7 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/orders">Deliveries</Link>
+              <Link href="/deliveries">Deliveries</Link>
             </li>
             <li>
               <Link href="/dashboard">Dashboard</Link>

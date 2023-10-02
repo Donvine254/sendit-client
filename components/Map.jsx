@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -10,6 +10,7 @@ import {
 } from "@react-google-maps/api";
 
 import Loading from "./loading";
+import Places from "./Places";
 
 const containerStyle = {
   width: "100%",
@@ -17,8 +18,8 @@ const containerStyle = {
 };
 
 const center = {
-    lat: -1.2834,
-    lng: 36.8235
+  lat: -1.292066,
+  lng: 36.821946,
 };
 export default function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -26,13 +27,15 @@ export default function Map() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
-
+  const mapRef = useRef();
   const [map, setMap] = useState(null);
+  const [pickupLocation, setPickupLocation] = useState(null);
+  const [deliveryLocation, setDeliveryLocation] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
-
+    mapRef.current = map
     setMap(map);
   }, []);
 
@@ -42,12 +45,37 @@ export default function Map() {
 
   return isLoaded ? (
     <div className="container">
+         <Places
+          pickupLocation={(position) => {
+            setPickupLocation(position);
+            mapRef.current?.panTo(position);
+          }}
+          deliveryLocation={(position) => {
+            setPickupLocation(position);
+            mapRef.current?.panTo(position);
+          }}
+        />
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={0}
         onLoad={onLoad}
-        onUnmount={onUnmount}></GoogleMap>
+        onUnmount={onUnmount}>
+        {pickupLocation && (
+            <>
+              <Marker
+                position={pickupLocation}
+              />
+            </>
+          )}
+        {deliveryLocation && (
+            <>
+              <Marker
+                position={deliveryLocation}
+              />
+            </>
+          )}
+      </GoogleMap>
     </div>
   ) : (
     <>
