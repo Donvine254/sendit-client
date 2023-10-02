@@ -30,7 +30,7 @@ export default function Map() {
   });
   const mapRef = useRef();
   const [map, setMap] = useState(null);
-  const [pickupLocation, setPickupLocation] = useState(null);
+  const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
@@ -47,11 +47,7 @@ export default function Map() {
   return isLoaded ? (
     <div className="container">
          <Places
-          pickupLocation={(position) => {
-            setPickupLocation(position);
-            mapRef.current?.panTo(position);
-          }}
-          deliveryLocation={(position) => {
+          setPickupLocation={(position) => {
             setPickupLocation(position);
             mapRef.current?.panTo(position);
           }}

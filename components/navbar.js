@@ -67,7 +67,7 @@ export default function Navbar() {
             width={120}
             height={20}
             priority
-            className="self-center mb-3 h-auto w-auto"
+            className="self-center mb-3"
             alt="Logo"
           />
         </Link>

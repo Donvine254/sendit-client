@@ -31,6 +31,7 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
     console.log(lat, lng)
+    setPickupLocation(lat, lng);
   };
   return (
     <div className="shadow-lg mb-4 p-4 font-mono">
@@ -43,6 +44,7 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
             <Combobox onSelect={handleSelect}>
               <ComboboxInput
                 value={value}
+                type="search"
                 onChange={(e) => setValue(e.target.value)}
                 disabled={!ready}
                 className="input input-secondary focus:outline-none w-full max-w-xs"
@@ -64,7 +66,7 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
             <p className="font-bold text-base my-2">
               Where would you like to send it?
             </p>
-            <Combobox onSelect={handleDeliverySelect}>
+            {/* <Combobox onSelect={handleDeliverySelect}>
               <ComboboxInput
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -80,7 +82,7 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
                     ))}
                 </ComboboxList>
               </ComboboxPopover>
-            </Combobox>
+            </Combobox> */}
           </div>
         </li>
       </ul>
