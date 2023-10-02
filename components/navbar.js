@@ -66,7 +66,7 @@ export default function Navbar() {
             src="./logo.svg"
             width={120}
             height={20}
-            className=""
+            className="self-center mb-3"
             alt="Logo"
           />
         </Link>
@@ -104,7 +104,7 @@ export default function Navbar() {
               </button>
               {user?.picture ? (
                 <Image
-                  className=" h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
+                  className="xsm:h-8 xsm:w-8 h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 mb-3"
                   src={user?.picture}
                   width={40}
                   height={40}
@@ -121,7 +121,7 @@ export default function Navbar() {
                 <p className="text-base font-bold">
                   {user?.given_name.toUpperCase()}
                 </p>
-                <p className="text-base text-red-600">
+                <p className="text-base text-gray-500">
                   {isAdmin ? "Admin" : "User"}
                 </p>
               </div>
