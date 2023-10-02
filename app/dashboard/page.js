@@ -20,7 +20,6 @@ export default function Dashboard() {
       setIsAutheticated(data.authenticated);
       setAdmin(data.isAdmin);
       registerUser(data, setIsAdmin, setCurrentUser);
-      console.log(data.user);
       setCurrentUser(data.user);
     };
 
