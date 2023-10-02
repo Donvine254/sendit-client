@@ -41,7 +41,7 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/orders">Orders</Link>
+              <Link href="/orders">Deliveries</Link>
             </li>
             <li>
               <Link href="/dashboard">Dashboard</Link>
@@ -54,7 +54,7 @@ export default function Navbar() {
             </li>
             {isAuthenticated() && (
               <li>
-                <LogoutLink className="text-subtle">Log out</LogoutLink>
+                <LogoutLink className="text-subtle text-white hover:text-black accent">Log out</LogoutLink>
               </li>
             )}
           </ul>
@@ -66,7 +66,7 @@ export default function Navbar() {
             src="./logo.svg"
             width={120}
             height={20}
-            className=""
+            className="self-center mb-3"
             alt="Logo"
           />
         </Link>
@@ -104,7 +104,7 @@ export default function Navbar() {
               </button>
               {user?.picture ? (
                 <Image
-                  className=" h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
+                  className="xsm:h-8 xsm:w-8 h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 mb-3"
                   src={user?.picture}
                   width={40}
                   height={40}
@@ -112,16 +112,16 @@ export default function Navbar() {
                   referrerPolicy="no-referrer"
                 />
               ) : (
-                <div className="h-10 w-10 rounded-full ring-2 ring-white">
-                  {user?.given_name?.[0]}
-                  {user?.family_name?.[0]}
+                <div className="xsm:h-8 xsm:w-8 h-10 w-10 flex items-center justify-center accent text-white rounded-full ring-2 ring-red-300 ring-offset-2 ">
+                  {user?.given_name?.[0].toUpperCase()}
+                  {user?.family_name?.[0].toUpperCase()}
                 </div>
               )}
               <div className="hidden md:inline-block">
                 <p className="text-base font-bold">
                   {user?.given_name.toUpperCase()}
                 </p>
-                <p className="text-base text-red-600">
+                <p className="text-base text-gray-500">
                   {isAdmin ? "Admin" : "User"}
                 </p>
               </div>

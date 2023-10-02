@@ -8,3 +8,6 @@
 html, body{
   scroll-behavior: smooth;
 }
+.link-hover:hover{
+  color: #0056F1;
+}
