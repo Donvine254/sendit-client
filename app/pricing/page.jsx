@@ -1,16 +1,11 @@
-'use client'
+
 import React from 'react'
-import { useAppContext } from '@/context/context'
-// import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 
 import Image from 'next/image'
-// import { Button } from '@/components'
-// const {getUser}=getKindeServerSession()
-// const user=getUser()
-// console.log(user)
+import { Button } from '@/components'
+
 export default function Page() {
-  const context =useAppContext()
-  console.log(context)
+
   return (
     <div className='m-2 mx-4'>
      <div className="card w-96 bg-base-200 shadow-xl mt-4">
@@ -19,9 +14,9 @@ export default function Page() {
   </figure>
   <div className="card-body items-center text-center">
     <h2 className="card-title">Shoes!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
+    <p>Own this nice pair of shoes today</p>
     <div className="card-actions">
-      {/* <Button/> */}
+      <Button/>
     </div>
   </div>
 </div>
