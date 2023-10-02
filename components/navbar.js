@@ -41,7 +41,7 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/orders">Orders</Link>
+              <Link href="/orders">Deliveries</Link>
             </li>
             <li>
               <Link href="/dashboard">Dashboard</Link>
@@ -54,7 +54,7 @@ export default function Navbar() {
             </li>
             {isAuthenticated() && (
               <li>
-                <LogoutLink className="text-subtle">Log out</LogoutLink>
+                <LogoutLink className="text-subtle text-white hover:text-black accent">Log out</LogoutLink>
               </li>
             )}
           </ul>
@@ -112,9 +112,9 @@ export default function Navbar() {
                   referrerPolicy="no-referrer"
                 />
               ) : (
-                <div className="h-10 w-10 rounded-full ring-2 ring-white">
-                  {user?.given_name?.[0]}
-                  {user?.family_name?.[0]}
+                <div className="xsm:h-8 xsm:w-8 h-10 w-10 flex items-center justify-center accent text-white rounded-full ring-2 ring-red-300 ring-offset-2 ">
+                  {user?.given_name?.[0].toUpperCase()}
+                  {user?.family_name?.[0].toUpperCase()}
                 </div>
               )}
               <div className="hidden md:inline-block">
