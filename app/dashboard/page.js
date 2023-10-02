@@ -6,6 +6,7 @@ import { registerUser } from "@/lib";
 
 import { useAppContext } from "@/context/context";
 import  Loading  from "../../components/loading";
+import Map from "../../components/Map";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
@@ -36,12 +37,9 @@ export default function Dashboard() {
           Get Started
         </button>
       </div>
-      {/* <section className="">
-        <h2 className="text-2xl font-bold">
-          This page is currently under development
-        </h2>
-      </section> */}
-      {/* <Loading/> */}
+      <section className="w-full h-fit">
+        <Map/>
+      </section>
     </div>
   );
 }
