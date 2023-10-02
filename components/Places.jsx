@@ -26,17 +26,10 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
   const handleSelect = async (val) => {
     setValue(val, false);
     clearSuggestions();
-    const results = await getGeocode(val);
+    const address={address: val}
+    console.log(address);
+    const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
-    console.log(lat, lng)
-    setPickupLocation({ lat, lng });
-  };
-  const handleDeliverySelect = async (val) => {
-    setValue(val, false);
-    clearSuggestions();
-    const results = await getGeocode({ address: val });
-    const { lat, lng } = await getLatLng(results[0]);
-    setDeliveryLocation({ lat, lng });
     console.log(lat, lng)
   };
   return (

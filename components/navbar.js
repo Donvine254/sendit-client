@@ -66,7 +66,8 @@ export default function Navbar() {
             src="./logo.svg"
             width={120}
             height={20}
-            className="self-center mb-3"
+            priority
+            className="self-center mb-3 h-auto w-auto"
             alt="Logo"
           />
         </Link>
