@@ -6,6 +6,7 @@ import { registerUser } from "@/lib";
 
 import { useAppContext } from "@/context/context";
 import  Loading  from "../../components/loading";
+import Map from "../../components/Map";
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
@@ -20,27 +21,25 @@ export default function Dashboard() {
       setAdmin(data.isAdmin);
       registerUser(data, setIsAdmin, setCurrentUser);
       console.log(data.user);
+      setCurrentUser(data.user);
     };
 
     getKindeSession();
   }, [setIsAdmin, setCurrentUser, setIsAutheticated]);
   return (
     <div className="mx-4">
-      <div className="">
+      <div className="p-4">
         {admin ? <p>Welcome admin</p> : <p>Welcome user</p>}
         <button
           type="button"
-          className="btn accent text-white font-bold text-2xl"
+          className="btn btn-sm accent text-white hover:text-black my-4 font-bold"
           onClick={() => toast.success("you clicked me!")}>
           Get Started
         </button>
       </div>
-      {/* <section className="">
-        <h2 className="text-2xl font-bold">
-          This page is currently under development
-        </h2>
-      </section> */}
-      <Loading/>
+      <section className="w-full h-fit">
+        <Map/>
+      </section>
     </div>
   );
 }
