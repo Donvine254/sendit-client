@@ -26,11 +26,11 @@ export default function Dashboard() {
   }, [setIsAdmin, setCurrentUser, setIsAutheticated]);
   return (
     <div className="mx-4">
-      <div className="">
+      <div className="p-4">
         {admin ? <p>Welcome admin</p> : <p>Welcome user</p>}
         <button
           type="button"
-          className="btn accent text-white font-bold text-2xl"
+          className="btn btn-sm accent text-white hover:text-black my-4 font-bold"
           onClick={() => toast.success("you clicked me!")}>
           Get Started
         </button>
@@ -40,7 +40,7 @@ export default function Dashboard() {
           This page is currently under development
         </h2>
       </section> */}
-      <Loading/>
+      {/* <Loading/> */}
     </div>
   );
 }
