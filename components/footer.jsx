@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 export default function Footer() {
   return (
-    <>
+    <div className='fixed bottom-0 left-0 right-0 w-full'>
     <footer className="footer p-10 shadow-lg bg-base-100 text-base-content">
   <aside>
     <Image src="./logo.svg" width={120} height={40} className='lg:mt-0 lg:mb-3' alt="sendit-logo"/>
@@ -36,6 +36,6 @@ export default function Footer() {
   </nav>
 </footer>
 <p className='text-center footer-title'>&copy; 2023, ALl Rights Reserved</p>
-</>
+</div>
   )
 }
