@@ -21,11 +21,12 @@ const center = {
   lat: -1.292066,
   lng: 36.821946,
 };
+const libraries=["places"]
 export default function Map() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["places"],
+    libraries: libraries
   });
   const mapRef = useRef();
   const [map, setMap] = useState(null);

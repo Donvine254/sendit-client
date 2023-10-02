@@ -28,19 +28,21 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
     clearSuggestions();
     const results = await getGeocode(val);
     const { lat, lng } = await getLatLng(results[0]);
+    console.log(lat, lng)
     setPickupLocation({ lat, lng });
   };
   const handleDeliverySelect = async (val) => {
     setValue(val, false);
     clearSuggestions();
-    const results = await getGeocode(val);
+    const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
     setDeliveryLocation({ lat, lng });
+    console.log(lat, lng)
   };
   return (
     <div className="shadow-lg mb-4 p-4 font-mono">
-      <ul class="steps steps-vertical mx-4">
-        <li class="step step-primary ">
+      <ul className="steps steps-vertical mx-4">
+        <li className="step step-primary ">
           <div className="flex flex-col items-start justify-start">
             <p className="font-bold text-base my-2">
               Where should we pick up your parcel?
@@ -64,7 +66,7 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
             </Combobox>
           </div>
         </li>
-        <li class="step step-primary ">
+        <li className="step step-primary ">
           <div className="flex flex-col items-start justify-start">
             <p className="font-bold text-base my-2">
               Where would you like to send it?
@@ -92,3 +94,4 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
     </div>
   );
 }
+
