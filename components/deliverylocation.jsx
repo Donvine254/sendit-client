@@ -36,7 +36,7 @@ export default function DeliveryLocation({ setDeliveryLocation }) {
   return (
     <div className="mb-4 p-4 font-mono">
       <ul className="steps steps-vertical mx-4 xsm:mx-1">
-        <li className="step step-primary " data-content={2}>
+        <li className="step step-secondary " data-content={2}>
           <div className="flex flex-col items-start justify-start">
             <p className="font-bold text-base my-2">
               Where would you like to send it?
