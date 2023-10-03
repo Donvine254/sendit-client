@@ -15,7 +15,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
-export default function PickupLocation({ setPickupLocation, setDeliveryLocation }) {
+export default function PickupLocation({ setPickupLocation }) {
   const {
     ready,
     value,
@@ -60,30 +60,6 @@ export default function PickupLocation({ setPickupLocation, setDeliveryLocation 
                 </ComboboxList>
               </ComboboxPopover>
             </Combobox>
-          </div>
-        </li>
-        <li className="step step-primary ">
-          <div className="flex flex-col items-start justify-start">
-            <p className="font-bold text-base my-2">
-              Where would you like to send it?
-            </p>
-            {/* <Combobox onSelect={handleDeliverySelect}>
-              <ComboboxInput
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                disabled={!ready}
-                className="input input-primary w-full max-w-xs focus:outline-none"
-                placeholder="Enter your delivery address"
-              />
-              <ComboboxPopover className="pl-2">
-                <ComboboxList>
-                  {status === "OK" &&
-                    data.map(({ place_id, description }) => (
-                      <ComboboxOption key={place_id} value={description} />
-                    ))}
-                </ComboboxList>
-              </ComboboxPopover>
-            </Combobox> */}
           </div>
         </li>
       </ul>
