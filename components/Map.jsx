@@ -30,8 +30,8 @@ export default function Map() {
   const mapRef = useRef();
   const [map, setMap] = useState(null);
   const [pickupLocation, setPickupLocation] = useState();
-  const [deliveryLocation, setDeliveryLocation] = useState(null);
-
+  const [deliveryLocation, setDeliveryLocation] = useState();
+ 
   const onLoad = useCallback(function callback(map) {
     const nairobiBounds = new window.google.maps.LatLngBounds(
       new window.google.maps.LatLng(-1.296056, 36.826397),
