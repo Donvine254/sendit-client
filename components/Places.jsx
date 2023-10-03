@@ -30,8 +30,9 @@ export default function Places({ setPickupLocation, setDeliveryLocation }) {
     console.log(address);
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
-    console.log(lat, lng)
-    setPickupLocation(lat, lng);
+    const latLng = new window.google.maps.LatLng(lat, lng)
+    console.log(latLng)
+    setPickupLocation(latLng);
   };
   return (
     <div className="shadow-lg mb-4 p-4 font-mono">
