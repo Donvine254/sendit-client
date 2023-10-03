@@ -29,13 +29,14 @@ export default function DeliveryLocation({ setDeliveryLocation }) {
     console.log(address);
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
-    console.log(lat, lng)
-    setDeliveryLocation(lat, lng);
+    const latLng = new window.google.maps.LatLng(lat, lng)
+    console.log(latLng)
+    setDeliveryLocation(latLng);
   };
   return (
-    <div className="shadow-lg mb-4 p-4 font-mono">
-      <ul className="steps steps-vertical mx-4">
-        <li className="step step-primary ">
+    <div className="mb-4 p-4 font-mono">
+      <ul className="steps steps-vertical mx-4 xsm:mx-1">
+        <li className="step step-primary " data-content={2}>
           <div className="flex flex-col items-start justify-start">
             <p className="font-bold text-base my-2">
               Where would you like to send it?

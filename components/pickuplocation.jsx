@@ -35,8 +35,8 @@ export default function PickupLocation({ setPickupLocation }) {
     setPickupLocation(latLng);
   };
   return (
-    <div className="shadow-lg mb-4 p-4 font-mono">
-      <ul className="steps steps-vertical mx-4">
+    <div className=" mb-4 xsm:mb-0 p-4 font-mono">
+      <ul className="steps steps-vertical mx-4 xsm:mx-1">
         <li className="step step-primary ">
           <div className="flex flex-col items-start justify-start">
             <p className="font-bold text-base my-2">

@@ -11,25 +11,22 @@ import {
 
 import Loading from "./loading";
 import PickupLocation from "./pickuplocation";
+import DeliveryLocation from "./deliverylocation";
 
 const containerStyle = {
   width: "100%",
   height: "600px",
 };
 
-const libraries=["places"]
+const libraries = ["places"];
 export default function Map() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: libraries
+    libraries: libraries,
   });
-  const center = useMemo(
-    () => ({ lat: -1.29, lng: 36.81 }),
-    []
-  );
-  const zoom = useMemo(()=>
-  1)
+  const center = useMemo(() => ({ lat: -1.29, lng: 36.81 }), []);
+  const zoom = useMemo(() => 1);
   const mapRef = useRef();
   const [map, setMap] = useState(null);
   const [pickupLocation, setPickupLocation] = useState();
@@ -41,7 +38,7 @@ export default function Map() {
       new window.google.maps.LatLng(-1.330702, 37.001718)
     );
     map.fitBounds(nairobiBounds);
-    mapRef.current = map
+    mapRef.current = map;
     setMap(map);
   }, []);
 
@@ -51,12 +48,21 @@ export default function Map() {
 
   return isLoaded ? (
     <div className="container">
-         <PickupLocation
+      <div className="container shadow-lg bg-base-100">
+        <PickupLocation
           setPickupLocation={(position) => {
             setPickupLocation(position);
             mapRef.current?.panTo(position);
           }}
         />
+        <DeliveryLocation
+          setDeliveryLocation={(position) => {
+            setPickupLocation(position);
+            mapRef.current?.panTo(position);
+          }}
+        />
+      </div>
+
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -64,19 +70,15 @@ export default function Map() {
         onLoad={onLoad}
         onUnmount={onUnmount}>
         {pickupLocation && (
-            <>
-              <Marker
-                position={pickupLocation}
-              />
-            </>
-          )}
+          <>
+            <Marker position={pickupLocation} />
+          </>
+        )}
         {deliveryLocation && (
-            <>
-              <Marker
-                position={deliveryLocation}
-              />
-            </>
-          )}
+          <>
+            <Marker position={deliveryLocation} />
+          </>
+        )}
       </GoogleMap>
     </div>
   ) : (
