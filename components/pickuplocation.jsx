@@ -15,7 +15,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
-export default function Places({ setPickupLocation, setDeliveryLocation }) {
+export default function PickupLocation({ setPickupLocation, setDeliveryLocation }) {
   const {
     ready,
     value,

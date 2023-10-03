@@ -10,7 +10,7 @@ import {
 } from "@react-google-maps/api";
 
 import Loading from "./loading";
-import Places from "./Places";
+import PickupLocation from "./pickuplocation";
 
 const containerStyle = {
   width: "100%",
@@ -51,7 +51,7 @@ export default function Map() {
 
   return isLoaded ? (
     <div className="container">
-         <Places
+         <PickupLocation
           setPickupLocation={(position) => {
             setPickupLocation(position);
             mapRef.current?.panTo(position);
