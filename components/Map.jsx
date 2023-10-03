@@ -48,7 +48,7 @@ export default function Map() {
   }, []);
   const fetchDirections = (destination) => {
     if (!pickupLocation || !destination) {
-      toast.error("no delivery location");
+      toast.error("Invalid pickup or delivery location");
     }
     const service = new google.maps.DirectionsService();
     service.route(

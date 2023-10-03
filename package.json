@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^1.8.19",
-    "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.19.2",
     "axios": "^1.5.1",
     "next": "latest",
@@ -18,7 +17,7 @@
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
-    "sweetalert2": "^11.7.27",
+    "sweetalert2": "^11.6.13",
     "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
