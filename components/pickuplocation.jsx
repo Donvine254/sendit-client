@@ -27,11 +27,9 @@ export default function PickupLocation({ setPickupLocation }) {
     setValue(val, false);
     clearSuggestions();
     const address={address: val}
-    console.log(address);
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
     const latLng = new window.google.maps.LatLng(lat, lng)
-    console.log(latLng)
     setPickupLocation(latLng);
   };
   return (

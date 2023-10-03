@@ -26,11 +26,9 @@ export default function DeliveryLocation({ setDeliveryLocation }) {
     setValue(val, false);
     clearSuggestions();
     const address={address: val}
-    console.log(address);
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
     const latLng = new window.google.maps.LatLng(lat, lng)
-    console.log(latLng)
     setDeliveryLocation(latLng);
   };
   return (
@@ -47,9 +45,10 @@ export default function DeliveryLocation({ setDeliveryLocation }) {
                 type="search"
                 onChange={(e) => setValue(e.target.value)}
                 disabled={!ready}
-                className="input input-secondary focus:outline-none w-full max-w-xs"
+                className="input input-secondary focus:outline-none w-full max-w-xs flex-1"
                 placeholder="Enter your delivery address"
               />
+        
               <ComboboxPopover className="pl-2">
                 <ComboboxList>
                   {status === "OK" &&
@@ -62,6 +61,7 @@ export default function DeliveryLocation({ setDeliveryLocation }) {
           </div>
         </li>
       </ul>
+     
     </div>
   );
 }

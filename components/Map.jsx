@@ -5,13 +5,12 @@ import {
   useJsApiLoader,
   Marker,
   DirectionsRenderer,
-  Circle,
-  MarkerClusterer,
 } from "@react-google-maps/api";
 
 import Loading from "./loading";
 import PickupLocation from "./pickuplocation";
 import DeliveryLocation from "./deliverylocation";
+import toast from "react-hot-toast";
 
 const containerStyle = {
   width: "100%",
@@ -31,7 +30,9 @@ export default function Map() {
   const [map, setMap] = useState(null);
   const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState();
- 
+  const [directions, setDirections] = useState();
+  const [distance, setDistance]= useState(0)
+
   const onLoad = useCallback(function callback(map) {
     const nairobiBounds = new window.google.maps.LatLngBounds(
       new window.google.maps.LatLng(-1.296056, 36.826397),
@@ -45,6 +46,26 @@ export default function Map() {
   const onUnmount = useCallback(function callback(map) {
     setMap(null);
   }, []);
+  const fetchDirections = (destination) => {
+    if (!pickupLocation || !destination) {
+      toast.error("no delivery location");
+    }
+    const service = new google.maps.DirectionsService();
+    service.route(
+      {
+        origin: pickupLocation,
+        destination: destination,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === "OK" && result) {
+          setDirections(result);
+          console.log(directions)
+          setDistance(directions?.routes[0]?.legs[0]?.distance?.text ?? 0)
+        }
+      }
+    );
+  };
 
   return isLoaded ? (
     <div className="container">
@@ -57,10 +78,12 @@ export default function Map() {
         />
         <DeliveryLocation
           setDeliveryLocation={(position) => {
-            setPickupLocation(position);
+            setDeliveryLocation(position);
             mapRef.current?.panTo(position);
+            fetchDirections(position);
           }}
         />
+        <p className="chat-bubble chat-bubble-primary text-base font-bold mx-4 my-5 w-fit text-white">Distance: {directions?.routes[0]?.legs[0]?.distance?.text ?? 0}. This journey will take approximately {directions?.routes[0]?.legs[0]?.duration?.text ?? 0}</p>
       </div>
 
       <GoogleMap
@@ -79,6 +102,7 @@ export default function Map() {
             <Marker position={deliveryLocation} />
           </>
         )}
+        {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
     </div>
   ) : (
