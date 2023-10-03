@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState, useRef } from "react";
+import React, { useCallback, useState, useRef, useMemo } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -17,10 +17,6 @@ const containerStyle = {
   height: "600px",
 };
 
-const center = {
-  lat: -1.292066,
-  lng: 36.821946,
-};
 const libraries=["places"]
 export default function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -28,14 +24,23 @@ export default function Map() {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: libraries
   });
+  const center = useMemo(
+    () => ({ lat: -1.29, lng: 36.81 }),
+    []
+  );
+  const zoom = useMemo(()=>
+  1)
   const mapRef = useRef();
   const [map, setMap] = useState(null);
   const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
+    const nairobiBounds = new window.google.maps.LatLngBounds(
+      new window.google.maps.LatLng(-1.296056, 36.826397),
+      new window.google.maps.LatLng(-1.330702, 37.001718)
+    );
+    map.fitBounds(nairobiBounds);
     mapRef.current = map
     setMap(map);
   }, []);
@@ -55,7 +60,7 @@ export default function Map() {
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={0}
+        zoom={zoom}
         onLoad={onLoad}
         onUnmount={onUnmount}>
         {pickupLocation && (
