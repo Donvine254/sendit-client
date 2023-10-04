@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function page({ params }) {
-  const pages = ["orders", "pricing", "quote"];
+  const pages = ["partners", "pricing", "quote", "careers","terms","about","privacy"];
   const isUnderDevelopment = pages.some((page) =>
     params["not-found"].includes(page)
   );
@@ -11,12 +11,12 @@ export default function page({ params }) {
   return (
     <>
       {isUnderDevelopment ? (
-        <div className="mt-1 ">
+        <div className="mt-1 xsm:h-fit md:h-[400px] ">
           <h1 className="text-2xl font-bold text-center my-2 font-mono">
             {" "}
             👷 Coming Soon 🚧🚧
           </h1>
-          <div className="alert alert-info">
+          <div className="alert alert-info mx-4 xsm:w-fit w-5/6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
