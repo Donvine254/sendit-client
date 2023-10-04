@@ -4,14 +4,11 @@ import React from "react";
 import Swal from "sweetalert2";
 export default function page() {
   return (
-    <>
     <div className="flex xsm:mx-2 items-center min-h-screen">
       <div className="container mx-auto">
-        <div className="max-w-md mx-auto xsm:my-1 my-2 lg:my-5 p-5 rounded-md">
+        <div className="max-w-md mx-auto xsm:my-1 my-1 lg:my-5 p-5 rounded-md">
           <div className="text-center">
-            <h1 className="my-3 xsm:my-0 text-3xl font-semibold font-mono ">
-              Contact Us
-            </h1>
+            <h1 className="my-3 xsm:my-0 text-3xl font-semibold">Contact Us</h1>
             <p className="text-base">
               Fill up the form below to send us a message.
             </p>
@@ -113,7 +110,5 @@ export default function page() {
         </div>
       </div>
     </div>
-    <div className="divider w-full"></div>
-    </>
   );
 }

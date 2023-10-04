@@ -5,6 +5,7 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <>
+      <div className="divider w-full"></div>
     <footer className="footer p-10 shadow-lg bg-base-100 text-base-content">
   <aside>
     <Image src="./logo.svg" width={120} height={40} className='lg:mt-0 lg:mb-3' alt="sendit-logo" priority/>

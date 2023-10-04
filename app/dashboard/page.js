@@ -26,7 +26,7 @@ export default function Dashboard() {
     getKindeSession();
   }, [setIsAdmin, setCurrentUser, setIsAutheticated]);
   return (
-    <div className="mx-4">
+    <div className="mx-4 md:min-h-[400px]">
       <div className="p-4">
         {admin ? <p>Welcome admin</p> : <p>Welcome user</p>}
         <button
