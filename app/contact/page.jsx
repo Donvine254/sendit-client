@@ -24,8 +24,8 @@ export default function page() {
         <div className="max-w-md mx-auto xsm:my-1 my-1 lg:my-5 p-5 rounded-md">
           <div className="text-center">
             <h1 className="my-3 xsm:my-0 text-3xl font-semibold">Contact Us</h1>
-            <p className="text-base">
-              Fill up the htmlForm below to send us a message.
+            <p className="mx-4 text-base text-start self-start">
+              Fill up the form below to send us a message and we will get in touch as soon as possible.
             </p>
           </div>
           <div className="m-2 shadow-2xl p-4 bg-base-100">
