@@ -3,6 +3,21 @@
 import React from "react";
 import Swal from "sweetalert2";
 export default function page() {
+  const environment = process.env.NODE_ENV;
+  const redirectUrl =
+    environment === "development"
+      ? "http://localhost:3000"
+      : "https://senditcourrier.vercel.app";
+  function handleSubmit() {
+    Swal.fire({
+      icon: "success",
+      title: "Message sent successfully",
+      text: "Thank you! The htmlForm has been submitted successfully. We will reply to you soon!",
+      showCloseButton: true,
+      confirmButtonColor: "#0056F1",
+      timer: 3000,
+    });
+  }
   return (
     <div className="flex xsm:mx-2 items-center min-h-screen">
       <div className="container mx-auto">
@@ -10,14 +25,15 @@ export default function page() {
           <div className="text-center">
             <h1 className="my-3 xsm:my-0 text-3xl font-semibold">Contact Us</h1>
             <p className="text-base">
-              Fill up the form below to send us a message.
+              Fill up the htmlForm below to send us a message.
             </p>
           </div>
           <div className="m-2 shadow-2xl p-4 bg-base-100">
             <form
               action="https://api.web3forms.com/submit"
               method="POST"
-              id="form">
+              id="form"
+              onSubmit={handleSubmit}>
               <input
                 type="hidden"
                 name="access_key"
@@ -26,16 +42,18 @@ export default function page() {
               <input
                 type="hidden"
                 name="subject"
-                value="New Submission from Web3Forms"
+                value="New Submission from Web3htmlForms"
               />
               <input
                 type="hidden"
                 name="redirect"
-                value="http://localhost:3000"
+                value={redirectUrl}
               />
               <input type="checkbox" name="botcheck" id="" className="hidden" />
               <div className="mb-6">
-                <label for="name" className="block mb-2 text-sm text-gray-600">
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm text-gray-600">
                   Full Name
                 </label>
                 <input
@@ -48,7 +66,9 @@ export default function page() {
                 />
               </div>
               <div className="mb-6">
-                <label for="email" className="block mb-2 text-sm text-gray-600">
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm text-gray-600">
                   Email Address
                 </label>
                 <input
@@ -61,7 +81,7 @@ export default function page() {
                 />
               </div>
               <div className="mb-6">
-                <label for="phone" className="text-sm text-gray-600 ">
+                <label htmlFor="phone" className="text-sm text-gray-600 ">
                   Phone Number
                 </label>
                 <input
@@ -73,7 +93,7 @@ export default function page() {
                 />
               </div>
               <div className="mb-6">
-                <label for="message" className="block mb-2 text-sm ">
+                <label htmlFor="message" className="block mb-2 text-sm ">
                   Your Message
                 </label>
 
@@ -88,17 +108,7 @@ export default function page() {
               <div className="mb-6">
                 <button
                   type="submit"
-                  className="btn btn-outline btn-primary w-full"
-                  onClick={() =>
-                    Swal.fire({
-                      icon: "success",
-                      title: "Message sent successfully",
-                      text: "Thank you! The form has been submitted successfully. We will reply to you soon!",
-                      showCloseButton: true,
-                      confirmButtonColor: "#0056F1",
-                      timer: 3000,
-                    })
-                  }>
+                  className="btn btn-outline btn-primary w-full">
                   Send Message
                 </button>
               </div>
