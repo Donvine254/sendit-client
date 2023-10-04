@@ -12,7 +12,7 @@ export default function page() {
     Swal.fire({
       icon: "success",
       title: "Message sent successfully",
-      text: "Thank you! The htmlForm has been submitted successfully. We will reply to you soon!",
+      text: "Thank you! Your message has been submitted successfully. We will reply to you soon!",
       showCloseButton: true,
       confirmButtonColor: "#0056F1",
       timer: 3000,
@@ -39,16 +39,12 @@ export default function page() {
                 name="access_key"
                 value="c0376663-dd70-4ab4-ba1b-e849ba57eecc"
               />
+              <input type="hidden" name="redirect" value={redirectUrl} />
               <input
                 type="hidden"
                 name="subject"
-                value="New Submission from Web3htmlForms"
-              />
-              <input
-                type="hidden"
-                name="redirect"
-                value={redirectUrl}
-              />
+                value="You have a new message at senditcourrier.com"></input>
+              <input type="hidden" name="from_name" value="sendit"></input>
               <input type="checkbox" name="botcheck" id="" className="hidden" />
               <div className="mb-6">
                 <label

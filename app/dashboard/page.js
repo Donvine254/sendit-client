@@ -21,7 +21,6 @@ export default function Dashboard() {
       setAdmin(data.isAdmin);
       registerUser(data, setIsAdmin, setCurrentUser);
       setCurrentUser(data.user);
-      console.log(process.env.NODE_ENV)
     };
 
     getKindeSession();
