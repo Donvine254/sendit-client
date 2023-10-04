@@ -4,9 +4,10 @@ import React from "react";
 import Swal from "sweetalert2";
 export default function page() {
   return (
+    <>
     <div className="flex xsm:mx-2 items-center min-h-screen">
       <div className="container mx-auto">
-        <div className="max-w-md mx-auto xsm:my-1 my-2 lg:my-10 p-5 rounded-md shadow-sm">
+        <div className="max-w-md mx-auto xsm:my-1 my-2 lg:my-5 p-5 rounded-md">
           <div className="text-center">
             <h1 className="my-3 xsm:my-0 text-3xl font-semibold font-mono ">
               Contact Us
@@ -15,7 +16,7 @@ export default function page() {
               Fill up the form below to send us a message.
             </p>
           </div>
-          <div className="m-7">
+          <div className="m-2 shadow-2xl p-4 bg-base-100">
             <form
               action="https://api.web3forms.com/submit"
               method="POST"
@@ -112,5 +113,7 @@ export default function page() {
         </div>
       </div>
     </div>
+    <div className="divider w-full"></div>
+    </>
   );
 }
