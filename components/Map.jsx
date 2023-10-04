@@ -67,8 +67,8 @@ export default function Map() {
   
 
   return isLoaded ? (
-    <div className="container">
-      <div className="container shadow-lg bg-base-100">
+    <div className="">
+      <div className="p-2 shadow-lg bg-base-100">
         <PickupLocation
           setPickupLocation={(position) => {
             setPickupLocation(position);
@@ -82,7 +82,7 @@ export default function Map() {
             fetchDirections(position);
           }}
         />
-        <p className="chat-bubble chat-bubble-primary text-base font-bold mx-4 my-5 w-fit text-white">Distance: {directions?.routes[0]?.legs[0]?.distance?.text ?? "0km"}. This journey will take approximately {directions?.routes[0]?.legs[0]?.duration?.text ?? "0 minutes"}</p>
+        <p className="chat-bubble chat-bubble-primary text-base font-bold mx-4 mb-2 w-fit text-white">Distance: {directions?.routes[0]?.legs[0]?.distance?.text ?? "0km"}. This journey will take approximately {directions?.routes[0]?.legs[0]?.duration?.text ?? "0 minutes"}</p>
       </div>
 
       <GoogleMap
