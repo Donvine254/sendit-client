@@ -25,7 +25,7 @@ export default function page() {
           </section>
         </div>
       ) : (
-        <div className="card py-4 xsm:w-full max-w-[300px] w-100px shadow-lg border border-blue-300 md:m-auto">
+        <div className="card py-4 xsm:w-full md:max-w-[400px] w-100px shadow-lg border border-blue-300 md:mx-auto mt-2">
           <div className="card-body items-center text-center">
             <figure className="px-10 pt-10">
               <Image
@@ -42,7 +42,7 @@ export default function page() {
               <LoginLink className="btn btn-neutral xsm:btn-sm xsm:mt-2 hover:bg-blue-600 hover:text-white " postLoginRedirectURL={'/deliveries'}>
                 Sign in
               </LoginLink>
-              <Link href="/" className="btn btn-ghost">Cancel</Link>
+              <Link href="/" className="btn btn-warning xsm:btn-sm xsm:mt-2 hover:bg-red-400">Cancel</Link>
             </div>
           </div>
         </div>
