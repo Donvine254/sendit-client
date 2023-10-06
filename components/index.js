@@ -3,4 +3,5 @@ import Loading from "./loading";
 import Footer from "./footer";
 import Button from "./button";
 import Map from "./Map";
-export { Navbar, Loading, Footer, Button, Map };
+import Hero from "./hero";
+export { Navbar, Loading, Footer, Button, Map, Hero };
