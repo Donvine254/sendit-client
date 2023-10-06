@@ -12,6 +12,7 @@
     "@kinde-oss/kinde-auth-nextjs": "^1.8.19",
     "@react-google-maps/api": "^2.19.2",
     "axios": "^1.5.1",
+    "encoding": "^0.1.13",
     "googleapis": "^126.0.1",
     "next": "latest",
     "nodemailer": "^6.9.5",
