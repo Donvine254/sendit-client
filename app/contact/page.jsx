@@ -25,7 +25,8 @@ export default function page() {
           <div className="text-center">
             <h1 className="my-3 xsm:my-0 text-3xl font-semibold">Contact Us</h1>
             <p className="mx-4 text-base text-start self-start">
-              Fill up the form below to send us a message and we will get in touch as soon as possible.
+              Fill up the form below to send us a message and we will get in
+              touch as soon as possible.
             </p>
           </div>
           <div className="m-2 shadow-2xl p-4 bg-base-100">
@@ -37,7 +38,7 @@ export default function page() {
               <input
                 type="hidden"
                 name="access_key"
-                value="c0376663-dd70-4ab4-ba1b-e849ba57eecc"
+                value="134e33ca-5eb3-4993-bd97-5a12f68fb77a"
               />
               <input type="hidden" name="redirect" value={redirectUrl} />
               <input
@@ -56,7 +57,7 @@ export default function page() {
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="John Doe"
+                  placeholder="Enter your names"
                   required
                   className="input input-bordered input-primary w-full max-w-xs0"
                 />
@@ -81,9 +82,11 @@ export default function page() {
                   Phone Number
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="phone"
                   id="phone"
+                  min="10"
+                  max="12"
                   placeholder="+254701234567"
                   className="input input-bordered input-secondary w-full max-w-xs0"
                 />
