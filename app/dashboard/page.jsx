@@ -32,7 +32,7 @@ export default function Dashboard() {
         <button
           type="button"
           className="btn btn-sm accent text-white hover:text-black my-4 font-bold"
-          onClick={() => toast.success("you clicked me!")}>
+          onClick={() => toast.success("eat this toast!")}>
           Get Started
         </button>
       </div>

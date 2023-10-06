@@ -90,7 +90,14 @@ export default function Map() {
         center={center}
         zoom={zoom}
         onLoad={onLoad}
-        onUnmount={onUnmount}>
+        onUnmount={onUnmount}
+        options={{
+          zoomControl:false,
+          streetViewControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+
+        }}>
         {pickupLocation && (
           <>
             <Marker position={pickupLocation} />
@@ -102,6 +109,7 @@ export default function Map() {
           </>
         )}
         {directions && <DirectionsRenderer directions={directions} />}
+    
       </GoogleMap>
     </div>
   ) : (
