@@ -12,3 +12,10 @@ html, body{
   color: #0056F1;
 }
 
+.card-grid-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  align-items: center;
+  gap:20px;
+  justify-content: center;
+}
