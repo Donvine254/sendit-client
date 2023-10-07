@@ -1,11 +1,11 @@
 
 import Image from 'next/image'
 import { Hero } from '@/components'
-export default function Home() {
-  import {
+import {
   getKindeServerSession,
   LoginLink,
 } from "@kinde-oss/kinde-auth-nextjs/server";
+export default function Home() {
   return (
     <>
     {isAuthenticated() ?
