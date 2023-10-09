@@ -7,17 +7,35 @@ import Link from "next/link";
 export default function Page() {
   return (
     <>
-      <h1 className="font-bold text-center text-2xl my-2">What We Offer</h1>
-      <p className="py-2 text-center text-base">The Rates might vary depending on weight, value of your goods, perishability and delivery location.</p>
-      <div className="card-grid-container">
+      <h1 className="font-bold text-center text-2xl my-2 font-serif">
+        What We Offer
+      </h1>
+      <p className="py-3 px-2 text-base font-serif bg-slate-200 flex items-center mx-2 rounded-lg gap-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          className="stroke-current shrink-0 w-6 h-6">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>
+          The Rates might vary depending on weight, value of your goods,
+          perishability and delivery location.
+        </span>
+      </p>
+      <div className="card-grid-container font-serif">
         <div className="pricing-card bg-base-100">
-          <h1 className="font-bold text-2xl text-blue-600 text-center my-2">
+          <h1 className="font-bold text-2xl text-blue-600 text-center my-2 bg-yellow-400 py-2 rounded-lg">
             Regular
           </h1>
           <h2 className="font-bold text-xl align-start">
             KSH 350/ <span className="text-base ">delivery</span>
           </h2>
-          <ul className="text-start py-4 text-base">
+          <ul className="text-start py-2 text-base divide-y-2">
             <li className="card-list">
               <AiOutlineCheck /> Same Day Delivery within Nairobi
             </li>
@@ -52,13 +70,13 @@ export default function Page() {
         </div>
 
         <div className="pricing-card bg-primary text-white">
-          <h1 className="font-bold text-2xl text-center my-2">
+          <h1 className="font-bold text-2xl text-center my-2 bg-slate-300 py-2 rounded-lg text-black">
             Cargo <span className="badge badge-accent">HOT</span>
           </h1>
           <h2 className="font-bold text-xl align-start">
             KSH 750/ <span className="text-base ">delivery</span>
           </h2>
-          <ul className="text-start py-4 text-base">
+          <ul className="text-start py-2 text-base divide-y-2 divide-dotted">
             <li className="card-list">
               <AiOutlineCheck />
               Same Day Delivery in Selected Towns
@@ -86,21 +104,19 @@ export default function Page() {
           </ul>
 
           <div className="flex items-center justify-center">
-            <Link
-              href="/deliveries"
-              className="btn btn-neutral my-2">
+            <Link href="/deliveries" className="btn btn-neutral my-2">
               Send Parcel
             </Link>
           </div>
         </div>
         <div className="pricing-card bg-base-100">
-          <h1 className="font-bold text-2xl text-blue-600 text-center my-2">
+          <h1 className="font-bold text-2xl text-blue-600 text-center my-2 bg-yellow-400 py-2 rounded-lg">
             Same Day
           </h1>
           <h2 className="font-bold text-xl align-start">
             KSH 500/ <span className="text-base ">delivery</span>
           </h2>
-          <ul className="text-start py-4 text-base">
+          <ul className="text-start py-2 text-base divide-y-2">
             <li className="card-list">
               <AiOutlineCheck /> Same Day Delivery
             </li>
@@ -127,14 +143,16 @@ export default function Page() {
             </li>
           </ul>
           <div className="flex items-center justify-center">
-            <Link
-              href="/deliveries"
-              className="btn btn-primary my-2">
+            <Link href="/deliveries" className="btn btn-primary my-2">
               Send Parcel
             </Link>
           </div>
         </div>
       </div>
+     <div className="font-serif py-3 px-2">
+     <h1 className="text-2xl  my-2 text-center font-bold">Not Satisfied? </h1>
+     <p className="text-xl">Use our price calculator to estimate the cost of sending your parcel</p>
+     </div>
     </>
   );
 }
