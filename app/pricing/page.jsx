@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { AiOutlineCheck } from "react-icons/ai";
 import Link from "next/link";
+import PriceCalculator from "@/components/priceCalculator";
 
 export default function Page() {
   return (
@@ -152,6 +153,7 @@ export default function Page() {
      <div className="font-serif py-3 px-2">
      <h1 className="text-2xl  my-2 text-center font-bold">Not Satisfied? </h1>
      <p className="text-xl">Use our price calculator to estimate the cost of sending your parcel</p>
+     <PriceCalculator/>
      </div>
     </>
   );
