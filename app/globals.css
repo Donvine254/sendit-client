@@ -13,9 +13,16 @@ html, body{
 }
 
 .card-grid-container{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  @apply flex flex-col lg:flex-row items-center justify-between lg:mx-4
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   align-items: center;
   gap:20px;
-  justify-content: center;
+  justify-content: space-between; */
+}
+.card-list{
+  @apply flex items-center gap-1
+}
+.pricing-card{
+  @apply rounded-md w-[350px] xsm:w-full border shadow-xl mt-4 h-[380px]  p-4 md:mx-2 
 }
