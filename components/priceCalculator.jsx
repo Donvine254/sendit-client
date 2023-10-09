@@ -37,7 +37,7 @@ export default function PriceCalculator() {
     if (originIsEmpty || destinationIsEmpty || weight===0) {
         toast.error("Please fill in all the required fields.");
       } else {
-        console.log("Perform calculation with:", origin, destination, parcelWeight);
+        console.log("Perform calculation with:", origin, destination, weight);
       }
   }
   return (
