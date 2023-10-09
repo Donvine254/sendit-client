@@ -8,6 +8,7 @@ export default function Page() {
   return (
     <>
       <h1 className="font-bold text-center text-2xl my-2">What We Offer</h1>
+      <p className="py-2 text-center text-base">The Rates might vary depending on weight, value of your goods, perishability and delivery location.</p>
       <div className="card-grid-container">
         <div className="pricing-card bg-base-100">
           <h1 className="font-bold text-2xl text-blue-600 text-center my-2">
