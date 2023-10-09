@@ -71,7 +71,7 @@ export default function Page() {
         </div>
 
         <div className="pricing-card bg-primary text-white">
-          <h1 className="font-bold text-2xl text-center my-2 bg-slate-300 py-2 rounded-lg text-black">
+          <h1 className="font-bold text-2xl text-center my-2 bg-slate-200 py-2 rounded-lg text-black">
             Cargo <span className="badge badge-accent">HOT</span>
           </h1>
           <h2 className="font-bold text-xl align-start">
