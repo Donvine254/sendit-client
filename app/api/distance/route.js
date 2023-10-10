@@ -15,7 +15,6 @@ export async function POST(req, res) {
     const result = await response.data
     const distance = result.rows[0].elements[0].distance.text;
     const duration = result.rows[0].elements[0].duration.text;
-    console.log(distance, duration)
     return NextResponse.json({distance, duration});
   } catch (error) {
     return new Response(error, { status: 400 });

@@ -1,7 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiFillFrown } from "react-icons/ai";
 import Link from "next/link";
 import PriceCalculator from "@/components/priceCalculator";
 
@@ -50,7 +50,7 @@ export default function Page() {
               <AiOutlineCheck /> Non-Perishable Goods
             </li>
             <li className="card-list">
-              <AiOutlineCheck /> 0-20kgs
+              <AiOutlineCheck /> 0-10kgs
             </li>
             <li className="card-list">
               <AiOutlineCheck />
@@ -132,7 +132,7 @@ export default function Page() {
               Perishable and Non-Perishable Goods
             </li>
             <li className="card-list">
-              <AiOutlineCheck /> 0-30kgs
+              <AiOutlineCheck /> 0-20kgs
             </li>
             <li className="card-list">
               <AiOutlineCheck />
@@ -151,7 +151,7 @@ export default function Page() {
         </div>
       </div>
      <div className="font-serif py-3 px-2">
-     <h1 className="text-2xl  my-2 text-center font-bold">Not Satisfied? </h1>
+     <h1 className="text-2xl  my-2 text-center font-bold flex items-center justify-center">Not Satisfied? <AiFillFrown className="text-red-400"/></h1>
      <p className="text-xl">Use our price calculator to estimate the cost of sending your parcel</p>
      <PriceCalculator/>
      </div>
