@@ -108,10 +108,11 @@ export default function PriceCalculator() {
         </div>
       </div>
       <div className="divider"></div>
-      <div className="flex items-center justify-between font-bold my-2 text-xl">
+      <div className="flex items-center justify-between font-bold my-1 text-xl">
         <p>Total Price:</p>
         <p>Ksh {1.16 * price}</p>
       </div>
+      <div className="divider"></div>
     </div>
   );
 }
