@@ -24,7 +24,7 @@ export default function Map() {
     libraries: libraries,
   });
   const center = useMemo(() => ({ lat: -1.29, lng: 36.81 }), []);
-  const zoom = useMemo(() => 1, [center]);
+  const zoom = 1
   const mapRef = useRef();
   const [map, setMap] = useState(null);
   const [pickupLocation, setPickupLocation] = useState();
