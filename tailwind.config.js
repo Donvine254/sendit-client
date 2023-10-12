@@ -24,6 +24,9 @@ module.exports = {
       },
       fontWeight: {
         'extra-bold': '800',
+      },
+       gridAutoRows: {
+        '1fr': 'minmax(250, 1fr)',
       }
     },
   },

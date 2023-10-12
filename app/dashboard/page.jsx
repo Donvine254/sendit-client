@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 export default function Dashboard() {
   const [admin, setAdmin] = useState(false);
-  const { setIsAdmin, setCurrentUser, setIsAutheticated } = useAppContext();
+  const { setIsAdmin, setCurrentUser, setIsAutheticated, currentUser } = useAppContext();
 
   useEffect(() => {
     const getKindeSession = async () => {
@@ -28,7 +28,7 @@ export default function Dashboard() {
   return (
     <div className="mx-4 md:min-h-[400px]">
       <div className="p-4">
-        {admin ? <p>Welcome admin</p> : <p>Welcome user</p>}
+        {currentUser ? <p>Welcome {currentUser.given_name}</p> : <p>Welcome </p>}
         <button
           type="button"
           className="btn btn-sm accent text-white hover:text-black my-4 font-bold"
