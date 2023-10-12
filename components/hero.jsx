@@ -25,7 +25,7 @@ const Hero = () => {
       </div>
       <div className="flex-1">
         <Image
-          src="/./hero-image.png"
+          src="https://res.cloudinary.com/dipkbpinx/image/upload/v1696637684/hero-image_bag5gu.png"
           alt="hero"
           width={830}
           height={670}
