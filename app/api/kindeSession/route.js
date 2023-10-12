@@ -7,5 +7,6 @@ export async function GET() {
   const authenticated = await isAuthenticated();
   const permissions = await getPermissions();
   const isAdmin = await getPermission("admin").isGranted;
-  return NextResponse.json({ user, authenticated, permissions, isAdmin });
+  const isRider = await getPermission("rider").isGranted;
+  return NextResponse.json({ user, authenticated, permissions, isAdmin, isRider});
 }

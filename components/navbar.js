@@ -14,7 +14,15 @@ export default function Navbar() {
   const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
   const user = getUser();
   const isAdmin = getPermission("admin").isGranted;
-
+  const isRider = getPermission("rider").isGranted;
+  let role 
+  if (isAdmin) {
+    role = "Admin";
+  } else if (isRider) {
+    role = "Rider";
+  } else {
+    role = "User";
+  }
   return (
     <div className="navbar bg-base-100 shadow-lg">
       <div className="navbar-start">
@@ -132,7 +140,7 @@ export default function Navbar() {
                   {user?.given_name.toUpperCase()}
                 </p>
                 <p className="text-base text-gray-500">
-                  {isAdmin ? "Admin" : "User"}
+                  {role ?? "user"}
                 </p>
               </div>
             </div>
