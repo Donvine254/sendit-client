@@ -2,8 +2,7 @@
 
 import React from "react";
 import Swal from "sweetalert2";
-import { FaLocationDot, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
-import { AiOutlineMail } from "react-icons/ai";
+import Image from "next/image";
 export default function page() {
   const environment = process.env.NODE_ENV;
   const redirectUrl =
@@ -26,12 +25,21 @@ export default function page() {
         <h1 className="my-3 xsm:my-0 text-3xl font-semibold  py-2 text-center">
           Contact Us
         </h1>
-        <h2 className="text-xl font-bold">You can reach us anyday, anytime through:</h2>
-       <div className="flex flex-col md:flex-row justify-between bg-base-200 shadow-lg border p-3 xsm:py-4">
-         <p className="flex items-center md:text-xl font-bold gap-1 my-1"><FaPhoneAlt/>+254702018080</p>
-        <p className="flex items-center md:text-xl font-bold gap-1 my-1"><AiOutlineMail/>senditcourrier@gmail.com</p>
-        <p className="flex items-center md:text-xl font-bold gap-1 my-1"><FaWhatsapp className="fill-green-900 text-green-900"/>+254702018080</p>
-       </div>
+        <h2 className="text-xl font-bold">
+          You can reach us anyday, anytime through:
+        </h2>
+        <div className="flex flex-col md:flex-row justify-between bg-base-200 shadow-lg border p-3 xsm:py-4">
+          <p className="flex items-center md:text-xl font-bold gap-1 my-1">
+            📞 +254702018080
+          </p>
+          <a href="mailto:senditcourrier.gmail.com" className="flex items-center md:text-xl font-bold gap-1 my-1">
+            📧 senditcourrier@gmail.com
+          </a>
+          <p className="flex items-center md:text-xl font-bold my-1">
+            <Image src="./whatsapp.svg" height={30} width={30}></Image>
+            +254702018080
+          </p>
+        </div>
         <div className="max-w-md mx-auto xsm:my-1 my-1 p-5 lg:my-3 rounded-md border border-primary shadow-2xl bg-base-100">
           <div className="text-center">
             <h2 className="text-xl font-bold">Need More information?</h2>
