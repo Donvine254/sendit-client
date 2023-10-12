@@ -113,7 +113,7 @@ export default function Navbar() {
                   <span className="badge badge-xs accent indicator-item"></span>
                   <div
                     tabIndex={0}
-                    className="dropdown-content z-[50] menu p-2 shadow bg-base-200 rounded-box min-w-[300px]">
+                    className="dropdown-content z-[50] menu p-2 shadow bg-base-200 rounded-box min-w-[300px] normal-case">
                     <p>
                       ℹ️ You have no new notifications
                     </p>

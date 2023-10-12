@@ -2,6 +2,7 @@
 
 import React from "react";
 import Swal from "sweetalert2";
+import Image from "next/image";
 export default function page() {
   const environment = process.env.NODE_ENV;
   const redirectUrl =
@@ -19,17 +20,35 @@ export default function page() {
     });
   }
   return (
-    <div className="flex xsm:mx-2 items-center min-h-screen">
+    <div className="flex xsm:mx-2 items-center min-h-scree font-serif">
       <div className="container mx-auto">
-        <div className="max-w-md mx-auto xsm:my-1 my-1 lg:my-5 p-5 rounded-md">
+        <h1 className="my-3 xsm:my-0 text-3xl font-semibold  py-2 text-center">
+          Contact Us
+        </h1>
+        <h2 className="text-xl font-bold">
+          You can reach us anyday, anytime through:
+        </h2>
+        <div className="flex flex-col md:flex-row justify-between bg-base-200 shadow-lg border p-3 xsm:py-4">
+          <p className="flex items-center md:text-xl font-bold gap-1 my-1">
+            📞 +254702018080
+          </p>
+          <a href="mailto:senditcourrier.gmail.com" className="flex items-center md:text-xl font-bold gap-1 my-1">
+            📧 senditcourrier@gmail.com
+          </a>
+          <p className="flex items-center md:text-xl font-bold my-1">
+            <Image src="./whatsapp.svg" height={30} width={30}></Image>
+            +254702018080
+          </p>
+        </div>
+        <div className="max-w-md mx-auto xsm:my-1 my-1 p-5 lg:my-3 rounded-md border border-primary shadow-2xl bg-base-100">
           <div className="text-center">
-            <h1 className="my-3 xsm:my-0 text-3xl font-semibold">Contact Us</h1>
+            <h2 className="text-xl font-bold">Need More information?</h2>
             <p className="mx-4 text-base text-start self-start">
               Fill up the form below to send us a message and we will get in
               touch as soon as possible.
             </p>
           </div>
-          <div className="m-2 shadow-2xl p-4 bg-base-100">
+          <div className="m-2 p-4  ">
             <form
               action="https://api.web3forms.com/submit"
               method="POST"
