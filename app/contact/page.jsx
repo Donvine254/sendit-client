@@ -32,15 +32,15 @@ export default function page() {
         <p className="flex items-center md:text-xl font-bold gap-1 my-1"><AiOutlineMail/>senditcourrier@gmail.com</p>
         <p className="flex items-center md:text-xl font-bold gap-1 my-1"><FaWhatsapp className="fill-green-900 text-green-900"/>+254702018080</p>
        </div>
-        <div className="max-w-md mx-auto xsm:my-1 my-1 p-5 rounded-md">
+        <div className="max-w-md mx-auto xsm:my-1 my-1 p-5 lg:my-3 rounded-md border border-primary shadow-2xl bg-base-100">
           <div className="text-center">
-            <h2>Need More information?</h2>
+            <h2 className="text-xl font-bold">Need More information?</h2>
             <p className="mx-4 text-base text-start self-start">
               Fill up the form below to send us a message and we will get in
               touch as soon as possible.
             </p>
           </div>
-          <div className="m-2 shadow-2xl p-4 bg-base-100">
+          <div className="m-2 p-4  ">
             <form
               action="https://api.web3forms.com/submit"
               method="POST"
