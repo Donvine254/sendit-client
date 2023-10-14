@@ -1,6 +1,7 @@
 "use client";
-
-import React from "react";
+import React from "react"
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import Swal from "sweetalert2";
 import Image from "next/image";
 export default function page() {
@@ -9,6 +10,9 @@ export default function page() {
     environment === "development"
       ? "http://localhost:3000"
       : "https://senditcourrier.vercel.app";
+    function handleChange(){
+      console.log("something is cooking")
+    }
   function handleSubmit() {
     Swal.fire({
       icon: "success",
@@ -32,11 +36,13 @@ export default function page() {
           <p className="flex items-center md:text-xl font-bold gap-1 my-1">
             📞 +254702018080
           </p>
-          <a href="mailto:senditcourrier.gmail.com" className="flex items-center md:text-xl font-bold gap-1 my-1">
+          <a
+            href="mailto:senditcourrier.gmail.com"
+            className="flex items-center md:text-xl font-bold gap-1 my-1">
             📧 senditcourrier@gmail.com
           </a>
           <p className="flex items-center md:text-xl font-bold my-1">
-            <Image src="./whatsapp.svg" height={30} width={30}></Image>
+            <Image src="./whatsapp.svg" height={30} width={30} alt="whatsapp-icon"></Image>
             +254702018080
           </p>
         </div>
@@ -70,7 +76,7 @@ export default function page() {
                 <label
                   htmlFor="name"
                   className="block mb-2 text-sm text-gray-600">
-                  Full Name
+                  Full Name <span className="text-red-600 font-bold">*</span>
                 </label>
                 <input
                   type="text"
@@ -85,7 +91,7 @@ export default function page() {
                 <label
                   htmlFor="email"
                   className="block mb-2 text-sm text-gray-600">
-                  Email Address
+                  Email Address <span className="text-red-600 font-bold">*</span>
                 </label>
                 <input
                   type="email"
@@ -98,21 +104,21 @@ export default function page() {
               </div>
               <div className="mb-6">
                 <label htmlFor="phone" className="text-sm text-gray-600 ">
-                  Phone Number
+                  Phone Number <span >(optional)</span>
                 </label>
+                {/* <PhoneInput placeholder="Enter phone number"  defaultCountry="KE" onChange={handleChange}/> */}
+
                 <input
                   type="number"
                   name="phone"
                   id="phone"
-                  min="10"
-                  max="12"
-                  placeholder="+254701234567"
+                  placeholder="🇰🇪 701234567"
                   className="input input-bordered input-secondary w-full max-w-xs0"
                 />
               </div>
               <div className="mb-6">
                 <label htmlFor="message" className="block mb-2 text-sm ">
-                  Your Message
+                  Your Message <span className="text-red-600 font-bold">*</span>
                 </label>
 
                 <textarea
