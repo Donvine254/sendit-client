@@ -15,7 +15,7 @@ export default function Navbar() {
   const user = getUser();
   const isAdmin = getPermission("admin").isGranted;
   const isRider = getPermission("rider").isGranted;
-  let role 
+  let role;
   if (isAdmin) {
     role = "Admin";
   } else if (isRider) {
@@ -51,9 +51,7 @@ export default function Navbar() {
             <li>
               <Link href="/deliveries">Deliveries</Link>
             </li>
-            <li>
-              <Link href="/dashboard">Dashboard</Link>
-            </li>
+
             <li>
               <Link href="/pricing">Pricing</Link>
             </li>
@@ -61,11 +59,16 @@ export default function Navbar() {
               <Link href="quote">Get a Quote</Link>
             </li>
             {isAuthenticated() && (
-              <li>
-                <LogoutLink className="text-subtle text-white hover:text-black accent">
-                  Log out
-                </LogoutLink>
-              </li>
+              <>
+                <li>
+                  <Link href="/dashboard">Dashboard</Link>
+                </li>
+                <li>
+                  <LogoutLink className="text-subtle text-white hover:text-black accent">
+                    Log out
+                  </LogoutLink>
+                </li>
+              </>
             )}
           </ul>
         </div>
@@ -96,7 +99,9 @@ export default function Navbar() {
           ) : (
             <div className="flex items-center gap-2 p-2">
               <button className="btn btn-ghost btn-circle">
-                <div className="indicator dropdown dropdown-hover dropdown-left" tabIndex={0}>
+                <div
+                  className="indicator dropdown dropdown-hover dropdown-left"
+                  tabIndex={0}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -114,9 +119,7 @@ export default function Navbar() {
                   <div
                     tabIndex={0}
                     className="dropdown-content z-[50] menu p-2 shadow bg-base-200 rounded-box min-w-[300px] normal-case">
-                    <p>
-                      ℹ️ You have no new notifications
-                    </p>
+                    <p>ℹ️ You have no new notifications</p>
                   </div>
                 </div>
               </button>
@@ -139,9 +142,7 @@ export default function Navbar() {
                 <p className="text-base font-bold">
                   {user?.given_name.toUpperCase()}
                 </p>
-                <p className="text-base text-gray-500">
-                  {role ?? "user"}
-                </p>
+                <p className="text-base text-gray-500">{role ?? "user"}</p>
               </div>
             </div>
           )}
