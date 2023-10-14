@@ -33,9 +33,9 @@ export default function QuotePage() {
       <h1 className="my-3 xsm:my-0 text-3xl font-semibold  py-2 text-center">
         Quote Request
       </h1>
-      <p className="font-light text-xl text-center py-2 lg:w-1/2 lg:mx-auto">
+      <p className="font-light text-xl py-2 lg:w-1/2 lg:mx-auto">
         Fill out the form below to request a quote. We will get back to you
-        within 24hrs of requesting your request. Thank you for your patience
+        within 24hrs of submitting your request. Thank you for your patience
       </p>
       <form
         action="https://api.web3forms.com/submit"
