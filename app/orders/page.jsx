@@ -7,8 +7,7 @@ export default function page() {
   const data = {
     subject: "Order confirmation",
     message:
-      "Hello there, this is just to let you know that your order has been confirmed. Our rider in the area will contact you for pickup instructions as  soon as possible",
-    email: "tutorassignment123@gmail.com",
+      "Hello there, this is just to let you know that your order has been confirmed. Our rider in the area will contact you for pickup instructions as  soon as possible"
   };
   function handleClick(){
     toast.success("order placed successfully")

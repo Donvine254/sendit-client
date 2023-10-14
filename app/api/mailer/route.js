@@ -60,10 +60,12 @@ export async function POST(req) {
   try {
     const emailHtml = render(
       <Email subject={data.subject} body={data.message} />
+      
     );
+    const receiver=data.email? data.email:user.email
     await sendEmail({
       subject: data.subject,
-      to: user.email,
+      to: receiver,
       from: process.env.NEXT_PUBLIC_EMAIL,
       html: emailHtml,
     });
