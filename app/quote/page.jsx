@@ -4,7 +4,7 @@ import "react-phone-number-input/style.css";
 import Swal from "sweetalert2";
 import { sendEmail } from "@/lib/mailer";
 
-export default function page() {
+export default function QuotePage() {
   const environment = process.env.NODE_ENV;
   const redirectUrl =
     environment === "development"

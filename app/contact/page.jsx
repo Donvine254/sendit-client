@@ -42,7 +42,7 @@ export default function page() {
             📧 senditcourrier@gmail.com
           </a>
           <p className="flex items-center md:text-xl font-bold my-1">
-            <Image src="./whatsapp.svg" height={30} width={30}></Image>
+            <Image src="./whatsapp.svg" height={30} width={30} alt="whatsapp-icon"></Image>
             +254702018080
           </p>
         </div>
