@@ -10,3 +10,5 @@ export async function GET() {
   const isRider = await getPermission("rider").isGranted;
   return NextResponse.json({ user, authenticated, permissions, isAdmin, isRider});
 }
+
+//can i fetch the user data here and make it available globally, why is the currentUser empty?
