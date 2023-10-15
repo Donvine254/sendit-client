@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 export default function Dashboard() {
   const [admin, setAdmin] = useState(false);
   const { setIsAdmin, setCurrentUser, setIsAutheticated, currentUser } = useAppContext();
+  const [capturedImage, setCapturedImage] = useState(null);
   const [image, setImage] = useState();
   useEffect(() => {
     const getKindeSession = async () => {
@@ -27,6 +28,30 @@ export default function Dashboard() {
 
     getKindeSession();
   }, [setIsAdmin, setCurrentUser, setIsAutheticated]);
+  //function to request access to user's camera:
+  
+  const handleCaptureImage = async () => {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const video = document.createElement("video");
+
+      video.srcObject = mediaStream;
+      await video.play();
+
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+      const capturedImageUrl = canvas.toDataURL("image/jpeg");
+
+      setCapturedImage(capturedImageUrl);
+      
+      // Stop capturing and close the camera
+      mediaStream.getTracks().forEach((track) => track.stop());
+    } catch (error) {
+      console.error("Error accessing the camera: ", error);
+    }
+  };
   return (
     <div className="mx-4 md:min-h-[400px]">
       <div className="p-4 container mx-auto ">
@@ -36,7 +61,15 @@ export default function Dashboard() {
       </div>
       <p>Upload a profile picture</p>
         <UploadButtonPage setImage={setImage} image={image}/>
-     <Loading/>
+        <div className="divider">Or</div>
+        <button onClick={handleCaptureImage} className="btn btn-neutral">Capture from Camera</button>
+        {capturedImage && (
+        <div>
+          <h3>Captured Image</h3>
+          <img src={capturedImage} alt="Captured" />
+        </div>
+      )}
+     {/* <Loading/> */}
     </div>
   );
 }
