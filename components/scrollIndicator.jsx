@@ -18,7 +18,7 @@ const ScrollIndicator = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 z-50 w-full bg-slate-300 ">
+    <div className="fixed top-0 z-50 w-full bg-slate-300 mb-2 ">
       <div className="w-full h-2">
         <div className="h-2 accent" id="myBar"></div>
       </div>
