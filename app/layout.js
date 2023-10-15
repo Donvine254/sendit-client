@@ -2,7 +2,7 @@ import "./globals.css";
 
 import ContextProvider from "@/context/context";
 import { Toaster } from "react-hot-toast";
-import { Navbar, Footer } from "@/components";
+import { Navbar, Footer, ScrollIndicator } from "@/components";
 
 
 export const metadata = {
@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="winter">
       <body>
+      <ScrollIndicator/>
         <ContextProvider>
           <Navbar/>
           {children}</ContextProvider>
