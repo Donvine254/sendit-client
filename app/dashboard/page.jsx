@@ -29,12 +29,14 @@ export default function Dashboard() {
     <div className="mx-4 md:min-h-[400px]">
       <div className="p-4">
         {currentUser ? <p>Welcome {currentUser.given_name}</p> : <p>Welcome </p>}
-        <button
+        {/* <button
           type="button"
           className="btn btn-sm accent text-white hover:text-black my-4 font-bold"
           onClick={() => toast.success("eat this toast!")}>
           Get Started
-        </button>
+        </button> */}
+        <p>Upload a profile picture</p>
+        <input type="file" className="file-input file-input-bordered file-input-info w-full max-w-xs" />
       </div>
      <Loading/>
     </div>
