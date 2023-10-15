@@ -66,7 +66,7 @@ export default function Dashboard() {
         {capturedImage && (
         <div>
           <h3>Captured Image</h3>
-          <img src={capturedImage} alt="Captured" />
+          <Image src={capturedImage} height={500} width={500}  alt="Captured" className="avatar xsm:w-full"/>
         </div>
       )}
      {/* <Loading/> */}
