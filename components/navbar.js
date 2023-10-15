@@ -97,11 +97,12 @@ export default function Navbar() {
               </RegisterLink>
             </>
           ) : (
-            <div className="flex items-center gap-2 p-2">
+            <div
+              className="flex items-center gap-2 p-2 tooltip tooltip-left tooltip-primary"
+              data-tip="You have no new notifications">
               <button className="btn btn-ghost btn-circle">
                 <div
-                  className="indicator dropdown dropdown-hover dropdown-left"
-                  tabIndex={0}>
+                  className="indicator">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -116,11 +117,6 @@ export default function Navbar() {
                     />
                   </svg>
                   <span className="badge badge-xs accent indicator-item"></span>
-                  <div
-                    tabIndex={0}
-                    className="dropdown-content z-[50] menu p-2 shadow bg-base-200 rounded-box min-w-[300px] normal-case">
-                    <p>ℹ️ You have no new notifications</p>
-                  </div>
                 </div>
               </button>
               {user?.picture ? (
