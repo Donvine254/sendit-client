@@ -26,3 +26,6 @@ html, body{
 .pricing-card{
   @apply rounded-md max-w-[400px] xsm:w-full border shadow-xl mt-4 h-fit min-h-[480px]  p-4 md:mx-2 
 }
+.home-card-container{
+  @apply grid auto-rows-fr md:grid-cols-2 lg:grid-cols-4 lg:mx-4 mx-2 sm:mx-3  items-center justify-center 
+}
