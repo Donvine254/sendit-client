@@ -11,7 +11,7 @@ const Hero = () => {
         </h1>
         <p className="py-4 text-[27px] font-light lg:py-6 md:leading-loose">
           Discover how sendit empowers small businesses, traders and individuals
-          through reliable courier delivery services today
+          through reliable courier delivery services today.
         </p>
         <div className="flex items-center gap-5 lg:gap-10">
           <Link href="/deliveries" className="btn btn-primary">
