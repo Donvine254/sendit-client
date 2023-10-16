@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-
+import {FaLongArrowAltRight} from "react-icons/fa"
 export default function HomeComponent() {
   return (
     <div className=" w-full bg-base-100 mt-2 overflow-hidden">
@@ -12,7 +12,7 @@ export default function HomeComponent() {
         <Link
           className="xsm:hidden btn btn-primary flex items-center"
           href="/pricing">
-          &#x27F6; See More
+         <FaLongArrowAltRight/> See More
         </Link>
       </div>
 
@@ -67,7 +67,7 @@ export default function HomeComponent() {
       <Link
         className="hidden btn btn-primary xsm:flex items-center mx-2 my-2"
         href="/pricing">
-        &#x27F6; See More
+        <FaLongArrowAltRight/>  See More
       </Link>
     </div>
   );
