@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import {FaLongArrowAltRight} from "react-icons/fa"
+
 export default function HomeComponent() {
   return (
     <div className=" w-full bg-base-100 mt-2 overflow-hidden">
