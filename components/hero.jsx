@@ -29,6 +29,8 @@ const Hero = () => {
           alt="hero-image"
           width={830}
           height={670}
+          priority
+          as={'image'}
           className="[800px]:mt-auto"
         />
       </div>
