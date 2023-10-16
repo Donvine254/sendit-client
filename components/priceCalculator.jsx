@@ -104,13 +104,13 @@ export default function PriceCalculator() {
         </div>
         <div className="flex items-center justify-between">
           <p>VAT:</p>
-          <p className="font-bold">Ksh {0.16 * price}</p>
+          <p className="font-bold">Ksh {(0.16 * price).toFixed(2)}</p>
         </div>
       </div>
       <div className="divider"></div>
       <div className="flex items-center justify-between font-bold my-1 text-xl">
         <p>Total Price:</p>
-        <p>Ksh {1.16 * price}</p>
+        <p>Ksh {(1.16 * price).toFixed()}</p>
       </div>
       <div className="divider"></div>
     </div>
