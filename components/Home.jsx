@@ -58,7 +58,7 @@ export default function HomeComponent() {
             <h1 className="card-title text-2xl">&#128737;</h1>
             <h2 className="font-bold">Cargo Insurance</h2>
             <p>
-              All cargo and parcel are insured any loss or damage during
+              All cargo and parcel are insured againist any loss or damage that might occur during
               transit.
             </p>
           </div>
