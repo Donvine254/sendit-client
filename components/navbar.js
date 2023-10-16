@@ -24,7 +24,7 @@ export default function Navbar() {
     role = "User";
   }
   return (
-    <div className="navbar bg-base-100 shadow-lg sticky top-0 z-[20]">
+    <div className="navbar bg-base-100 shadow-lg sticky top-0 z-[20] mt-2 ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -73,19 +73,19 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
-      <div className="navbar-center self-center">
+      <div className="navbar-center">
         <Link href="/">
           <Image
             src="./logo.svg"
             width={120}
             height={20}
             priority
-            className="self-center mb-3"
+            className="mb-2"
             alt="Logo"
           />
         </Link>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end items-center">
         <div className="flex items-center gap-1">
           {!isAuthenticated() ? (
             <>
@@ -98,9 +98,9 @@ export default function Navbar() {
             </>
           ) : (
             <div
-              className="flex items-center gap-2 p-2 tooltip tooltip-left tooltip-primary"
-              data-tip="You have no new notifications">
-              <button className="btn btn-ghost btn-circle">
+              className="flex items-center gap-2 p-2"
+             >
+              <button className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary"  data-tip="You have no new notifications">
                 <div
                   className="indicator">
                   <svg
@@ -121,10 +121,10 @@ export default function Navbar() {
               </button>
               {user?.picture ? (
                 <Image
-                  className="xsm:h-8 xsm:w-8 h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 mb-3"
+                  className="xsm:h-8 xsm:w-8 h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
                   src={user?.picture}
-                  width={40}
-                  height={40}
+                  width={48}
+                  height={48}
                   alt="user profile avatar"
                   referrerPolicy="no-referrer"
                 />
