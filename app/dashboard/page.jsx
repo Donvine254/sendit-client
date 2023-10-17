@@ -8,13 +8,12 @@ import { useAppContext } from "@/context/context";
 import  Loading  from "../../components/loading";
 import UploadButtonPage from "@/components/uploadButton"
 import Image from "next/image";
-
+import Link from "next/link"
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
   const [admin, setAdmin] = useState(false);
   const { setIsAdmin, setCurrentUser, setIsAutheticated, currentUser } = useAppContext();
-  const [capturedImage, setCapturedImage] = useState(null);
   const [image, setImage] = useState();
   useEffect(() => {
     const getKindeSession = async () => {
@@ -36,9 +35,9 @@ export default function Dashboard() {
         {currentUser ? <p className="font-bold">Welcome {currentUser.given_name}</p> : <p>Welcome </p>}
         
       </div>
-      <p>Upload a profile picture</p>
-        <UploadButtonPage setImage={setImage} image={image}/>
-        
+      {/* <p>Upload a profile picture</p>
+        <UploadButtonPage setImage={setImage} image={image}/> */}
+      <Link href="/dashboard/settings" className="btn btn-ghost flex items-center gap-2 w-36"><Image src="./settings.svg" width={20} height={20}/> Settings</Link>
      {/* <Loading/> */}
     </div>
   );
