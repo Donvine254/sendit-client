@@ -1,9 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import { useAppContext } from "@/context/context";
 import toast from "react-hot-toast";
 import { OrderDetails, PickupDetails, DeliveryDetails } from "./steps";
 
 export default function DeliveryPage() {
+const {parcelData}= useAppContext()
   const [currentStep, setCurrentStep] = useState(1); // Initial step
 
   const handleNext = () => {
@@ -19,6 +21,7 @@ export default function DeliveryPage() {
   };
   const handleSubmit = () => {
     toast.success("processing your request...");
+    console.log(parcelData)
   };
 
   return (

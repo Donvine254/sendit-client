@@ -14,7 +14,6 @@ import toast from "react-hot-toast";
 export default function Dashboard() {
   const {  setCurrentUser,
   currentUser } = useAppContext();
-  const [image, setImage] = useState();
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");
@@ -28,12 +27,12 @@ export default function Dashboard() {
   return (
     <div className="mx-4 md:min-h-[400px]">
       <div className="p-4 container mx-auto flex items-center justify-center ">
-        {currentUser && <Image src={image? image:currentUser.picture} width={50} height={50} alt="user-avatar" className="avatar rounded-full"/>}
+        {currentUser && <Image src={currentUser.picture} width={50} height={50} alt="user-avatar" className="avatar rounded-full"/>}
         {currentUser ? <p className="font-bold">Welcome {currentUser.given_name}</p> : <p>Welcome </p>}
         
       </div>
       <p>Upload a profile picture</p>
-        <UploadButtonPage setImage={setImage} image={image}/>
+        {/* <UploadButtonPage setImage={setImage} image={image}/> */}
       <Link href="/dashboard/settings" className="btn btn-ghost flex items-center gap-2 w-36"> Settings</Link>
      <Loading/>
     </div>

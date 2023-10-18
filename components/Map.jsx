@@ -15,11 +15,11 @@ import PickupLocation from "./pickuplocation";
 import DeliveryLocation from "./deliverylocation";
 import toast from "react-hot-toast";
 
-//styles for the map container  
+//styles for the map container
 const containerStyle = {
   width: "100%",
   height: "500px",
-  margin:"auto"
+  margin: "auto",
 };
 
 const libraries = ["places"];
@@ -37,10 +37,20 @@ export default function Map({ mapToRender }) {
   const [deliveryLocation, setDeliveryLocation] = useState();
   const [directions, setDirections] = useState();
   const [distance, setDistance] = useState(0);
-  const { currentUser } = useAppContext();
+  const { currentUser, parcelData, setParcelData } = useAppContext();
 
-  const [phone_number, setPhone_number] = useState(null);
-  const [receiver_contact, setReceiver_contact]= useState(null);
+
+ 
+
+  //function to handle change in inputs
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setParcelData((prev) => ({
+      ...prev,
+      [name]: value, 
+    }));
+  }
 
   const onLoad = useCallback(function callback(map) {
     const nairobiBounds = new window.google.maps.LatLngBounds(
@@ -95,8 +105,13 @@ export default function Map({ mapToRender }) {
                   What is your phone number?
                 </label>
                 <PhoneInput
-                  value={phone_number}
-                  onChange={setPhone_number}
+                  value={parcelData.phone_number}
+                  onChange={(value) =>
+                    setParcelData((prev) => ({
+                      ...prev,
+                      phone_number: value,
+                    }))
+                  }
                   defaultCountry="KE"
                   className="input input-bordered input-secondary"
                 />
@@ -112,6 +127,8 @@ export default function Map({ mapToRender }) {
                 rows="3"
                 name="pickup_notes"
                 id="pickup_notes"
+                value={parcelData.pickup_notes}
+                onChange={handleChange}
                 placeholder="pickup notes"
                 className="w-full textarea textarea-primary"
                 required></textarea>
@@ -141,6 +158,8 @@ export default function Map({ mapToRender }) {
                   type="text"
                   name="receiver_name"
                   id="receiver_name"
+                  value={parcelData.receiver_name}
+                  onChange={handleChange}
                   placeholder="John Doe"
                   required
                   className="input input-bordered input-secondary w-full max-w-xs0"
@@ -154,8 +173,13 @@ export default function Map({ mapToRender }) {
                   <span className="text-red-600 font-bold">*</span>
                 </label>
                 <PhoneInput
-                  value={receiver_contact}
-                  onChange={setReceiver_contact}
+                  value={parcelData.receiver_contact}
+                  onChange={(value) =>
+                    setParcelData((prev) => ({
+                      ...prev,
+                      receiver_contact: value,
+                    }))
+                  }
                   defaultCountry="KE"
                   className="input input-bordered input-secondary"
                 />
@@ -168,6 +192,8 @@ export default function Map({ mapToRender }) {
                   rows="3"
                   name="delivery_notes"
                   id="delivery_notes"
+                  value={parcelData.delivery_notes}
+                  onChange={handleChange}
                   placeholder="delivery notes"
                   className="w-full textarea textarea-primary"
                   required></textarea>
@@ -203,7 +229,12 @@ export default function Map({ mapToRender }) {
         )}
         {deliveryLocation && (
           <>
-            <Marker position={deliveryLocation} icon={"https://res.cloudinary.com/dipkbpinx/image/upload/v1697650214/green-flag_wbpv1t.svg"} />
+            <Marker
+              position={deliveryLocation}
+              icon={
+                "https://res.cloudinary.com/dipkbpinx/image/upload/v1697650214/green-flag_wbpv1t.svg"
+              }
+            />
           </>
         )}
         {directions && <DirectionsRenderer directions={directions} />}
