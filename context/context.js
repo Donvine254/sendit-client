@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect} from "react";
-import { registerUser } from "@/lib";
+import { registerUser, calculatePrice } from "@/lib";
 const AppContext = createContext("");
 
 export const useAppContext=()=>useContext(AppContext)
@@ -10,6 +10,8 @@ export default function ContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [phone_number, setPhone_number]= useState("")
+   const [pickupLocation, setPickupLocation] = useState();
+  const [deliveryLocation, setDeliveryLocation] = useState();
   const [parcelData, setParcelData] = useState({
     weight: null,
     description: "",
@@ -17,10 +19,13 @@ export default function ContextProvider({ children }) {
     pickup_notes: "",
     delivery_address:"",
     delivery_notes:"",
-    distance:"",
-    duration:"",
     receiver_name:"",
     receiver_contact:"",
+  })
+  const [orderData, setOrderData]=useState({
+    price:calculatePrice(parcelData.weight),
+    distance:"",
+    duration:"",
   })
 
 //fetch the currentUser and setCurrentUser when pages that use context load:
@@ -52,7 +57,13 @@ useEffect(() => {
     parcelData,
     setParcelData,
     phone_number, 
-    setPhone_number
+    setPhone_number,
+    orderData,
+    setOrderData,
+    pickupLocation, 
+    setPickupLocation,
+    deliveryLocation, 
+    setDeliveryLocation
   };
 
   return (

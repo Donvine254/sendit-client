@@ -33,16 +33,20 @@ export default function Map({ mapToRender }) {
   const zoom = 1;
   const mapRef = useRef();
   const [map, setMap] = useState(null);
-  const [pickupLocation, setPickupLocation] = useState();
-  const [deliveryLocation, setDeliveryLocation] = useState();
+ 
   const [directions, setDirections] = useState();
-  const [distance, setDistance] = useState(0);
+
   const {
     currentUser,
     parcelData,
     setParcelData,
     phone_number,
     setPhone_number,
+    setOrderData,
+    pickupLocation, 
+    setPickupLocation,
+    deliveryLocation, 
+    setDeliveryLocation
   } = useAppContext();
 
   //function to handle change in inputs
@@ -81,8 +85,12 @@ export default function Map({ mapToRender }) {
       },
       (result, status) => {
         if (status === "OK" && result) {
-          setDirections(result);
-          setDistance(result?.routes[0]?.legs[0]?.distance?.text ?? 0);
+          setOrderData((prev)=>({
+            ...prev,
+            distance:result.routes[0]?.legs[0]?.distance?.text,
+            duration:result.routes[0]?.legs[0]?.duration?.text 
+          }))
+    
         }
       }
     );
@@ -174,14 +182,12 @@ export default function Map({ mapToRender }) {
                 </label>
                 <PhoneInput
                   value={parcelData.receiver_contact}
-                  onChange={(value) => {
-                    const sanitizedValue = value.replace("+", "");
-                    const contactNumber = parseInt(sanitizedValue, 10);
+                  onChange={(value) => 
                     setParcelData((prev) => ({
                       ...prev,
-                      receiver_contact: contactNumber,
-                    }));
-                  }}
+                      receiver_contact: value,
+                    }))
+                  }
                   defaultCountry="KE"
                   className="input input-bordered input-secondary"
                 />
@@ -203,8 +209,6 @@ export default function Map({ mapToRender }) {
             </form>
           </>
         )}
-
-        {/* <p className="chat-bubble chat-bubble-primary text-base font-bold mx-4 mb-2 w-fit text-white">Distance: {directions?.routes[0]?.legs[0]?.distance?.text ?? "0km"}. This journey will take approximately {directions?.routes[0]?.legs[0]?.duration?.text ?? "0 minutes"}</p> */}
       </div>
 
       <GoogleMap
