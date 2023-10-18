@@ -15,6 +15,7 @@ export default function ContextProvider({ children }) {
   const [parcelData, setParcelData] = useState({
     weight: null,
     description: "",
+    value:"",
     pickup_address: "",
     pickup_notes: "",
     delivery_address:"",

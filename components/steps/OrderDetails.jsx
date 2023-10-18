@@ -52,6 +52,8 @@ export default function OrderDetails() {
           type="number"
           name="value"
           id="number"
+          value={parcelData.value}
+          onChange={handleChange}
           placeholder="value"
           required
           className="input input-bordered input-secondary w-full max-w-xs0"
