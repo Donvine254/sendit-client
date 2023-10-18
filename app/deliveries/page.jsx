@@ -14,11 +14,11 @@ export default function page() {
   return (
     <>
       {isAuthenticated() ? (
-        <div className="lg:mx-auto m-2 p-5">
+        <div className="">
           <h1 className="text-center my-2 font-bold text-2xl md:text-3xl">
             Create a Delivery Order
           </h1>
-          <section >
+          <section className="w-full">
             <ul className="steps w-full">
               <li data-content="✓" className="step step-primary">
               </li>
@@ -31,7 +31,7 @@ export default function page() {
             </ul>
             {/* <OrderDetails /> */}
             <PickupDetails/>
-            <div className="flex items-center justify-between lg:w-1/2 mx-auto">
+            <div className="flex items-center justify-between lg:w-1/2 mx-auto mt-2">
               <button className="btn btn-neutral">Back</button>
               <button className="btn btn-primary">Next</button>
             </div>

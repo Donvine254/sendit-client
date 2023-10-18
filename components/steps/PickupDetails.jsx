@@ -3,18 +3,19 @@ import React, {useState} from "react";
 import Map from "../Map";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
-import PickupLocation from "../pickuplocation";
+
 import { useAppContext } from "@/context/context";
 export default function PickupDetails() {
   const { currentUser } = useAppContext();
-  const [pickupLocation, setPickupLocation] = useState();
+ 
   const [phone_number, setPhone_number]=useState(null)
   console.log(currentUser)
   return (
-    <div className="flex">
-      <div>
+    <div className="mx-5">
+        <Map/>
+      {/* <div>
         <form>
-          {/* <PickupLocation setPickupLocation={setPickupLocation}/> */}
+           <PickupLocation setPickupLocation={setPickupLocation}/> 
           {!currentUser?.phone_number ? (
             <div className="mb-2">
               <label htmlFor="phone_number" className="block mb-2 text-sm ">
@@ -40,8 +41,8 @@ export default function PickupDetails() {
         </form>
       </div>
       <div>
-        <Map propsLocation={pickupLocation}/>
-      </div>
+        
+      </div> */}
     </div>
   );
 }

@@ -6,18 +6,21 @@ import {
   Marker,
   DirectionsRenderer,
 } from "@react-google-maps/api";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
+import { useAppContext } from "@/context/context";
 import Loading from "./loading";
 import PickupLocation from "./pickuplocation";
 import DeliveryLocation from "./deliverylocation";
 import toast from "react-hot-toast";
 const containerStyle = {
   width: "100%",
-  height: "600px",
+  height: "400px",
 };
 
 const libraries = ["places"];
-export default function Map({propsLocation}) {
+export default function Map() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -31,6 +34,9 @@ export default function Map({propsLocation}) {
   const [deliveryLocation, setDeliveryLocation] = useState();
   const [directions, setDirections] = useState();
   const [distance, setDistance]= useState(0)
+  const { currentUser } = useAppContext();
+ 
+  const [phone_number, setPhone_number]=useState(null)
 
   const onLoad = useCallback(function callback(map) {
     const nairobiBounds = new window.google.maps.LatLngBounds(
@@ -66,8 +72,30 @@ export default function Map({propsLocation}) {
   };
   
   return isLoaded ? (
-    <div className="w-full">
-      <div className="p-2 shadow-lg bg-base-100">
+    <div className="w-full flex-col md:flex-row  justify-between">
+      <div className="p-2 self-start lg:w-1/2 gap-10">
+        {!currentUser?.phone_number ? (
+            <div className="mb-2">
+              <label htmlFor="phone_number" className="block mb-2 text-sm ">
+                What is your phone number?
+              </label>
+              <PhoneInput value={phone_number} onChange={setPhone_number} defaultCountry="KE" className="input input-bordered input-secondary" />
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className="mb-2">
+            <label htmlFor="pickup_notes" className="block mb-2 text-sm ">
+              Pickup Notes
+            </label>
+            <textarea
+              rows="5"
+              name="pickup_notes"
+              id="pickup_notes"
+              placeholder="pickup notes"
+              className="w-full textarea textarea-primary"
+              required></textarea>
+          </div>
         <PickupLocation
           setPickupLocation={(position) => {
             setPickupLocation(position);
@@ -97,9 +125,9 @@ export default function Map({propsLocation}) {
           fullscreenControl: false,
 
         }}>
-        {propsLocation && (
+        {pickupLocation && (
           <>
-            <Marker position={propsLocation} />
+            <Marker position={pickupLocation} />
           </>
         )}
         {deliveryLocation && (
