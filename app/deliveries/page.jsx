@@ -1,9 +1,8 @@
 import React from "react";
-import Map from "../../components/Map";
+
 import Image from "next/image";
 import Link from "next/link";
-import { OrderDetails } from "@/components/steps";
-import  PickupDetails from "../../components/steps/PickupDetails"
+import DeliveryPage from "../../components/DeliveryPage"
 import {
   getKindeServerSession,
   LoginLink,
@@ -18,24 +17,7 @@ export default function page() {
           <h1 className="text-center my-2 font-bold text-2xl md:text-3xl">
             Create a Delivery Order
           </h1>
-          <section className="w-full">
-            <ul className="steps w-full">
-              <li data-content="✓" className="step step-primary">
-              </li>
-              <li data-content="✕" className="step step-ghost">
-              </li>
-              <li data-content="✕" className="step step-ghost">
-              </li>
-              <li data-content="✕" className="step step-ghost">
-              </li>
-            </ul>
-            {/* <OrderDetails /> */}
-            <PickupDetails/>
-            <div className="flex items-center justify-between lg:w-1/2 mx-auto mt-2">
-              <button className="btn btn-neutral">Back</button>
-              <button className="btn btn-primary">Next</button>
-            </div>
-          </section>
+          <DeliveryPage/>
         </div>
       ) : (
         <div className="card py-4 xsm:w-full md:max-w-[400px] w-100px shadow-lg border border-blue-300 md:mx-auto mt-2">
