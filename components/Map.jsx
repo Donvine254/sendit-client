@@ -17,7 +17,7 @@ const containerStyle = {
 };
 
 const libraries = ["places"];
-export default function Map() {
+export default function Map({propsLocation}) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -65,9 +65,8 @@ export default function Map() {
     );
   };
   
-
   return isLoaded ? (
-    <div className="">
+    <div className="w-full">
       <div className="p-2 shadow-lg bg-base-100">
         <PickupLocation
           setPickupLocation={(position) => {
@@ -75,14 +74,14 @@ export default function Map() {
             mapRef.current?.panTo(position);
           }}
         />
-        <DeliveryLocation
+        {/* <DeliveryLocation
           setDeliveryLocation={(position) => {
             setDeliveryLocation(position);
             mapRef.current?.panTo(position);
             fetchDirections(position);
           }}
         />
-        <p className="chat-bubble chat-bubble-primary text-base font-bold mx-4 mb-2 w-fit text-white">Distance: {directions?.routes[0]?.legs[0]?.distance?.text ?? "0km"}. This journey will take approximately {directions?.routes[0]?.legs[0]?.duration?.text ?? "0 minutes"}</p>
+        <p className="chat-bubble chat-bubble-primary text-base font-bold mx-4 mb-2 w-fit text-white">Distance: {directions?.routes[0]?.legs[0]?.distance?.text ?? "0km"}. This journey will take approximately {directions?.routes[0]?.legs[0]?.duration?.text ?? "0 minutes"}</p> */}
       </div>
 
       <GoogleMap
@@ -98,9 +97,9 @@ export default function Map() {
           fullscreenControl: false,
 
         }}>
-        {pickupLocation && (
+        {propsLocation && (
           <>
-            <Marker position={pickupLocation} />
+            <Marker position={propsLocation} />
           </>
         )}
         {deliveryLocation && (

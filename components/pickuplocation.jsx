@@ -39,7 +39,7 @@ export default function PickupLocation({ setPickupLocation }) {
               onChange={(e) => setValue(e.target.value)}
             />
             <ul
-              className="bg-base-100 w-full items-start flex flex-col text-base m-0 pt-1 justify-start py-2 border z-50"
+              className="bg-base-100  items-start flex flex-col text-base m-0 pt-1 justify-start py-2 border z-50"
               style={{ position: "absolute", top: "100%" }}>
               {status === "OK" &&
                 data.map(({ place_id, description }) => (
