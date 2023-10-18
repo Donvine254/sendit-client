@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect} from "react";
-import { registerUser, calculatePrice } from "@/lib";
+import { registerUser} from "@/lib";
 const AppContext = createContext("");
 
 export const useAppContext=()=>useContext(AppContext)
@@ -23,7 +23,7 @@ export default function ContextProvider({ children }) {
     receiver_contact:"",
   })
   const [orderData, setOrderData]=useState({
-    price:calculatePrice(parcelData.weight),
+    price:0,
     distance:"",
     duration:"",
   })
