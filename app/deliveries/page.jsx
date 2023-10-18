@@ -1,7 +1,8 @@
 import React from "react";
-import Map from "../../components/Map";
+
 import Image from "next/image";
 import Link from "next/link";
+import DeliveryPage from "../../components/DeliveryPage"
 import {
   getKindeServerSession,
   LoginLink,
@@ -12,17 +13,11 @@ export default function page() {
   return (
     <>
       {isAuthenticated() ? (
-        <div className="lg:mx-auto m-2 p-5" >
-          <h1 className="text-center my-2 font-bold text-2xl md:text-4xl">
+        <div className="">
+          <h1 className="text-center my-2 font-bold text-2xl md:text-3xl">
             Create a Delivery Order
           </h1>
-          <p className="text-xl my-2 ">
-            Use our effortless delivery order to place an order, Sendit will
-            handle the rest
-          </p>
-          <section className="">
-            <Map />
-          </section>
+          <DeliveryPage/>
         </div>
       ) : (
         <div className="card py-4 xsm:w-full md:max-w-[400px] w-100px shadow-lg border border-blue-300 md:mx-auto mt-2">
@@ -39,15 +34,20 @@ export default function page() {
             <h2 className="card-title text-red-500">Login Required</h2>
             <p>Kindly login to create a delivery order</p>
             <div className="card-actions justify-end gap-2">
-              <LoginLink className="btn btn-neutral xsm:btn-sm xsm:mt-2 hover:bg-blue-600 hover:text-white " postLoginRedirectURL={'/deliveries'}>
+              <LoginLink
+                className="btn btn-neutral xsm:btn-sm xsm:mt-2 hover:bg-blue-600 hover:text-white "
+                postLoginRedirectURL={"/deliveries"}>
                 Sign in
               </LoginLink>
-              <Link href="/" className="btn btn-warning xsm:btn-sm xsm:mt-2 hover:bg-red-400">Cancel</Link>
+              <Link
+                href="/"
+                className="btn btn-warning xsm:btn-sm xsm:mt-2 hover:bg-red-400">
+                Cancel
+              </Link>
             </div>
           </div>
         </div>
       )}
-      </>
+    </>
   );
 }
-

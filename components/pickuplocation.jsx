@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-
+import Image from "next/image";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-
-export default function PickupLocation({ setPickupLocation }) {
+import { MdLocationPin } from "react-icons/md";
+export default function PickupLocation({ setPickupLocation, setParcelData }) {
   const {
     ready,
     value,
@@ -18,6 +18,11 @@ export default function PickupLocation({ setPickupLocation }) {
   const handleSelect = async (val) => {
     setValue(val, false);
     clearSuggestions();
+    //set parcelData delivery address to val
+    setParcelData((prev) => ({
+      ...prev,
+      pickup_address: val,
+    }));
     const address = { address: val };
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
@@ -25,35 +30,35 @@ export default function PickupLocation({ setPickupLocation }) {
     setPickupLocation(latLng);
   };
   return (
-    <div className="mb-1 xsm:mb-0 p-4 font-mono">
-      <ul className="steps steps-vertical mx-4 xsm:mx-1">
-        <li className="step step-primary ">
-          <div className="flex flex-col items-start justify-start">
-            <p className="font-bold text-base my-2">
-              Where should we pick up your parcel?
-            </p>
-            <input
-              type="search"
-              className="input input-secondary focus:outline-none w-full max-w-xl mb-2"
-              value={value}
-              disabled={!ready}
-              placeholder="Enter your pickup address"
-              onChange={(e) => setValue(e.target.value)}
-            />
-            <ul className="bg-base-200 w-full items-start flex flex-col text-base m-0 pt-1 justify-start">
-              {status === "OK" &&
-                data.map(({ place_id, description }) => (
-                  <li
-                    key={place_id}
-                    value={description}
-                    onClick={() => handleSelect(description)} className="btn btn-ghost pt-2">
-                    {description}
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
+    <>
+      <p className="font-bold text-base flex items-center gap-2">
+        <Image src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697650099/flag-svgrepo-com_1_zz3zvp.svg" width={20} height={20} alt="pickup flag" />{" "}
+        Pickup Address
+      </p>
+      <div className="w-full mt-2 relative">
+        <input
+          type="search"
+          className="input input-secondary focus:outline-none w-full mb-2"
+          value={value}
+          disabled={!ready}
+          placeholder="Tatu City"
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <ul
+          className="bg-base-100  items-start flex flex-col text-base m-0 pt-1 justify-start py-2 border z-50 w-full"
+          style={{ position: "absolute", top: "100%" }}>
+          {status === "OK" &&
+            data.map(({ place_id, description }) => (
+              <li
+                key={place_id}
+                value={description}
+                onClick={() => handleSelect(description)}
+                className="mr-2 hover:bg-primary hover:text-white hover:rounded-md  capitalize w-full text-start p-2 flex items-center">
+                <MdLocationPin /> {description}
+              </li>
+            ))}
+        </ul>
+      </div>
+    </>
   );
 }

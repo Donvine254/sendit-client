@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef } from "react";
-import "react-phone-number-input/style.css";
+
 import Swal from "sweetalert2";
 import { sendEmail } from "@/lib/mailer";
 
