@@ -32,7 +32,7 @@ export default function DeliveryLocation({ setDeliveryLocation, setParcelData })
   return (
     <>
       <p className="font-bold text-base flex items-center gap-2">
-        <Image src="./flag.svg" width={20} height={20} alt="pickup flag" />{" "}
+        <Image src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697650214/green-flag_wbpv1t.svg" width={20} height={20} alt="pickup flag" />{" "}
         Delivery Address
       </p>
       <div className="w-full mt-2 relative">

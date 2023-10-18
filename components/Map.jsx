@@ -237,14 +237,11 @@ export default function Map({ mapToRender }) {
         {deliveryLocation && (
           <>
             <Marker
-              position={deliveryLocation}
-              icon={
-                "https://res.cloudinary.com/dipkbpinx/image/upload/v1697650214/green-flag_wbpv1t.svg"
-              }
+              position={deliveryLocation}           
             />
           </>
         )}
-        {directions && <DirectionsRenderer directions={directions} />}
+        {directions && <DirectionsRenderer directions={directions}  />}
       </GoogleMap>
     </div>
   ) : (
