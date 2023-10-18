@@ -6,9 +6,9 @@ import { Navbar, Footer, ScrollIndicator } from "@/components";
 
 
 export const metadata = {
-  title: "SendIT",
+  title: "Sendit",
   description:
-    "SendIT is a courier delivery service provider that offers same day deliveries and unbeaten prices for all deliveries",
+    "Sendit is a courier delivery service provider that offers same day deliveries and unbeaten prices for all deliveries",
 };
 
 export default function RootLayout({ children }) {
