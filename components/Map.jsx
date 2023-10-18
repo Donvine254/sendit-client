@@ -72,8 +72,8 @@ export default function Map() {
   };
   
   return isLoaded ? (
-    <div className="w-full flex-col md:flex-row  justify-between">
-      <div className="p-2 self-start lg:w-1/2 gap-10">
+    <div className="w-full flex flex-col lg:flex-row  justify-evenly">
+      <div className="p-2 self-start w-full gap-10">
         {!currentUser?.phone_number ? (
             <div className="mb-2">
               <label htmlFor="phone_number" className="block mb-2 text-sm ">
