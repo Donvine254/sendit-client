@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-
+import Image from "next/image"
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-
+import {MdLocationPin} from "react-icons/md"
 export default function PickupLocation({ setPickupLocation }) {
   const {
     ready,
@@ -25,35 +25,36 @@ export default function PickupLocation({ setPickupLocation }) {
     setPickupLocation(latLng);
   };
   return (
-    <div className="mb-1 xsm:mb-0 p-4 font-mono">
-      <ul className="steps steps-vertical mx-4 xsm:mx-1">
-        <li className="step step-primary ">
-          <div className="flex flex-col items-start justify-start">
-            <p className="font-bold text-base my-2">
-              Where should we pick up your parcel?
+    <>
+            <p className="font-bold text-base m-5 flex items-center gap-2">
+            <Image src="./flag.svg" width={20} height={20} alt="pickup flag"/> Pickup Address
             </p>
+            <div className="m-5 w-full md:w-1/2">
             <input
               type="search"
-              className="input input-secondary focus:outline-none w-full max-w-xl mb-2"
+              className="input input-secondary focus:outline-none w-full mb-2"
               value={value}
               disabled={!ready}
-              placeholder="Enter your pickup address"
+              placeholder="Tatu City"
               onChange={(e) => setValue(e.target.value)}
             />
-            <ul className="bg-base-200 w-full items-start flex flex-col text-base m-0 pt-1 justify-start">
+            <ul
+              className="bg-base-100 w-full items-start flex flex-col text-base m-0 pt-1 justify-start py-2 border z-50"
+              style={{ position: "absolute", top: "100%" }}>
               {status === "OK" &&
                 data.map(({ place_id, description }) => (
                   <li
                     key={place_id}
                     value={description}
-                    onClick={() => handleSelect(description)} className="btn btn-ghost pt-2">
-                    {description}
+                    onClick={() => handleSelect(description)}
+                    className="mr-2 hover:bg-primary hover:text-white hover:rounded-md  capitalize w-full text-start p-2 flex items-center">
+                   <MdLocationPin/> {description}
                   </li>
                 ))}
             </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
+            </div>
+            
+       
+    </>
   );
 }

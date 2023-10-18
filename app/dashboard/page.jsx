@@ -35,10 +35,10 @@ export default function Dashboard() {
         {currentUser ? <p className="font-bold">Welcome {currentUser.given_name}</p> : <p>Welcome </p>}
         
       </div>
-      {/* <p>Upload a profile picture</p>
-        <UploadButtonPage setImage={setImage} image={image}/> */}
-      <Link href="/dashboard/settings" className="btn btn-ghost flex items-center gap-2 w-36"><Image src="./settings.svg" width={20} height={20}/> Settings</Link>
-     {/* <Loading/> */}
+      <p>Upload a profile picture</p>
+        <UploadButtonPage setImage={setImage} image={image}/>
+      <Link href="/dashboard/settings" className="btn btn-ghost flex items-center gap-2 w-36"> Settings</Link>
+     <Loading/>
     </div>
   );
 }
