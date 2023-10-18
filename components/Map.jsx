@@ -85,6 +85,7 @@ export default function Map({ mapToRender }) {
       },
       (result, status) => {
         if (status === "OK" && result) {
+          setDirections(result);
           setOrderData((prev)=>({
             ...prev,
             distance:result.routes[0]?.legs[0]?.distance?.text,
