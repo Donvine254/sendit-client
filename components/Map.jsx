@@ -37,10 +37,13 @@ export default function Map({ mapToRender }) {
   const [deliveryLocation, setDeliveryLocation] = useState();
   const [directions, setDirections] = useState();
   const [distance, setDistance] = useState(0);
-  const { currentUser, parcelData, setParcelData } = useAppContext();
-
-
- 
+  const {
+    currentUser,
+    parcelData,
+    setParcelData,
+    phone_number,
+    setPhone_number,
+  } = useAppContext();
 
   //function to handle change in inputs
   function handleChange(e) {
@@ -48,7 +51,7 @@ export default function Map({ mapToRender }) {
 
     setParcelData((prev) => ({
       ...prev,
-      [name]: value, 
+      [name]: value,
     }));
   }
 
@@ -98,6 +101,7 @@ export default function Map({ mapToRender }) {
                 setPickupLocation(position);
                 mapRef.current?.panTo(position);
               }}
+              setParcelData={setParcelData}
             />
             {!currentUser?.phone_number ? (
               <div className="mt-4 py-2">
@@ -105,13 +109,8 @@ export default function Map({ mapToRender }) {
                   What is your phone number?
                 </label>
                 <PhoneInput
-                  value={parcelData.phone_number}
-                  onChange={(value) =>
-                    setParcelData((prev) => ({
-                      ...prev,
-                      phone_number: value,
-                    }))
-                  }
+                  value={phone_number}
+                  onChange={setPhone_number}
                   defaultCountry="KE"
                   className="input input-bordered input-secondary"
                 />
@@ -145,6 +144,7 @@ export default function Map({ mapToRender }) {
                 mapRef.current?.panTo(position);
                 fetchDirections(position);
               }}
+              setParcelData={setParcelData}
             />
             <form>
               <div className="mt-4 py-2">
@@ -174,12 +174,14 @@ export default function Map({ mapToRender }) {
                 </label>
                 <PhoneInput
                   value={parcelData.receiver_contact}
-                  onChange={(value) =>
+                  onChange={(value) => {
+                    const sanitizedValue = value.replace("+", "");
+                    const contactNumber = parseInt(sanitizedValue, 10);
                     setParcelData((prev) => ({
                       ...prev,
-                      receiver_contact: value,
-                    }))
-                  }
+                      receiver_contact: contactNumber,
+                    }));
+                  }}
                   defaultCountry="KE"
                   className="input input-bordered input-secondary"
                 />

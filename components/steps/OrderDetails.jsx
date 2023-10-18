@@ -36,7 +36,7 @@ export default function OrderDetails() {
           type="number"
           name="weight"
           id="weight"
-          value={parcelData.weight}
+          value={!parcelData.weight? "" : parcelData.weight}
           onChange={handleChange}
           max={100}
           placeholder="weight"

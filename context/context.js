@@ -9,8 +9,9 @@ export default function ContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [phone_number, setPhone_number]= useState("")
   const [parcelData, setParcelData] = useState({
-    weight: "",
+    weight: null,
     description: "",
     pickup_address: "",
     pickup_notes: "",
@@ -20,7 +21,6 @@ export default function ContextProvider({ children }) {
     duration:"",
     receiver_name:"",
     receiver_contact:"",
-    phone_number:""
   })
 
 //fetch the currentUser and setCurrentUser when pages that use context load:
@@ -50,7 +50,9 @@ useEffect(() => {
     isAuthenticated,
     setIsAuthenticated,
     parcelData,
-    setParcelData
+    setParcelData,
+    phone_number, 
+    setPhone_number
   };
 
   return (

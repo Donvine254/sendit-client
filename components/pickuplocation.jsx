@@ -7,7 +7,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 import { MdLocationPin } from "react-icons/md";
-export default function PickupLocation({ setPickupLocation }) {
+export default function PickupLocation({ setPickupLocation, setParcelData }) {
   const {
     ready,
     value,
@@ -18,6 +18,11 @@ export default function PickupLocation({ setPickupLocation }) {
   const handleSelect = async (val) => {
     setValue(val, false);
     clearSuggestions();
+    //set parcelData delivery address to val
+    setParcelData((prev) => ({
+      ...prev,
+      pickup_address: val,
+    }));
     const address = { address: val };
     const results = await getGeocode(address);
     const { lat, lng } = await getLatLng(results[0]);
