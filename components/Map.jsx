@@ -16,7 +16,7 @@ import DeliveryLocation from "./deliverylocation";
 import toast from "react-hot-toast";
 const containerStyle = {
   width: "100%",
-  height: "400px",
+  height: "450px"
 };
 
 const libraries = ["places"];
@@ -72,10 +72,17 @@ export default function Map() {
   };
   
   return isLoaded ? (
-    <div className="w-full flex flex-col lg:flex-row  justify-evenly">
-      <div className="p-2 self-start w-full gap-10">
+    <div className="w-full flex flex-col lg:flex-row  justify-evenly gap-10 font-serif">
+      <div className="p-2 self-start w-full gap-10 border pb-5">
+        <p className="text-lg font-bold py-2 text-center">Add Pickup Address</p>
+      <PickupLocation
+          setPickupLocation={(position) => {
+            setPickupLocation(position);
+            mapRef.current?.panTo(position);
+          }}
+        />
         {!currentUser?.phone_number ? (
-            <div className="mb-2">
+            <div className="mt-4">
               <label htmlFor="phone_number" className="block mb-2 text-sm ">
                 What is your phone number?
               </label>
@@ -96,12 +103,7 @@ export default function Map() {
               className="w-full textarea textarea-primary"
               required></textarea>
           </div>
-        <PickupLocation
-          setPickupLocation={(position) => {
-            setPickupLocation(position);
-            mapRef.current?.panTo(position);
-          }}
-        />
+       
         {/* <DeliveryLocation
           setDeliveryLocation={(position) => {
             setDeliveryLocation(position);
