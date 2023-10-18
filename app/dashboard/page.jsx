@@ -12,21 +12,18 @@ import Link from "next/link"
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
-  const [admin, setAdmin] = useState(false);
-  const { setIsAdmin, setCurrentUser, setIsAutheticated, currentUser } = useAppContext();
+  const {  setCurrentUser,
+  currentUser } = useAppContext();
   const [image, setImage] = useState();
   useEffect(() => {
     const getKindeSession = async () => {
       const res = await fetch("/api/kindeSession");
       const data = await res.json();
-      setIsAutheticated(data.authenticated);
-      setAdmin(data.isAdmin);
-      registerUser(data, setIsAdmin, setCurrentUser);
-      setCurrentUser(data.user);
+      registerUser(data, setCurrentUser);
     };
 
     getKindeSession();
-  }, [setIsAdmin, setCurrentUser, setIsAutheticated]);
+  }, [setCurrentUser]);
  
   return (
     <div className="mx-4 md:min-h-[400px]">
