@@ -17,11 +17,6 @@ Alternatively, you can view the deployed sites below
 => Backend api
 
 ***[sendit.up.railway.app](https://sendit.up.railway.app)*** 
-## Group Members
-- Donvine Mugendi - Scrum Master
-- Angela Kulola 
-- Maureen Ngugi
-- Kepher Ogalo
 
 ## TECHNOLOGIES USED
 This app is bootstraped using NextJs, which means that most components are server side rendered and console messages might not appear on the browser console. Additionaly, you will need to create API keys for other services detailed below:

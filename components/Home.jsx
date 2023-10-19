@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Image from "next/image";
 import DeliveryProcess from "./DeliveryProcess";
