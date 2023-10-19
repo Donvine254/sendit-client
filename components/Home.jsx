@@ -1,74 +1,114 @@
 import Link from "next/link";
 import React from "react";
-import {FaLongArrowAltRight} from "react-icons/fa"
+import { FaLongArrowAltRight } from "react-icons/fa";
+import Image from "next/image";
 export default function HomeComponent() {
   return (
-    <div className=" w-full bg-base-100 mt-2 overflow-hidden">
-      <div className="flex items-center justify-between mx-5 xsm:mx-1">
-        {" "}
-        <h1 className="font-bold text-2xl md:text-3xl text-center">
-          Special Features That Make You Happy
-        </h1>
+    <>
+      <div className=" w-full bg-base-100 mt-2 overflow-hidden border-b-2">
+        <div className="flex items-center justify-between mx-5 xsm:mx-1">
+          {" "}
+          <h1 className="font-bold text-2xl md:text-3xl text-center">
+            Special Features That Make You Happy
+          </h1>
+          <Link
+            className="xsm:hidden btn btn-primary flex items-center"
+            href="/pricing">
+            <FaLongArrowAltRight /> See More
+          </Link>
+        </div>
+
+        <div className="home-card-container mt-1">
+          {/* first card */}
+          <div className="flex  border-b-4 md:border-r-4 md:border-b-0 border-primary h-[240px]">
+            <div className="card-body items-center text-center">
+              <h1 className="card-title text-2xl">$</h1>
+              <h2 className="font-bold">Transparent Pricing</h2>
+              <p>
+                Our price calculator lets you determine the price of your order
+                before you even make an order. No hidden charges!
+              </p>
+            </div>
+          </div>
+          {/* second card */}
+          <div className="flex border-b-4 lg:border-r-4 md:border-b-0 border-primary h-[240px]">
+            <div className="card-body items-center text-center">
+              <h1 className="card-title text-2xl">&#9889;</h1>
+              <h2 className="font-bold">Fast Delivery</h2>
+              <p>
+                <span className="text-primary font-semibold">
+                  Usitense kama mzigo imefika!{" "}
+                </span>{" "}
+                We deliver your order before you start worrying about it.
+              </p>
+            </div>
+          </div>
+          {/* Third card */}
+          <div className="flex  border-b-4 md:border-r-4 md:border-b-0 border-primary h-[240px]">
+            <div className="card-body items-center text-center">
+              <h1 className="card-title text-2xl">&#128179;</h1>
+              <h2 className="font-bold">Pay on Delivery</h2>
+              <p>
+                We allow you the flexibility of paying only after the recipient
+                confirms the delivery has been made.
+              </p>
+            </div>
+          </div>
+          {/* fourth card */}
+          <div className="flex  border-b-4 lg:border-r-4 md:border-b-0 border-primary h-[240px]">
+            <div className="card-body items-center text-center">
+              <h1 className="card-title text-2xl">&#128737;</h1>
+              <h2 className="font-bold">Cargo Insurance</h2>
+              <p>
+                All cargo and parcel are insured againist any loss or damage
+                that might occur during transit.
+              </p>
+            </div>
+          </div>
+        </div>
         <Link
-          className="xsm:hidden btn btn-primary flex items-center"
+          className="hidden btn btn-primary xsm:flex items-center mx-2 my-2"
           href="/pricing">
-         <FaLongArrowAltRight/> See More
+          <FaLongArrowAltRight /> See More
         </Link>
       </div>
-
-      <div className="home-card-container mt-1">
-        {/* first card */}
-        <div className="flex  border-b-4 md:border-r-4 md:border-b-0 border-primary h-[240px]">
-          <div className="card-body items-center text-center">
-            <h1 className="card-title text-2xl">$</h1>
-            <h2 className="font-bold">Transparent Pricing</h2>
-            <p>
-              Our price calculator lets you determine the price of your order
-              before you even make an order. No hidden charges!
-            </p>
+      {/* callout card */}
+      <div className="flex flex-col md:flex-row items-center justify-between bg-base-100 mt-2 mx-5">
+        <div className="flex-1">
+          <div className="mockup-phone border-primary">
+            <div className="camera"></div>
+            <div className="display">
+              <div className="">
+                {" "}
+                <Image
+                  src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697733102/bike_jso1cp.jpg"
+                  alt="callout-image"
+                  width={3000}
+                  height={2000}
+                  className="md:my-2 md:mx-1"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        {/* second card */}
-        <div className="flex border-b-4 lg:border-r-4 md:border-b-0 border-primary h-[240px]">
-          <div className="card-body items-center text-center">
-            <h1 className="card-title text-2xl">&#9889;</h1>
-            <h2 className="font-bold">Fast Delivery</h2>
+        <div className="md:w-1/2 p-2 mx-2 self-center h-full">
+          <h1 className="text-2xl lg:text-3xl font-bold text-center">
+            Deliver your parcel without ever leaving your home
+          </h1>
+          <div className="py-4 text-xl font-light lg:py-6 md:leading-loose">
             <p>
-              <span className="text-primary font-semibold">
-                Usitense kama mzigo imefika!{" "}
-              </span>{" "}
-              We deliver your order before you start worrying about it.
+              Join over 1000 customers who trust sendit for timely, reliable and
+              efficient delivery services.
             </p>
-          </div>
-        </div>
-        {/* Third card */}
-        <div className="flex  border-b-4 md:border-r-4 md:border-b-0 border-primary h-[240px]">
-          <div className="card-body items-center text-center">
-            <h1 className="card-title text-2xl">&#128179;</h1>
-            <h2 className="font-bold">Pay on Delivery</h2>
-            <p>
-              We allow you the flexibility of paying only after the recipient
-              confirms the delivery has been made.
-            </p>
-          </div>
-        </div>
-        {/* fourth card */}
-        <div className="flex  border-b-4 lg:border-r-4 md:border-b-0 border-primary h-[240px]">
-          <div className="card-body items-center text-center">
-            <h1 className="card-title text-2xl">&#128737;</h1>
-            <h2 className="font-bold">Cargo Insurance</h2>
-            <p>
-              All cargo and parcel are insured againist any loss or damage that might occur during
-              transit.
-            </p>
+            <p>Be assured by using sendit services today!</p>
+            <div className="flex items-center justify-center">
+              <Link href="/deliveries" className="btn btn-primary">
+                Get started
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-      <Link
-        className="hidden btn btn-primary xsm:flex items-center mx-2 my-2"
-        href="/pricing">
-        <FaLongArrowAltRight/>  See More
-      </Link>
-    </div>
+    </>
   );
 }
