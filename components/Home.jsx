@@ -3,10 +3,11 @@ import React from "react";
 
 import { FaLongArrowAltRight } from "react-icons/fa";
 import Image from "next/image";
+import DeliveryProcess from "./DeliveryProcess";
 export default function HomeComponent() {
   return (
     <>
-      <div className=" w-full bg-base-100 mt-2 overflow-hidden border-b-2">
+      <div className=" w-full bg-base-100 my-2 overflow-hidden border-b-2 font-serif">
         <div className="flex items-center justify-between mx-5 xsm:mx-1">
           {" "}
           <h1 className="font-bold text-2xl md:text-3xl text-center">
@@ -74,9 +75,9 @@ export default function HomeComponent() {
         </Link>
       </div>
       {/* callout card */}
-      <div className="flex flex-col md:flex-row items-center justify-between bg-base-100 mt-2 mx-5">
+      <div className="flex flex-col md:flex-row items-center gap-10 bg-base-100 my-2 mx-5">
         <div className="flex-1">
-          <div className="mockup-phone border-primary">
+          <div className="mockup-phone border-primary group">
             <div className="camera"></div>
             <div className="display">
               <div className="">
@@ -86,14 +87,14 @@ export default function HomeComponent() {
                   alt="callout-image"
                   width={3000}
                   height={2000}
-                  className="md:my-2 md:mx-1"
+                  className="md:my-2 md:mx-1 grayscale group-hover:grayscale-0 transition ease-in-out"
                 />
               </div>
             </div>
           </div>
         </div>
         <div className="md:w-1/2 p-2 mx-2 self-center h-full">
-          <h1 className="text-2xl lg:text-3xl font-bold text-center">
+          <h1 className="text-2xl lg:text-3xl font-bold">
             Deliver your parcel without ever leaving your home
           </h1>
           <div className="py-4 text-xl font-light lg:py-6 md:leading-loose">
@@ -110,6 +111,8 @@ export default function HomeComponent() {
           </div>
         </div>
       </div>
+      {/* How delivery works */}
+      <DeliveryProcess/>
     </>
   );
 }
