@@ -228,9 +228,6 @@ export default function Map({ mapToRender }) {
           <>
             <Marker
               position={pickupLocation}
-              icon={
-                "https://res.cloudinary.com/dipkbpinx/image/upload/v1697650099/flag-svgrepo-com_1_zz3zvp.svg"
-              }
             />
           </>
         )}
