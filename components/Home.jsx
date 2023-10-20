@@ -14,7 +14,7 @@ export default function HomeComponent() {
             Special Features That Make You Happy
           </h1>
           <Link
-            className="xsm:hidden btn btn-primary flex items-center"
+            className="xsm:hidden btn hero-btn btn-outline hover:text-white flex items-center"
             href="/pricing">
             <FaLongArrowAltRight /> See More
           </Link>
@@ -104,8 +104,8 @@ export default function HomeComponent() {
             </p>
             <p>Be assured by using sendit services today!</p>
             <div className="flex items-center justify-center">
-              <Link href="/deliveries" className="btn btn-primary">
-                Get started
+              <Link href="/deliveries" className="btn btn-primary hero-btn-1">
+                Send Parcel Now!
               </Link>
             </div>
           </div>

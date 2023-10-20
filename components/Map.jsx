@@ -127,7 +127,7 @@ export default function Map({ mapToRender }) {
             ) : (
               <></>
             )}
-            <div className="mb-2 py-2">
+            <div className="m-2 py-2">
               <label htmlFor="pickup_notes" className="block mb-2 text-sm ">
                 Pickup Notes
               </label>
@@ -228,9 +228,6 @@ export default function Map({ mapToRender }) {
           <>
             <Marker
               position={pickupLocation}
-              icon={
-                "https://res.cloudinary.com/dipkbpinx/image/upload/v1697650099/flag-svgrepo-com_1_zz3zvp.svg"
-              }
             />
           </>
         )}
