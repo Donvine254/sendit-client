@@ -16,7 +16,7 @@ export default function page() {
       "Hello there, this is just to let you know that your order has been confirmed. Our rider in the area will contact you for pickup instructions as  soon as possible",
   };
   function handleClick() {
-    toast.success("order placed successfully");
+   
     // sendEmail(data);
     console.log(currentUser);
   }
