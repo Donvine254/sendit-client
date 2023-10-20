@@ -14,10 +14,10 @@ const Hero = () => {
           through reliable courier delivery services today.
         </p>
         <div className="flex items-center gap-5 lg:gap-10">
-          <Link href="/deliveries" className="btn btn-primary">
+          <Link href="/deliveries" className="btn btn-primary hero-btn-1">
             Send Parcel
           </Link>
-          <Link href="/contact" className="btn btn-outline btn-ghost flex items-center justify-start gap-1">
+          <Link href="/contact" className="btn btn-outline flex items-center justify-start gap-1 hero-btn">
             Learn More &#x27F6;
           </Link>
         </div>
