@@ -12,7 +12,19 @@ export default function ContextProvider({ children }) {
   const [phone_number, setPhone_number]= useState("")
    const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState();
-  const [createdParcel, setCreatedParcel] = useState();
+  const [createdParcel, setCreatedParcel] = useState({
+    id: 5,
+    description: "a laptop with a charger and a bag",
+    weight: "1.5",
+    pickup_address: "Kenyatta University, Main Campus, Nairobi, Kenya",
+    pickup_notes: "The soldiers will not let you in so call me when you get there",
+    delivery_address: "Kahawa West, Githurai, Kenya",
+    delivery_notes: "donvine will be asleep so alert him earlier when you pick the order.",
+    receiver_name: "donvine",
+    receiver_contact: 254702018079,
+    created_at: "2023-10-20T19:56:07.234Z",
+    updated_at: "2023-10-20T19:56:07.234Z",
+  });
   const [parcelData, setParcelData] = useState({
     user_id:null,
     weight: null,
