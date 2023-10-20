@@ -1,25 +1,18 @@
 "use client";
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from 'next/navigation'
 import { useAppContext } from "@/context/context";
 import { VscLocation } from "react-icons/vsc";
-import { sendEmail } from "@/lib/mailer";
+import { updateUserDetails, createOrder } from "@/lib";
 import Loading from "../../../components/loading";
-import toast from "react-hot-toast";
-import Swal from "sweetalert2";
 
-export default function page() {
+export default function OrderPage() {
   const { orderData, createdParcel, currentUser, phone_number } = useAppContext();
-  // const searchParams = useSearchParams();
-  // const parcel_id = searchParams.get("parcel_id");
-
-  const data = {
-    subject: "Order confirmation",
-    message:
-      "Hello there, this is just to let you know that your order has been confirmed. Our rider in the area will contact you for pickup instructions as  soon as possible",
-  };
+  const router= useRouter()
+ 
   function handleClick() {
-    // sendEmail(data);
+    updateUserDetails(currentUser, phone_number)
+    createOrder(orderData, router)
   }
   return (
     <section className="w-full">
