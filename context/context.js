@@ -12,6 +12,7 @@ export default function ContextProvider({ children }) {
   const [phone_number, setPhone_number]= useState("")
    const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState();
+  const [createdParcel, setCreatedParcel] = useState();
   const [parcelData, setParcelData] = useState({
     user_id:null,
     weight: null,
@@ -76,7 +77,9 @@ useEffect(() => {
     pickupLocation, 
     setPickupLocation,
     deliveryLocation, 
-    setDeliveryLocation
+    setDeliveryLocation,
+    createdParcel, 
+    setCreatedParcel
   };
 
   return (

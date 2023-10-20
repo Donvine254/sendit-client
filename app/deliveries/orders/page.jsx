@@ -9,17 +9,17 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 export default function page() {
-  const { orderData, currentUser } = useAppContext();
-  const searchParams = useSearchParams()
+  const { orderData, createdParcel } = useAppContext();
+  const searchParams = useSearchParams();
+  const parcel_id = searchParams.get("parcel_id");
+  console.log(parcel_id);
   const data = {
     subject: "Order confirmation",
     message:
       "Hello there, this is just to let you know that your order has been confirmed. Our rider in the area will contact you for pickup instructions as  soon as possible",
   };
   function handleClick() {
-   
     // sendEmail(data);
-    console.log(currentUser);
   }
   return (
     <section className="w-full">
