@@ -141,7 +141,7 @@ export default function QuotePage() {
           />
         </div>
         <div className="">
-          <button type="submit" className="btn btn-outline btn-primary w-full">
+          <button type="submit" className="btn btn-outline btn-primary hero-btn w-full">
             Submit
           </button>
         </div>

@@ -98,7 +98,7 @@ html, body{
 
 }
 .hero-btn:hover::before{
-    transform: scale(200);
+    transform: scale(1000);
     background: #0056F1;
 }
 .hero-btn-1{
