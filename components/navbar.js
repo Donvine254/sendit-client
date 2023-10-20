@@ -100,7 +100,7 @@ export default function Navbar() {
             <div
               className="flex items-center gap-2 p-2"
              >
-              <button className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary"  data-tip="You have no new notifications">
+              <button className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case"  data-tip="You have no new notifications">
                 <div
                   className="indicator">
                   <svg
@@ -135,8 +135,8 @@ export default function Navbar() {
                 </div>
               )}
               <div className="hidden md:inline-block">
-                <p className="text-base font-bold">
-                  {user?.given_name.toUpperCase()}
+                <p className="text-base font-bold capitalize">
+                  {user?.given_name}
                 </p>
                 <p className="text-base text-gray-500">{role ?? "user"}</p>
               </div>

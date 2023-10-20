@@ -8,10 +8,10 @@ import PriceCalculator from "@/components/priceCalculator";
 export default function Page() {
   return (
     <>
-      <h1 className="font-bold text-center text-2xl my-2 font-serif">
+      <h1 className="font-bold text-center text-2xl my-2 ">
         What We Offer
       </h1>
-      <p className="py-3 px-2 text-base font-serif bg-slate-200 flex items-center mx-7 rounded-lg gap-2">
+      <p className="py-3 px-2 text-base bg-slate-200 flex items-center mx-7 rounded-lg gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

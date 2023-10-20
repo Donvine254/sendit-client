@@ -1,14 +1,16 @@
 "use client";
 import React, { useState } from "react";
 import { useAppContext } from "@/context/context";
-import toast from "react-hot-toast";
+
 import { OrderDetails, PickupDetails, DeliveryDetails } from "./steps";
 import { calculatePrice, calculateVAT } from "../lib/calculatePrice";
+import { createParcel } from "../lib";
+import { useRouter } from 'next/navigation'
 
 export default function DeliveryPage() {
-  const { parcelData, orderData, setOrderData } = useAppContext();
+  const { parcelData, setOrderData, setCreatedParcel } = useAppContext();
   const [currentStep, setCurrentStep] = useState(1); // Initial step
-
+  const router = useRouter();
   const handleNext = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
@@ -21,17 +23,16 @@ export default function DeliveryPage() {
     }
   };
   const handleSubmit = () => {
-    toast.success("processing your request...");
-    let price=calculatePrice(parcelData.weight)
-    let VAT=calculateVAT(price)
-    
-    let totalPrice = price+VAT
+    let price = calculatePrice(parcelData.weight);
+    let VAT = calculateVAT(price);
+
+    let totalPrice = price + VAT;
 
     setOrderData((prev) => ({
       ...prev,
       price: totalPrice,
     }));
-    console.log(parcelData, orderData);
+    createParcel(parcelData, router, setOrderData, setCreatedParcel);
   };
   let disabled = false;
 

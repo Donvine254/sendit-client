@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { registerUser } from "@/lib";
-
 import { useAppContext } from "@/context/context";
 import  Loading  from "../../components/loading";
 import UploadButtonPage from "@/components/uploadButton"
@@ -12,18 +10,8 @@ import Link from "next/link"
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
-  const {  setCurrentUser,
-  currentUser } = useAppContext();
-  useEffect(() => {
-    const getKindeSession = async () => {
-      const res = await fetch("/api/kindeSession");
-      const data = await res.json();
-      registerUser(data, setCurrentUser);
-    };
+  const {currentUser } = useAppContext();
 
-    getKindeSession();
-  }, [setCurrentUser]);
- 
   return (
     <div className="mx-4 md:min-h-[400px]">
       <div className="p-4 container mx-auto flex items-center justify-center ">

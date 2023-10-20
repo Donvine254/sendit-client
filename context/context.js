@@ -12,7 +12,9 @@ export default function ContextProvider({ children }) {
   const [phone_number, setPhone_number]= useState("")
    const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState();
+  const [createdParcel, setCreatedParcel] = useState();
   const [parcelData, setParcelData] = useState({
+    user_id:null,
     weight: null,
     description: "",
     value:"",
@@ -40,8 +42,19 @@ useEffect(() => {
     else {
       setIsAuthenticated(data.authenticated)
       setIsAdmin(data.isAdmin)
-      setCurrentUser(data.user)
-      registerUser(data, setCurrentUser);
+      const response = await fetch(`https://sendit.up.railway.app/users/${data.user.id}`)
+      if(response.ok){
+        const user = await response.json()
+        setCurrentUser(user)
+        setParcelData((prev)=>({
+          ...prev,
+          user_id:user.id,
+        }))
+      }
+      else {
+        registerUser(data, setCurrentUser);
+      }
+      
     }
   }
   getKindeSession();
@@ -64,7 +77,9 @@ useEffect(() => {
     pickupLocation, 
     setPickupLocation,
     deliveryLocation, 
-    setDeliveryLocation
+    setDeliveryLocation,
+    createdParcel, 
+    setCreatedParcel
   };
 
   return (
