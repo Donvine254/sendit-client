@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 export default function page() {
   const { orderData, currentUser } = useAppContext();
+  const searchParams = useSearchParams()
   const data = {
     subject: "Order confirmation",
     message:

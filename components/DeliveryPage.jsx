@@ -5,12 +5,12 @@ import toast from "react-hot-toast";
 import { OrderDetails, PickupDetails, DeliveryDetails } from "./steps";
 import { calculatePrice, calculateVAT } from "../lib/calculatePrice";
 import { createParcel } from "../lib";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'
 
 export default function DeliveryPage() {
   const { parcelData, orderData, setOrderData } = useAppContext();
   const [currentStep, setCurrentStep] = useState(1); // Initial step
-  const { navigate } = useRouter();
+  const router = useRouter();
   const handleNext = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
@@ -23,7 +23,6 @@ export default function DeliveryPage() {
     }
   };
   const handleSubmit = () => {
-    toast.success("processing your request...");
     let price = calculatePrice(parcelData.weight);
     let VAT = calculateVAT(price);
 
@@ -33,8 +32,7 @@ export default function DeliveryPage() {
       ...prev,
       price: totalPrice,
     }));
-    console.log(parcelData, orderData);
-    createParcel(parcelData, navigate);)
+    createParcel(parcelData, router);
   };
   let disabled = false;
 
