@@ -3,7 +3,9 @@ import React from "react";
 import { useSearchParams } from "next/navigation";
 import { VscLocation } from "react-icons/vsc";
 import { sendEmail } from "@/lib/mailer";
+import  Loading  from "../../../components/loading";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 export default function page() {
   const data = {
