@@ -1,13 +1,15 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import { useAppContext } from "@/context/context";
 import { VscLocation } from "react-icons/vsc";
 import { sendEmail } from "@/lib/mailer";
-import  Loading  from "../../../components/loading";
+import Loading from "../../../components/loading";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 export default function page() {
+  const { orderData, currentUser } = useAppContext();
   const data = {
     subject: "Order confirmation",
     message:
@@ -15,7 +17,8 @@ export default function page() {
   };
   function handleClick() {
     toast.success("order placed successfully");
-    sendEmail(data);
+    // sendEmail(data);
+    console.log(currentUser);
   }
   return (
     <section className="w-full">
@@ -141,12 +144,12 @@ export default function page() {
           <p className="text-xl font-light">VAT:</p>
           <p className="font-bold">Ksh 16 </p>
         </div>
-       
+
         <div className="flex items-center justify-between font-bold my-1 text-xl">
           <p>Total Price:</p>
           <p>Ksh 116 </p>
         </div>
-         <div className="divider"></div>
+        <div className="divider"></div>
         <div className="flex items-center justify-between">
           <p className="text-xl font-light">Estimated Delivery Date:</p>
           <p className="font-bold">21/10/2023 </p>
@@ -159,7 +162,7 @@ export default function page() {
           onClick={handleClick}>
           Place Order
         </button>
-        </div>
+      </div>
     </section>
   );
 }
