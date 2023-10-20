@@ -1,16 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import { useAppContext } from "@/context/context";
 import  Loading  from "../../components/loading";
+import { updateUserDetails } from "@/lib";
 import UploadButtonPage from "@/components/uploadButton"
 import Image from "next/image";
 import Link from "next/link"
 import toast from "react-hot-toast";
 
 export default function Dashboard() {
-  const {currentUser } = useAppContext();
+  const {currentUser, setCurrentUser } = useAppContext();
+  const [phone_number, setPhone_number]=useState();
+  function handleChange(){
+    updateUserDetails(currentUser,phone_number, setCurrentUser);
+    toast.success("processing request...")
+  }
 
   return (
     <div className="mx-4 md:min-h-[400px]">
@@ -20,8 +27,11 @@ export default function Dashboard() {
         
       </div>
       <p>Upload a profile picture</p>
-        {/* <UploadButtonPage setImage={setImage} image={image}/> */}
-      <Link href="/dashboard/settings" className="btn btn-ghost flex items-center gap-2 w-36"> Settings</Link>
+        <UploadButtonPage/>
+        <p>Update Phone Number</p>
+        <PhoneInput value={phone_number} onChange={setPhone_number} defaultCountry="KE" className="input input-bordered"/>
+        <button className="btn btn-primary hero-btn my-5"onClick={handleChange}>Submit</button>
+      {/* <Link href="/dashboard/settings" className="btn btn-ghost flex items-center gap-2 w-36"> Settings</Link> */}
      <Loading/>
     </div>
   );
