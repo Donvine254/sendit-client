@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { registerUser } from "@/lib";
-
 import { useAppContext } from "@/context/context";
 import  Loading  from "../../components/loading";
 import UploadButtonPage from "@/components/uploadButton"
