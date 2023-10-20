@@ -139,10 +139,15 @@ export default function page() {
           <p className="text-xl font-light">VAT:</p>
           <p className="font-bold">Ksh 16 </p>
         </div>
-        <div className="divider"></div>
+       
         <div className="flex items-center justify-between font-bold my-1 text-xl">
           <p>Total Price:</p>
           <p>Ksh 116 </p>
+        </div>
+         <div className="divider"></div>
+        <div className="flex items-center justify-between">
+          <p className="text-xl font-light">Estimated Delivery Date:</p>
+          <p className="font-bold">21/10/2023 </p>
         </div>
       </div>
       <div className="flex items-center justify-center">
