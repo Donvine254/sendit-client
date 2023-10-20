@@ -75,7 +75,7 @@ export default function OrderPage() {
                     {/* row 4 */}
                     <tr>
                       <th>✍🏾 Pickup Notes</th>
-                      <td>Call John to open the gate.</td>
+                      <td>{createdParcel?.pickup_notes}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -123,8 +123,7 @@ export default function OrderPage() {
                     <tr>
                       <th>✍🏾 Delivery Notes</th>
                       <td>
-                        John is working so alert him when you are near the
-                        location.
+                      {createdParcel?.delivery_notes}
                       </td>
                     </tr>
                   </tbody>
