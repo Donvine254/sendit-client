@@ -25,7 +25,7 @@ export default function Footer() {
   <nav>
     <header className="footer-title">Resources</header> 
     <Link href="/about" className="link link-hover">About us</Link> 
-    <Link href="/careers" className="link link-hover">Careers</Link> 
+    <Link href="/careers" className="link link-hover">Careers <span className="indicator-item badge badge-primary">hiring!</span></Link> 
     <Link href="/contact" className="link link-hover">Help Center</Link> 
     <Link href="/partners" className="link link-hover">Become a Partner</Link>
   </nav> 
