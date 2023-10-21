@@ -71,7 +71,7 @@ html, body{
   }
 
   &:hover:before {
-    transform: scale(100);
+    transform: scale(1000);
   }
 }
 .hero-btn{
