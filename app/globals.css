@@ -37,6 +37,8 @@ html, body{
   -webkit-text-fill-color: transparent;
  
 }
+/* how delivery works card */
+
 .delivery-card{
   transition: all 0.3s ease-out;
   z-index: 0;
@@ -73,6 +75,14 @@ html, body{
 
   &:hover:before {
     transform: scale(1000);
+  }
+}
+@media (min-width: 1024px) and (max-width: 1310px) {
+  .delivery-card {
+    height: 360px !important
+  }
+  .delivery-card h4 {
+  font-size: 24px !important
   }
 }
 .hero-btn{
