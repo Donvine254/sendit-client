@@ -32,9 +32,9 @@ export default function OrderPage() {
           {" "}
           <div className="mx-auto flex flex-col lg:flex-row gap-5 lg:gap-0 justify-evenly p-4">
             {/* first card */}
-            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[350px]">
+            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[300px] delivery-card relative group">
               <div className="p-4">
-                <h1 className="text-xl font-bold flex items-center gap-2">
+                <h1 className="text-xl font-bold flex items-center gap-2 mb-1 text-primary group-hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -52,8 +52,7 @@ export default function OrderPage() {
                   <VscLocation /> {createdParcel?.pickup_address}
                 </p>
               </div>
-
-              <div className="divider"></div>
+              <hr></hr>
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}
@@ -77,16 +76,16 @@ export default function OrderPage() {
                     {/* row 4 */}
                     <tr>
                       <th>✍🏾 Pickup Notes</th>
-                      <td>{createdParcel?.pickup_notes}</td>
+                      <td>{createdParcel?.pickup_notes ?? "None"}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
             {/* second card */}
-            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[350px] ">
+            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[300px] delivery-card relative group ">
               <div className="p-4">
-                <h1 className="text-xl font-bold flex items-center gap-2">
+                <h1 className="text-xl font-bold flex items-center gap-2 mb-1 text-green-700 group-hover:text-green-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -105,7 +104,7 @@ export default function OrderPage() {
                 </p>
               </div>
 
-              <div className="divider"></div>
+              <hr></hr>
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}
@@ -119,13 +118,13 @@ export default function OrderPage() {
                     {/* row 2 */}
                     <tr>
                       <th>📞 Receiver Contact</th>
-                      <td>+{createdParcel?.receiver_contact}</td>
+                      <td>{createdParcel?.receiver_contact}</td>
                     </tr>
                     {/* row 3 */}
                     <tr>
                       <th>✍🏾 Delivery Notes</th>
                       <td>
-                      {createdParcel?.delivery_notes}
+                      {createdParcel?.delivery_notes ?? "None"}
                       </td>
                     </tr>
                   </tbody>
