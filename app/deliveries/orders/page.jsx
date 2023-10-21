@@ -1,18 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from 'next/navigation'
 import { useAppContext } from "@/context/context";
 import { VscLocation } from "react-icons/vsc";
 import { updateUserDetails, createOrder } from "@/lib";
 import Loading from "../../../components/loading";
+import { ErrorList } from "@/components/DeliveryPage";
 
 export default function OrderPage() {
   const { orderData, createdParcel, currentUser, phone_number } = useAppContext();
+ const [errors, setErrors]=useState();
   const router= useRouter()
  
   function handleClick() {
     updateUserDetails(currentUser, phone_number)
-    createOrder(orderData, router)
+    createOrder(orderData, router, setErrors)
   }
   return (
     <section className="w-full">
@@ -75,7 +77,7 @@ export default function OrderPage() {
                     {/* row 4 */}
                     <tr>
                       <th>✍🏾 Pickup Notes</th>
-                      <td>Call John to open the gate.</td>
+                      <td>{createdParcel?.pickup_notes}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -123,8 +125,7 @@ export default function OrderPage() {
                     <tr>
                       <th>✍🏾 Delivery Notes</th>
                       <td>
-                        John is working so alert him when you are near the
-                        location.
+                      {createdParcel?.delivery_notes}
                       </td>
                     </tr>
                   </tbody>
@@ -153,6 +154,7 @@ export default function OrderPage() {
               <p className="font-bold">21/10/2023 </p>
             </div>
           </div>
+          {errors && <ErrorList errors={errors}/>}
           <div className="flex items-center justify-center">
             <button
               type="button"
