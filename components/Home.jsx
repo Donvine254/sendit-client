@@ -117,8 +117,8 @@ export default function HomeComponent() {
       <section className="w-full my-2">
         <div className="bg-primary hover:bg-transparent group  border rounded-lg grid auto-rows-fr md:grid-cols-2 mx-5">
           <div className="p-2 mx-5 flex flex-col items-center my-auto lg:gap-5 text-white h-fit group-hover:text-black">
-            <div className="ribbon-container"><h2 className="ribbon my-5 text-center shadow-lg w-full">
-              <span className="font-bold text-3xl md:text-4xl my-2 lg:my-0 p-3 ribbon-content">We are hiring!</span>
+            <div className="ribbon-container mb-2"><h2 className="ribbon lg:my-5 text-center shadow-lg w-[90%] sm:w-1/2 md:w-[70%] ">
+              <span className="font-bold text-2xl lg:text-4xl my-2 lg:my-0 ribbon-content">We are hiring!</span>
             </h2></div>
             
             <p className="my-2 lg:leading-loose lg:text-2xl">
