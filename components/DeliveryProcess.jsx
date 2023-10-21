@@ -9,13 +9,13 @@ export default function DeliveryProcess() {
       <DeliveryStep
         stepNumber="1"
         title="Place your order."
-        description="Make a delivery request through our effortless web application and experience customer satisfaction like never before"
+        description="Make a delivery request order through our effortless web application."
       />
 
       <DeliveryStep
         stepNumber="2"
         title="Goods picked."
-        description="Our riders will pick and deliver your goods. We use the most suitable vehicle sizes for your load"
+        description="Our riders will pick and deliver your goods. We use the most suitable vehicle sizes for your load."
       />
 
       <DeliveryStep
@@ -35,7 +35,7 @@ export default function DeliveryProcess() {
 }
 
 const DeliveryStep = ({ stepNumber, title, description }) => (
-  <div className="card border h-fit md:h-[300px] relative m-2 delivery-card group">
+  <div className=" card border h-fit md:h-[300px] relative m-2 delivery-card group" >
     <div className="card-body">
     <h2 className="mb-2 text-6xl font-bold number font-mono">{stepNumber}</h2>
     <h4 className="mb-2 text-3xl">{title}</h4>
@@ -47,3 +47,4 @@ const DeliveryStep = ({ stepNumber, title, description }) => (
     </div>
   </div>
 );
+

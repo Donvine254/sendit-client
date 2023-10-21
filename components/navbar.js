@@ -135,10 +135,10 @@ export default function Navbar() {
                 </div>
               )}
               <div className="hidden md:inline-block">
-                <p className="text-base font-bold capitalize">
-                  {user?.given_name}
+                <p className="text-base font-bold ">
+                  {user?.given_name.toUpperCase()}
                 </p>
-                <p className="text-base text-gray-500">{role ?? "user"}</p>
+                <p className="text-base text-gray-500">{role ?? "User"}</p>
               </div>
             </div>
           )}
