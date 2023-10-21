@@ -39,7 +39,7 @@ export default function OrderDetails() {
           value={!parcelData.weight? "" : parcelData.weight}
           onChange={handleChange}
           max={100}
-          min={0}
+          min={1}
           placeholder="weight"
           required
           className="input input-bordered input-secondary w-full max-w-xs0"
