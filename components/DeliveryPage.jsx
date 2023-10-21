@@ -48,8 +48,7 @@ export default function DeliveryPage() {
       disabled =
         parcelData.delivery_address === "" ||
         parcelData.receiver_name === "" ||
-        parcelData.receiver_contact === ""||
-        !parcelData.receiver_contact
+        parcelData.receiver_contact === "";
       break;
     default:
       disabled = false; // Enable the "Next" button for other cases
@@ -109,12 +108,12 @@ export default function DeliveryPage() {
   );
 }
 //sub-component for rendering errors:
-const ErrorList = ({ errors }) => {
+export const ErrorList = ({ errors }) => {
   return (
     <ul className="mx-5 bg-[#F87272]  p-2 border rounded-lg">
       {Object.keys(errors).map((key) => {
         return errors[key].map((errorMessage, index) => (
-          <li key={index} className="flex items-center gap-2 my-1">
+          <li key={index} className="flex flex-col items-start  md:flex-row md:items-center gap-2 my-1">
           <span className="capitalize font-bold flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>{key}:</span><span > {errorMessage}</span>
           </li>
         ));
