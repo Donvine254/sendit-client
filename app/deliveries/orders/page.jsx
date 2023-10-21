@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useAppContext } from "@/context/context";
 import { VscLocation } from "react-icons/vsc";
 import { updateUserDetails, createOrder } from "@/lib";
+import {calculateEstimatedDeliveryDate} from "@/lib/calculatePrice"
 import Loading from "../../../components/loading";
 import { ErrorList } from "@/components/DeliveryPage";
 
@@ -32,9 +33,9 @@ export default function OrderPage() {
           {" "}
           <div className="mx-auto flex flex-col lg:flex-row gap-5 lg:gap-0 justify-evenly p-4">
             {/* first card */}
-            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[350px]">
+            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[300px] delivery-card relative group">
               <div className="p-4">
-                <h1 className="text-xl font-bold flex items-center gap-2">
+                <h1 className="text-xl font-bold flex items-center gap-2 mb-1 text-primary group-hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -52,8 +53,7 @@ export default function OrderPage() {
                   <VscLocation /> {createdParcel?.pickup_address}
                 </p>
               </div>
-
-              <div className="divider"></div>
+              <hr></hr>
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}
@@ -77,16 +77,16 @@ export default function OrderPage() {
                     {/* row 4 */}
                     <tr>
                       <th>✍🏾 Pickup Notes</th>
-                      <td>{createdParcel?.pickup_notes}</td>
+                      <td>{createdParcel?.pickup_notes ?? "None"}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
             {/* second card */}
-            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[350px] ">
+            <div className="border bg-base-200 shadow-lg lg:w-1/2 lg:mx-5 h-fit min-h-[300px] delivery-card relative group ">
               <div className="p-4">
-                <h1 className="text-xl font-bold flex items-center gap-2">
+                <h1 className="text-xl font-bold flex items-center gap-2 mb-1 text-green-700 group-hover:text-green-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -105,7 +105,7 @@ export default function OrderPage() {
                 </p>
               </div>
 
-              <div className="divider"></div>
+              <hr></hr>
               <div className="overflow-x-auto">
                 <table className="table">
                   {/* head */}
@@ -114,7 +114,7 @@ export default function OrderPage() {
                     {/* row 1 */}
                     <tr>
                       <th>🧑🏾‍🦱 Receiver Name</th>
-                      <td>{createdParcel?.receiver_name}</td>
+                      <td className="capitalize">{createdParcel?.receiver_name}</td>
                     </tr>
                     {/* row 2 */}
                     <tr>
@@ -124,8 +124,8 @@ export default function OrderPage() {
                     {/* row 3 */}
                     <tr>
                       <th>✍🏾 Delivery Notes</th>
-                      <td>
-                      {createdParcel?.delivery_notes}
+                      <td contentEditable="false">
+                      {createdParcel?.delivery_notes ?? "None"}
                       </td>
                     </tr>
                   </tbody>
@@ -151,11 +151,11 @@ export default function OrderPage() {
             <div className="divider"></div>
             <div className="flex items-center justify-between">
               <p className="text-xl font-light">Estimated Delivery Date:</p>
-              <p className="font-bold">21/10/2023 </p>
+              <p className="font-bold">{calculateEstimatedDeliveryDate(orderData.duration) ?? ""} </p>
             </div>
           </div>
-          {errors && <ErrorList errors={errors}/>}
-          <div className="flex items-center justify-center">
+          {errors && <ErrorList errors={errors} />}
+          <div className="flex items-center justify-center my-2">
             <button
               type="button"
               className="btn btn-outline hero-btn"

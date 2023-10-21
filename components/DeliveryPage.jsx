@@ -72,6 +72,9 @@ export default function DeliveryPage() {
           className={
             currentStep >= 3 ? "step step-primary" : "step step-ghost"
           }></li>
+        <li
+          data-content="✕"
+          className="step step-ghost"></li>
       </ul>
      
       {/* Conditionally render the step based on the current step */}
