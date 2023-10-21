@@ -137,6 +137,7 @@ export default function HomeComponent() {
               src="https://t4.ftcdn.net/jpg/02/92/33/63/360_F_292336327_qSqYCuOGtnaNXXGmgp8lZrZJC9VoIDHz.jpg"
               width={540}
               height={360}
+              alt="delivery-person"
               className=" h-fit lg:h-full w-full object-contain object-center md:rounded-lg"
             />
           </div>
