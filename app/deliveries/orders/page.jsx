@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useAppContext } from "@/context/context";
 import { VscLocation } from "react-icons/vsc";
 import { updateUserDetails, createOrder } from "@/lib";
+import {calculateEstimatedDeliveryDate} from "@/lib/calculatePrice"
 import Loading from "../../../components/loading";
 import { ErrorList } from "@/components/DeliveryPage";
 
@@ -123,7 +124,7 @@ export default function OrderPage() {
                     {/* row 3 */}
                     <tr>
                       <th>✍🏾 Delivery Notes</th>
-                      <td>
+                      <td contentEditable="false">
                       {createdParcel?.delivery_notes ?? "None"}
                       </td>
                     </tr>
@@ -150,7 +151,7 @@ export default function OrderPage() {
             <div className="divider"></div>
             <div className="flex items-center justify-between">
               <p className="text-xl font-light">Estimated Delivery Date:</p>
-              <p className="font-bold">21/10/2023 </p>
+              <p className="font-bold">{calculateEstimatedDeliveryDate(orderData.duration) ?? ""} </p>
             </div>
           </div>
           {errors && <ErrorList errors={errors} />}
