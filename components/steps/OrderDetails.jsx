@@ -53,6 +53,7 @@ export default function OrderDetails() {
           type="number"
           name="value"
           id="number"
+          max={100000}
           min={0}
           value={parcelData.value}
           onChange={handleChange}

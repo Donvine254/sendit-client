@@ -114,12 +114,12 @@ export default function OrderPage() {
                     {/* row 1 */}
                     <tr>
                       <th>🧑🏾‍🦱 Receiver Name</th>
-                      <td>{createdParcel?.receiver_name}</td>
+                      <td className="capitalize">{createdParcel?.receiver_name}</td>
                     </tr>
                     {/* row 2 */}
                     <tr>
                       <th>📞 Receiver Contact</th>
-                      <td>{createdParcel?.receiver_contact}</td>
+                      <td>+{createdParcel?.receiver_contact}</td>
                     </tr>
                     {/* row 3 */}
                     <tr>
@@ -154,8 +154,8 @@ export default function OrderPage() {
               <p className="font-bold">21/10/2023 </p>
             </div>
           </div>
-          {errors && <ErrorList errors={errors}/>}
-          <div className="flex items-center justify-center">
+          {errors && <ErrorList errors={errors} />}
+          <div className="flex items-center justify-center my-2">
             <button
               type="button"
               className="btn btn-outline hero-btn"
