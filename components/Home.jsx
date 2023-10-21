@@ -112,7 +112,36 @@ export default function HomeComponent() {
         </div>
       </div>
       {/* How delivery works */}
-      <DeliveryProcess/>
+      <DeliveryProcess />
+      {/* We are hiring section */}
+      <section className="w-full my-2">
+        <div className="bg-primary hover:bg-transparent group  border rounded-lg grid auto-rows-fr md:grid-cols-2 mx-5">
+          <div className="p-2 mx-5 flex flex-col items-center my-auto lg:gap-5 text-white h-fit group-hover:text-black">
+            <div className="ribbon-container"><h2 className="ribbon my-5 text-center shadow-lg w-full">
+              <span className="font-bold text-3xl md:text-4xl my-2 lg:my-0 p-3 ribbon-content">We are hiring!</span>
+            </h2></div>
+            
+            <p className="my-2 lg:leading-loose lg:text-2xl">
+              Are you looking to supplement your income as a driver? You are
+              passionate about innovation and enjoy working with people? Then
+              you&apos;ve come to the right place.
+            </p>
+            <Link
+              href="/careers"
+              className="btn hero-btn group-hover:bg-[#0056F1] group-hover:text-white font-bold self-center">
+              Join Us Today!
+            </Link>
+          </div>
+          <div className="image-wrapper hidden md:block">
+            <Image
+              src="https://t4.ftcdn.net/jpg/02/92/33/63/360_F_292336327_qSqYCuOGtnaNXXGmgp8lZrZJC9VoIDHz.jpg"
+              width={540}
+              height={360}
+              className=" h-fit lg:h-full w-full object-contain object-center md:rounded-lg"
+            />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
