@@ -24,7 +24,7 @@ export default function Navbar() {
     role = "User";
   }
   return (
-    <div className="navbar bg-base-100 shadow-lg sticky top-0 z-[20] mt-2 overflow-hidden ">
+    <div className="navbar bg-base-100 shadow-lg sticky top-0 z-[20] mt-2 ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -85,7 +85,7 @@ export default function Navbar() {
           />
         </Link>
       </div>
-      <div className="navbar-end items-center">
+      <div className="navbar-end items-center overflow-hidden">
         <div className="flex items-center gap-1">
           {!isAuthenticated() ? (
             <>
