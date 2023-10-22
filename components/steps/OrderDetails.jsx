@@ -15,7 +15,7 @@ export default function OrderDetails() {
     <form className="mx-5 lg:w-1/2 lg:mx-auto py-2">
       <p className="text-lg font-bold py-2 text-center">Add Parcel Details</p>
       <div className="mb-6">
-        <label htmlFor="description" className="block mb-2 text-sm ">
+        <label htmlFor="description" className="block mb-2 text-lg font-bold ">
           What are you sending <span className="text-red-600 font-bold">*</span>
         </label>
         <textarea
@@ -30,7 +30,7 @@ export default function OrderDetails() {
           required></textarea>
       </div>
       <div className="mb-4">
-        <label htmlFor="weight" className="block mb-2 text-sm text-gray-600">
+        <label htmlFor="weight" className="block mb-2 text-lg font-bold ">
           Weight <span className="text-red-600 font-bold">*</span>
         </label>
         <input
@@ -48,7 +48,7 @@ export default function OrderDetails() {
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="value" className="block mb-2 text-sm text-gray-600">
+        <label htmlFor="value" className="block mb-2text-lg font-bold ">
           Value <span className="text-red-600 font-bold">*</span>
         </label>
         <input
