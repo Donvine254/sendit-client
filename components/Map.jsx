@@ -89,8 +89,8 @@ export default function Map({ mapToRender, valid, setValid }) {
           ...prev,
           contact_person: value,
         }));
+        setPhone_number(value)
       }
-
       setValid(isValidPhoneNumber(value));
     }
     else return false
@@ -158,7 +158,7 @@ export default function Map({ mapToRender, valid, setValid }) {
             <div className="mt-4 py-2">
               {!currentUser?.phone_number ? (
                 <>
-                  <label htmlFor="phone_number" className="block mb-2 text-sm">
+                  <label htmlFor="phone_number" className="block mb-2 text-lg font-bold">
                     What is your phone number?
                   </label>
                   <PhoneInput
