@@ -39,6 +39,7 @@ export default function Map({ mapToRender, valid, setValid }) {
 
   const {
     parcelData,
+    currentUser,
     setParcelData,
     phone_number,
     setPhone_number,
@@ -150,7 +151,7 @@ export default function Map({ mapToRender, valid, setValid }) {
               setParcelData={setParcelData}
             />
             <div className="mt-4 py-2">
-              {!phone_number ? (
+              {!currentUser.phone_number ? (
                 <>
                   <label htmlFor="phone_number" className="block mb-2 text-lg font-bold">
                     What is your phone number?
