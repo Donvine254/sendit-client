@@ -51,6 +51,23 @@ export default function Map({ mapToRender, valid, setValid }) {
   } = useAppContext();
 
   //function to handle change in inputs
+  const [useContact, setUseContact] = useState(false);
+  //function to set contact_person to user number
+  function handleUseContact() {
+    setUseContact(!useContact);
+    if (useContact) {
+      setParcelData((prev) => ({
+        ...prev,
+        contact_person: currentUser.phone_number,
+      }));
+    }
+    else if(!useContact){
+      setParcelData((prev) => ({
+        ...prev,
+        contact_person: "",
+      }));
+    }
+  }
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -61,18 +78,26 @@ export default function Map({ mapToRender, valid, setValid }) {
   }
   //function to validate phone input
   function handlePhoneInput(value, user) {
-    if (user === "receiver") {
-      setParcelData((prev) => ({
-        ...prev,
-        receiver_contact: value,
-      }));
-    } else if (user === "sender") {
-      setPhone_number(value);
-    }
-    setValid(isValidPhoneNumber(value));
-  }
+    if (value) {
+      if (user === "receiver") {
+        setParcelData((prev) => ({
+          ...prev,
+          receiver_contact: value,
+        }));
+      } else {
+        setParcelData((prev) => ({
+          ...prev,
+          contact_person: value,
+        }));
+      }
 
-  function handleBlur(value) {
+      setValid(isValidPhoneNumber(value));
+    }
+    else return false
+  }
+  
+
+  function handleBlur() {
     if (!valid) {
       toast.error("Invalid phone number");
     }
@@ -130,31 +155,72 @@ export default function Map({ mapToRender, valid, setValid }) {
               }}
               setParcelData={setParcelData}
             />
-            {!currentUser?.phone_number ? (
-              <div className="mt-4 py-2">
-                <label htmlFor="phone_number" className="block mb-2 text-sm ">
-                  What is your phone number?
-                </label>
-                <PhoneInput
-                  value={phone_number}
-                  onChange={(value) => handlePhoneInput(value, "sender")}
-                  onBlur={handleBlur}
-                  defaultCountry="KE"
-                  className={`input input-bordered input-secondary ${
-                    !valid ? "input-error" : ""
-                  }`}
-                />
-                {!valid && (
-                  <p className="text-error-content my-2">
-                    Please enter a valid phone number
-                  </p>
-                )}
-              </div>
-            ) : (
-              <></>
-            )}
-            <div className="m-2 py-2">
-              <label htmlFor="pickup_notes" className="block mb-2 text-sm ">
+            <div className="mt-4 py-2">
+              {!currentUser?.phone_number ? (
+                <>
+                  <label htmlFor="phone_number" className="block mb-2 text-sm">
+                    What is your phone number?
+                  </label>
+                  <PhoneInput
+                    value={phone_number}
+                    onChange={(value) => handlePhoneInput(value)}
+                    onBlur={handleBlur}
+                    defaultCountry="KE"
+                    className={`input input-bordered input-secondary ${
+                      !valid ? "input-error" : ""
+                    }`}
+                  />
+                  {!valid && (
+                    <p className="text-error-content my-2">
+                      Please enter a valid phone number
+                    </p>
+                  )}
+                </>
+              ) : (
+                <>
+                  <label
+                    htmlFor="contact_person"
+                    className="block mb-2 text-lg font-bold">
+                    Contact Person:
+                  </label>
+                  <label
+                    htmlFor="contact_info"
+                    className="my-2 cursor-pointer flex items-start gap-2">
+                    <input
+                      type="checkbox"
+                      id="contact-info"
+                      checked={useContact}
+                      className="checkbox checkbox-primary"
+                      onChange={handleUseContact}
+                    />
+                    <span className="text-error font-bold">Use my contact info</span>
+                  </label>
+
+                  {!useContact? (
+                    <>
+                      <PhoneInput
+                        value=""
+                        onChange={(value) => handlePhoneInput(value)}
+                        onBlur={handleBlur}
+                        defaultCountry="KE"
+                        className={`input input-bordered input-secondary ${
+                          !valid ? "input-error" : ""
+                        }`}
+                      />
+                      {!valid && (
+                        <p className="text-error-content my-2">
+                          Please enter a valid phone number
+                        </p>
+                      )}
+                    </>
+                  ):<></>}
+                </>
+              )}
+            </div>
+            <div className="my-2 py-2">
+              <label
+                htmlFor="pickup_notes"
+                className="block mb-2 text-lg font-bold ">
                 Pickup Notes
               </label>
               <textarea
@@ -185,7 +251,7 @@ export default function Map({ mapToRender, valid, setValid }) {
               <div className="mt-4 py-2">
                 <label
                   htmlFor="receiver_name"
-                  className="block mb-2 text-sm text-gray-600">
+                  className="block mb-2 text-lg font-bold">
                   Receiver Name{" "}
                   <span className="text-red-600 font-bold">*</span>
                 </label>
@@ -203,12 +269,17 @@ export default function Map({ mapToRender, valid, setValid }) {
                   required
                   className="input input-bordered input-secondary w-full max-w-xs0"
                 />
-                {parcelData.receiver_name.length > 1 && parcelData.receiver_name.length < 4 && <p className="text-error my-2">*Please enter a valid name</p>}
+                {parcelData.receiver_name.length > 1 &&
+                  parcelData.receiver_name.length < 4 && (
+                    <p className="text-error my-2">
+                      *Please enter a valid name
+                    </p>
+                  )}
               </div>
               <div className="mb-2">
                 <label
                   htmlFor="receiver_name"
-                  className="block mb-2 text-sm text-gray-600">
+                  className="block mb-2 text-lg font-bold">
                   Receiver Contact{" "}
                   <span className="text-red-600 font-bold">*</span>
                 </label>
@@ -228,7 +299,9 @@ export default function Map({ mapToRender, valid, setValid }) {
                 )}
               </div>
               <div className="mb-2">
-                <label htmlFor="delivery_notes" className="block mb-2 text-sm ">
+                <label
+                  htmlFor="delivery_notes"
+                  className="block mb-2 text-sm text-lg font-bold">
                   Delivery Notes
                 </label>
                 <textarea
