@@ -24,7 +24,7 @@ export default function Navbar() {
     role = "User";
   }
   return (
-    <div className="navbar bg-base-100 shadow-lg sticky top-0 z-[20] mt-2 ">
+    <div className="navbar bg-base-100 shadow-lg sticky top-0 z-[20] mt-2 overflow-hidden ">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -121,7 +121,7 @@ export default function Navbar() {
               </button>
               {user?.picture ? (
                 <Image
-                  className="xsm:h-8 xsm:w-8 h-10 w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
+                  className="h-8 w-8 md:h-10 md:w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
                   src={user?.picture}
                   width={48}
                   height={48}
@@ -135,8 +135,8 @@ export default function Navbar() {
                 </div>
               )}
               <div className="hidden md:inline-block">
-                <p className="text-base font-bold ">
-                  {user?.given_name.toUpperCase()}
+                <p className="text-base font-bold capitalize ">
+                  {user?.given_name}
                 </p>
                 <p className="text-base text-gray-500">{role ?? "User"}</p>
               </div>
