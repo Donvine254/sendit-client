@@ -38,7 +38,7 @@ useEffect(() => {
     const res = await fetch("/api/kindeSession");
     const data= await res.json();
     if (data.authenticated=== false){
-      //do something
+      //do something or nothing
     }
     else {
       setIsAuthenticated(data.authenticated)
