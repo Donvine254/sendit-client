@@ -123,8 +123,13 @@ export default function OrderPage() {
                     </tr>
                     {/* row 3 */}
                     <tr>
+                      <th>🛣️ Distance</th>
+                      <td>{orderData?.distance}</td>
+                    </tr>
+                    {/* row 4 */}
+                    <tr>
                       <th>✍🏾 Delivery Notes</th>
-                      <td contentEditable="false">
+                      <td>
                       {createdParcel?.delivery_notes ?? "None"}
                       </td>
                     </tr>

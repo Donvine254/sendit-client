@@ -5,11 +5,11 @@ import { useAppContext } from "@/context/context";
 import { OrderDetails, PickupDetails, DeliveryDetails } from "./steps";
 import { calculatePrice, calculateVAT } from "../lib/calculatePrice";
 import { createParcel } from "../lib";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 
 export default function DeliveryPage() {
   const { parcelData, setOrderData, setCreatedParcel } = useAppContext();
-  const [errors, setErrors]=useState();
+  const [errors, setErrors] = useState();
   const [valid, setValid] = useState(true);
   const [currentStep, setCurrentStep] = useState(1); // Initial step
   const router = useRouter();
@@ -40,16 +40,23 @@ export default function DeliveryPage() {
 
   switch (currentStep) {
     case 1:
-      disabled = !parcelData.weight || parcelData.description === ""|| parcelData.value === "";
+      disabled =
+        !parcelData.weight ||
+        parcelData.description === "" ||
+        parcelData.value === "";
       break;
     case 2:
-      disabled = parcelData.pickup_address === "" || !valid;
+      disabled =
+        parcelData.pickup_address === "" ||
+        !valid ||
+        parcelData.contact_person === "";
       break;
     case 3:
       disabled =
         parcelData.delivery_address === "" ||
         parcelData.receiver_name === "" ||
-        parcelData.receiver_contact === "" || !valid;
+        parcelData.receiver_contact === "" ||
+        !valid;
       break;
     default:
       disabled = false; // Enable the "Next" button for other cases
@@ -73,16 +80,16 @@ export default function DeliveryPage() {
           className={
             currentStep >= 3 ? "step step-primary" : "step step-ghost"
           }></li>
-        <li
-          data-content="✕"
-          className="step step-ghost"></li>
+        <li data-content="✕" className="step step-ghost"></li>
       </ul>
-     
+
       {/* Conditionally render the step based on the current step */}
       {currentStep === 1 && <OrderDetails />}
-      {currentStep === 2 && <PickupDetails valid={valid} setValid={setValid}/>}
-      {currentStep === 3 && <DeliveryDetails valid={valid} setValid={setValid}/>}
-      {errors && <ErrorList errors={errors}/>}
+      {currentStep === 2 && <PickupDetails valid={valid} setValid={setValid} />}
+      {currentStep === 3 && (
+        <DeliveryDetails valid={valid} setValid={setValid} />
+      )}
+      {errors && <ErrorList errors={errors} />}
       <div className="flex items-center justify-center gap-5 lg:gap-10 lg:w-1/2 mx-5 lg:mx-auto mt-2 lg:mt-4">
         {currentStep > 1 && (
           <button
@@ -107,7 +114,6 @@ export default function DeliveryPage() {
           </button>
         )}
       </div>
-      
     </section>
   );
 }
@@ -117,11 +123,28 @@ export const ErrorList = ({ errors }) => {
     <ul className="mx-5 bg-[#F87272]  p-2 border rounded-lg">
       {Object.keys(errors).map((key) => {
         return errors[key].map((errorMessage, index) => (
-          <li key={index} className="flex flex-col items-start  md:flex-row md:items-center gap-2 my-1">
-          <span className="capitalize font-bold flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>{key}:</span><span > {errorMessage}</span>
+          <li
+            key={index}
+            className="flex flex-col items-start  md:flex-row md:items-center gap-2 my-1">
+            <span className="capitalize font-bold flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="stroke-current shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {key}:
+            </span>
+            <span> {errorMessage}</span>
           </li>
         ));
       })}
     </ul>
-  )
+  );
 };
