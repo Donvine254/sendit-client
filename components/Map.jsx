@@ -54,18 +54,13 @@ export default function Map({ mapToRender, valid, setValid }) {
   const [useContact, setUseContact] = useState(false);
   //function to set contact_person to user number
   function handleUseContact() {
-    setUseContact(!useContact);
+    setUseContact((prev)=>!prev);
     if (useContact) {
       setParcelData((prev) => ({
         ...prev,
         contact_person: currentUser.phone_number,
       }));
-    }
-    else if(!useContact){
-      setParcelData((prev) => ({
-        ...prev,
-        contact_person: "",
-      }));
+      console.log(parcelData.contact_person)
     }
   }
   function handleChange(e) {
@@ -188,7 +183,8 @@ export default function Map({ mapToRender, valid, setValid }) {
                     className="my-2 cursor-pointer flex items-start gap-2">
                     <input
                       type="checkbox"
-                      id="contact-info"
+                      id="contact_info"
+                      value={useContact}
                       checked={useContact}
                       className="checkbox checkbox-primary"
                       onChange={handleUseContact}
@@ -199,7 +195,7 @@ export default function Map({ mapToRender, valid, setValid }) {
                   {!useContact? (
                     <>
                       <PhoneInput
-                        value=""
+                        value={parcelData?.contact_person.toString()}
                         onChange={(value) => handlePhoneInput(value)}
                         onBlur={handleBlur}
                         defaultCountry="KE"
