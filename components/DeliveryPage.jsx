@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 export default function DeliveryPage() {
   const { parcelData, setOrderData, setCreatedParcel } = useAppContext();
   const [errors, setErrors]=useState();
+  const [valid, setValid] = useState(true);
   const [currentStep, setCurrentStep] = useState(1); // Initial step
   const router = useRouter();
   const handleNext = () => {
@@ -39,16 +40,16 @@ export default function DeliveryPage() {
 
   switch (currentStep) {
     case 1:
-      disabled = !parcelData.weight || parcelData.description === "";
+      disabled = !parcelData.weight || parcelData.description === ""|| parcelData.value === "";
       break;
     case 2:
-      disabled = parcelData.pickup_address === "";
+      disabled = parcelData.pickup_address === "" || !valid;
       break;
     case 3:
       disabled =
         parcelData.delivery_address === "" ||
         parcelData.receiver_name === "" ||
-        parcelData.receiver_contact === "";
+        parcelData.receiver_contact === "" || !valid;
       break;
     default:
       disabled = false; // Enable the "Next" button for other cases
@@ -79,8 +80,8 @@ export default function DeliveryPage() {
      
       {/* Conditionally render the step based on the current step */}
       {currentStep === 1 && <OrderDetails />}
-      {currentStep === 2 && <PickupDetails />}
-      {currentStep === 3 && <DeliveryDetails />}
+      {currentStep === 2 && <PickupDetails valid={valid} setValid={setValid}/>}
+      {currentStep === 3 && <DeliveryDetails valid={valid} setValid={setValid}/>}
       {errors && <ErrorList errors={errors}/>}
       <div className="flex items-center justify-center gap-5 lg:gap-10 lg:w-1/2 mx-5 lg:mx-auto mt-2 lg:mt-4">
         {currentStep > 1 && (
