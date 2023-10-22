@@ -7,7 +7,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 import { useAppContext } from "@/context/context";
 import Loading from "./loading";
@@ -23,7 +23,7 @@ const containerStyle = {
 };
 
 const libraries = ["places"];
-export default function Map({ mapToRender }) {
+export default function Map({ mapToRender, valid, setValid }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -33,8 +33,9 @@ export default function Map({ mapToRender }) {
   const zoom = 1;
   const mapRef = useRef();
   const [map, setMap] = useState(null);
- 
+
   const [directions, setDirections] = useState();
+  //state to validate phone input
 
   const {
     currentUser,
@@ -43,10 +44,10 @@ export default function Map({ mapToRender }) {
     phone_number,
     setPhone_number,
     setOrderData,
-    pickupLocation, 
+    pickupLocation,
     setPickupLocation,
-    deliveryLocation, 
-    setDeliveryLocation
+    deliveryLocation,
+    setDeliveryLocation,
   } = useAppContext();
 
   //function to handle change in inputs
@@ -57,6 +58,24 @@ export default function Map({ mapToRender }) {
       ...prev,
       [name]: value,
     }));
+  }
+  //function to validate phone input
+  function handlePhoneInput(value, user) {
+    if (user === "receiver") {
+      setParcelData((prev) => ({
+        ...prev,
+        receiver_contact: value,
+      }));
+    } else if (user === "sender") {
+      setPhone_number(value);
+    }
+    setValid(isValidPhoneNumber(value));
+  }
+
+  function handleBlur(value) {
+    if (!valid) {
+      toast.error("Invalid phone number");
+    }
   }
 
   const onLoad = useCallback(function callback(map) {
@@ -86,12 +105,11 @@ export default function Map({ mapToRender }) {
       (result, status) => {
         if (status === "OK" && result) {
           setDirections(result);
-          setOrderData((prev)=>({
+          setOrderData((prev) => ({
             ...prev,
-            distance:result.routes[0]?.legs[0]?.distance?.text,
-            duration:result.routes[0]?.legs[0]?.duration?.text 
-          }))
-    
+            distance: result.routes[0]?.legs[0]?.distance?.text,
+            duration: result.routes[0]?.legs[0]?.duration?.text,
+          }));
         }
       }
     );
@@ -119,10 +137,18 @@ export default function Map({ mapToRender }) {
                 </label>
                 <PhoneInput
                   value={phone_number}
-                  onChange={setPhone_number}
+                  onChange={(value) => handlePhoneInput(value, "sender")}
+                  onBlur={handleBlur}
                   defaultCountry="KE"
-                  className="input input-bordered input-secondary"
+                  className={`input input-bordered input-secondary ${
+                    !valid ? "input-error" : ""
+                  }`}
                 />
+                {!valid && (
+                  <p className="text-error-content my-2">
+                    Please enter a valid phone number
+                  </p>
+                )}
               </div>
             ) : (
               <></>
@@ -167,12 +193,17 @@ export default function Map({ mapToRender }) {
                   type="text"
                   name="receiver_name"
                   id="receiver_name"
+                  pattern="[A-Za-z-' ]+"
+                  minLength="4"
+                  maxLength="50"
+                  title="name cannot be less than four characters"
                   value={parcelData.receiver_name}
                   onChange={handleChange}
                   placeholder="John Doe"
                   required
                   className="input input-bordered input-secondary w-full max-w-xs0"
                 />
+                {parcelData.receiver_name.length > 1 && parcelData.receiver_name.length < 4 && <p className="text-error my-2">*Please enter a valid name</p>}
               </div>
               <div className="mb-2">
                 <label
@@ -183,15 +214,18 @@ export default function Map({ mapToRender }) {
                 </label>
                 <PhoneInput
                   value={parcelData.receiver_contact}
-                  onChange={(value) => 
-                    setParcelData((prev) => ({
-                      ...prev,
-                      receiver_contact: value,
-                    }))
-                  }
+                  onChange={(value) => handlePhoneInput(value, "receiver")}
+                  onBlur={handleBlur}
                   defaultCountry="KE"
-                  className="input input-bordered input-secondary"
+                  className={`input input-bordered ${
+                    !valid ? "input-error" : ""
+                  }`}
                 />
+                {!valid && (
+                  <p className="text-error my-2">
+                    * Please enter a valid phone number
+                  </p>
+                )}
               </div>
               <div className="mb-2">
                 <label htmlFor="delivery_notes" className="block mb-2 text-sm ">
@@ -226,19 +260,15 @@ export default function Map({ mapToRender }) {
         }}>
         {pickupLocation && (
           <>
-            <Marker
-              position={pickupLocation}
-            />
+            <Marker position={pickupLocation} />
           </>
         )}
         {deliveryLocation && (
           <>
-            <Marker
-              position={deliveryLocation}           
-            />
+            <Marker position={deliveryLocation} />
           </>
         )}
-        {directions && <DirectionsRenderer directions={directions}  />}
+        {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
     </div>
   ) : (

@@ -24,6 +24,7 @@ export default function OrderDetails() {
           value={parcelData.description}
           onChange={handleChange}
           id="description"
+          title="parcel description cannot be blank"
           placeholder="parcel description"
           className="w-full textarea textarea-primary"
           required></textarea>
@@ -36,6 +37,7 @@ export default function OrderDetails() {
           type="number"
           name="weight"
           id="weight"
+          title="weight cannot be blank"
           value={!parcelData.weight? "" : parcelData.weight}
           onChange={handleChange}
           max={100}
@@ -53,6 +55,7 @@ export default function OrderDetails() {
           type="number"
           name="value"
           id="number"
+          title="value cannot be blank"
           max={100000}
           min={0}
           value={parcelData.value}
