@@ -10,7 +10,7 @@ export default function ContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [phone_number, setPhone_number]= useState("")
-   const [pickupLocation, setPickupLocation] = useState();
+  const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState();
   const [createdParcel, setCreatedParcel] = useState();
   const [parcelData, setParcelData] = useState({
@@ -24,6 +24,7 @@ export default function ContextProvider({ children }) {
     delivery_notes:"",
     receiver_name:"",
     receiver_contact:"",
+    contact_person:""
   })
   const [orderData, setOrderData]=useState({
     price:0,
@@ -37,7 +38,7 @@ useEffect(() => {
     const res = await fetch("/api/kindeSession");
     const data= await res.json();
     if (data.authenticated=== false){
-      //do something
+      //do something or nothing
     }
     else {
       setIsAuthenticated(data.authenticated)
