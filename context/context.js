@@ -9,7 +9,7 @@ export default function ContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [phone_number, setPhone_number]= useState("")
+  const [phone_number, setPhone_number]= useState()
   const [pickupLocation, setPickupLocation] = useState();
   const [deliveryLocation, setDeliveryLocation] = useState();
   const [createdParcel, setCreatedParcel] = useState();
@@ -51,6 +51,9 @@ useEffect(() => {
           ...prev,
           user_id:user.id,
         }))
+        if(user.phone_number){
+          setPhone_number(user.phone_number)
+        }
       }
       else {
         registerUser(data, setCurrentUser);
