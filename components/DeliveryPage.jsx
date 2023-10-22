@@ -49,7 +49,7 @@ export default function DeliveryPage() {
       disabled =
         parcelData.pickup_address === "" ||
         !valid ||
-        parcelData.receiver_contact === "";
+        parcelData.contact_person === "";
       break;
     case 3:
       disabled =
