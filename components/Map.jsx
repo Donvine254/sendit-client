@@ -38,7 +38,6 @@ export default function Map({ mapToRender, valid, setValid }) {
   //state to validate phone input
 
   const {
-    currentUser,
     parcelData,
     setParcelData,
     phone_number,
@@ -58,9 +57,9 @@ export default function Map({ mapToRender, valid, setValid }) {
     if (useContact) {
       setParcelData((prev) => ({
         ...prev,
-        contact_person: currentUser.phone_number,
+        contact_person: phone_number,
       }));
-      console.log(parcelData.contact_person)
+      console.log(parcelData.phone_number)
     }
   }
   function handleChange(e) {
@@ -151,7 +150,7 @@ export default function Map({ mapToRender, valid, setValid }) {
               setParcelData={setParcelData}
             />
             <div className="mt-4 py-2">
-              {!currentUser?.phone_number ? (
+              {!phone_number ? (
                 <>
                   <label htmlFor="phone_number" className="block mb-2 text-lg font-bold">
                     What is your phone number?

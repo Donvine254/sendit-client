@@ -129,7 +129,7 @@ export default function OrderPage() {
                     {/* row 4 */}
                     <tr>
                       <th>✍🏾 Delivery Notes</th>
-                      <td contentEditable="false">
+                      <td>
                       {createdParcel?.delivery_notes ?? "None"}
                       </td>
                     </tr>
