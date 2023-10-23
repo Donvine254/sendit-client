@@ -19,6 +19,7 @@ export default function Settings({ currentUser }) {
             src={currentUser.picture}
             width={80}
             height={80}
+            alt={currentUser.name}
             className="h-16 w-16 md:h-20 md:w-20 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 md:mx-auto"></Image>
           <p className="text-base mt-5">Update Profile Picture</p>
           <UploadButtonPage />
