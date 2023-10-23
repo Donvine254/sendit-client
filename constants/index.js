@@ -34,7 +34,7 @@ export const faqData = {
   
     Delivery: [
       {
-        title: "What is Sendit&apos;s delivery coverage area?",
+        title: "What is Sendit's delivery coverage area?",
         content:
           "We offer a nationwide delivery coverage within Kenya. We're continuously expanding our reach to serve you better.",
       },
