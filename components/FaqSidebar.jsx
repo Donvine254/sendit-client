@@ -1,4 +1,5 @@
 'use client'
+import { useState } from "react";
 import FaqQuestion  from "./FaqQuestion"
 import { faqData } from "@/constants";
 export default function FaqSideBar() {

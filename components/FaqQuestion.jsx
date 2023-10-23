@@ -1,4 +1,5 @@
 'use client'
+import { useState } from "react";
 export default function FaqQuestion({ title, content }) {
     const [isDetailExpanded, setIsDetailExpanded] = useState(false);
   
