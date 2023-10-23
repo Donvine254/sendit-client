@@ -10,14 +10,14 @@ export default function FaqSideBar() {
     };
   
     return (
-      <section className="md:flex gap-10">
+      <section className="md:flex md:gap-2 lg:gap-5">
         {/* Parent div for tab*/}
-        <div id="tab">
-          <ul className="md:float-left w-full md-min-w[30%] md:w-fit  md:h-full flex justify-between items-start md:block  md:min-w-[150px] md:mr-2 pb-2 text-xl md:bg-base-200">
-            <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
+        <div id="tab" className="p-2">
+          <ul className="md:float-left w-full md:w-fit  md:h-full flex justify-between items-start md:block  md:min-w-[150px] lg:min-w-[250px] md:mr-2 pb-2 text-xl md:bg-base-200 md:mt-2">
+            <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary ">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "All" ? "text-primary md:hover:text-white font-bold" : ""
+                  activeTab === "All" ? "text-primary font-bold md:hover:text-white " : ""
                 }`}
                 onClick={() => openTopic("All")}>
                 All
@@ -26,7 +26,7 @@ export default function FaqSideBar() {
             <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "Order" ? "text-primary md:hover:text-white font-bold" : ""
+                  activeTab === "Order" ? "text-primary font-bold md:hover:text-white" : ""
                 }`}
                 onClick={() => openTopic("Order")}>
                 Order
@@ -35,7 +35,7 @@ export default function FaqSideBar() {
             <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "Delivery" ? "text-primary md:hover:text-white font-bold" : ""
+                  activeTab === "Delivery" ? "text-primary font-bold md:hover:text-white" : ""
                 }`}
                 onClick={() => openTopic("Delivery")}>
                 Delivery
@@ -44,7 +44,7 @@ export default function FaqSideBar() {
             <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "Payments" ? "text-primary  md:hover:text-white font-bold" : ""
+                  activeTab === "Payments" ? "text-primary font-bold md:hover:text-white" : ""
                 }`}
                 onClick={() => openTopic("Payments")}>
                 Payments
@@ -65,7 +65,7 @@ export default function FaqSideBar() {
             {faqData[category].map((faq, index) => (
               <div key={index}>
                 <FaqQuestion title={faq.title} content={faq.content} />
-                {index < faqData[category].length - 1 && <hr />}
+                {index < faqData[category].length && <hr />}
               </div>
             ))}
           </div>
