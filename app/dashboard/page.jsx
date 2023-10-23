@@ -8,7 +8,7 @@ export default function Dashboard() {
   const { currentUser } = useAppContext();
   const [active, setActive] = useState(); //use this to dynamically render dashboards
   return (
-    <section className="mx-4 p-2 min-w-[500px]">
+    <section className="p-2 md:min-h-[500px]">
       {currentUser ? (
         <>
           {" "}
@@ -17,7 +17,7 @@ export default function Dashboard() {
             active={active}
             setActive={setActive}
           />
-          {currentUser.role==="user"&& <Userdashboard currentUser={currentUser}  active={active} />}
+          {<Userdashboard currentUser={currentUser}  active={active} />}
         </>
       ) : (
         <>

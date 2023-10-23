@@ -13,11 +13,11 @@ export default function Userdashboard({ currentUser, active }) {
   return (
     <>
       {active == "Settings" && (
-        <div className="w-full lg:mt-10 lg:w-1/2 lg:mx-auto">
+        <div className="w-full lg:mt-10 lg:w-2/3 lg:mx-auto p-5">
       
           {/* parent div for the flexbox */}
-          <div className="md:flex gap-5 lg:gap-10">
-          <div className="py-4 xsm:mx-auto">
+          <div className="md:flex gap-5 lg:gap-10 border p-2 ">
+          <div className="py-4 sm:flex flex-col items-center w-full md:w-fit justify-center">
             <Image src={currentUser.picture} width={80} height={80} className="h-16 w-16 md:h-20 md:w-20 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 md:mx-auto"></Image>
             <p className="text-base mt-5">Update Profile Picture</p>
             <UploadButtonPage/>

@@ -192,11 +192,11 @@ body {
   .ul-with-scrollbar {
     overflow-x: scroll;
     scrollbar-width: thin;
-    -webkit-overflow-scrolling: auto;
+    -webkit-overflow-scrolling: touch;
 
     /* Webkit-specific scrollbar styles */
     &::-webkit-scrollbar {
-      width: 2px;
+      width: 0px;
     }
 
     &::-webkit-scrollbar-thumb {
