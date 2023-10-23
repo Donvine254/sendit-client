@@ -58,6 +58,9 @@ export default function Navbar() {
             <li>
               <Link href="quote">Get a Quote</Link>
             </li>
+            <li>
+              <Link href="faqs">FAQs</Link>
+            </li>
             {isAuthenticated() && (
               <>
                 <li>

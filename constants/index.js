@@ -26,7 +26,7 @@ export const faqData = {
           "It is your sole responsibility to ensure your goods are packed properly thereby preventing damage to contents during transit. We suggest using a soft-sided suitcase or sturdy double-walled cardboard boxes designed to hold the weight packed. Sendit will not be liable of any damages resulting from loose packaging. However, our riders will inspect the packaging on pickup.",
       },
       {
-        title: "Can I modify or cancel an order after it's been placed?",
+        title: "How can i edit my order?",
         content:
           "We understand that circumstances change. If you need to make changes to your order or cancel it, visit the dashboard page and edit any details. Kindly note changes cannot be made after our riders have picked the parcel.",
       },
