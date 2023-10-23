@@ -3,7 +3,7 @@ import FaqSideBar from "@/components/FaqSidebar";
 export default function page() {
   return (
     <>
-      <div className="p-6 md:min-h-[400px]">
+      <div className="p-6 md:min-h-[500px]">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-center my-2">
             Frequently Asked Questions
