@@ -13,38 +13,38 @@ export default function FaqSideBar() {
       <section className="md:flex gap-10">
         {/* Parent div for tab*/}
         <div id="tab">
-          <ul className="md:float-left w-full md-min-w[30%] md:w-fit  md:h-full flex justify-between items-start md:block  md:min-w-[150px] md:mr-2 py-2 text-xl md:bg-base-200">
-            <li className="border-b-2 border-dotted md:py-2">
+          <ul className="md:float-left w-full md-min-w[30%] md:w-fit  md:h-full flex justify-between items-start md:block  md:min-w-[150px] md:mr-2 pb-2 text-xl md:bg-base-200">
+            <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "All" ? "font-bold" : ""
+                  activeTab === "All" ? "text-primary md:hover:text-white font-bold" : ""
                 }`}
                 onClick={() => openTopic("All")}>
                 All
               </p>
             </li>
-            <li className="border-b-2 border-dotted md:py-2">
+            <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "Order" ? "font-bold" : ""
+                  activeTab === "Order" ? "text-primary md:hover:text-white font-bold" : ""
                 }`}
                 onClick={() => openTopic("Order")}>
                 Order
               </p>
             </li>
-            <li className="border-b-2 border-dotted md:py-2">
+            <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "Delivery" ? "font-bold" : ""
+                  activeTab === "Delivery" ? "text-primary md:hover:text-white font-bold" : ""
                 }`}
                 onClick={() => openTopic("Delivery")}>
                 Delivery
               </p>
             </li>
-            <li className="border-b-2 border-dotted md:py-2">
+            <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary">
               <p
                 className={`md:w-32 text-start pl-3 ${
-                  activeTab === "Payments" ? "font-bold" : ""
+                  activeTab === "Payments" ? "text-primary  md:hover:text-white font-bold" : ""
                 }`}
                 onClick={() => openTopic("Payments")}>
                 Payments
