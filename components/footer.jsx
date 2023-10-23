@@ -32,7 +32,7 @@ export default function Footer() {
   <nav>
     <header className="footer-title">Support</header> 
     <Link href="/contact" className="link link-hover">Contact Us</Link>  
-    <Link href="/contact" className="link link-hover">FAQs</Link> 
+    <Link href="/faqs" className="link link-hover">FAQs</Link> 
     <Link href="/contact" className="link link-hover">Security</Link>
   </nav>
 </footer>
