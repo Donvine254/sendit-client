@@ -3,8 +3,6 @@
 import { UploadButton } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
 import toast from "react-hot-toast";
-import { useState } from "react";
-import Link from "next/link";
 
 export default function UploadButtonPage({setImage, image}) {
  

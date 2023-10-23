@@ -138,7 +138,7 @@ export default function HomeComponent() {
               width={540}
               height={360}
               alt="delivery-person"
-              className=" h-fit lg:h-full w-full object-contain object-center md:rounded-lg"
+              className=" h-fit lg:h-full w-full object-cover object-center md:rounded-lg"
             />
           </div>
         </div>
