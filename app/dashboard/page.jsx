@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 
 export default function Dashboard() {
   const { currentUser } = useAppContext();
-  const [active, setActive] = useState("Settings");
+  const [active, setActive] = useState("Orders");
   //redirect to the active pages
   if (active === "Help Center") {
     redirect("/contact");
