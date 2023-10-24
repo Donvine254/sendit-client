@@ -4,19 +4,19 @@ import { UploadButton } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
 import toast from "react-hot-toast";
 
-export default function UploadButtonPage({setImage, image}) {
+export default function UploadButtonPage({setCurrentUser}) {
  
-  const imgList = image ? (
-      <p>Upload Complete!</p>
-  ) : null;
-
+ 
   return (
     <main className="flex flex-col items-start justify-start">
       <UploadButton
         endpoint="profilePicture"
         onClientUploadComplete={(res) => {
           if (res) {
-            setImage(res[0].fileUrl);
+            setCurrentUser((prev)=>({
+              ...prev,
+              picture:res[0].fileUrl
+            }))
           }
           toast.success("Upload Completed!");
         }}
@@ -24,7 +24,6 @@ export default function UploadButtonPage({setImage, image}) {
           toast.error(`ERROR! ${error.message}`);
         }}
       />
-      {imgList}
     </main>
   );
 }

@@ -6,7 +6,7 @@ import { Toolbar, Userdashboard } from "@/components/Dashboard";
 
 export default function Dashboard() {
   const { currentUser } = useAppContext();
-  const [active, setActive] = useState(); //use this to dynamically render dashboards
+  const [active, setActive] = useState('Settings'); //use this to dynamically render dashboards
   return (
     <section className="p-2 md:min-h-[500px]">
       {currentUser ? (
