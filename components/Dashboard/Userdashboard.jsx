@@ -1,6 +1,6 @@
 import Settings from "./settings";
 
-export default function Userdashboard({ currentUser, active }) {
+export default function  Userdashboard({ currentUser, active }) {
   
   return (
     <>
