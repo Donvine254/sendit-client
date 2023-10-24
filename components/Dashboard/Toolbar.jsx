@@ -35,7 +35,7 @@ const menuItems = {
     { text: "Settings" },
   ],
   rider: [
-    { text: "My Order" },
+    { text: "My Deliveries" },
     { text: "Get Orders" },
     { text: "Earnings" },
     { text: "Help Center" },
