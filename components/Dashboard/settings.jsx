@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import Image from "next/image";
 import UploadButtonPage from "@/components/uploadButton";
-import { patchPhoneNumber} from "@/lib";
+import { patchPhoneNumber } from "@/lib";
 import { useAppContext } from "@/context/context";
 import toast from "react-hot-toast";
 export default function Settings({ currentUser }) {
@@ -22,14 +22,24 @@ export default function Settings({ currentUser }) {
       {/* parent div for the flexbox */}
       <div className="md:flex gap-5 lg:gap-10 p-2 ">
         <div className="py-4 sm:flex xsm:flex flex-col items-center w-full md:w-fit justify-center">
-          <Image
-            src={currentUser.picture}
-            width={80}
-            height={80}
-            alt={currentUser.name}
-            className="h-20 w-20 md:h-24 md:w-24 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 md:mx-auto"></Image>
+          {currentUser.picture ? (
+            <Image
+              src={currentUser.picture}
+              width={80}
+              height={80}
+              priority
+              alt={currentUser.name}
+              className="h-20 w-20 md:h-24 md:w-24 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 md:mx-auto"></Image>
+          ) : (
+            <>
+              <div className="h-20 w-20 md:h-24 md:w-24 flex items-center justify-center accent text-white rounded-full ring-2 ring-red-300 ring-offset-2  md:mx-auto text-4xl ">
+                {currentUser?.name?.[0].toUpperCase()}
+              </div>
+            </>
+          )}
+
           <p className="text-base mt-5">Update Profile Picture</p>
-          <UploadButtonPage setCurrentUser={setCurrentUser} />
+          <UploadButtonPage setCurrentUser={setCurrentUser} id={currentUser.user_id} />
         </div>
         <form className="flex-1">
           <h1 className="text-xl md:text-2xl font-bold md:text-center">
@@ -73,34 +83,21 @@ export default function Settings({ currentUser }) {
                 Edit
               </button>
             </label>
-            {!currentUser.phone_number || !isEditing ? (
-              <input
-                type="number"
-                name="phone"
-                id="phone"
-                value={currentUser.phone_number}
-                disabled
-                className="w-full py-1 border-b-2 bg-base-100"
-              />
-            ) : (
-              <>
                 <PhoneInput
                   onChange={(value) => handlePhoneInput(value)}
                   value={phone_number.toString()}
-                  placeholder="What is your phone number?"
+                  placeholder={!currentUser.phone_number? "What is your phone number?":""}
                   disabled={!isEditing}
                   defaultCountry="KE"
                   className={`bg-base-100 w-full py-1 border-b-2 focus:outline-none ${
                     !valid ? "input-error" : ""
-                  } ${isEditing?"input input-bordered input-primary":""}`}
+                  } ${isEditing ? "input input-bordered input-primary" : ""}`}
                 />
                 {!valid && (
                   <p className="text-error my-2">
                     *Please enter a valid phone number
                   </p>
                 )}
-              </>
-            )}
           </div>
           <div className="flex items-center justify-center my-2">
             <button
@@ -108,9 +105,9 @@ export default function Settings({ currentUser }) {
               className={`btn hero-btn ${!isEditing ? "hidden" : ""}`}
               onClick={(e) => {
                 e.preventDefault();
-                toast.success("processing request.....")
+                toast.success("processing request.....");
                 patchPhoneNumber(currentUser, phone_number, setCurrentUser);
-                setIsEditing(false)
+                setIsEditing(false);
               }}>
               Submit
             </button>
