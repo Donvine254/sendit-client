@@ -41,7 +41,7 @@ export default function MyOrders({ currentUser }) {
   }, [currentUser]);
 
   return (
-    <div className="w-full lg:mt-10 lg:w-1/2 lg:mx-auto p-2">
+    <div className="w-full lg:mt-5 lg:w-1/2 lg:mx-auto p-2">
       {isLoading ? (
         <progress className="progress progress-primary w-full"></progress>
       ) : (
@@ -133,10 +133,10 @@ export default function MyOrders({ currentUser }) {
                 <div className="absolute right-0 md:right-[-10px] top-[-25px] md:top-[-10px] h-24 w-20 z-5">
                   <div
                     className={`absolute transform rotate-45 ${
-                      order.status === "pending" ? "bg-gray-600" : "bg-primary"
+                      order.status === "pending" ? "bg-primary" : "!bg-green-600"
                     } ${
-                      order.status === "delivered" ? "!bg-green-600" : ""
-                    } text-center text-white text-[10px] md:text-[20px] font-semibold py-1 right-[-34px] top-[32px] capitalize w-[150px] md:w-[200px]`}>
+                      order.status === "delivered" ? "!bg-[#FFC804]" : ""
+                    } text-center text-white text-[10px] md:text-xl font-semibold py-1 right-[-34px] top-[32px] capitalize w-[150px] md:w-[200px]`}>
                     {order?.status}
                   </div>
                 </div>
