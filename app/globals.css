@@ -196,7 +196,7 @@ body {
 
     /* Webkit-specific scrollbar styles */
     &::-webkit-scrollbar {
-      width: 0px;
+      width: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
