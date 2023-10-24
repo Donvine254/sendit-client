@@ -4,8 +4,10 @@ import { UploadButton } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
 import toast from "react-hot-toast";
 
-export default function UploadButtonPage({setCurrentUser}) {
- 
+import { updateUserPicture } from "@/lib";
+
+export default function UploadButtonPage({setCurrentUser, id}) {
+
  
   return (
     <main className="flex flex-col items-start justify-start">
@@ -18,6 +20,8 @@ export default function UploadButtonPage({setCurrentUser}) {
               picture:res[0].fileUrl
             }))
           }
+          let image=res[0].fileUrl
+          updateUserPicture(image, id)
           toast.success("Upload Completed!");
         }}
         onUploadError={(error) => {
