@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { useAppContext } from "@/context/context";
-import Loading from "../loading";
 export default function OrderDetails() {
-  const { parcelData, setParcelData, currentUser } = useAppContext();
+  const { parcelData, setParcelData} = useAppContext();
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -13,9 +12,7 @@ export default function OrderDetails() {
     }));
   }
   return (
-    <>
-      {currentUser.id ? (
-        <form className="mx-5 lg:w-1/2 lg:mx-auto py-2">
+  <form className="mx-5 lg:w-1/2 lg:mx-auto py-2">
           <p className="text-lg font-bold py-2 text-center">
             Add Parcel Details
           </p>
@@ -74,9 +71,5 @@ export default function OrderDetails() {
             />
           </div>
         </form>
-      ) : (
-        <Loading />
-      )}{" "}
-    </>
-  );
+  )
 }
