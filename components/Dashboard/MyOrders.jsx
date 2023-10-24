@@ -41,7 +41,7 @@ export default function MyOrders({ currentUser }) {
   }, [currentUser]);
 
   return (
-    <div className="w-full lg:mt-5 lg:w-1/2 lg:mx-auto p-2">
+    <div className="w-full lg:mt-5 p-2">
       {isLoading ? (
         <progress className="progress progress-primary w-full"></progress>
       ) : (
@@ -79,8 +79,11 @@ export default function MyOrders({ currentUser }) {
               Delivered
             </button>
           </div>
+          <div className={`grid grid-cols-1 lg:grid-cols-2 gap-4`}>
           {orders && orders.length > 0 ? (
+            
             filteredOrders.map((order) => (
+                
               <div
                 className="flex flex-col bg-base-200 p-4 rounded-lg border space-y-4 my-3 relative overflow-hidden"
                 key={order.id}>
@@ -165,6 +168,7 @@ export default function MyOrders({ currentUser }) {
               </Link>
             </div>
           )}
+        </div>
         </div>
       )}
     </div>
