@@ -17,11 +17,11 @@ export default function MyOrders({ currentUser }) {
 
   if (Array.isArray(orders) && orders.length > 0) {
     filteredOrders = orders.filter((order) => {
-      if (active === 'all') {
-        return true; 
+      if (active === "all") {
+        return true;
       } else {
-        return order.status.includes(active); 
-      } 
+        return order.status.includes(active);
+      }
     });
   }
 
@@ -47,30 +47,32 @@ export default function MyOrders({ currentUser }) {
       ) : (
         <div>
           <div
-            className={`flex items-center gap-2 ${isLoading ? "hidden" : ""}`}>
+            className={`flex items-center xsm:gap-1 gap-2 ${
+              isLoading ? "hidden" : ""
+            }`}>
             <button
-              className={`btn bg-gray-200 btn-sm normal-case ${
+              className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px]  ${
                 active === "all" ? "!btn-primary" : ""
               }`}
               onClick={() => handleButtonClick("all")}>
               All
             </button>
             <button
-              className={`btn bg-gray-200 btn-sm normal-case ${
+              className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px]  ${
                 active === "pending" ? "!btn-primary" : ""
               }`}
               onClick={() => handleButtonClick("pending")}>
               Pending
             </button>
             <button
-              className={`btn bg-gray-200 btn-sm normal-case ${
+              className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px]  ${
                 active === "on-transit" ? "!btn-primary" : ""
               }`}
               onClick={() => handleButtonClick("on-transit")}>
               On-Transit
             </button>
             <button
-              className={`btn bg-gray-200 btn-sm normal-case ${
+              className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
                 active === "delivered" ? "!btn-primary" : ""
               }`}
               onClick={() => handleButtonClick("delivered")}>
@@ -90,14 +92,18 @@ export default function MyOrders({ currentUser }) {
                   </p>
                 </div>
                 <ul className="steps steps-vertical">
-                  <li className="step step-primary font-bold" data-content="">
+                  <li
+                    className={`step ${
+                      order.status === "pending" ? "" : "step-primary"
+                    }`}
+                    data-content={order.status === "pending" ? "✕" : "✓"}>
                     {order?.parcel?.pickup_address}
                   </li>
                   <li
-                    className={`step font-bold ${
+                    className={`step ${
                       order.status === "delivered" ? "step-primary" : ""
                     }`}
-                    data-content="">
+                    data-content={order.status === "delivered" ? "✓" : "✕"}>
                     {order?.parcel?.delivery_address}
                   </li>
                 </ul>
@@ -124,13 +130,13 @@ export default function MyOrders({ currentUser }) {
                   </button>
                 </div>
                 {/* styling for a banner */}
-                <div className="absolute right-0 top-0 h-24 w-20 z-5">
+                <div className="absolute right-0 md:right-[-10px] top-[-25px] md:top-[-10px] h-24 w-20 z-5">
                   <div
                     className={`absolute transform rotate-45 ${
                       order.status === "pending" ? "bg-gray-600" : "bg-primary"
                     } ${
-                      order.status === "delivered" ? "bg-green-600" : ""
-                    } text-center text-white font-semibold py-1 right-[-34px] top-[32px] capitalize w-[200px]`}>
+                      order.status === "delivered" ? "!bg-green-600" : ""
+                    } text-center text-white text-[10px] md:text-[20px] font-semibold py-1 right-[-34px] top-[32px] capitalize w-[150px] md:w-[200px]`}>
                     {order?.status}
                   </div>
                 </div>
