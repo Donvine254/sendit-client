@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import Image from "next/image";
 import UploadButtonPage from "@/components/uploadButton";
-import { updateUserDetails } from "@/lib";
+import { patchPhoneNumber} from "@/lib";
 import { useAppContext } from "@/context/context";
+import toast from "react-hot-toast";
 export default function Settings({ currentUser }) {
   const { phone_number, setPhone_number, setCurrentUser } = useAppContext();
   const [valid, setValid] = useState(true);
@@ -28,7 +29,7 @@ export default function Settings({ currentUser }) {
             alt={currentUser.name}
             className="h-20 w-20 md:h-24 md:w-24 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 md:mx-auto"></Image>
           <p className="text-base mt-5">Update Profile Picture</p>
-          <UploadButtonPage setCurrentUser={setCurrentUser}/>
+          <UploadButtonPage setCurrentUser={setCurrentUser} />
         </div>
         <form className="flex-1">
           <h1 className="text-xl md:text-2xl font-bold md:text-center">
@@ -72,7 +73,7 @@ export default function Settings({ currentUser }) {
                 Edit
               </button>
             </label>
-            {currentUser.phone_number ? (
+            {!currentUser.phone_number || !isEditing ? (
               <input
                 type="number"
                 name="phone"
@@ -84,18 +85,18 @@ export default function Settings({ currentUser }) {
             ) : (
               <>
                 <PhoneInput
-                  value={phone_number}
                   onChange={(value) => handlePhoneInput(value)}
+                  value={phone_number.toString()}
                   placeholder="What is your phone number?"
                   disabled={!isEditing}
                   defaultCountry="KE"
                   className={`bg-base-100 w-full py-1 border-b-2 focus:outline-none ${
                     !valid ? "input-error" : ""
-                  }`}
+                  } ${isEditing?"input input-bordered input-primary":""}`}
                 />
                 {!valid && (
-                  <p className="text-error-content my-2">
-                    Please enter a valid phone number
+                  <p className="text-error my-2">
+                    *Please enter a valid phone number
                   </p>
                 )}
               </>
@@ -105,9 +106,12 @@ export default function Settings({ currentUser }) {
             <button
               type="submit"
               className={`btn hero-btn ${!isEditing ? "hidden" : ""}`}
-              onClick={() =>
-                updateUserDetails(currentUser, phone_number, setCurrentUser)
-              }>
+              onClick={(e) => {
+                e.preventDefault();
+                toast.success("processing request.....")
+                patchPhoneNumber(currentUser, phone_number, setCurrentUser);
+                setIsEditing(false)
+              }}>
               Submit
             </button>
           </div>
