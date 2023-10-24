@@ -185,7 +185,7 @@ body {
 }
 /* Styling for toolbar links */
 .toolbar-link {
-  @apply hover:text-primary font-bold md:text-xl pb-2 cursor-pointer whitespace-nowrap;
+  @apply hover:text-primary font-bold text-base md:text-xl pb-2 cursor-pointer whitespace-nowrap;
 }
 /* styling for the scrollbar */
 @media (max-width: 680px) {

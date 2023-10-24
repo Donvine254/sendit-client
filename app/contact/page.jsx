@@ -1,18 +1,15 @@
 "use client";
 import React from "react"
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
 import Swal from "sweetalert2";
 import Image from "next/image";
-export default function page() {
+export default function Contact() {
   const environment = process.env.NODE_ENV;
   const redirectUrl =
     environment === "development"
       ? "http://localhost:3000"
       : "https://senditcourrier.vercel.app";
-    function handleChange(){
-      console.log("something is cooking")
-    }
+
   function handleSubmit() {
     Swal.fire({
       icon: "success",
@@ -24,12 +21,12 @@ export default function page() {
     });
   }
   return (
-    <div className="flex xsm:mx-2 items-center min-h-scree font-serif">
+    <div className="flex xsm:mx-2 items-center min-h-screen font-serif">
       <div className="container mx-auto">
-        <h1 className="my-3 xsm:my-0 text-3xl font-semibold  py-2 text-center">
+        <h1 className="my-3 xsm:my-0 text-xl md:text-2xl font-semibold  py-2 text-center">
           Contact Us
         </h1>
-        <h2 className="text-xl font-bold">
+        <h2 className="text-base md:text-xl font-bold">
           You can reach us anyday, anytime through:
         </h2>
         <div className="flex flex-col md:flex-row justify-between bg-base-200 shadow-lg border p-3 xsm:py-4">
@@ -106,7 +103,6 @@ export default function page() {
                 <label htmlFor="phone" className="text-sm text-gray-600 ">
                   Phone Number <span >(optional)</span>
                 </label>
-                {/* <PhoneInput placeholder="Enter phone number"  defaultCountry="KE" onChange={handleChange}/> */}
 
                 <input
                   type="number"

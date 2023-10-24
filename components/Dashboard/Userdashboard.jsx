@@ -1,11 +1,11 @@
-import Settings from "./settings";
+import MyOrders from "./MyOrders";
 
-export default function Userdashboard({ currentUser, active }) {
+export default function  Userdashboard({ currentUser, active }) {
   
   return (
     <>
-      {active == "Settings" && (
-        <Settings currentUser={currentUser}/>
+      {active === "My Orders" || active==="Orders" && (
+        <MyOrders currentUser={currentUser}/>
       )}
     </>
   );
