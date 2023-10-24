@@ -85,7 +85,7 @@ export default function Settings({ currentUser }) {
             </label>
                 <PhoneInput
                   onChange={(value) => handlePhoneInput(value)}
-                  value={phone_number.toString()}
+                  value={phone_number?phone_number.toString():phone_number}
                   placeholder={!currentUser.phone_number? "What is your phone number?":""}
                   disabled={!isEditing}
                   defaultCountry="KE"
