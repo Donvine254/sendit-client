@@ -43,7 +43,9 @@ export default function MyDeliveries({ currentUser }) {
   return (
     <div className="w-full lg:mt-5 p-2">
       {isLoading ? (
-        <progress className="progress progress-primary w-full"></progress>
+        <div className="md:flex items-center justify-center">
+          <progress className="progress progress-primary w-full md:w-1/2"></progress>
+        </div>
       ) : (
         <div>
           {isLoading || orders.length < 1 ? null : (
