@@ -5,7 +5,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import { FallbackImage } from "./Userimage";
 
-const dynamicImage = dynamic(() => import("./Userimage"), {
+const UserImageDynamic = dynamic(() => import("./Userimage"), {
   loading: () => <FallbackImage />,
 });
 
@@ -132,7 +132,7 @@ export default function Navbar() {
                 </div>
               </button>
               {user?.picture ? (
-                <dynamicImage src={user?.picture} />
+                <UserImageDynamic src={user?.picture} />
               ) : (
                 <div className="xsm:h-8 xsm:w-8 h-10 w-10 flex items-center justify-center accent text-white rounded-full ring-2 ring-red-300 ring-offset-2 ">
                   {user?.given_name?.[0].toUpperCase()}

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useAppContext } from "@/context/context";
 export default function UserImage({ src }) {
