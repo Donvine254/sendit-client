@@ -114,7 +114,7 @@ export default function Navbar() {
           ) : (
             <div className="flex items-center gap-2 p-2">
               <button
-                className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case"
+                className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case z-5"
                 data-tip="You have no new notifications">
                 <div className="indicator">
                   <svg
