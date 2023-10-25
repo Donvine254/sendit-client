@@ -26,19 +26,25 @@ export default function RiderEarnings({ currentUser }) {
         </div>
       ) : (
         <div>
-          <h1 className="text-2xl text-center font-bold">Earnings Summary</h1>
+          <h1 className="text-center font-bold">
+            Rider since {currentUser?.joined}
+          </h1>
           <div className="py-3 flex flex-col gap-10">
             <div className="stats bg-[#e5f6f6]  border w-full shadow-lg">
               <div className="stat my-3 mr-2.5 ">
                 <div className="font-bold text-xl ">Total Revenue</div>
-                <div className="stat-value">Ksh {revenue?.total_revenue}</div>
+                <div className="stat-value">
+                  Ksh {revenue?.total_revenue ?? 0}
+                </div>
                 <div className="text-[12px]">↗︎ 1% from yesterday</div>
               </div>
             </div>
             <div className="stats bg-base-200 border shadow-lg  w-full ">
               <div className="stat my-3 mr-2.5 ">
                 <div className="font-bold text-xl ">Delivery Count</div>
-                <div className="stat-value">50 completed</div>
+                <div className="stat-value">
+                  {revenue?.delivered_orders ?? 0}completed
+                </div>
                 <div className="text-[12px]">↗︎ 8% from last month</div>
               </div>
             </div>
