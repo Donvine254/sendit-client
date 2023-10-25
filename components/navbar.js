@@ -80,7 +80,9 @@ export default function Navbar() {
               </>
             ) : (
               <li>
-                <LoginLink className="text-subtle">Log out</LoginLink>
+                <LoginLink className="text-subtle text-white hover:text-black accent">
+                  Log in
+                </LoginLink>
               </li>
             )}
           </ul>
