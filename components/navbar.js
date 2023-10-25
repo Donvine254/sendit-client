@@ -2,6 +2,12 @@ import React from "react";
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import { FallbackImage } from "./Userimage";
+
+const UserImageDynamic = dynamic(() => import("./Userimage"), {
+  loading: () => <FallbackImage />,
+});
 
 import {
   RegisterLink,
@@ -49,7 +55,7 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/deliveries">Deliveries</Link>
+              <Link href="/deliveries">Send Parcel</Link>
             </li>
 
             <li>
@@ -61,7 +67,7 @@ export default function Navbar() {
             <li>
               <Link href="faqs">FAQs</Link>
             </li>
-            {isAuthenticated() && (
+            {isAuthenticated() ? (
               <>
                 <li>
                   <Link href="/dashboard">Dashboard</Link>
@@ -72,6 +78,12 @@ export default function Navbar() {
                   </LogoutLink>
                 </li>
               </>
+            ) : (
+              <li>
+                <LoginLink className="text-subtle text-white hover:text-black accent">
+                  Log in
+                </LoginLink>
+              </li>
             )}
           </ul>
         </div>
@@ -100,12 +112,11 @@ export default function Navbar() {
               </RegisterLink>
             </>
           ) : (
-            <div
-              className="flex items-center gap-2 p-2"
-             >
-              <button className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case"  data-tip="You have no new notifications">
-                <div
-                  className="indicator">
+            <div className="flex items-center gap-2 p-2">
+              <button
+                className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case z-5"
+                data-tip="You have no new notifications">
+                <div className="indicator">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -123,14 +134,7 @@ export default function Navbar() {
                 </div>
               </button>
               {user?.picture ? (
-                <Image
-                  className="h-8 w-8 md:h-10 md:w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
-                  src={user?.picture}
-                  width={48}
-                  height={48}
-                  alt="user profile avatar"
-                  referrerPolicy="no-referrer"
-                />
+                <UserImageDynamic src={user?.picture} />
               ) : (
                 <div className="xsm:h-8 xsm:w-8 h-10 w-10 flex items-center justify-center accent text-white rounded-full ring-2 ring-red-300 ring-offset-2 ">
                   {user?.given_name?.[0].toUpperCase()}

@@ -22,8 +22,8 @@ export default function Dashboard() {
     } else if (currentUser?.role === "rider") {
       setActive("My Deliveries");
     }
-  }, [currentUser, setActive])
-  
+  }, [currentUser, setActive]);
+
   return (
     <section className="p-2 md:min-h-[500px]">
       {currentUser ? (
@@ -35,7 +35,7 @@ export default function Dashboard() {
             setActive={setActive}
           />
           {active === "Settings" && <Settings currentUser={currentUser} />}
-          {currentUser.role === "user"  && (
+          {currentUser.role === "user" && (
             <Userdashboard currentUser={currentUser} active={active} />
           )}
         </>
