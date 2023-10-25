@@ -4,7 +4,7 @@ export default function  Userdashboard({ currentUser, active }) {
   
   return (
     <>
-      {active === "My Orders" || active==="Orders" && (
+      {active === "My Orders" && (
         <MyOrders currentUser={currentUser}/>
       )}
     </>
