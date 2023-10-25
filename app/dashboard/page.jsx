@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/context";
 import Loading from "../../components/loading";
-import { Toolbar, Userdashboard, Settings } from "@/components/Dashboard";
+import { Toolbar, Userdashboard, Settings, Riderdashboard, Admindashbaord } from "@/components/Dashboard";
 import { redirect } from "next/navigation";
 
 export default function Dashboard() {
@@ -37,6 +37,9 @@ export default function Dashboard() {
           {active === "Settings" && <Settings currentUser={currentUser} />}
           {currentUser.role === "user" && (
             <Userdashboard currentUser={currentUser} active={active} />
+          )}
+          {currentUser.role === "rider" && (
+            <Riderdashboard currentUser={currentUser} active={active} />
           )}
         </>
       ) : (

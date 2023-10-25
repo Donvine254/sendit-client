@@ -1,7 +1,9 @@
-import React from 'react'
-
-export default function Riderdashboard() {
+import React from "react";
+import MyDeliveries from "./MyDeliveries"
+export default function Riderdashboard({currentUser, active}) {
   return (
-    <div>Riderdashboard</div>
+    <>
+    {active ==="My Deliveries" && <MyDeliveries currentUser={currentUser}/>}
+    </>
   )
 }
