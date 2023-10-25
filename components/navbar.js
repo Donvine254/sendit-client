@@ -61,7 +61,7 @@ export default function Navbar() {
             <li>
               <Link href="faqs">FAQs</Link>
             </li>
-            {isAuthenticated() && (
+            {isAuthenticated() ? (
               <>
                 <li>
                   <Link href="/dashboard">Dashboard</Link>
@@ -72,6 +72,10 @@ export default function Navbar() {
                   </LogoutLink>
                 </li>
               </>
+            ) : (
+              <li>
+                <LoginLink className="text-subtle">Log out</LoginLink>
+              </li>
             )}
           </ul>
         </div>
@@ -100,12 +104,11 @@ export default function Navbar() {
               </RegisterLink>
             </>
           ) : (
-            <div
-              className="flex items-center gap-2 p-2"
-             >
-              <button className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case"  data-tip="You have no new notifications">
-                <div
-                  className="indicator">
+            <div className="flex items-center gap-2 p-2">
+              <button
+                className="btn btn-ghost btn-circle  tooltip tooltip-left tooltip-primary normal-case"
+                data-tip="You have no new notifications">
+                <div className="indicator">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
