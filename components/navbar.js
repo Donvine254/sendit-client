@@ -2,6 +2,12 @@ import React from "react";
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import { FallbackImage } from "./Userimage";
+
+const dynamicImage = dynamic(() => import("./Userimage"), {
+  loading: () => <FallbackImage />,
+});
 
 import {
   RegisterLink,
@@ -49,7 +55,7 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/deliveries">Deliveries</Link>
+              <Link href="/deliveries">Send Parcel</Link>
             </li>
 
             <li>
@@ -126,14 +132,7 @@ export default function Navbar() {
                 </div>
               </button>
               {user?.picture ? (
-                <Image
-                  className="h-8 w-8 md:h-10 md:w-10 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2"
-                  src={user?.picture}
-                  width={48}
-                  height={48}
-                  alt="user profile avatar"
-                  referrerPolicy="no-referrer"
-                />
+                <dynamicImage src={user?.picture} />
               ) : (
                 <div className="xsm:h-8 xsm:w-8 h-10 w-10 flex items-center justify-center accent text-white rounded-full ring-2 ring-red-300 ring-offset-2 ">
                   {user?.given_name?.[0].toUpperCase()}
