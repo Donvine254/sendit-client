@@ -66,7 +66,7 @@ export default function GetOrders() {
                   {order?.distance}, {order.duration} drive.
                 </p>
               </div>
-              <hr></hr>
+              <hr />
               <div className="flex gap-2 xsm:flex-col">
                 <p>
                   <span className="font-bold">Customer: </span>
@@ -107,7 +107,10 @@ export default function GetOrders() {
             </div>
           ))
         ) : (
-          <div className={`flex flex-col items-center justify-center py-2 ${isLoading? "hidden":""}`}>
+          <div
+            className={`flex flex-col items-center justify-center py-2 ${
+              isLoading ? "hidden" : ""
+            }`}>
             <p className="text-primary font-bold py-2 flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
