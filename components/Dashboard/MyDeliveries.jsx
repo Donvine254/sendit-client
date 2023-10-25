@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { IoPricetagSharp } from "react-icons/io5";
 import Link from "next/link";
 
-export default function MyOrders({ currentUser }) {
+export default function MyDeliveries({ currentUser }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [active, setActive] = useState("all");
@@ -29,7 +29,7 @@ export default function MyOrders({ currentUser }) {
     (async () => {
       if (currentUser) {
         const response = await fetch(
-          `https://sendit.up.railway.app/customer/${currentUser.id}/orders`
+          `https://sendit.up.railway.app/rider/${currentUser.id}/orders`
         );
         if (response.ok) {
           const data = await response.json();
@@ -56,13 +56,6 @@ export default function MyOrders({ currentUser }) {
                 }`}
                 onClick={() => handleButtonClick("all")}>
                 All
-              </button>
-              <button
-                className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "pending" ? "!btn-primary" : ""
-                }`}
-                onClick={() => handleButtonClick("pending")}>
-                Pending
               </button>
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
@@ -94,17 +87,10 @@ export default function MyOrders({ currentUser }) {
                   key={order.id}>
                   <div className="font-semibold md:flex md:items-center md:gap-10">
                     <span>Order ID: 000{order?.id}</span>
-                    <p className="hidden md:block">
-                      {" "}
-                      {order?.parcel.created_at_date}
-                    </p>
+                    <p className="hidden md:block"> {order?.created_at_date}</p>
                   </div>
                   <ul className="steps steps-vertical">
-                    <li
-                      className={`step ${
-                        order.status === "pending" ? "" : "step-primary"
-                      }`}
-                      data-content={order.status === "pending" ? "✕" : "✓"}>
+                    <li className="step step-primary " data-content="✓">
                       {order?.parcel?.pickup_address}
                     </li>
                     <li
@@ -118,6 +104,18 @@ export default function MyOrders({ currentUser }) {
                   <div className="text-base font-light leading-loose">
                     <span className="font-bold">Description: </span>
                     {order?.parcel?.description}
+                  </div>
+                  <div className="flex gap-2 xsm:flex-col">
+                    <p>
+                      <span className="font-bold">Customer: </span>
+                      {order.customer?.name}
+                    </p>
+                    <p className="font-bold">
+                      Contact:{" "}
+                      <span className=" font-light">
+                        {order.customer?.phone_number}{" "}
+                      </span>
+                    </p>
                   </div>
                   <div className="flex justify-between gap-5 items-center">
                     <div className="btn btn-outline btn-disabled flex items-center gap-1">
@@ -140,11 +138,7 @@ export default function MyOrders({ currentUser }) {
                   {/* styling for a banner */}
                   <div className="absolute right-0 md:right-[-10px] top-[-25px] md:top-[-10px] h-24 w-20 z-5">
                     <div
-                      className={`absolute transform rotate-45 ${
-                        order.status === "pending"
-                          ? "bg-primary"
-                          : "!bg-green-600"
-                      } ${
+                      className={`absolute transform rotate-45 bg-green-600 ${
                         order.status === "delivered" ? "!bg-[#FFC804]" : ""
                       } text-center text-white text-[10px] md:text-xl font-semibold py-1 right-[-34px] top-[32px] capitalize w-[150px] md:w-[200px]`}>
                       {order?.status}
@@ -168,10 +162,14 @@ export default function MyOrders({ currentUser }) {
                     />
                   </svg>
 
-                  <span>You have no orders yet, let&apos;s fix that!</span>
+                  <span>
+                    You have no scheduled deliveries, let&apos;s fix that!
+                  </span>
                 </p>
-                <Link href="/deliveries" className="btn btn-primary">
-                  Create New Order
+                <Link
+                  href="/dashboard?active=Get%Orders"
+                  className="btn btn-primary">
+                  Get Orders
                 </Link>
               </div>
             )}
