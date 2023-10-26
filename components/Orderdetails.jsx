@@ -7,6 +7,7 @@ import { IoPricetagSharp } from "react-icons/io5";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { FaLocationArrow } from "react-icons/fa6";
+import { sendEmail } from "@/lib/mailer";
 
 export default function OrderDetails({ order, role, handleClick }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,6 +23,17 @@ export default function OrderDetails({ order, role, handleClick }) {
     e.preventDefault();
   }
 
+  const handleEditChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    console.log(name, value);
+
+    setParcelData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleUpdate = (e) => {
     e.preventDefault();
     fetch(`https://sendit.up.railway.app/parcels/${parcelData.id}`, {
@@ -35,8 +47,9 @@ export default function OrderDetails({ order, role, handleClick }) {
       .then(() => {
         const emailData = {
           subject: "Parcel Updated",
-          message: `Hello there, this is just to let you know that your parcel details have been updated.${JSON.stringify(parcelData)}`,
-          email: selectedOrder.sender.email,
+          message: `Hello there, this is just to let you know that your parcel details have been updated.${JSON.stringify(
+            parcelData
+          )}`,
         };
         sendEmail(emailData);
         window.location.reload(false);
@@ -177,15 +190,17 @@ export default function OrderDetails({ order, role, handleClick }) {
         <div className="flex items-center justify-center gap-5 my-2 bg-base-200 border py-4">
           <button
             className="btn btn-neutral"
-            onClick={() => {setParcelData(order.parcel), setIsEditing(true)}}
+            onClick={() => {
+              setParcelData(order.parcel), setIsEditing(true);
+            }}
           >
             Edit
           </button>
-          
+
           <button className="btn btn-warning">Cancel</button>
         </div>
       )}
-      {(isEditing && parcelData) && (
+      {isEditing && parcelData && (
         <dialog id="order_modal" className="modal modal-open mx-auto">
           <div className="modal-box max-w-5xl w-full">
             <button
@@ -212,7 +227,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled
                   value={parcelData.description}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
 
@@ -232,7 +247,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled={isEditing ? false : true}
                   value={parcelData.weight}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
               <div className="mb-6">
@@ -251,7 +266,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled
                   value={parcelData.pickup_address}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
               <div className="mb-6">
@@ -270,7 +285,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled={isEditing ? false : true}
                   value={parcelData.pickup_notes}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
               <div className="mb-6">
@@ -289,7 +304,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled
                   value={parcelData.delivery_address}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
               <div className="mb-6">
@@ -308,7 +323,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled={isEditing ? false : true}
                   value={parcelData.receiver_name}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
               <div className="mb-6">
@@ -327,7 +342,7 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled={isEditing ? false : true}
                   value={parcelData.receiver_contact}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
               <div className="mb-6">
@@ -346,14 +361,14 @@ export default function OrderDetails({ order, role, handleClick }) {
                   className="input input-bordered input-secondary w-full max-w-xs0"
                   disabled
                   value={parcelData.contact_person}
-                  onChange={handleChange}
+                  onChange={handleEditChange}
                 />
               </div>
             </form>
             {order.status !== "delivered" && (
               <div className="flex flex-row">
                 <button
-                  onClick={(e)=>handleUpdate(e)}
+                  onClick={(e) => handleUpdate(e)}
                   className="bg-green-500 hover:bg-green-400"
                 >
                   Save
