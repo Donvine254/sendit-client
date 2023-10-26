@@ -8,7 +8,7 @@ export default function Page() {
     Swal.fire({
       icon: "info",
       title: "Submit Your Resume",
-      html: "Please send your resume to <a href='mailto:senditcourriera@gmail.com' class='text-blue-500'>senditcourriera@gmail.com</a> to express your interest in joining our team.",
+      html: "Please send your resume to <a href='mailto:senditcourriera@gmail.com' class='text-blue-500'>senditcourrier@gmail.com</a> to express your interest in joining our team.",
       showCloseButton: true,
       confirmButtonColor: "#0056F1",
     });
