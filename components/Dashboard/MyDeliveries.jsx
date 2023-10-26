@@ -7,17 +7,17 @@ import Link from "next/link";
 export default function MyDeliveries({ currentUser, setActive }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [active, setActive] = useState("all");
+  const [activeTab, setActiveTab] = useState("all");
 
   const handleButtonClick = (status) => {
-    setActive(status);
+    setActiveTab(status);
   };
   //function to filter orders
   let filteredOrders = orders;
 
   if (Array.isArray(orders) && orders.length > 0) {
     filteredOrders = orders.filter((order) => {
-      if (active === "all") {
+      if (activeTab === "all") {
         return true;
       } else {
         return order.status.includes(active);
@@ -52,21 +52,21 @@ export default function MyDeliveries({ currentUser, setActive }) {
             <div className="flex items-center xsm:gap-1 gap-2">
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "all" ? "!btn-primary" : ""
+                  activeTab === "all" ? "!btn-primary" : ""
                 }`}
                 onClick={() => handleButtonClick("all")}>
                 All
               </button>
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "on-transit" ? "!btn-primary" : ""
+                  activeTab === "on-transit" ? "!btn-primary" : ""
                 }`}
                 onClick={() => handleButtonClick("on-transit")}>
                 On-Transit
               </button>
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "delivered" ? "!btn-primary" : ""
+                  activeTab === "delivered" ? "!btn-primary" : ""
                 }`}
                 onClick={() => handleButtonClick("delivered")}>
                 Delivered

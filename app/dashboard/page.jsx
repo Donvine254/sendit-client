@@ -7,7 +7,7 @@ import {
   Userdashboard,
   Settings,
   Riderdashboard,
-  Admindashbaord,
+  Admindashboard,
 } from "@/components/Dashboard";
 import { useRouter } from "next/navigation";
 
