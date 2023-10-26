@@ -46,7 +46,7 @@ export default function Dashboard() {
             <Userdashboard currentUser={currentUser} active={active} />
           )}
           {currentUser.role === "rider" && (
-            <Riderdashboard currentUser={currentUser} active={active} />
+            <Riderdashboard currentUser={currentUser} active={active} setActive={setActive} />
           )}
         </>
       ) : (

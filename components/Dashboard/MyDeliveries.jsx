@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { IoPricetagSharp } from "react-icons/io5";
 import Link from "next/link";
 
-export default function MyDeliveries({ currentUser }) {
+export default function MyDeliveries({ currentUser, setActive }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [active, setActive] = useState("all");
@@ -166,11 +166,11 @@ export default function MyDeliveries({ currentUser }) {
                     You have no scheduled deliveries, let&apos;s fix that!
                   </span>
                 </p>
-                <Link
-                  href="/dashboard?active=Get%Orders"
+                <button
+                  onClick={() => setActive("Get Orders")}
                   className="btn btn-primary">
                   Get Orders
-                </Link>
+                </button>
               </div>
             )}
           </div>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Hero, HomeComponent } from "@/components";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Link from "next/link";
