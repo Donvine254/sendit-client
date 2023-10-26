@@ -71,6 +71,7 @@ export default function Footer() {
             Careers{" "}
             <span className="indicator-item badge badge-primary">hiring!</span>
           </Link>
+          <Link href="/riders" className="link link-hover">Drive with Sendit</Link>
           <Link href="/contact" className="link link-hover">
             Help Center
           </Link>
