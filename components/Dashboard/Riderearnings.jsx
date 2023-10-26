@@ -16,7 +16,7 @@ export default function RiderEarnings({ currentUser }) {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className="w-full lg:mt-5 lg:w-2/3 lg:mx-auto p-2">
