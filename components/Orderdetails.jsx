@@ -364,19 +364,23 @@ export default function OrderDetails({
         </dialog>
       )}
       {role === "rider" && order?.status === "pending" && (
-        <button
-          className="btn btn-primary"
-          onClick={() => editOrder(order, currentUser, assign)}>
-          Deliver Order
-        </button>
+        <div className="flex items-center justify-center">
+          <button
+            className="btn btn-primary"
+            onClick={() => editOrder(order, currentUser, "assign")}>
+            Deliver Order
+          </button>
+        </div>
       )}
 
       {role === "rider" && order?.status === "on-transit" && (
-        <button
-          className="btn btn-primary"
-          onClick={() => editOrder(order, currentUser, delivery)}>
-          Mark Delivered
-        </button>
+        <div className="flex items-center justify-center">
+          <button
+            className="btn btn-primary"
+            onClick={() => editOrder(order, currentUser, delivery)}>
+            Mark Delivered
+          </button>
+        </div>
       )}
       <div className="divider mt-7 mb-5"></div>
       <div className="flex items-center justify-center">
