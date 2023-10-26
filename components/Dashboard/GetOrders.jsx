@@ -29,7 +29,7 @@ export default function GetOrders({ currentUser }) {
         role="rider"
         handleClick={() => setSelectedOrder(null)}
         currentUser={currentUser}
-        route="get-order"
+        
       />
     );
   }

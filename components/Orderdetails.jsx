@@ -14,7 +14,6 @@ export default function OrderDetails({
   role,
   handleClick,
   currentUser,
-  route,
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -358,12 +357,21 @@ export default function OrderDetails({
         </dialog>
       )}
       {role === "rider" &&
-        route ===
-          "get-order"(
+        order.status ===
+          "pending"(
             <button
               className="btn btn-primary"
-              onClick={() => editOrder(order, currentUser)}>
+              onClick={() => editOrder(order, currentUser, assign)}>
               Deliver Order
+            </button>
+          )}
+      {role === "rider" &&
+        order.status ===
+          "on-transit"(
+            <button
+              className="btn btn-primary"
+              onClick={() => editOrder(order, currentUser, delivery)}>
+              Mark Delivered
             </button>
           )}
       <div className="divider mt-7 mb-5"></div>
