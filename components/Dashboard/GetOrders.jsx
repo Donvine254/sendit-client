@@ -26,7 +26,7 @@ export default function GetOrders({ currentUser }) {
     return (
       <Orderdetails
         order={selectedOrder}
-        role="user"
+        role="rider"
         handleClick={() => setSelectedOrder(null)}
         currentUser={currentUser}
         route="get-order"

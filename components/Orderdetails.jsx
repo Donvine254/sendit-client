@@ -8,13 +8,13 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { FaLocationArrow } from "react-icons/fa6";
 import toast from "react-hot-toast";
-
+import { editOrder } from "@/lib";
 export default function OrderDetails({
   order,
   role,
   handleClick,
   currentUser,
-  route
+  route,
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -147,7 +147,6 @@ export default function OrderDetails({
             disabled
             name="receiver contact"
           />
-          {order?.parcel?.receiver_contact}
         </p>
         <div className="flex items-center gap-4">
           <label htmlFor="delivery_notes" className="block font-bold ">
@@ -358,9 +357,15 @@ export default function OrderDetails({
           </div>
         </dialog>
       )}
-      {role === "rider" && (
-        <button className="btn btn-primary">Deliver Order</button>
-      )}
+      {role === "rider" &&
+        route ===
+          "get-order"(
+            <button
+              className="btn btn-primary"
+              onClick={() => editOrder(order, currentUser)}>
+              Deliver Order
+            </button>
+          )}
       <div className="divider mt-7 mb-5"></div>
       <div className="flex items-center justify-center">
         <button className="btn btn-ghost" onClick={handleClick}>
