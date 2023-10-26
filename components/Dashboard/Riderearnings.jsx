@@ -16,7 +16,7 @@ export default function RiderEarnings({ currentUser }) {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className="w-full lg:mt-5 lg:w-2/3 lg:mx-auto p-2">
@@ -43,7 +43,7 @@ export default function RiderEarnings({ currentUser }) {
               <div className="stat my-3 mr-2.5 ">
                 <div className="font-bold text-xl ">Delivery Count</div>
                 <div className="stat-value">
-                  {revenue?.delivered_orders ?? 0}completed
+                  {revenue?.delivered_orders ?? 0} completed
                 </div>
                 <div className="text-[12px]">↗︎ 8% from last month</div>
               </div>

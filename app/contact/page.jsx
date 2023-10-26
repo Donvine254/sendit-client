@@ -1,9 +1,16 @@
 "use client";
-import React from "react"
+import React, { useState } from "react";
 import "react-phone-number-input/style.css";
+import "./contact.css";
 import Swal from "sweetalert2";
 import Image from "next/image";
+import Chatbot from "react-chatbot-kit";
+import "react-chatbot-kit/build/main.css";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { config, ActionProvider, MessageParser } from "@/components/bot";
+
 export default function Contact() {
+  const [openChat, setOpenChat] = useState(false);
   const environment = process.env.NODE_ENV;
   const redirectUrl =
     environment === "development"
@@ -21,7 +28,23 @@ export default function Contact() {
     });
   }
   return (
-    <div className="flex xsm:mx-2 items-center min-h-screen font-serif">
+    <div className="flex xsm:mx-2 items-center min-h-screen font-serif relative">
+      <p className="fixed bottom-5 right-5 z-50 w-[60px] h-[60px] rounded-full bg-green-500 flex items-center justify-center shadow-md whatsapp-btn">
+        {" "}
+        <IoLogoWhatsapp
+          className="i !text-white fill-white text-[32px] icony cursor-pointer"
+          onClick={() => {
+            setOpenChat(!openChat);
+          }}
+        />
+      </p>
+      {openChat && (
+        <Chatbot
+          config={config}
+          messageParser={MessageParser}
+          actionProvider={ActionProvider}
+        />
+      )}
       <div className="container mx-auto">
         <h1 className="my-3 xsm:my-0 text-xl md:text-2xl font-semibold  py-2 text-center">
           Contact Us
@@ -39,7 +62,11 @@ export default function Contact() {
             📧 senditcourrier@gmail.com
           </a>
           <p className="flex items-center md:text-xl font-bold my-1">
-            <Image src="./whatsapp.svg" height={30} width={30} alt="whatsapp-icon"></Image>
+            <Image
+              src="./whatsapp.svg"
+              height={30}
+              width={30}
+              alt="whatsapp-icon"></Image>
             +254702018080
           </p>
         </div>
@@ -88,7 +115,8 @@ export default function Contact() {
                 <label
                   htmlFor="email"
                   className="block mb-2 text-sm text-gray-600">
-                  Email Address <span className="text-red-600 font-bold">*</span>
+                  Email Address{" "}
+                  <span className="text-red-600 font-bold">*</span>
                 </label>
                 <input
                   type="email"
@@ -101,7 +129,7 @@ export default function Contact() {
               </div>
               <div className="mb-6">
                 <label htmlFor="phone" className="text-sm text-gray-600 ">
-                  Phone Number <span >(optional)</span>
+                  Phone Number <span>(optional)</span>
                 </label>
 
                 <input
