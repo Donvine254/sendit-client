@@ -22,6 +22,11 @@ export default function OrderDetails({
   function handleSubmit(e) {
     e.preventDefault();
   }
+  const emailData = {
+    subject: "Your Parcel Details Have Changed!",
+    message:
+      "Hello there, this is just to let you know that your parcel details have been updated. Kindly login to see the changes.",
+  };
 
   const handleEditChange = (e) => {
     e.preventDefault();
@@ -46,11 +51,6 @@ export default function OrderDetails({
     })
       .then(() => {
         toast.success("order updated successfully");
-        const emailData = {
-          subject: "Your Parcel Details Have Changed!",
-          message:
-            "Hello there, this is just to let you know that your parcel details have been updated. Kindly login to see the changes.",
-        };
         sendEmail(emailData);
         window.location.reload(false);
       })
@@ -350,15 +350,16 @@ export default function OrderDetails({
               <div className="flex items-center justify-center py-2 gap-5 ">
                 <button
                   onClick={(e) => {
-                    handleUpdate(e)
-                    closeModal()}}
+                    handleUpdate(e);
+                    
+                  }}
                   className="btn bg-green-500 btn-sm text-white hover:btn-primary">
                   Save
                 </button>
                 <button
                   onClick={() => {
-                    setIsEditing(false)
-                    closeModal()
+                    setIsEditing(false);
+                    
                   }}
                   className="btn btn-error btn-sm text-white">
                   Cancel
