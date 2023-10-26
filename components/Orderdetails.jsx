@@ -377,7 +377,7 @@ export default function OrderDetails({
         <div className="flex items-center justify-center">
           <button
             className="btn btn-primary"
-            onClick={() => editOrder(order, currentUser, delivery)}>
+            onClick={() => editOrder(order, currentUser, "delivery")}>
             Mark Delivered
           </button>
         </div>
