@@ -349,12 +349,17 @@ export default function OrderDetails({
             {order.status !== "delivered" && (
               <div className="flex items-center justify-center py-2 gap-5 ">
                 <button
-                  onClick={(e) => handleUpdate(e)}
+                  onClick={(e) => {
+                    handleUpdate(e)
+                    closeModal()}}
                   className="btn bg-green-500 btn-sm text-white hover:btn-primary">
                   Save
                 </button>
                 <button
-                  onClick={() => setIsEditing(false)}
+                  onClick={() => {
+                    setIsEditing(false)
+                    closeModal()
+                  }}
                   className="btn btn-error btn-sm text-white">
                   Cancel
                 </button>
