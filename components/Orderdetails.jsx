@@ -35,9 +35,7 @@ export default function OrderDetails({ order, role, handleClick }) {
       .then(() => {
         const emailData = {
           subject: "Parcel Updated",
-          message: `Hello there, this is just to let you know that your parcel details have been updated.${JSON.stringify(
-            parcelData
-          )}`,
+          message: `Hello there, this is just to let you know that your parcel details have been updated.${JSON.stringify(parcelData)}`,
           email: selectedOrder.sender.email,
         };
         sendEmail(emailData);
@@ -179,17 +177,15 @@ export default function OrderDetails({ order, role, handleClick }) {
         <div className="flex items-center justify-center gap-5 my-2 bg-base-200 border py-4">
           <button
             className="btn btn-neutral"
-            onClick={() => {
-              setParcelData(order.parcel), setIsEditing(true);
-            }}
+            onClick={() => {setParcelData(order.parcel), setIsEditing(true)}}
           >
             Edit
           </button>
-
+          
           <button className="btn btn-warning">Cancel</button>
         </div>
       )}
-      {isEditing && parcelData && (
+      {(isEditing && parcelData) && (
         <dialog id="order_modal" className="modal modal-open mx-auto">
           <div className="modal-box max-w-5xl w-full">
             <button
@@ -357,7 +353,7 @@ export default function OrderDetails({ order, role, handleClick }) {
             {order.status !== "delivered" && (
               <div className="flex flex-row">
                 <button
-                  onClick={(e) => handleUpdate(e)}
+                  onClick={(e)=>handleUpdate(e)}
                   className="bg-green-500 hover:bg-green-400"
                 >
                   Save
