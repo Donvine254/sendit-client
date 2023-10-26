@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { IoPricetagSharp } from "react-icons/io5";
 import Link from "next/link";
+import Orderdetails from "../Orderdetails";
 
 export default function MyOrders({ currentUser }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [active, setActive] = useState("all");
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
   const handleButtonClick = (status) => {
     setActive(status);
@@ -39,6 +41,15 @@ export default function MyOrders({ currentUser }) {
       }
     })();
   }, [currentUser]);
+  if (selectedOrder) {
+    return (
+      <Orderdetails
+        order={selectedOrder}
+        role="user"
+        handleClick={() => setSelectedOrder(null)}
+      />
+    );
+  }
 
   return (
     <div className="w-full lg:mt-5 p-2">
@@ -133,7 +144,9 @@ export default function MyOrders({ currentUser }) {
                         <></>
                       )}
                     </div>
-                    <button className="btn btn-outline hover:btn-primary flex">
+                    <button
+                      className="btn btn-outline hover:btn-primary flex"
+                      onClick={() => setSelectedOrder(order)}>
                       View Details
                     </button>
                   </div>
