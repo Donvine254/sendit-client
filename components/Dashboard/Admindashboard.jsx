@@ -1,7 +1,15 @@
-import React from 'react'
+import Orders from "./Orders";
+import Analytics from "./Analytics";
+import Customers from "./Customers";
+import Riders from "./Riders";
 
-export default function Admindashbaord() {
+export default function Admindashboard({ currentUser, active }) {
   return (
-    <div>Admindashbaord</div>
-  )
+    <>
+      {active == "Orders" && <Orders currentUser={currentUser} />}
+      {active == "Analytics" && <Analytics currentUser={currentUser} />}
+      {active == "Customers" && <Customers currentUser={currentUser} />}
+      {active == "Riders" && <Riders currentUser={currentUser} />}
+    </>
+  );
 }
