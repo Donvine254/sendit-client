@@ -1,0 +1,37 @@
+.react-chatbot-kit-chat-container {
+  @apply xsm:!w-full !z-50 md:!min-w-[350px] !shadow-lg  !absolute md:!right-5 !m-2 md:p-0  !bottom-8 !font-serif;
+}
+.react-chatbot-kit-chat-header {
+  @apply !font-serif;
+}
+.whatsapp-btn {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+.whatsapp-btn icony {
+  animation: beat 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
