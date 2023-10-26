@@ -2,17 +2,24 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "@/context/context";
 import Loading from "../../components/loading";
-import { Toolbar, Userdashboard, Settings, Riderdashboard, Admindashbaord } from "@/components/Dashboard";
-import { redirect } from "next/navigation";
+import {
+  Toolbar,
+  Userdashboard,
+  Settings,
+  Riderdashboard,
+  Admindashbaord,
+} from "@/components/Dashboard";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const { currentUser } = useAppContext();
   const [active, setActive] = useState("Settings");
   //redirect to the active pages
+  const router = useRouter();
   if (active === "Help Center") {
-    redirect("/contact");
+    router.push("/contact");
   } else if (active === "Send Parcel") {
-    redirect("/deliveries");
+    router.push("/deliveries");
   }
   useEffect(() => {
     if (currentUser?.role === "user") {
