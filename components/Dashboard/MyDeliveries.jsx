@@ -4,20 +4,20 @@ import React, { useEffect, useState } from "react";
 import { IoPricetagSharp } from "react-icons/io5";
 import Link from "next/link";
 
-export default function MyDeliveries({ currentUser }) {
+export default function MyDeliveries({ currentUser, setActive }) {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [active, setActive] = useState("all");
+  const [activeTab, setActiveTab] = useState("all");
 
   const handleButtonClick = (status) => {
-    setActive(status);
+    setActiveTab(status);
   };
   //function to filter orders
   let filteredOrders = orders;
 
   if (Array.isArray(orders) && orders.length > 0) {
     filteredOrders = orders.filter((order) => {
-      if (active === "all") {
+      if (activeTab === "all") {
         return true;
       } else {
         return order.status.includes(active);
@@ -52,21 +52,21 @@ export default function MyDeliveries({ currentUser }) {
             <div className="flex items-center xsm:gap-1 gap-2">
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "all" ? "!btn-primary" : ""
+                  activeTab === "all" ? "!btn-primary" : ""
                 }`}
                 onClick={() => handleButtonClick("all")}>
                 All
               </button>
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "on-transit" ? "!btn-primary" : ""
+                  activeTab === "on-transit" ? "!btn-primary" : ""
                 }`}
                 onClick={() => handleButtonClick("on-transit")}>
                 On-Transit
               </button>
               <button
                 className={`btn bg-gray-200 btn-sm normal-case xsm:text-[10px] ${
-                  active === "delivered" ? "!btn-primary" : ""
+                  activeTab === "delivered" ? "!btn-primary" : ""
                 }`}
                 onClick={() => handleButtonClick("delivered")}>
                 Delivered
@@ -166,11 +166,11 @@ export default function MyDeliveries({ currentUser }) {
                     You have no scheduled deliveries, let&apos;s fix that!
                   </span>
                 </p>
-                <Link
-                  href="/dashboard?active=Get%Orders"
+                <button
+                  onClick={() => setActive("Get Orders")}
                   className="btn btn-primary">
                   Get Orders
-                </Link>
+                </button>
               </div>
             )}
           </div>
