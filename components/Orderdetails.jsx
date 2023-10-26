@@ -14,6 +14,7 @@ export default function OrderDetails({
   role,
   handleClick,
   currentUser,
+  route
 }) {
   const [isEditing, setIsEditing] = useState(false);
 

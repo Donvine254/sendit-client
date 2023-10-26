@@ -46,6 +46,7 @@ export default function MyDeliveries({ currentUser, setActive }) {
         order={selectedOrder}
         role="user"
         handleClick={() => setSelectedOrder(null)}
+        currentUser={currentUser}
       />
     );
   }
