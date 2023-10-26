@@ -7,6 +7,7 @@ import { IoPricetagSharp } from "react-icons/io5";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { FaLocationArrow } from "react-icons/fa6";
+import { sendEmail } from "@/lib/mailer";
 import toast from "react-hot-toast";
 import { editOrder } from "@/lib";
 export default function OrderDetails({
@@ -45,6 +46,12 @@ export default function OrderDetails({
     })
       .then(() => {
         toast.success("order updated successfully");
+        const emailData = {
+          subject: "Your Parcel Details Have Changed!",
+          message:
+            "Hello there, this is just to let you know that your parcel details have been updated. Kindly login to see the changes.",
+        };
+        sendEmail(emailData);
         window.location.reload(false);
       })
       .catch((error) => {
@@ -356,24 +363,21 @@ export default function OrderDetails({
           </div>
         </dialog>
       )}
-      {role === "rider" &&
-        order.status ===
-          "pending"(
-            <button
-              className="btn btn-primary"
-              onClick={() => editOrder(order, currentUser, assign)}>
-              Deliver Order
-            </button>
-          )}
-      {role === "rider" &&
-        order.status ===
-          "on-transit"(
-            <button
-              className="btn btn-primary"
-              onClick={() => editOrder(order, currentUser, delivery)}>
-              Mark Delivered
-            </button>
-          )}
+      {role === "rider" && order?.status === "pending" && (
+        <button
+          className="btn btn-primary"
+          onClick={() => editOrder(order, currentUser, assign)}>
+          Deliver Order
+        </button>
+      )}
+
+      {role === "rider" && order?.status === "on-transit" && (
+        <button
+          className="btn btn-primary"
+          onClick={() => editOrder(order, currentUser, delivery)}>
+          Mark Delivered
+        </button>
+      )}
       <div className="divider mt-7 mb-5"></div>
       <div className="flex items-center justify-center">
         <button className="btn btn-ghost" onClick={handleClick}>
