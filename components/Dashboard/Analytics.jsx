@@ -112,7 +112,7 @@ export default function Analytics() {
       new Chart(ctx, {
         type: "pie",
         data: {
-          labels: ["On Transit", "Pending", "Delivered"],
+          labels: ["Pending", "On-Transit", "Delivered"],
           datasets: [
             {
               data: [
@@ -120,7 +120,7 @@ export default function Analytics() {
                 pendingOrderCount,
                 deliveredOrderCount,
               ],
-              backgroundColor: ["#e74c3c", "#f1c40f","#3498db"],
+              backgroundColor: ["#0056f1", "#f1c40f", "#33CF64"],
             },
           ],
         },
@@ -150,59 +150,52 @@ export default function Analytics() {
   ]);
 
   return (
-    <div className="bg-gray-100 p-4">
-      <div className="card w-full max-w-screen-xl md:w-auto sm:w-2/3 mx-auto  bg-base-100 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title">Analytics</h2>
-          <div className="stats flex-1 flex-row shadow">
-            <div className="stat sm:w-auto place-items-center">
-              <div className="stat-title">Daily Revenue</div>
-              <div className="stat-value text-xl">
-                Today&apos;s Revenue: <br /> KES{dailyRevenue}
-              </div>
-            </div>
+    <div className=" p-4">
+      <div className="grid grid-cols-2 xsm:grid-cols-1 md:grid-cols-4 gap-2 shadow-lg py-2 my-2">
+        <div className="stat sm:w-auto place-items-center bg-slate-200">
+          <div className="stat-title">Daily Revenue</div>
+          <div className="stat-value text-xl">
+            Today&apos;s Revenue: <br /> KES {dailyRevenue}
+          </div>
+        </div>
 
-            <div className="stat sm:w-auto place-items-center">
-              <div className="stat-title">Weekly Revenue</div>
-              <div className="stat-value text-xl">
-                This week&apos;s Revenue: <br /> KES{weeklyRevenue}
-              </div>
-            </div>
+        <div className="stat sm:w-auto place-items-center bg-blue-200">
+          <div className="stat-title">Weekly Revenue</div>
+          <div className="stat-value text-xl">
+            This week&apos;s Revenue: <br /> KES {weeklyRevenue}
+          </div>
+        </div>
 
-            <div className="stat sm:w-auto place-items-center">
-              <div className="stat-title">Monthly Revenue</div>
-              <div className="stat-value text-xl">
-                This month&apos;s Revenue: <br /> KES{monthlyRevenue}
-              </div>
-            </div>
-            <div className="stat sm:w-auto place-items-center">
-              <div className="stat-title text-center">Total Revenue</div>
-              <div className="stat-value text-xl">
-                Total Revenue: <br /> KES{totalRevenue}
-              </div>
-            </div>
+        <div className="stat sm:w-auto place-items-center bg-yellow-200 ">
+          <div className="stat-title">Monthly Revenue</div>
+          <div className="stat-value text-xl">
+            This month&apos;s Revenue: <br /> KES {monthlyRevenue}
           </div>
-          <>
-          <h2 className="text-2xl font-semibold text-center">Orders Report</h2>
-          <div className="text-center mt-2">
-            <canvas id="orderChart" width="200" height="200"></canvas>
+        </div>
+        <div className="stat sm:w-auto place-items-center bg-green-100">
+          <div className="stat-title text-center">Total Revenue</div>
+          <div className="stat-value text-xl">
+            Total Revenue: <br /> KES {totalRevenue}
           </div>
-          <div className="stat sm:w-auto place-items-center">
-            <div className="stat-title">Total Customers</div>
-            <div className="stat-value text-xl">
-              Total Customers: {totalCustomers}
-            </div>
-          </div>
-
-          <div className="stat sm:w-auto place-items-center">
-            <div className="stat-title">Total Riders</div>
-            <div className="stat-value text-xl">
-              Total Riders: {totalRiders}
-            </div>
-          </div>
-        </>
         </div>
       </div>
+      <>
+        <h2 className="text-2xl font-semibold text-center">Orders Report</h2>
+        <div className="text-center mt-2">
+          <canvas id="orderChart" width="200" height="200"></canvas>
+        </div>
+        <div className="stat sm:w-auto place-items-center">
+          <div className="stat-title">Total Customers</div>
+          <div className="stat-value text-xl">
+            Total Customers: {totalCustomers}
+          </div>
+        </div>
+
+        <div className="stat sm:w-auto place-items-center">
+          <div className="stat-title">Total Riders</div>
+          <div className="stat-value text-xl">Total Riders: {totalRiders}</div>
+        </div>
+      </>
     </div>
   );
 }

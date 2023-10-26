@@ -156,7 +156,7 @@ export default function Orders() {
                       <td className="border px-2 sm:px-4 py-2">
                         {order.duration}
                       </td>
-                      <td className="border px-2 sm:px-4 py-2">
+                      <td className="border px-2 sm:px-4 py-2 underline decoration-blue-600 underline-offset-2 hover:text-primary">
                         {order.parcel.description}
                       </td>
                       <td className="border px-2 sm:px-4 py-2">
@@ -171,13 +171,13 @@ export default function Orders() {
                       <td
                         className={`${
                           order.status == "delivered"
-                            ? "bg-green-300 text-green-900"
+                            ? "bg-green-500 text-green-900"
                             : order.status == "on-transit"
-                            ? "bg-blue-300 text-blue-900"
+                            ? "bg-blue-600 text-blue-900"
                             : order.status == "pending"
-                            ? "bg-orange-300 text-orange-900"
+                            ? "bg-orange-500 text-orange-900"
                             : ""
-                        } border px-2 sm:px-4 py-2`}>
+                        } border px-2 sm:px-4 py-2 text-white capitalize`}>
                         {order.status}
                       </td>
                       <td className="border px-2 sm:px-4 py-2">

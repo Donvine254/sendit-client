@@ -52,7 +52,7 @@ export default function Riders() {
               <table class="shadow-lg h-60 w-full bg-white	 border-collapse rounded-md border-neutral-800 ">
                 <thead className="">
                   <tr>
-                    <th className="bg-blue-100 border text-left px-8 py-4">
+                    <th className="bg-blue-100 border text-left px-8 py-4 underline decoration-blue-600 underline-offset-2 hover:text-primary">
                       Name
                     </th>
                     <th className="bg-blue-100 border text-left px-8 py-4">
