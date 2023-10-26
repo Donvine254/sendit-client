@@ -27,7 +27,7 @@ const config = {
   customComponents: {
     botAvatar: (props) => (
       <Image
-        src="https://utfs.io/f/6f48eaf6-c038-4f0f-88c2-07eea00d9621-jhnwg5.jpg"
+        src="https://avatars.githubusercontent.com/u/126117678?s=60&v=4"
         height={48}
         width={48}
         alt="donvine"
