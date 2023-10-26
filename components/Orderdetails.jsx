@@ -29,7 +29,7 @@ export default function OrderDetails({ order, role, handleClick }) {
         </h1>
         <p>
           <span className="font-bold">Order ID: </span>
-          {order?.id}
+          000{order?.id}
         </p>
         <div className="flex items-center mb-2 gap-2">
           <span className="font-bold flex items-center gap-2">
@@ -147,9 +147,10 @@ export default function OrderDetails({ order, role, handleClick }) {
           </div>
         )}
       </div>
-      {role === "user" && (
+      {role === "user" && order.status === "pending" && (
         <div className="flex items-center justify-center gap-5 my-2 bg-base-200 border py-4">
           <button className="btn btn-neutral">Edit</button>
+          {/* edit, when clicked opens modal, allow the user to edit: WEIGHT, Receiver_name, receiver_contact, pickup_notes, delivery_notes */}
           <button className="btn btn-warning">Cancel</button>
         </div>
       )}
@@ -158,7 +159,9 @@ export default function OrderDetails({ order, role, handleClick }) {
       )}
       <div className="divider mt-7 mb-5"></div>
       <div className="flex items-center justify-center">
-        <button className="btn btn-ghost">Back</button>
+        <button className="btn btn-ghost" onClick={handleClick}>
+          Back
+        </button>
       </div>
     </form>
   );
