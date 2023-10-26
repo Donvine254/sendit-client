@@ -7,19 +7,50 @@ import { IoPricetagSharp } from "react-icons/io5";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { FaLocationArrow } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
-export default function OrderDetails({ order, role, handleClick }) {
+export default function OrderDetails({
+  order,
+  role,
+  handleClick,
+  currentUser,
+}) {
   const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({});
-  function handleChange(name, value) {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
+
+  const [parcelData, setParcelData] = useState(null);
   function handleSubmit(e) {
     e.preventDefault();
   }
+
+  const handleEditChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    console.log(name, value);
+
+    setParcelData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    fetch(`https://sendit.up.railway.app/parcels/${parcelData.id}`, {
+      method: "PATCH",
+      body: JSON.stringify(parcelData),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(() => {
+        toast.success("order updated successfully");
+        window.location.reload(false);
+      })
+      .catch((error) => {
+        toast.error("Error updating order: ", error);
+      });
+  };
 
   return (
     <form className="p-4" onSubmit={handleSubmit}>
@@ -36,12 +67,7 @@ export default function OrderDetails({ order, role, handleClick }) {
             <span className="text-xl mr-2">⚖️</span>
             Weight in Kgs:{" "}
           </span>
-          <input
-            value={order?.parcel?.weight}
-            disabled
-            name="weight"
-            onChange={handleChange}
-          />
+          <input value={order?.parcel?.weight} disabled name="weight" />
         </div>
         <div className="flex items-center mb-2 gap-2">
           <span className="font-bold flex items-center gap-2">
@@ -118,7 +144,6 @@ export default function OrderDetails({ order, role, handleClick }) {
           <input
             value={order?.parcel?.receiver_contact}
             disabled
-            onChange={handleChange}
             name="receiver contact"
           />
           {order?.parcel?.receiver_contact}
@@ -149,10 +174,188 @@ export default function OrderDetails({ order, role, handleClick }) {
       </div>
       {role === "user" && order.status === "pending" && (
         <div className="flex items-center justify-center gap-5 my-2 bg-base-200 border py-4">
-          <button className="btn btn-neutral">Edit</button>
-          {/* edit, when clicked opens modal, allow the user to edit: WEIGHT, Receiver_name, receiver_contact, pickup_notes, delivery_notes */}
+          <button
+            className="btn btn-neutral"
+            onClick={() => {
+              setParcelData(order.parcel), setIsEditing(true);
+            }}>
+            Edit
+          </button>
+
           <button className="btn btn-warning">Cancel</button>
         </div>
+      )}
+      {isEditing && parcelData && (
+        <dialog id="order_modal" className="modal modal-open mx-auto">
+          <div className="modal-box max-w-5xl w-full">
+            <button
+              onClick={() => setIsEditing(false)}
+              className="btn btn-sm btn-circle btn-ghost fixed  right-0 top-0">
+              ✕
+            </button>
+            <h3 className="font-bold text-lg my-8">Order Parcel Details</h3>
+            <form onSubmit={handleUpdate}>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Description"
+                  className="block mb-2 text-sm text-gray-600">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  name="description"
+                  id="description"
+                  placeholder="Enter parcel description"
+                  required
+                  className="input input-bordered input-secondary w-full "
+                  value={parcelData.description}
+                  onChange={handleEditChange}
+                />
+              </div>
+
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Weight"
+                  className="block mb-2 text-sm text-gray-600">
+                  Weight
+                </label>
+                <input
+                  type="text"
+                  name="weight"
+                  id="weight"
+                  placeholder="Enter parcel Weight"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled={isEditing ? false : true}
+                  value={parcelData.weight}
+                  onChange={handleEditChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Pickup Address"
+                  className="block mb-2 text-sm text-gray-600">
+                  Pickup Address
+                </label>
+                <input
+                  type="text"
+                  name="pickup_address"
+                  id="pickup_address"
+                  placeholder="Enter parcel pickup address"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled
+                  value={parcelData.pickup_address}
+                  onChange={handleEditChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Pickup Notes"
+                  className="block mb-2 text-sm text-gray-600">
+                  Pickup Notes
+                </label>
+                <input
+                  type="text"
+                  name="pickup_notes"
+                  id="pickup_notes"
+                  placeholder="Enter parcel pickup notes"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled={isEditing ? false : true}
+                  value={parcelData.pickup_notes}
+                  onChange={handleEditChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Delivery Address"
+                  className="block mb-2 text-sm text-gray-600">
+                  Delivery Address
+                </label>
+                <input
+                  type="text"
+                  name="delivery_address"
+                  id="delivery_address"
+                  placeholder="Enter parcel delivery address"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled
+                  value={parcelData.delivery_address}
+                  onChange={handleEditChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Recipient Name"
+                  className="block mb-2 text-sm text-gray-600">
+                  Recipient Name
+                </label>
+                <input
+                  type="text"
+                  name="receiver_name"
+                  id="receiver_name"
+                  placeholder="Enter parcel recipient name"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled={isEditing ? false : true}
+                  value={parcelData.receiver_name}
+                  onChange={handleEditChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Recipient Contact"
+                  className="block mb-2 text-sm text-gray-600">
+                  Recipient Contact
+                </label>
+                <input
+                  type="text"
+                  name="receiver_contact"
+                  id="receiver_contact"
+                  placeholder="Enter parcel Recipient Contact"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled={isEditing ? false : true}
+                  value={parcelData.receiver_contact}
+                  onChange={handleEditChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="Parcel Contact Person"
+                  className="block mb-2 text-sm text-gray-600">
+                  Contact Person
+                </label>
+                <input
+                  type="text"
+                  name="contact_person"
+                  id="contact_person"
+                  placeholder="Enter parcel Contact Person"
+                  required
+                  className="input input-bordered input-secondary w-full max-w-xs0"
+                  disabled
+                  value={parcelData.contact_person}
+                  onChange={handleEditChange}
+                />
+              </div>
+            </form>
+            {order.status !== "delivered" && (
+              <div className="flex items-center justify-center py-2 gap-5 ">
+                <button
+                  onClick={(e) => handleUpdate(e)}
+                  className="btn bg-green-500 btn-sm text-white hover:btn-primary">
+                  Save
+                </button>
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className="btn btn-error btn-sm text-white">
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
+        </dialog>
       )}
       {role === "rider" && (
         <button className="btn btn-primary">Deliver Order</button>
