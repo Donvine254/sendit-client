@@ -7,10 +7,10 @@ const Hero = () => {
   return (
     <div className="lg:grid lg:grid-cols-2 gap-5  w-full bg-base-100 mt-2 overflow-hidden">
       <div className="p-2 mx-5">
-        <h1 className="text-3xl md:text-5xl md:leading-loose lg:text-6xl font-extrabold xsm:leading-loose">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold">
           Deliver Anything, Anywhere, Anytime!
         </h1>
-        <p className="py-4 text-[27px] font-light lg:py-6 leading-loose">
+        <p className="py-4 text-[27px] font-light lg:py-6">
           Discover how sendit empowers small businesses, traders and individuals
           through reliable courier delivery services today.
         </p>
