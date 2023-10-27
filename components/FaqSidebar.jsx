@@ -13,7 +13,7 @@ export default function FaqSideBar() {
     <section className="md:grid grid-cols-4 md:gap-2 lg:gap-5">
       {/* Parent div for tab*/}
       <div id="tab" className="p-2 col-span-1">
-        <ul className="md:float-left w-full md:w-fit  md:h-full flex justify-between items-start md:block  md:min-w-[150px] lg:min-w-[250px] md:mr-2 pb-2 text-xl md:bg-base-200 md:mt-2">
+        <ul className="md:float-left w-full md:w-fit  md:h-full flex justify-between items-start md:!block  md:min-w-[150px] lg:min-w-[250px] md:mr-2 pb-2 text-xl md:bg-base-200 md:mt-2">
           <li className="border-b-2 border-dotted md:py-2 md:hover:btn-primary ">
             <p
               className={`md:w-32 text-start pl-3 ${

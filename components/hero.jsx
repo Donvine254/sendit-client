@@ -2,15 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import picture from "../public/hero-image.png";
+import picture from "../public/hero-bg.png";
 const Hero = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5  w-full bg-base-100 mt-2 overflow-hidden">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  w-full mt-2 overflow-hidden">
       <div className="p-2 mx-5">
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold">
+        <h1 className="text-3xl md:text-5xl md:leading-loose lg:text-6xl font-extrabold xsm:leading-loose">
           Deliver Anything, Anywhere, Anytime!
         </h1>
-        <p className="py-4 text-[27px] font-light lg:py-6 md:leading-loose">
+        <p className="py-4 text-[27px] font-light lg:py-6 leading-loose">
           Discover how sendit empowers small businesses, traders and individuals
           through reliable courier delivery services today.
         </p>
@@ -25,7 +25,7 @@ const Hero = () => {
           </Link>
         </div>
       </div>
-      <div className="items-center">
+      <div className="hidden lg:block">
         <Image src={picture} alt="hero-image" priority />
       </div>
     </div>
