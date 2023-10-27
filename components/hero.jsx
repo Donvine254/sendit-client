@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import picture from "../public/hero-image.png"
 const Hero = () => {
   return (
     <div className="flex flex-col lg:flex-row items-start justify-start w-full bg-base-100 mt-2 overflow-hidden">
@@ -24,13 +25,10 @@ const Hero = () => {
       </div>
       <div className="flex-1 items-center">
         <Image
-          src="https://res.cloudinary.com/dipkbpinx/image/upload/v1696637684/hero-image_bag5gu.png"
+          src={picture}
           alt="hero-image"
-          width={830}
-          height={670}
+          
           priority
-          as={'image'}
-          className="[800px]:mt-auto"
         />
       </div>
     </div>
