@@ -77,7 +77,7 @@ export default function HomeComponent() {
       {/* How delivery works */}
       <DeliveryProcess />
       {/* We are hiring section */}
-      <section className="w-full my-2">
+      <section className="w-full my-4">
         <div className="bg-primary hover:bg-transparent group  border rounded-lg grid auto-rows-fr md:grid-cols-2 mx-5">
           <div className="p-2 mx-5 flex flex-col items-center my-auto lg:gap-5 text-white h-fit group-hover:text-black">
             <div className="ribbon-container mb-2">
