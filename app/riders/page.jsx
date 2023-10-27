@@ -23,9 +23,10 @@ export default function Page() {
     });
   }
   return (
-    <div className="flex lg:flex-row xl:flex-row flex-col  justify-center items-center min-h-screen">
-      <div className="my-1 lg:my-5 p-5 pr-10 max-w-xl rounded-md">
-        <h1 className="text-3xl font-semibold text-center mt-8">
+    <div className="px-5 lg:grid lg:grid-cols-2 gap-10 min-h-screen">
+      {/* benefits card */}
+      <div className="my-1 lg:my-5 mt-5 lg:pl-10 max-w-xl rounded-md mx-auto">
+        <h1 className="text-3xl font-semibold text-center">
           Benefits of becoming a rider with our company
         </h1>
         <h2 className="text-2xl font-semibold mt-6">Flexible work schedule</h2>
@@ -58,7 +59,8 @@ export default function Page() {
           Access to advanced delivery tools and technology for efficiency.
         </p>
       </div>
-      <div>
+      {/* card for form */}
+      <div className="my-1 lg:my-5 mt-5 max-w-xl mx-auto">
         <div className="text-center">
           <h1 className="my-3 xsm:my-0 text-3xl font-semibold">
             Rider Details
