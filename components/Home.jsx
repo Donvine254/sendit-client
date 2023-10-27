@@ -74,53 +74,20 @@ export default function HomeComponent() {
           <FaLongArrowAltRight /> See More
         </Link>
       </div>
-      {/* callout card */}
-      <div className="flex flex-col md:flex-row items-center gap-10 bg-base-100 my-2 mx-5">
-        <div className="flex-1">
-          <div className="mockup-phone border-primary group">
-            <div className="camera"></div>
-            <div className="display">
-              <div className="">
-                {" "}
-                <Image
-                  src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697733102/bike_jso1cp.jpg"
-                  alt="callout-image"
-                  width={3000}
-                  height={2000}
-                  className="md:my-2 md:mx-1 grayscale group-hover:grayscale-0 transition ease-in-out"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="md:w-1/2 p-2 mx-2 self-center h-full">
-          <h1 className="text-2xl lg:text-3xl font-bold">
-            Deliver your parcel without ever leaving your home
-          </h1>
-          <div className="py-4 text-xl font-light lg:py-6 md:leading-loose">
-            <p>
-              Join over 1000 customers who trust sendit for timely, reliable and
-              efficient delivery services.
-            </p>
-            <p>Be assured by using sendit services today!</p>
-            <div className="flex items-center justify-center">
-              <Link href="/deliveries" className="btn btn-primary hero-btn-1">
-                Send Parcel Now!
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
       {/* How delivery works */}
       <DeliveryProcess />
       {/* We are hiring section */}
       <section className="w-full my-2">
         <div className="bg-primary hover:bg-transparent group  border rounded-lg grid auto-rows-fr md:grid-cols-2 mx-5">
           <div className="p-2 mx-5 flex flex-col items-center my-auto lg:gap-5 text-white h-fit group-hover:text-black">
-            <div className="ribbon-container mb-2"><h2 className="ribbon lg:my-5 text-center shadow-lg w-[90%] sm:w-1/2 md:w-[70%] ">
-              <span className="font-bold text-2xl lg:text-4xl my-2 lg:my-0 ribbon-content">We are hiring!</span>
-            </h2></div>
-            
+            <div className="ribbon-container mb-2">
+              <h2 className="ribbon lg:my-5 text-center shadow-lg w-[90%] sm:w-1/2 md:w-[70%] ">
+                <span className="font-bold text-2xl lg:text-4xl my-2 lg:my-0 ribbon-content">
+                  We are hiring!
+                </span>
+              </h2>
+            </div>
+
             <p className="my-2 lg:leading-loose lg:text-2xl">
               Are you looking to supplement your income as a driver? You are
               passionate about innovation and enjoy working with people? Then

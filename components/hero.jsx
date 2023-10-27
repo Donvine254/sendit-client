@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import picture from "../public/hero-image.png";
 const Hero = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-start justify-start w-full bg-base-100 mt-2 overflow-hidden">
-      <div className="lg:w-1/2 p-2 mx-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5  w-full bg-base-100 mt-2 overflow-hidden">
+      <div className="p-2 mx-5">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold">
           Deliver Anything, Anywhere, Anytime!
         </h1>
@@ -17,21 +18,15 @@ const Hero = () => {
           <Link href="/deliveries" className="btn btn-primary hero-btn-1">
             Send Parcel
           </Link>
-          <Link href="/contact" className="btn btn-outline flex items-center justify-start gap-1 hero-btn">
+          <Link
+            href="/contact"
+            className="btn btn-outline flex items-center justify-start gap-1 hero-btn">
             Learn More &#x27F6;
           </Link>
         </div>
       </div>
-      <div className="flex-1 items-center">
-        <Image
-          src="https://res.cloudinary.com/dipkbpinx/image/upload/v1696637684/hero-image_bag5gu.png"
-          alt="hero-image"
-          width={830}
-          height={670}
-          priority
-          as={'image'}
-          className="[800px]:mt-auto"
-        />
+      <div className="items-center">
+        <Image src={picture} alt="hero-image" priority />
       </div>
     </div>
   );
