@@ -2,16 +2,16 @@
 import Link from "next/link";
 const Hero = () => {
   return (
-    <div className="w-full bg-[url('https://www.postnord.dk/globalassets/illustrations/product-hero-illustrations--with-background-color/illu-truck-house.svg')] bg-no-repeat bg-blend-normal bg-cover h-screen">
-      <div className=" md:w-3/5 p-10 text-white ">
-        <h1 className="text-3xl md:text-5xl  lg:text-6xl font-extrabold">
-          Deliver Anything, Anywhere, Anytime!
-        </h1>
-        <p className="py-4 text-[27px] font-light lg:py-6 leading-loose">
+    <div className="w-full h-screen p-10  text-white bg-gradient-to-br from-blue-800 via-purple-800 to-blue-800">
+      <h1 className="text-3xl md:text-5xl  lg:text-[60px] leading-loose font-extrabold mt-20 ">
+        Deliver Anything, Anywhere, Anytime!
+      </h1>
+      <div className="lg:w-2/3 mx-auto ">
+        <p className="py-4 text-[27px] font-light lg:py-6 leading-loose text-center mt-5 whitespace-break-spaces">
           Discover how sendit empowers small businesses, traders and individuals
           through reliable courier delivery services today.
         </p>
-        <div className="flex items-center gap-5 lg:gap-10">
+        <div className="flex items-center justify-center mt-5 gap-5 lg:gap-10">
           <Link href="/deliveries" className="btn btn-primary hero-btn-1">
             Send Parcel
           </Link>
