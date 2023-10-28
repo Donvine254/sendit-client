@@ -1,13 +1,10 @@
-"use client";
-
-import Image from "next/image";
+// import picture from "../public/hero-bg.png";
 import Link from "next/link";
-import picture from "../public/hero-bg.png";
 const Hero = () => {
   return (
-    <div className="grid-cols-2 gap-5  w-full mt-2 overflow-hidden">
-      <div className="p-2 mx-5">
-        <h1 className="text-3xl md:text-5xl md:leading-loose lg:text-6xl font-extrabold xsm:leading-loose">
+    <div className="w-full bg-[url('https://www.postnord.dk/globalassets/illustrations/product-hero-illustrations--with-background-color/illu-truck-house.svg')] bg-no-repeat bg-blend-normal bg-cover h-screen">
+      <div className=" md:w-3/5 p-10 text-white ">
+        <h1 className="text-3xl md:text-5xl  lg:text-6xl font-extrabold">
           Deliver Anything, Anywhere, Anytime!
         </h1>
         <p className="py-4 text-[27px] font-light lg:py-6 leading-loose">
@@ -24,9 +21,6 @@ const Hero = () => {
             Learn More &#x27F6;
           </Link>
         </div>
-      </div>
-      <div className="hidden lg:block">
-        <Image src={picture} alt="hero-image" priority />
       </div>
     </div>
   );
