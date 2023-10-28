@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="w-full h-fit p-5 md:p-10 bg-gradient-radial bg-no-repeat bg-cover">
+    <div className="w-full h-fit p-5 md:p-10 bg-hero-bg bg-no-repeat bg-cover">
       <h1 className="text-3xl md:text-5xl  lg:text-[60px] leading-loose font-extrabold md:mt-16 text-center ">
         Deliver Anything, Anywhere, Anytime!
       </h1>
