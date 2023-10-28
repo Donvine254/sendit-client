@@ -1,11 +1,8 @@
 "use client";
 import React from "react";
-import "react-phone-number-input/style.css";
-import "./contact.css";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import Link from "next/link";
-import "react-chatbot-kit/build/main.css";
 import { IoLogoWhatsapp } from "react-icons/io";
 
 export default function Contact() {
