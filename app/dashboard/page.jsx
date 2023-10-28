@@ -33,34 +33,28 @@ export default function Dashboard() {
 
   return (
     <section className="p-2 md:min-h-[500px]">
-      {currentUser ? (
-        <>
-          {" "}
-          <Toolbar
-            role={currentUser.role ?? "user"}
+      <>
+        {" "}
+        <Toolbar
+          role={currentUser?.role ?? "user"}
+          active={active}
+          setActive={setActive}
+        />
+        {active === "Settings" && <Settings currentUser={currentUser} />}
+        {currentUser?.role === "user" && (
+          <Userdashboard currentUser={currentUser} active={active} />
+        )}
+        {currentUser?.role === "rider" && (
+          <Riderdashboard
+            currentUser={currentUser}
             active={active}
             setActive={setActive}
           />
-          {active === "Settings" && <Settings currentUser={currentUser} />}
-          {currentUser.role === "user" && (
-            <Userdashboard currentUser={currentUser} active={active} />
-          )}
-          {currentUser.role === "rider" && (
-            <Riderdashboard
-              currentUser={currentUser}
-              active={active}
-              setActive={setActive}
-            />
-          )}
-          {currentUser.role === "admin" && (
-            <Admindashboard currentUser={currentUser} active={active} />
-          )}
-        </>
-      ) : (
-        <>
-          <Loading />
-        </>
-      )}
+        )}
+        {currentUser?.role === "admin" && (
+          <Admindashboard currentUser={currentUser} active={active} />
+        )}
+      </>
     </section>
   );
 }

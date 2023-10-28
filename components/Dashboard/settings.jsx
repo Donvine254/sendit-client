@@ -22,13 +22,13 @@ export default function Settings({ currentUser }) {
       {/* parent div for the flexbox */}
       <div className="md:flex gap-5 lg:gap-10 p-2 ">
         <div className="py-4 sm:flex xsm:flex flex-col items-center w-full md:w-fit justify-center">
-          {currentUser.picture ? (
+          {currentUser?.picture ? (
             <Image
-              src={currentUser.picture}
+              src={currentUser?.picture}
               width={80}
               height={80}
               priority
-              alt={currentUser.name}
+              alt={currentUser?.name}
               className="h-20 w-20 md:h-24 md:w-24 rounded-full ring-2 ring-blue-800 ring-offset-base-100 ring-offset-2 md:mx-auto"></Image>
           ) : (
             <>
@@ -39,11 +39,11 @@ export default function Settings({ currentUser }) {
           )}
 
           <p className="text-base mt-5">Update Profile Picture</p>
-          <UploadButtonPage setCurrentUser={setCurrentUser} id={currentUser.user_id} />
+          <UploadButtonPage setCurrentUser={setCurrentUser} id={currentUser?.user_id} />
         </div>
         <form className="flex-1">
           <h1 className="text-xl md:text-2xl font-bold md:text-center">
-            Hello {currentUser.name}!
+            Hello {currentUser?.name}!
           </h1>
           <div className="py-2">
             <label htmlFor="name" className="">
@@ -53,7 +53,7 @@ export default function Settings({ currentUser }) {
               type="text"
               name="name"
               id="name"
-              value={currentUser.name}
+              value={currentUser?.name}
               disabled
               className="w-full py-1 border-b-2 bg-base-100"
             />
@@ -66,7 +66,7 @@ export default function Settings({ currentUser }) {
               type="email"
               name="email"
               id="email"
-              value={currentUser.email}
+              value={currentUser?.email}
               disabled
               className="w-full py-1 border-b-2 bg-base-100"
             />
