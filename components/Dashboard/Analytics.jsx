@@ -52,7 +52,7 @@ export default function Analytics() {
         },
       });
     }
-  }, [orders]);
+  }, [analytics]);
 
   return (
     <div className=" p-4">
