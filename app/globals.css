@@ -51,7 +51,8 @@ body {
     top: -4px;
     border: 1px solid #cccccc;
     background-color: white;
-    color:black .number {
+    color:white; 
+     .number {
       -webkit-text-stroke: 1px #ffffff;
     }
   }
@@ -62,7 +63,7 @@ body {
     z-index: -1;
     top: -16px;
     right: -16px;
-    background: #dad7df;
+    background: #ad994c;
     height: 32px;
     width: 32px;
     border-radius: 32px;

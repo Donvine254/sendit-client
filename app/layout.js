@@ -4,7 +4,6 @@ import ContextProvider from "@/context/context";
 import { Toaster } from "react-hot-toast";
 import { Navbar, Footer, ScrollIndicator } from "@/components";
 
-
 export const metadata = {
   title: "Sendit",
   description:
@@ -13,12 +12,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="winter">
+    <html lang="en" data-theme="luxury">
       <body>
-      <ScrollIndicator/>
+        <ScrollIndicator />
         <ContextProvider>
-          <Navbar/>
-          {children}</ContextProvider>
+          <Navbar />
+          {children}
+        </ContextProvider>
         <Toaster />
         <Footer />
       </body>

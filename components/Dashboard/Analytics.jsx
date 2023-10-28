@@ -3,11 +3,7 @@ import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 
 export default function Analytics() {
-  const [totalRevenue, setTotalRevenue] = useState(null);
-  const [dailyRevenue, setDailyRevenue] = useState(null);
-  const [weeklyRevenue, setWeeklyRevenue] = useState(null);
-  const [monthlyRevenue, setMonthlyRevenue] = useState(null);
-  const [totalCustomers, setTotalCustomers] = useState(null);
+  const [revenue, setRevenue] = useState(null);
   const [totalRiders, setTotalRiders] = useState(null);
   const [orderCount, setOrderCount] = useState(null);
   const [onTransitOrdersCount, setOnTransitOrdersCount] = useState(null);
@@ -19,34 +15,7 @@ export default function Analytics() {
     fetch("https://sendit.up.railway.app/company/revenue")
       .then((response) => response.json())
       .then((data) => {
-        setTotalRevenue(data.total_revenue);
-      })
-      .catch((error) => {
-        console.error("Error fetching revenue data: ", error);
-      });
-
-    fetch("https://sendit.up.railway.app/company/daily_revenue")
-      .then((response) => response.json())
-      .then((data) => {
-        setDailyRevenue(data.daily_revenue);
-      })
-      .catch((error) => {
-        console.error("Error fetching revenue data: ", error);
-      });
-
-    fetch("https://sendit.up.railway.app/company/weekly_revenue")
-      .then((response) => response.json())
-      .then((data) => {
-        setWeeklyRevenue(data.weekly_revenue);
-      })
-      .catch((error) => {
-        console.error("Error fetching revenue data: ", error);
-      });
-
-    fetch("https://sendit.up.railway.app/company/monthly_revenue")
-      .then((response) => response.json())
-      .then((data) => {
-        setMonthlyRevenue(data.monthly_revenue);
+        setRevenue(data);
       })
       .catch((error) => {
         console.error("Error fetching revenue data: ", error);
@@ -155,27 +124,27 @@ export default function Analytics() {
         <div className="stat sm:w-auto place-items-center bg-slate-200">
           <div className="stat-title">Daily Revenue</div>
           <div className="stat-value text-xl">
-            Today&apos;s Revenue: <br /> KES {dailyRevenue}
+            Today&apos;s Revenue: <br /> KES {revenue?.daily_revenue}
           </div>
         </div>
 
         <div className="stat sm:w-auto place-items-center bg-blue-200">
           <div className="stat-title">Weekly Revenue</div>
           <div className="stat-value text-xl">
-            This week&apos;s Revenue: <br /> KES {weeklyRevenue}
+            This week&apos;s Revenue: <br /> KES {revenue?.weekly_revenue}
           </div>
         </div>
 
         <div className="stat sm:w-auto place-items-center bg-yellow-200 ">
           <div className="stat-title">Monthly Revenue</div>
           <div className="stat-value text-xl">
-            This month&apos;s Revenue: <br /> KES {monthlyRevenue}
+            This month&apos;s Revenue: <br /> KES {revenue?.monthly_revenue}
           </div>
         </div>
         <div className="stat sm:w-auto place-items-center bg-green-100">
           <div className="stat-title text-center">Total Revenue</div>
           <div className="stat-value text-xl">
-            Total Revenue: <br /> KES {totalRevenue}
+            Total Revenue: <br /> KES {revenue?.total_revenue}
           </div>
         </div>
       </div>
