@@ -78,8 +78,8 @@ export default function HomeComponent() {
       <DeliveryProcess />
       {/* We are hiring section */}
       <section className="w-full my-4">
-        <div className="bg-primary hover:bg-transparent group  border rounded-lg grid auto-rows-fr md:grid-cols-2 mx-5">
-          <div className="p-2 mx-5 flex flex-col items-center my-auto lg:gap-5 text-white h-fit group-hover:text-black">
+        <div className="bg-transparent group  border rounded-lg grid auto-rows-fr md:grid-cols-2 mx-5">
+          <div className="p-2 mx-5 flex flex-col items-center my-auto lg:gap-5  h-fit ">
             <div className="ribbon-container mb-2">
               <h2 className="ribbon lg:my-5 text-center shadow-lg w-[90%] sm:w-1/2 md:w-[70%] ">
                 <span className="font-bold text-2xl lg:text-4xl my-2 lg:my-0 ribbon-content">
@@ -95,7 +95,7 @@ export default function HomeComponent() {
             </p>
             <Link
               href="/careers"
-              className="btn hero-btn group-hover:bg-[#0056F1] group-hover:text-white font-bold self-center">
+              className="btn hero-btn  font-bold self-center">
               Join Us Today!
             </Link>
           </div>

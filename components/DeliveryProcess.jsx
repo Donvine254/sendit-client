@@ -35,11 +35,11 @@ export default function DeliveryProcess() {
 }
 
 const DeliveryStep = ({ stepNumber, title, description }) => (
-  <div className=" card border h-fit md:h-[300px] relative m-2 delivery-card group" >
+  <div className=" card border h-fit md:h-[300px] relative m-2 delivery-card" >
     <div className="card-body">
     <h2 className="mb-2 text-6xl font-bold number font-mono">{stepNumber}</h2>
     <h4 className="mb-2 text-3xl">{title}</h4>
-    <p className="font-normal text-gray-700 group-hover:text-gray-200 ">
+    <p className="font-normal text-gray-700 ">
       {description}
     </p>
     <Link href="/deliveries"><PiArrowFatRightLight className="absolute bottom-5 text-primary right-5 w-[32px] h-[32px] hover:scale-125 ease-in-out group-hover:text-inherit"/></Link>
