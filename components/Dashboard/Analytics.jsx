@@ -6,6 +6,7 @@ export default function Analytics() {
   const [revenue, setRevenue] = useState(null);
   const [totalRiders, setTotalRiders] = useState(null);
   const [orderCount, setOrderCount] = useState(null);
+  const [totalCustomers, setTotalCustomers] = useState(0);
   const [onTransitOrdersCount, setOnTransitOrdersCount] = useState(null);
   const [pendingOrderCount, setPendingOrderCount] = useState(null);
   const [deliveredOrderCount, setDeliveredOrderCount] = useState(null);
@@ -24,8 +25,7 @@ export default function Analytics() {
     fetch("https://sendit.up.railway.app/company/customers")
       .then((response) => response.json())
       .then((data) => {
-        const totalCustomers = data.length;
-        setTotalCustomers(totalCustomers);
+        setTotalCustomers(data?.length);
         setLoading(false);
       })
       .catch((error) => {
