@@ -1,5 +1,4 @@
 # SENDIT
-![alt text](https://res.cloudinary.com/dipkbpinx/image/upload/v1697745132/sendit-homepage_smjdfj.jpg) 
 
 ## Project Description
 Sendit is a courier services provider based in Kenya that offers reliable and efficient delivery services. The company charges parcel delivery rates based on weight of the parcel, but also charges more for highly valuable parcels. Sendit aims to simplify the process of sending and receiving parcels and cargo through reliable pickup and drop services that ensure riders take orders from the customer preferred pickup location and drop it to any preferred delivery location. The project can be used in conjuction with the ruby on rails API 
