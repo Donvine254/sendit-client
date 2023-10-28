@@ -42,17 +42,17 @@ body {
 .delivery-card {
   transition: all 0.3s ease-out;
   z-index: 0;
-  background-color: #faf7f7;
+  background-color: #dff1f5;
   overflow: hidden;
 
   &:hover {
     transition: all 0.2s ease-out;
     box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
     top: -4px;
-    border: 1px solid #cccccc;
+    border: 1px solid #f8f4f4;
     background-color: white;
-    color:white; 
-     .number {
+    color: white;
+    .number {
       -webkit-text-stroke: 1px #ffffff;
     }
   }
@@ -63,7 +63,7 @@ body {
     z-index: -1;
     top: -16px;
     right: -16px;
-    background: #ad994c;
+    background: #0056f1;
     height: 32px;
     width: 32px;
     border-radius: 32px;
