@@ -1,16 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import "react-phone-number-input/style.css";
 import "./contact.css";
 import Swal from "sweetalert2";
 import Image from "next/image";
-import Chatbot from "react-chatbot-kit";
+import Link from "next/link";
 import "react-chatbot-kit/build/main.css";
 import { IoLogoWhatsapp } from "react-icons/io";
-import { config, ActionProvider, MessageParser } from "@/components/bot";
 
 export default function Contact() {
-  const [openChat, setOpenChat] = useState(false);
   const environment = process.env.NODE_ENV;
   const redirectUrl =
     environment === "development"
@@ -28,23 +26,15 @@ export default function Contact() {
     });
   }
   return (
-    <div className="flex xsm:mx-2 items-center min-h-screen font-serif relative">
-      <p className="fixed bottom-5 right-5 z-50 w-[60px] h-[60px] rounded-full bg-green-500 flex items-center justify-center shadow-md whatsapp-btn">
+    <div className="flex xsm:mx-2 items-center min-h-screen relative">
+      <Link
+        href="https://wa.me/message/KTXORQNJ32XNI1"
+        target="_blank"
+        referrerPolicy="no-referrer"
+        className="fixed bottom-5 right-5 z-50 w-[60px] h-[60px] rounded-full bg-green-500 flex items-center justify-center shadow-md whatsapp-btn">
         {" "}
-        <IoLogoWhatsapp
-          className="i !text-white fill-white text-[32px] icony cursor-pointer"
-          onClick={() => {
-            setOpenChat(!openChat);
-          }}
-        />
-      </p>
-      {openChat && (
-        <Chatbot
-          config={config}
-          messageParser={MessageParser}
-          actionProvider={ActionProvider}
-        />
-      )}
+        <IoLogoWhatsapp className="i !text-white fill-white text-[32px] icony cursor-pointer" />
+      </Link>
       <div className="container mx-auto">
         <h1 className="my-3 xsm:my-0 text-xl md:text-2xl font-semibold  py-2 text-center">
           Contact Us

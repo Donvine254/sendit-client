@@ -5,7 +5,7 @@ import Link from "next/link";
 import picture from "../public/hero-bg.png";
 const Hero = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5  w-full mt-2 overflow-hidden">
+    <div className="grid-cols-2 gap-5  w-full mt-2 overflow-hidden">
       <div className="p-2 mx-5">
         <h1 className="text-3xl md:text-5xl md:leading-loose lg:text-6xl font-extrabold xsm:leading-loose">
           Deliver Anything, Anywhere, Anytime!

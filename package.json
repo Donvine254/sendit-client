@@ -22,7 +22,6 @@
     "next": "latest",
     "nodemailer": "^6.9.5",
     "react": "latest",
-    "react-chatbot-kit": "^2.1.2",
     "react-dom": "latest",
     "react-google-autocomplete": "^2.7.3",
     "react-hot-toast": "^2.4.1",
