@@ -19,6 +19,11 @@ export default function Analytics() {
   useEffect(() => {
     if (analytics) {
       const ctx = document.getElementById("orderChart");
+      const existingChart = Chart.getChart(ctx);
+
+      if (existingChart) {
+        existingChart.destroy();
+      }
       new Chart(ctx, {
         type: "pie",
         data: {
