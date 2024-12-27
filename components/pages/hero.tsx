@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function Heropage() {
   return (
-    <section className="min-h-screen bg-[#F8F9FA] ">
-      <div className="bg-gradient-to-br from-blue-300 via-gray-100 to-blue-200 relative min-h-[600px] md:bg-white">
+    <section className="min-h-screen bg-[#F8F9FA]">
+      <div className="bg-gradient-to-br from-blue-300 via-gray-100 to-blue-200 relative md:h-screen min-h-[600px] md:bg-white">
         <div
           className="absolute inset-0 bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/t_hiring-banner/v1735321412/illustrations/thvil4msrl3vprazslpq.webp')] bg-no-repeat bg-right bg-contain md:block hidden w-full"
           aria-hidden="true"
