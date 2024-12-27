@@ -1,14 +1,42 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Parcel {
+  id              String       @id @default(cuid())
+  userId          String
+  weight          Float
+  description     String
+  status          ParcelStatus @default(PENDING)
+  price           Float
+  pickupAddress   Json         @default("{\"street\": \"\", \"city\": \"\", \"state\": \"\", \"postalCode\": \"\", \"country\": \"\"}")
+  deliveryAddress Json         @default("{\"street\": \"\", \"city\": \"\", \"state\": \"\", \"postalCode\": \"\", \"country\": \"\"}")
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model shippingAddress {
+  id       String @id @default(cuid())
+  userId   String
+  fullName String
+  phone    Int
+  email    String
+  region   String
+  city     String
+  district String
+  location String
+}
+
+enum ParcelStatus {
+  PENDING
+  IN_TRANSIT
+  DELIVERED
+  CANCELLED
 }
