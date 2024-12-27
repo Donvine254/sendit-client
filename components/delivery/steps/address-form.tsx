@@ -50,7 +50,7 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
 
         <div className="space-y-1">
           <label htmlFor="email" className="block font-semibold text-gray-700">
-            Email Address
+            Email Address (optional)
           </label>
           <Input
             type="email"
@@ -59,7 +59,6 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
             placeholder="Enter your email address"
             value={data.email}
             onChange={(e) => onChange({ ...data, email: e.target.value })}
-            required
           />
         </div>
       </div>
