@@ -1,3 +1,4 @@
+import Features from "@/components/pages/features";
 import Heropage from "@/components/pages/hero";
 
 export default function Home() {
@@ -5,6 +6,7 @@ export default function Home() {
     <section>
       <main>
         <Heropage />
+        <Features />
       </main>
     </section>
   );
