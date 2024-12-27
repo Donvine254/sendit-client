@@ -1,8 +1,7 @@
 import { Input } from "@/components/ui/input";
+import { regions } from "@/constants";
 import { AddressFormData } from "@/types";
 import React from "react";
-
-const regions = ["Nairobi", "Embu", "Thika", "Nakuru"];
 
 interface AddressFormProps {
   title: string;
