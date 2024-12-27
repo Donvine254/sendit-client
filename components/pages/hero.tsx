@@ -1,4 +1,4 @@
-import { Star, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -39,7 +39,7 @@ export default function Heropage() {
                 </Button>
               </Link>
             </div>
-            <div className="flex mt-4 md:mt-2">
+            {/* <div className="flex mt-4 md:mt-2">
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
@@ -49,7 +49,7 @@ export default function Heropage() {
             </div>
             <p className="mt-4 text-3xl font-bold">
               2k+ <span className="text-muted-foreground">Good Reviews</span>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
