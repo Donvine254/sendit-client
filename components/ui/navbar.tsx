@@ -1,16 +1,15 @@
-"use client";
 import Link from "next/link";
 import Script from "next/script";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { Package } from "lucide-react";
-
-export default function NavigationMenu() {
-  const user = null;
-  const router = useRouter();
-  async function handleLogout() {
-    router.push("/api/logout");
-  }
+import {
+  LoginLink,
+  LogoutLink,
+  getKindeServerSession,
+} from "@kinde-oss/kinde-auth-nextjs/server";
+export default async function NavigationMenu() {
+  const { isAuthenticated } = getKindeServerSession();
+  const isAuth = await isAuthenticated();
 
   return (
     <menu className="relative bg-transparent w-full">
@@ -76,7 +75,7 @@ export default function NavigationMenu() {
                 </Link>
               </li>
               {/* dropdown for account */}
-              <li className={`${!user ? "hidden" : "block"}`}>
+              <li className={`${!isAuth ? "hidden" : "block"}`}>
                 <button
                   id="dropdownNavbarLink"
                   data-dropdown-toggle="dropdownNavbar"
@@ -177,19 +176,15 @@ export default function NavigationMenu() {
                 </div>
               </li>
               {/* end of dropdown */}
-              <li className={`${user ? "hidden" : "block"}`}>
-                <Link
-                  href="/login"
-                  className="text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-600 md:hover:shadow  md:bg-blue-500 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:px-4 md:text-white md:text-center md:rounded-md md:h-8">
+              <li className={`${isAuth ? "hidden" : "block"}`}>
+                <LoginLink className="text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-600 md:hover:shadow  md:bg-blue-500 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:px-4 md:text-white md:text-center md:rounded-md md:h-8">
                   Login
-                </Link>
+                </LoginLink>
               </li>
-              <li className={`${!user ? "hidden" : "block"} `}>
-                <button
-                  onClick={handleLogout}
-                  className=" text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-green-500 md:hover:shadow  md:bg-green-500 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:h-8 md:px-4 md:text-white md:text-center md:rounded-md ">
+              <li className={`${!isAuth ? "hidden" : "block"} `}>
+                <LogoutLink className=" text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-500 md:hover:shadow  md:bg-blue-600 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:h-8 md:px-4 md:text-white md:text-center md:rounded-md ">
                   Logout
-                </button>
+                </LogoutLink>
               </li>
             </ul>
           </div>
