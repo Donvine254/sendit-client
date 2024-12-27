@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Heropage() {
   return (
     <section className="min-h-screen bg-[#F8F9FA]">
-      <div className="bg-gradient-to-br from-blue-300 via-gray-100 to-blue-200 relative md:h-screen min-h-[600px] md:bg-white">
+      <div className="bg-gradient-to-br from-blue-400 via-gray-100 to-blue-400 relative md:h-screen min-h-[600px] md:bg-white">
         <div
           className="absolute inset-0 bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/t_hiring-banner/v1735326614/illustrations/cstnqioumwvu8iinrq0r.webp')] bg-no-repeat bg-right bg-contain md:block hidden w-full"
           aria-hidden="true"
@@ -25,7 +25,7 @@ export default function Heropage() {
               shipping solutions for all your needs.
             </p>
             <div className="mt-8 flex gap-4 items-center xsm:justify-between  ">
-              <Link href="deliveries" passHref>
+              <Link href="/deliveries" passHref>
                 <Button
                   variant="default"
                   className="justify-between gap-2 bg-blue-500 text-white">
@@ -33,7 +33,7 @@ export default function Heropage() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="contact" passHref>
+              <Link href="/contact" passHref>
                 <Button className="bg-transparent border-2 text-blue-600 border-blue-500 hover:bg-blue-500 hover:text-white">
                   Learn More
                 </Button>
