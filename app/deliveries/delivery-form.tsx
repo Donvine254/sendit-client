@@ -13,7 +13,7 @@ const STEPS = [
   { title: "Parcel Details", description: "Describe your package" },
   { title: "Pickup Address", description: "Where we collect from" },
   { title: "Delivery Address", description: "Where we deliver to" },
-  { title: "Review & Pay", description: "Confirm your order" },
+  { title: "Review", description: "Confirm your order" },
 ];
 
 const DeliveryForm = () => {
@@ -57,15 +57,13 @@ const DeliveryForm = () => {
 
   return (
     <div className="min-h-screen  bg-gradient-to-tr from-blue-200 via-gray-100 to-blue-200 py-10">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="bg-white rounded-lg shadow-lg">
           <div className="p-8">
             <h1 className="text-2xl font-bold text-gray-900 mb-8">
               Create Delivery Order
             </h1>
-
             <StepIndicator steps={STEPS} currentStep={currentStep} />
-
             <div className="mt-8">
               {currentStep === 0 && (
                 <ParcelDetails

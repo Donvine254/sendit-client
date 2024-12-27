@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <NavigationMenu />
+        <Toaster />
         {children}
         <Footer />
       </body>

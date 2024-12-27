@@ -2,6 +2,7 @@ import React from "react";
 
 import { Package } from "lucide-react";
 import { AddressFormData, ParcelFormData } from "@/types";
+import { toast } from "sonner";
 
 interface OrderSummaryProps {
   parcelData: ParcelFormData;
@@ -20,8 +21,10 @@ const OrderSummary = ({
 }: OrderSummaryProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle payment processing here
-    alert("Order submitted successfully!");
+    console.log(OrderSummary);
+    toast.success("Order submitted successfully!", {
+      position: "top-center",
+    });
   };
 
   const AddressDisplay = ({
@@ -32,7 +35,7 @@ const OrderSummary = ({
     data: AddressFormData;
   }) => (
     <div className="space-y-2">
-      <h3 className="font-medium text-gray-900">{title}</h3>
+      <h3 className="font-semibold text-gray-900">{title}</h3>
       <div className="text-sm text-gray-600">
         <p>{data.fullName}</p>
         <p>{data.phone}</p>
@@ -47,13 +50,12 @@ const OrderSummary = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="bg-gray-50 p-6 rounded-lg space-y-6">
+      <div className="bg-blue-50 p-6 rounded-lg space-y-6">
         <div className="flex items-center space-x-3">
           <Package className="h-6 w-6 text-blue-600" />
           <h2 className="text-lg font-medium text-gray-900">Order Summary</h2>
         </div>
-
-        <div className="border-t border-gray-200 pt-4">
+        <div className="border-t border-gray-300 pt-4">
           <dl className="space-y-6">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <AddressDisplay title="Pickup Address" data={pickupAddress} />
@@ -61,9 +63,11 @@ const OrderSummary = ({
             </div>
 
             <div>
-              <dt className="font-medium text-gray-900">Package Details</dt>
+              <dt className="font-semibold text-gray-900">Package Details</dt>
               <dd className="mt-2 text-sm text-gray-600">
-                <p>Description: {parcelData.description}</p>
+                <p className="capitalize">
+                  Description: {parcelData.description}
+                </p>
                 <p>Weight: {parcelData.weight} kg</p>
               </dd>
             </div>
@@ -90,7 +94,7 @@ const OrderSummary = ({
         <button
           type="submit"
           className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-          Confirm and Pay
+          Confirm
         </button>
       </div>
     </form>

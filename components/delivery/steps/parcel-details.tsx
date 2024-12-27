@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { ParcelFormData } from "@/types";
 import React from "react";
 
@@ -18,13 +19,13 @@ const ParcelDetails = ({ data, onChange, onNext }: ParcelDetailsProps) => {
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700">
+          className="block  font-semibold text-gray-700">
           Package Description
         </label>
         <textarea
           id="description"
           rows={4}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border bg-white"
           placeholder="Describe what you're sending..."
           value={data.description}
           onChange={(e) => onChange({ ...data, description: e.target.value })}
@@ -33,17 +34,14 @@ const ParcelDetails = ({ data, onChange, onNext }: ParcelDetailsProps) => {
       </div>
 
       <div>
-        <label
-          htmlFor="weight"
-          className="block text-sm font-medium text-gray-700">
+        <label htmlFor="weight" className="block  font-semibold text-gray-700">
           Weight (kg)
         </label>
-        <input
+        <Input
           type="number"
           id="weight"
           min="0.1"
           step="0.1"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           value={data.weight || ""}
           onChange={(e) =>
             onChange({ ...data, weight: parseFloat(e.target.value) })

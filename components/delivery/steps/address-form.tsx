@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { AddressFormData } from "@/types";
 import React from "react";
 
@@ -18,67 +19,60 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div>
-        <label
-          htmlFor="fullName"
-          className="block text-sm font-medium text-gray-700">
+    <form onSubmit={handleSubmit} className="space-y-2">
+      <div className="space-y-1">
+        <label htmlFor="fullName" className="block font-semibold text-gray-700">
           Full Name
         </label>
-        <input
+        <Input
           type="text"
           id="fullName"
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           value={data.fullName}
+          placeholder="Enter Full Name"
           onChange={(e) => onChange({ ...data, fullName: e.target.value })}
           required
         />
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div>
-          <label
-            htmlFor="phone"
-            className="block text-sm font-medium text-gray-700">
+        <div className="space-y-1">
+          <label htmlFor="phone" className="block font-semibold  text-gray-700">
             Phone Number
           </label>
-          <input
+          <Input
             type="tel"
             id="phone"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            placeholder="Enter phone number"
             value={data.phone}
             onChange={(e) => onChange({ ...data, phone: e.target.value })}
             required
           />
         </div>
 
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700">
+        <div className="space-y-1">
+          <label htmlFor="email" className="block font-semibold text-gray-700">
             Email Address
           </label>
-          <input
+          <Input
             type="email"
             id="email"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            name="email"
+            placeholder="Enter your email address"
             value={data.email}
             onChange={(e) => onChange({ ...data, email: e.target.value })}
             required
           />
         </div>
       </div>
-
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div>
-          <label
-            htmlFor="region"
-            className="block text-sm font-medium text-gray-700">
+        <div className="space-y-1">
+          <label htmlFor="region" className="block font-semibold text-gray-700">
             Region
           </label>
           <select
             id="region"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            name="region"
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
             value={data.region}
             onChange={(e) => onChange({ ...data, region: e.target.value })}
             required>
@@ -91,33 +85,31 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
           </select>
         </div>
 
-        <div>
+        <div className="space-y-1">
           <label
             htmlFor="district"
-            className="block text-sm font-medium text-gray-700">
+            className="block font-semibold text-gray-700">
             District
           </label>
-          <input
+          <Input
             type="text"
             id="district"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+            name="district"
             value={data.district}
             onChange={(e) => onChange({ ...data, district: e.target.value })}
             required
           />
         </div>
       </div>
-
-      <div>
-        <label
-          htmlFor="address"
-          className="block text-sm font-medium text-gray-700">
+      <div className="space-y-1">
+        <label htmlFor="address" className="block font-semibold text-gray-700">
           Detailed Address
         </label>
         <textarea
           id="address"
+          name="address"
           rows={3}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className=" block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border bg-white"
           placeholder="Street name and nearby landmark"
           value={data.address}
           onChange={(e) => onChange({ ...data, address: e.target.value })}
