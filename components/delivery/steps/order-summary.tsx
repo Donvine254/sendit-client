@@ -21,7 +21,13 @@ const OrderSummary = ({
 }: OrderSummaryProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(OrderSummary);
+    const orderData = {
+      parcelData,
+      pickupAddress,
+      deliveryAddress,
+      price,
+    };
+    console.log(orderData);
     toast.success("Order submitted successfully!", {
       position: "top-center",
     });
@@ -50,7 +56,7 @@ const OrderSummary = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="bg-blue-50 p-6 rounded-lg space-y-6">
+      <div className="bg-white md:bg-blue-50 p-6 rounded-lg space-y-6">
         <div className="flex items-center space-x-3">
           <Package className="h-6 w-6 text-blue-600" />
           <h2 className="text-lg font-medium text-gray-900">Order Summary</h2>

@@ -15,7 +15,9 @@ const ParcelDetails = ({ data, onChange, onNext }: ParcelDetailsProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 bg-white md:bg-transparent p-4 md:p-0 rounded-md md:rounded-none shadow md:shadow-none">
       <div>
         <label
           htmlFor="description"

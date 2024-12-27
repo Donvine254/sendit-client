@@ -14,7 +14,7 @@ const StepIndicator = ({ steps, currentStep }: StepIndicatorProps) => {
   return (
     <nav aria-label="Progress">
       {/* show this in small devices */}
-      <ol className="flex items-center justify-between relative w-full md:hidden">
+      <ol className="flex items-center justify-between relative w-full md:hidden mb-4 ">
         {/* Line behind circles */}
         <div className="absolute top-1/2 w-full h-0.5 bg-gray-300 z-0"></div>
         <div
@@ -23,7 +23,10 @@ const StepIndicator = ({ steps, currentStep }: StepIndicatorProps) => {
             width: `${(100 / (steps.length - 1)) * currentStep}%`,
           }}></div>
         {steps.map((step, index) => (
-          <li key={step.title || `step-${index}`} className="relative z-10">
+          <li
+            key={step.title || `step-${index}`}
+            className="relative z-10"
+            title={step.title}>
             {/* Circle */}
             <div
               className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${
@@ -33,6 +36,7 @@ const StepIndicator = ({ steps, currentStep }: StepIndicatorProps) => {
               } border-2`}>
               {index + 1}
             </div>
+            <small className="absolute">{step.title}</small>
           </li>
         ))}
       </ol>

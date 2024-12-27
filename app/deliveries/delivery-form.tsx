@@ -58,13 +58,13 @@ const DeliveryForm = () => {
   return (
     <div className="min-h-screen  bg-gradient-to-tr from-blue-200 via-gray-100 to-blue-200 py-10">
       <div className="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8">
-        <div className="bg-white rounded-lg shadow-lg">
-          <div className="p-8">
+        <div className="md:bg-white md:rounded-lg md:shadow-lg">
+          <div className="p-2 sm:p-8">
             <h1 className="text-2xl font-bold text-gray-900 mb-8">
               Create Delivery Order
             </h1>
             <StepIndicator steps={STEPS} currentStep={currentStep} />
-            <div className="mt-8">
+            <div className="mt-10 md:mt-8">
               {currentStep === 0 && (
                 <ParcelDetails
                   data={parcelData}

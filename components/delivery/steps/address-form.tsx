@@ -18,7 +18,9 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 bg-white md:bg-transparent p-4 md:p-0 rounded-md md:rounded-none shadow md:shadow-none">
       <div className="space-y-1">
         <label htmlFor="fullName" className="block font-semibold text-gray-700">
           Full Name
