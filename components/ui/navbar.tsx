@@ -67,13 +67,68 @@ export default async function NavigationMenu() {
                   Send Parcel
                 </Link>
               </li>
+              {/* dropdown for resources */}
               <li>
-                <Link
-                  href="/pricing"
-                  className=" hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2  hover:underline underline-offset-2 md:p-0">
-                  Pricing
-                </Link>
+                <button
+                  id="dropdownNavbarLink"
+                  data-dropdown-toggle="dropdownNavbar3"
+                  className=" hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2  md:p-0 font-medium flex items-center justify-between w-full md:w-auto hover:underline underline-offset-2">
+                  Resources{" "}
+                  <svg
+                    className="w-4 h-4 ml-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"></path>
+                  </svg>
+                </button>
+                {/* Dropdown menu  */}
+                <div
+                  id="dropdownNavbar3"
+                  className="hidden bg-white text-base z-10 list-none divide-y divide-gray-200 rounded shadow my-4 w-[84%] md:w-44">
+                  <ul className="py-1" aria-labelledby="dropdownLargeButton">
+                    <li>
+                      <Link
+                        href="/help"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                        Help Center
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/pricing"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                        Pricing
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/quote"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                        Get a Quote
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/contact"
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                        Contact
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className="py-1">
+                    <Link
+                      href="/pricing"
+                      className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                      FAQs
+                    </Link>
+                  </div>
+                </div>
               </li>
+              {/* end of dropdown */}
               {/* dropdown for account */}
               <li className={`${!isAuth ? "hidden" : "block"}`}>
                 <button
@@ -121,61 +176,6 @@ export default async function NavigationMenu() {
                   </ul>
                 </div>
               </li>
-              {/* dropdown for resources */}
-              <li>
-                <button
-                  id="dropdownNavbarLink"
-                  data-dropdown-toggle="dropdownNavbar3"
-                  className=" hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2  md:p-0 font-medium flex items-center justify-between w-full md:w-auto hover:underline underline-offset-2">
-                  Resources{" "}
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"></path>
-                  </svg>
-                </button>
-                {/* Dropdown menu  */}
-                <div
-                  id="dropdownNavbar3"
-                  className="hidden bg-white text-base z-10 list-none divide-y divide-gray-200 rounded shadow my-4 w-[84%] md:w-44">
-                  <ul className="py-1" aria-labelledby="dropdownLargeButton">
-                    <li>
-                      <Link
-                        href="/help"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
-                        Help Center
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/quote"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
-                        Get a Quote
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/contact"
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
-                        Contact
-                      </Link>
-                    </li>
-                  </ul>
-                  <div className="py-1">
-                    <Link
-                      href="/pricing"
-                      className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
-                      FAQs
-                    </Link>
-                  </div>
-                </div>
-              </li>
-              {/* end of dropdown */}
               <li className={`${isAuth ? "hidden" : "block"}`}>
                 <LoginLink className="text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-600 md:hover:shadow  md:bg-blue-500 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:px-4 md:text-white md:text-center md:rounded-md md:h-8">
                   Login
