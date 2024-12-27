@@ -13,7 +13,31 @@ interface StepIndicatorProps {
 const StepIndicator = ({ steps, currentStep }: StepIndicatorProps) => {
   return (
     <nav aria-label="Progress">
-      <ol role="list" className="space-y-4 md:flex md:space-y-0 md:space-x-8">
+      {/* show this in small devices */}
+      <ol className="flex items-center justify-between relative w-full md:hidden">
+        {/* Line behind circles */}
+        <div className="absolute top-1/2 w-full h-0.5 bg-gray-300 z-0"></div>
+        <div
+          className="absolute top-1/2 h-0.5 bg-blue-500 z-0"
+          style={{
+            width: `${(100 / (steps.length - 1)) * currentStep}%`,
+          }}></div>
+        {steps.map((step, index) => (
+          <li key={step.title || `step-${index}`} className="relative z-10">
+            {/* Circle */}
+            <div
+              className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${
+                index <= currentStep
+                  ? "bg-blue-500 text-white border-blue-500"
+                  : "bg-white text-gray-500 border-gray-300"
+              } border-2`}>
+              {index + 1}
+            </div>
+          </li>
+        ))}
+      </ol>
+      {/* show this in  md devices */}
+      <ol role="list" className="hidden md:flex space-y-0 space-x-8">
         {steps.map((step, index) => (
           <li key={step.title} className="md:flex-1">
             <div
