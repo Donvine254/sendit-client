@@ -54,7 +54,7 @@ export default function Footer() {
               </div>
             </div>
             <div className=" ">
-              <h6 className="mb-4 text-center font-extrabold text-blue-500 uppercase md:text-start">
+              <h6 className="mb-4 text-start font-extrabold text-blue-500 uppercase ">
                 Company
               </h6>
               <p className="mb-4">
@@ -92,7 +92,7 @@ export default function Footer() {
               </p>
             </div>
             <div className="">
-              <h6 className="mb-4 text-center font-extrabold text-blue-500 uppercase md:text-start">
+              <h6 className="mb-4 text-start font-extrabold text-blue-500 uppercase">
                 Quick Links
               </h6>
               <p className="mb-4">
@@ -127,7 +127,7 @@ export default function Footer() {
             </div>
 
             <div>
-              <h6 className="mb-4  text-center font-extrabold uppercase md:text-start text-blue-500">
+              <h6 className="mb-4  text-start font-extrabold uppercase  text-blue-500">
                 Contact Us
               </h6>
               <p className="mb-4 flex items-center md:justify-start gap-2 cursor-pointer">

@@ -17,7 +17,7 @@ export default async function NavigationMenu() {
         async
         defer
         src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></Script>
-      <section className="bg-white text-blue-600 md:bg-transparent md:text-gray-700 md:absolute bg-transparent z-20 py-4  md:mx-4 fixed top-0 w-full md:w-[95%]">
+      <section className=" text-blue-600 md:text-gray-700 absolute bg-white z-20 py-4 px-4  w-full">
         <div className="container bg-transparent mx-auto flex flex-wrap items-center justify-between">
           <Link href="/" className="flex items-center gap-1">
             <Package className="h-8 w-8 " />
