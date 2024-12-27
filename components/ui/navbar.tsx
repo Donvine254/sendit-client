@@ -18,7 +18,7 @@ export default function NavigationMenu() {
         async
         defer
         src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></Script>
-      <section className="text-muted-foreground bg-transparent z-20 py-4  md:mx-4 fixed top-0 w-[95%]">
+      <section className=" bg-transparent z-20 py-4  md:mx-4 fixed top-0 w-[95%]">
         <div className="container bg-transparent mx-auto flex flex-wrap items-center justify-between">
           <Link href="/" className="flex items-center gap-1">
             <Package className="h-8 w-8 " />
@@ -66,6 +66,13 @@ export default function NavigationMenu() {
                   href="/deliveries"
                   className=" hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2  hover:underline underline-offset-2 md:p-0">
                   Send Parcel
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/pricing"
+                  className=" hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 block pl-3 pr-4 py-2  hover:underline underline-offset-2 md:p-0">
+                  Pricing
                 </Link>
               </li>
               {/* dropdown for account */}
@@ -164,7 +171,7 @@ export default function NavigationMenu() {
                     <Link
                       href="/pricing"
                       className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
-                      Pricing
+                      FAQs
                     </Link>
                   </div>
                 </div>
