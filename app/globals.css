@@ -83,5 +83,5 @@ input[type="number"] {
 }
 
 #mobile-menu {
-  @apply bg-white md:bg-inherit;
+  @apply bg-white shadow md:shadow-none md:bg-inherit;
 }
