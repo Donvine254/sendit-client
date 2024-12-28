@@ -35,7 +35,7 @@ export default function Home() {
                     variant="default"
                     className="justify-between gap-2 bg-blue-400 text-white">
                     Get Started
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-2 h-5 w-5 animate-move-arrow" />
                   </Button>
                 </Link>
               </div>
