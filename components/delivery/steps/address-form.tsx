@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { regions } from "@/constants";
 import { AddressFormData } from "@/types";
+import Image from "next/image";
 import React from "react";
 
 interface AddressFormProps {
@@ -40,14 +41,27 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
           <label htmlFor="phone" className="block font-semibold  text-gray-700">
             Phone Number
           </label>
-          <Input
-            type="tel"
-            id="phone"
-            placeholder="Enter phone number"
-            value={data.phone}
-            onChange={(e) => onChange({ ...data, phone: e.target.value })}
-            required
-          />
+          <div className="flex items-center group">
+            <div className="flex h-10 w-fit rounded-l-md border border-input bg-background px-2 group-focus-within:ring-2 group-focus-within:ring-offset-background group-focus-within:ring-ring">
+              <Image
+                src="https://res.cloudinary.com/dipkbpinx/image/upload/v1735344660/logos/flag-kenya_sei3av.svg"
+                width={48}
+                height={48}
+                alt="kenyan flag"
+              />
+            </div>
+            <Input
+              type="tel"
+              id="phone"
+              minLength={9}
+              maxLength={9}
+              className="rounded-l-none"
+              placeholder="Enter phone number"
+              value={data.phone}
+              onChange={(e) => onChange({ ...data, phone: e.target.value })}
+              required
+            />
+          </div>
         </div>
 
         <div className="space-y-1">

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import DeliveryForm from "./delivery-form";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export const metadata: Metadata = {
   title: "Sendit Courier- Welcome ",
@@ -7,6 +8,9 @@ export const metadata: Metadata = {
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
 export default async function Page() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+  console.log(user);
   return (
     <section className="min-h-screen bg-[#F8F9FA]">
       <div className="bg-[url('/delivery.webp')] bg-cover bg-center bg-no-repeat pt-10">

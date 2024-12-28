@@ -43,6 +43,7 @@ const ParcelDetails = ({ data, onChange, onNext }: ParcelDetailsProps) => {
           type="number"
           id="weight"
           min="0.1"
+          placeholder="Weight in Kgs"
           step="0.1"
           value={data.weight || ""}
           onChange={(e) =>
