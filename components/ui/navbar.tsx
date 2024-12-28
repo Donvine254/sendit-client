@@ -121,14 +121,13 @@ export default async function NavigationMenu() {
                   </ul>
                   <div className="py-1">
                     <Link
-                      href="/pricing"
+                      href="/faq"
                       className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
                       FAQs
                     </Link>
                   </div>
                 </div>
               </li>
-              {/* end of dropdown */}
               {/* dropdown for account */}
               <li className={`${!isAuth ? "hidden" : "block"}`}>
                 <button
