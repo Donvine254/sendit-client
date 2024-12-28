@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import DeliveryForm from "./delivery-form";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { sessionUser } from "@/types";
 
 export const metadata: Metadata = {
   title: "Sendit Courier- Welcome ",
@@ -9,8 +10,7 @@ export const metadata: Metadata = {
 };
 export default async function Page() {
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
-  console.log(user);
+  const user = (await getUser()) as sessionUser;
   return (
     <section className="min-h-screen bg-[#F8F9FA]">
       <div className="bg-[url('/delivery.webp')] bg-cover bg-center bg-no-repeat pt-10">
@@ -21,7 +21,7 @@ export default async function Page() {
         </div>
       </div>
       <main>
-        <DeliveryForm />
+        <DeliveryForm user={user} />
       </main>
     </section>
   );

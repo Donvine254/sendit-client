@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import StepIndicator from "@/components/delivery/step-indicator";
-import { AddressFormData, ParcelFormData } from "@/types";
+import { AddressFormData, ParcelFormData, sessionUser } from "@/types";
 import ParcelDetails from "@/components/delivery/steps/parcel-details";
 import PickupAddress from "@/components/delivery/steps/pickup-address";
 import DeliveryAddress from "@/components/delivery/steps/delivery-address";
@@ -15,8 +15,10 @@ const STEPS = [
   { title: "Delivery Address", description: "Where we deliver to" },
   { title: "Review", description: "Confirm your order" },
 ];
-
-const DeliveryForm = () => {
+type Props = {
+  user: sessionUser;
+};
+const DeliveryForm = ({ user }: Props) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [parcelData, setParcelData] = useState<ParcelFormData>({
     description: "",
@@ -95,6 +97,7 @@ const DeliveryForm = () => {
                   deliveryAddress={deliveryAddress}
                   price={calculatePrice()}
                   onBack={handleBack}
+                  user={user}
                 />
               )}
             </div>

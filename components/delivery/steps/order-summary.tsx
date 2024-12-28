@@ -1,8 +1,9 @@
 import React from "react";
 
 import { Package } from "lucide-react";
-import { AddressFormData, ParcelFormData } from "@/types";
+import { AddressFormData, ParcelFormData, sessionUser } from "@/types";
 import { toast } from "sonner";
+import { createOrder } from "@/lib/actions";
 
 interface OrderSummaryProps {
   parcelData: ParcelFormData;
@@ -10,6 +11,7 @@ interface OrderSummaryProps {
   deliveryAddress: AddressFormData;
   price: number;
   onBack: () => void;
+  user: sessionUser;
 }
 
 const OrderSummary = ({
@@ -17,20 +19,30 @@ const OrderSummary = ({
   pickupAddress,
   deliveryAddress,
   price,
+  user,
   onBack,
 }: OrderSummaryProps) => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const orderData = {
-      parcelData,
-      pickupAddress,
-      deliveryAddress,
-      price,
+      userId: user.id,
+      description: parcelData.description,
+      weight: parcelData.weight,
+      pickupAddress: pickupAddress,
+      deliveryAddress: deliveryAddress,
+      price: price,
     };
-    console.log(orderData);
-    toast.success("Order submitted successfully!", {
-      position: "top-center",
-    });
+    try {
+      const res = await createOrder(orderData);
+      if (res.success) {
+        toast.success(res.message);
+      } else {
+        toast.error(res.error || "Something went wrong");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    }
   };
 
   const AddressDisplay = ({

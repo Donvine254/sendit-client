@@ -11,6 +11,16 @@ export type ParcelFormData = {
   description: string;
   weight: number;
 };
+
+export type ParcelOrderData = {
+  userId: string;
+  description: string;
+  weight: number;
+  price: number;
+  pickupAddress: AddressFormData;
+  deliveryAddress: AddressFormData;
+};
+
 export type sessionUser = {
   email: string;
   id: string;
