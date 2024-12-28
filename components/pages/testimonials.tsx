@@ -32,8 +32,8 @@ const stats = [
 
 export default function Testimonials() {
   return (
-    <section className="p-2 md:p-4 bg-[#F8F9FA]">
-      <div className="container mx-auto px-4">
+    <section className=" bg-grid-gray-100">
+      <div className="container mx-auto p-2 md:p-4 bg-[#f2f2f2] bg-opacity-70">
         <div className="flex flex-col items-center justify-center mb-4">
           <p className="text-xl font-bold text-center text-blue-500 py-1 px-4 border bg-gray-200 w-fit">
             Testimonials
@@ -42,7 +42,7 @@ export default function Testimonials() {
             What our customer&apos;s say
           </h1>
         </div>
-        <div className="grid md:grid-cols-3 gap-8  border-b py-2 md:mb-4">
+        <div className="grid md:grid-cols-3 gap-8  py-2 md:mb-4">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
