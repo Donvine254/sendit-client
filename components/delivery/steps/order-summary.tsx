@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Package } from "lucide-react";
 import { AddressFormData, ParcelFormData, sessionUser } from "@/types";
 import { toast } from "sonner";
 import { createOrder } from "@/lib/actions";
 import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
 interface OrderSummaryProps {
   parcelData: ParcelFormData;
@@ -24,8 +25,10 @@ const OrderSummary = ({
   onBack,
 }: OrderSummaryProps) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
     const orderData = {
       userId: user.id,
       description: parcelData.description,
@@ -52,6 +55,8 @@ const OrderSummary = ({
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,6 +107,19 @@ const OrderSummary = ({
 
             <div className="border-t border-gray-200 pt-4">
               <div className="flex justify-between">
+                <dt className="font-medium text-gray-600">Subtotal</dt>
+                <dd className="font-medium text-muted-foreground">
+                  KES {price.toLocaleString()}
+                </dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="font-medium text-gray-600">VAT (16%)</dt>
+                <dd className="font-medium text-muted-foreground">
+                  KES {(price * 0.16).toLocaleString()}
+                </dd>
+              </div>
+              <hr />
+              <div className="flex justify-between">
                 <dt className="font-medium text-gray-900">Total Price</dt>
                 <dd className="font-medium text-blue-600">
                   KES {price.toLocaleString()}
@@ -116,13 +134,19 @@ const OrderSummary = ({
         <button
           type="button"
           onClick={onBack}
-          className="inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          disabled={loading}
+          className="inline-flex justify-center py-2 h-10 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed">
           Back
         </button>
         <button
           type="submit"
-          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-          Confirm
+          className="inline-flex justify-center h-10 w-20 items-center  border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 border disabled:border-blue-200 disabled:bg-muted disabled:cursor-not-allowed"
+          disabled={loading}>
+          {!loading ? (
+            "Confirm"
+          ) : (
+            <Loader className="animate-spin text-blue-500 h-5 w-5" />
+          )}
         </button>
       </div>
     </form>
