@@ -92,8 +92,8 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
             required>
             <option value="">Select a region</option>
             {regions.map((region) => (
-              <option key={region} value={region}>
-                {region}
+              <option key={region.county} value={region.county}>
+                {region.county}
               </option>
             ))}
           </select>
@@ -105,14 +105,23 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
             className="block font-semibold text-gray-700">
             District
           </label>
-          <Input
-            type="text"
+          <select
             id="district"
             name="district"
+            disabled={!data.region}
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
             value={data.district}
             onChange={(e) => onChange({ ...data, district: e.target.value })}
-            required
-          />
+            required>
+            <option value="">Select a region</option>
+            {regions
+              .find((region) => region.county === data.region)
+              ?.subcounties.map((subcounty) => (
+                <option key={subcounty} value={subcounty}>
+                  {subcounty}
+                </option>
+              ))}
+          </select>
         </div>
       </div>
       <div className="space-y-1">
