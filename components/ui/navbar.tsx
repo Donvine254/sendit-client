@@ -13,13 +13,13 @@ export default async function NavigationMenu() {
   const isAuth = await isAuthenticated();
 
   return (
-    <menu className="relative bg-transparent w-full">
+    <menu className="relative bg-green-500 w-full">
       <Script
         async
         defer
         src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></Script>
-      <section className=" text-blue-600 md:text-gray-700  bg-white z-20 py-4 px-4 fixed top-0 w-full shadow">
-        <div className="container bg-transparent mx-auto flex flex-wrap items-center justify-between">
+      <section className=" text-blue-600 md:text-gray-700  bg-white z-20 py-4 fixed top-0  w-full shadow">
+        <div className="flex flex-wrap items-center justify-between  px-4 w-full">
           <Link href="/" className="flex items-center gap-1 text-blue-600">
             <Image
               src="https://res.cloudinary.com/dipkbpinx/image/upload/v1735352741/illustrations/by2cal2orce7rmqsceqi.svg"
