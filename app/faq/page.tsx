@@ -27,11 +27,11 @@ export default function page({}: Props) {
       </div>
       <main className="max-w-5xl mx-auto p-2 md:p-6">
         <FAQS />
-        <div className="mt-10 text-base  bg-blue-500 p-3 md:p-6 rounded-md text-white">
+        <div className="md:mt-10  bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/v1735350473/illustrations/woqbj1kwbaszfwovpbh1.webp')] bg-cover bg-center bg-no-repeat p-3 md:p-6 rounded-md text-white">
           <h2 className="text-2xl font-semibold mb-4">
             Can&apos;t find what you&apos;re looking for?
           </h2>
-          <p className="mb-4 text-gray-200 ">
+          <p className="mb-4 text-gray-200 xsm:text-sm ">
             If you couldn&apos;t find the answer to your question, please
             don&apos;t not hesitate to contact our customer support team.
             We&apos;re here to help!
