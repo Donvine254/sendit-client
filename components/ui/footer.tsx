@@ -103,9 +103,7 @@ export default function Footer() {
                 Quick Links
               </h6>
               <p className="mb-4">
-                <a
-                  href="/faqs"
-                  className="text-neutral-600 hover:text-blue-500">
+                <a href="/faq" className="text-neutral-600 hover:text-blue-500">
                   FAQs
                 </a>
               </p>
