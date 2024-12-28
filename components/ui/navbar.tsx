@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Script from "next/script";
 import React from "react";
-import { Package } from "lucide-react";
 import {
   LoginLink,
   LogoutLink,
