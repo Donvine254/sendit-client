@@ -9,7 +9,7 @@ import React from "react";
 import Image from "next/image";
 export default function Features() {
   return (
-    <section className="bg-[#f8f9fa] py-12">
+    <section className="bg-[#f8f9fa] py-6 sm:py-10 md:py-12">
       <div className="bg-[url('/why-us-bg.png')] bg-contain bg-center bg-no-repeat">
         <div className="container mx-auto px-6">
           {/* Header */}

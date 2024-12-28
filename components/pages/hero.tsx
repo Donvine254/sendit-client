@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Heropage() {
   return (
-    <section className="h-screen bg-[#F8F9FA]">
+    <section className="min-h-screen bg-[#F8F9FA] sm:mb-20 overflow-hidden">
       <div className="bg-gradient-to-br from-blue-400 via-gray-100 to-blue-400 relative h-screen min-h-[600px] md:bg-white">
         <div
           className="absolute inset-0 bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/t_hiring-banner/v1735326614/illustrations/cstnqioumwvu8iinrq0r.webp')] bg-no-repeat bg-right bg-contain md:block hidden w-full"
@@ -19,7 +19,7 @@ export default function Heropage() {
                 Courier Services
               </span>
             </h1>
-            <p className="mt-3 text-base text-muted-foreground sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+            <p className="mt-3 text-base text-muted-foreground sm:mt-5 sm:text-xl lg:text-lg xl:text-xl md:max-w-sm lg:max-w-max">
               Send your parcels with confidence. We pick up from your location
               and deliver to any destination. Quick, secure, and hassle-free
               shipping solutions for all your needs.
@@ -39,17 +39,19 @@ export default function Heropage() {
                 </Button>
               </Link>
             </div>
-            <div className="flex mt-4 md:hidden">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-8 h-8 text-yellow-400 fill-yellow-400"
-                />
-              ))}
+            <div className="md:hidden">
+              <div className="flex mt-4 ">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-8 h-8 text-yellow-400 fill-yellow-400"
+                  />
+                ))}
+              </div>
+              <p className="mt-4 text-3xl font-bold">
+                2k+ <span className="text-muted-foreground">Good Reviews</span>
+              </p>
             </div>
-            <p className="mt-4 text-3xl font-bold">
-              2k+ <span className="text-muted-foreground">Good Reviews</span>
-            </p>
           </div>
         </div>
       </div>
