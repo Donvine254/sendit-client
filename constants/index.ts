@@ -83,6 +83,49 @@ export const faqData = {
   ],
 };
 
+export const pricingPlans = [
+  {
+    title: "Regular",
+    price: 350,
+    features: [
+      "Same Day Delivery within Nairobi",
+      "Item Tracking",
+      "<30 Minutes Pickup",
+      "Non-Perishable Goods",
+      "0-10kgs per parcel",
+      "Door Delivery",
+      "Fresh Guarantee",
+    ],
+  },
+  {
+    title: "Same Day",
+    price: 500,
+    isPopular: true,
+    features: [
+      "Same Day Delivery in selected regions",
+      "Item tracking",
+      "<10 Minutes Pickup",
+      "Perishable and Non-Perishable Goods",
+      "0-20kgs per parcel",
+      "Door Delivery",
+      "Fresh Guarantee",
+    ],
+  },
+  {
+    title: "Cargo",
+    price: 750,
+    features: [
+      "Same Day Delivery in selected regions",
+      "Item Tracking",
+      "<20 Minutes Pickup",
+      "Non-Perishable Goods",
+      "Maximum 70kgs per parcel",
+      "Promo and Special Discounts",
+      "Door Delivery",
+    ],
+  },
+];
+
 export const regions = [
   {
     county: "Baringo",
