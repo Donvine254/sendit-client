@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { HomeIcon } from "lucide-react";
 
 interface Star {
   id: number;
@@ -118,7 +119,10 @@ export default function NotFound() {
         transition={{ delay: 0.5 }}
         className="z-10">
         <Button asChild className="bg-blue-500 hover:bg-blue-600 text-white">
-          <Link href="/">Return to Homepage</Link>
+          <Link href="/">
+            {" "}
+            <HomeIcon /> Return to Homepage
+          </Link>
         </Button>
       </motion.div>
     </div>
