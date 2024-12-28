@@ -30,7 +30,7 @@ export default function Heropage() {
                   variant="default"
                   className="justify-between gap-2 bg-blue-500 text-white">
                   Send Parcel
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-5 w-5 animate-move-arrow" />
                 </Button>
               </Link>
               <Link href="/contact" passHref>

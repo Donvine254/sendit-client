@@ -1,6 +1,6 @@
 import {
   Clock10Icon,
-  MapPinIcon,
+  Globe,
   ShieldCheckIcon,
   TagIcon,
   Trophy,
@@ -77,9 +77,21 @@ export default function Features() {
                 </div>
               </div>
             </div>
-
+            {/* show this only in small devices */}
+            <div className="flex md:hidden justify-between gap-2">
+              <div className="w-fit h-fit px-2 py-2 bg-blue-500 rounded-md">
+                <Globe fill="none" className="text-white" size={40} />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">Nationwide Coverage</h3>
+                <p className="mt-2 text-base text-gray-600">
+                  Delivering your packages to any location across the country
+                  with unmatched efficiency.
+                </p>
+              </div>
+            </div>
             {/* Feature 3 */}
-            <div className="space-y-4 py-2 flex flex-col items-center">
+            <div className="space-y-4 py-2 hidden  md:flex flex-col  items-center ">
               <div className="flex justify-between gap-2 items-start">
                 <div>
                   <h3 className="text-xl font-semibold text-right">
@@ -105,7 +117,7 @@ export default function Features() {
                   </p>
                 </div>
                 <div className="w-fit h-fit px-2 py-2 bg-blue-500 rounded-md">
-                  <MapPinIcon fill="none" className="text-white" size={40} />
+                  <Globe fill="none" className="text-white" size={40} />
                 </div>
               </div>
             </div>

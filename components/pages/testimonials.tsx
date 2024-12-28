@@ -65,7 +65,7 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-3 gap-4 mx-auto text-center divide-x py-2 mt-2">
+        <div className="grid grid-cols-3 gap-4 mx-auto text-center divide-x py-2 my-10">
           {stats.map((stat, index) => (
             <div key={index}>
               <p className=" text-2xl md:text-4xl font-bold text-blue-600 mb-2">
