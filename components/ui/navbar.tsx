@@ -53,7 +53,7 @@ export default function NavigationMenu() {
         defer
         src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></Script>
       <motion.section
-        className=" text-blue-600 md:text-gray-700  z-20 py-4  top-0  w-full shadow"
+        className="xsm:!bg-white text-blue-600 md:text-gray-700  z-20 py-4  top-0  w-full shadow"
         style={motionStyle as any}>
         <Navbar />
       </motion.section>
