@@ -4,6 +4,7 @@ import { Package } from "lucide-react";
 import { AddressFormData, ParcelFormData, sessionUser } from "@/types";
 import { toast } from "sonner";
 import { createOrder } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 interface OrderSummaryProps {
   parcelData: ParcelFormData;
@@ -13,7 +14,7 @@ interface OrderSummaryProps {
   onBack: () => void;
   user: sessionUser;
 }
-
+declare const confetti: any;
 const OrderSummary = ({
   parcelData,
   pickupAddress,
@@ -22,6 +23,7 @@ const OrderSummary = ({
   user,
   onBack,
 }: OrderSummaryProps) => {
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const orderData = {
@@ -35,7 +37,15 @@ const OrderSummary = ({
     try {
       const res = await createOrder(orderData);
       if (res.success) {
-        toast.success(res.message);
+        toast.success(res.message, { position: "top-center" });
+        confetti({
+          particleCount: 1000,
+          spread: 100,
+          origin: { y: 0.3 },
+        });
+        setTimeout(() => {
+          router.replace("/me/orders");
+        }, 2000);
       } else {
         toast.error(res.error || "Something went wrong");
       }
