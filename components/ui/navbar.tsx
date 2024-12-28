@@ -7,6 +7,7 @@ import {
   LogoutLink,
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
+import Image from "next/image";
 export default async function NavigationMenu() {
   const { isAuthenticated } = getKindeServerSession();
   const isAuth = await isAuthenticated();
@@ -19,9 +20,16 @@ export default async function NavigationMenu() {
         src="https://unpkg.com/@themesberg/flowbite@1.1.1/dist/flowbite.bundle.js"></Script>
       <section className=" text-blue-600 md:text-gray-700  bg-white z-20 py-4 px-4 fixed top-0 w-full shadow">
         <div className="container bg-transparent mx-auto flex flex-wrap items-center justify-between">
-          <Link href="/" className="flex items-center gap-1">
-            <Package className="h-8 w-8 " />
-            <h2 className="text-xl font-bold uppercase">Sendit</h2>
+          <Link href="/" className="flex items-center gap-1 text-blue-600">
+            <Image
+              src="https://res.cloudinary.com/dipkbpinx/image/upload/v1735352741/illustrations/by2cal2orce7rmqsceqi.svg"
+              height={32}
+              width={32}
+              alt="logo"
+              priority
+              className="h-8 w-8 "
+            />
+            <h2 className="text-xl font-extrabold uppercase">Sendit</h2>
           </Link>
           <button
             data-collapse-toggle="mobile-menu"
@@ -52,7 +60,7 @@ export default async function NavigationMenu() {
             </svg>
           </button>
           <div className="hidden md:block w-full md:w-auto" id="mobile-menu">
-            <ul className="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-xl md:font-medium">
+            <ul className="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-lg md:font-medium">
               <li>
                 <Link
                   href="/"
@@ -175,13 +183,13 @@ export default async function NavigationMenu() {
                   </ul>
                 </div>
               </li>
-              <li className={`${isAuth ? "hidden" : "block"}`}>
-                <LoginLink className="text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-600 md:hover:shadow  md:bg-blue-500 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:px-4 md:text-white md:text-center md:rounded-md md:h-8">
+              <li className={`${isAuth ? "hidden" : "flex"}`}>
+                <LoginLink className="text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-600 md:hover:shadow  md:bg-blue-500 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:px-4 items-center md:text-white md:text-center md:rounded-md md:h-8">
                   Login
                 </LoginLink>
               </li>
-              <li className={`${!isAuth ? "hidden" : "block"} `}>
-                <LogoutLink className=" text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-500 md:hover:shadow  md:bg-blue-600 block pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:h-8 md:px-4 md:text-white md:text-center md:rounded-md ">
+              <li className={`${!isAuth ? "hidden" : "flex"} `}>
+                <LogoutLink className=" text-gray-700 hover:bg-gray-50 xsm:border-b  md:hover:bg-blue-500 md:hover:shadow  md:bg-blue-600  pl-3 pr-4 py-2 md:hover:text-white md:py-0 md:h-8 md:px-4 md:text-white md:text-center md:rounded-md  items-center">
                   Logout
                 </LogoutLink>
               </li>
