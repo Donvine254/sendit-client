@@ -1,5 +1,6 @@
 import { Whatsapp } from "@/assets";
 import { MailIcon, MapPin, Phone } from "lucide-react";
+import ContactForm from "./contact-form";
 
 const contactMethods = [
   {
@@ -39,9 +40,11 @@ const contactMethods = [
 
 export default function ContactCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 md:p-6">
       {contactMethods.map((method, index) => (
-        <div key={index} className="bg-white p-6 rounded-lg shadow border">
+        <div
+          key={index}
+          className="bg-white p-6 rounded-lg shadow border w-full">
           <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
             <method.icon className="h-6 w-6 text-blue-600" />
           </div>
@@ -54,6 +57,9 @@ export default function ContactCards() {
           </a>
         </div>
       ))}
+
+      {/* Contact Form */}
+      <ContactForm />
     </div>
   );
 }

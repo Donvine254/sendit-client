@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 type Props = {};
 export const metadata: Metadata = {
-  title: "Sendit Courier- Frequently Asked Questions ",
+  title: "Sendit Courier- Pricing Information",
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };

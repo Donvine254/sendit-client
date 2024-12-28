@@ -25,10 +25,9 @@ export default function ContactForm() {
     const email = (form.elements.namedItem("email") as HTMLInputElement)?.value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement)
       ?.value;
-    toast.success("Submitting form...", {
+    const toastId = toast.loading("Sending message...", {
       position: "top-center",
     });
-
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
@@ -44,10 +43,12 @@ export default function ContactForm() {
         subject: "You have a new message at senditcourier.vercel.app.",
       }),
     });
-
+    toast.dismiss(toastId);
     const result = await response.json();
     if (result.success) {
-      toast.success("Message sent successfully");
+      toast.success("Message sent successfully", {
+        position: "top-center",
+      });
       form.reset();
     } else {
       toast.error("Failed to send message. Please try again.");
@@ -58,11 +59,11 @@ export default function ContactForm() {
     <form
       id="form"
       onSubmit={handleSubmit}
-      className="bg-white p-6 h-full min-h-[300px] rounded-lg shadow mb-12">
+      className="bg-white p-6 col-span-full md:col-span-2  rounded-lg shadow mb-12">
       <h2 className="text-xl font-bold text-start my-2">
         Need More information?
       </h2>
-      <p className="text-muted-foreground xsm:text-sm">
+      <p className="text-muted-foreground xsm:text-sm mb-2">
         Fill up the form below to send us a message and we will get in touch as
         soon as possible.
       </p>
@@ -127,12 +128,12 @@ export default function ContactForm() {
       <div className="flex items-center justify-end gap-4 py-2">
         <button
           type="reset"
-          className="border-green-500 hover:border-red-500 border px-4 py-1 rounded-lg focus:outline-none focus:ring-2 transition-colors">
+          className="border-blue-500 hover:border-red-500 border px-4 py-1 rounded-lg focus:outline-none focus:ring-2 transition-colors">
           Clear
         </button>
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors">
+          className="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
           Send
         </button>
       </div>
