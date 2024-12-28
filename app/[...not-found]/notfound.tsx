@@ -3,17 +3,28 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
+interface Star {
+  id: number;
+  size: number;
+  x: number;
+  y: number;
+  duration: number;
+}
 const StarBackground = () => {
-  const stars = Array.from({ length: 50 }).map((_, i) => ({
-    id: i,
-    size: Math.random() * 2 + 1,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    // Reduce the duration to increase speed (e.g., between 5 and 15 seconds)
-    duration: Math.random() * 10 + 5,
-  }));
-
+  const [stars, setStars] = useState<Star[]>([]);
+  useEffect(() => {
+    const generatedStars = Array.from({ length: 50 }).map((_, i) => ({
+      id: i,
+      size: Math.random() * 2 + 1,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      // Reduce the duration to increase speed (e.g., between 5 and 15 seconds)
+      duration: Math.random() * 10 + 5,
+    }));
+    setStars(generatedStars);
+  }, []);
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       {stars.map((star) => (
