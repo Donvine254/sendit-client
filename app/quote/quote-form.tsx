@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import { Upload } from "lucide-react";
 import { QuoteFormData } from "@/types";
 import { regions } from "@/constants";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
 export default function QuoteForm() {
   const [formData, setFormData] = useState<QuoteFormData>({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     phone: "",
     email: "",
     pickupRegion: "",
@@ -47,60 +50,88 @@ export default function QuoteForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow-lg rounded-lg p-8 space-y-6">
+      className="bg-white max-w-5xl mx-auto shadow-lg rounded-lg p-8 space-y-6">
       {/* Personal Information */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">
           Personal Information
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+          <div className="space-y-1">
             <label
-              htmlFor="fullName"
-              className="block text-sm font-medium text-gray-700">
-              Full Name
+              htmlFor="firstName"
+              className="block font-semibold text-gray-700">
+              First Name
             </label>
-            <input
+            <Input
               type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Enter First Name"
               required
             />
           </div>
-          <div>
+          <div className="space-y-1">
             <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-gray-700">
-              Phone Number
+              htmlFor="lastName"
+              className="block font-semibold text-gray-700">
+              Last Name
             </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
+            <Input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Enter Last Name"
               required
             />
           </div>
-          <div className="md:col-span-2">
+          <div className="space-y-1">
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700">
-              Email Address
+              className="block font-semibold text-gray-700">
+              Email Address (optional)
             </label>
-            <input
+            <Input
               type="email"
               id="email"
               name="email"
+              placeholder="Enter your email address"
               value={formData.email}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              required
             />
+          </div>
+          <div className="space-y-1">
+            <label
+              htmlFor="phone"
+              className="block font-semibold  text-gray-700">
+              Phone Number
+            </label>
+            <div className="flex items-center group">
+              <div className="flex h-10 w-fit rounded-l-md border border-input bg-background px-2 group-focus-within:ring-2 group-focus-within:ring-offset-background group-focus-within:ring-ring">
+                <Image
+                  src="https://res.cloudinary.com/dipkbpinx/image/upload/v1735344660/logos/flag-kenya_sei3av.svg"
+                  width={48}
+                  height={48}
+                  alt="kenyan flag"
+                />
+              </div>
+              <Input
+                type="tel"
+                id="phone"
+                minLength={9}
+                maxLength={9}
+                className="rounded-l-none"
+                placeholder="Enter phone number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -109,10 +140,10 @@ export default function QuoteForm() {
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">Pickup Address</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+          <div className="space-y-1">
             <label
               htmlFor="pickupRegion"
-              className="block text-sm font-medium text-gray-700">
+              className="block font-semibold text-gray-700">
               Region
             </label>
             <select
@@ -120,7 +151,7 @@ export default function QuoteForm() {
               name="pickupRegion"
               value={formData.pickupRegion}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               required>
               <option value="">Select Region</option>
               {regions.map((region) => (
@@ -172,10 +203,10 @@ export default function QuoteForm() {
           Delivery Address
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+          <div className="space-y-1">
             <label
               htmlFor="deliveryRegion"
-              className="block text-sm font-medium text-gray-700">
+              className="block font-semibold text-gray-700">
               Region
             </label>
             <select
@@ -183,7 +214,7 @@ export default function QuoteForm() {
               name="deliveryRegion"
               value={formData.deliveryRegion}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               required>
               <option value="">Select Region</option>
               {regions.map((region) => (

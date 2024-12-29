@@ -32,7 +32,8 @@ export type sessionUser = {
 };
 
 export interface QuoteFormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   phone: string;
   email: string;
   pickupRegion: string;

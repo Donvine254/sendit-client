@@ -17,7 +17,7 @@ export default function page({}: Props) {
           </p>
         </div>
       </div>
-      <main className="bg-[#f2f2f2] bg-opacity-70">
+      <main className="bg-[#f2f2f2] bg-opacity-70 py-6">
         <QuoteForm />
       </main>
     </section>
