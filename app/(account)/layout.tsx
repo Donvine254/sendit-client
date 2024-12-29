@@ -5,7 +5,10 @@ import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
-
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { sessionUser } from "@/types";
+import UserSidenav from "@/components/pages/sidebar";
+import { getUserData } from "@/lib/actions";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,11 +24,7 @@ export const metadata: Metadata = {
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { sessionUser } from "@/types";
-import { redirect } from "next/navigation";
-import UserSidenav from "@/components/pages/sidebar";
-import { getUserData } from "@/lib/actions";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -34,9 +33,6 @@ export default async function RootLayout({
   const { getUser, getPermission } = getKindeServerSession();
   const permission = await getPermission("admin");
   const user = (await getUser()) as sessionUser;
-  if (!user) {
-    return redirect(`/api/auth/login`);
-  }
   const userData = await getUserData(user.id);
   return (
     <html lang="en">
