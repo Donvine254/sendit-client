@@ -4,13 +4,12 @@ import { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-type Props = {};
 export const metadata: Metadata = {
   title: "Sendit Courier- Contact Us",
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-export default function Contact({}: Props) {
+export default function Contact() {
   return (
     <section className="min-h-screen bg-grid-gray-100">
       <main className="bg-[#f2f2f2] bg-opacity-70">

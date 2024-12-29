@@ -7,6 +7,7 @@ import React from "react";
 interface AddressFormProps {
   title: string;
   data: AddressFormData;
+  // eslint-disable-next-line
   onChange: (data: AddressFormData) => void;
   onNext: () => void;
   onBack: () => void;

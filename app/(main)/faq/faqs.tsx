@@ -6,9 +6,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faqData } from "@/constants";
-type Props = {};
 
-export default function FAQS({}: Props) {
+
+export default function FAQS() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:bg-gray-100 p-6 sm:rounded-lg sm:shadow-md">
       {Object.entries(faqData).map(([category, questions]) => (

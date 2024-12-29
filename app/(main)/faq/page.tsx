@@ -4,14 +4,12 @@ import FAQS from "./faqs";
 import { MailIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
-type Props = {};
 export const metadata: Metadata = {
   title: "Sendit Courier- Frequently Asked Questions ",
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-export default function page({}: Props) {
+export default function page() {
   return (
     <section className="min-h-screen  bg-gradient-to-r from-blue-200 via-gray-100 to-blue-200">
       <div className="bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/v1735350473/illustrations/woqbj1kwbaszfwovpbh1.webp')] bg-cover bg-center bg-no-repeat pt-10">

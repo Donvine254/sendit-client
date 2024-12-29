@@ -1,8 +1,5 @@
-import React from "react";
 import { redirect } from "next/navigation";
 
-type Props = {};
-
-export default async function Profile({}: Props) {
+export default async function Profile() {
   return redirect("/me/profile");
 }
