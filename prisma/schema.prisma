@@ -20,6 +20,8 @@ model Parcel {
   deliveryAddress Json         @default("{\"street\": \"\", \"city\": \"\", \"state\": \"\", \"postalCode\": \"\", \"country\": \"\"}")
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
+
+  @@index([userId])
 }
 
 model shippingAddress {

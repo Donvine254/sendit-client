@@ -37,7 +37,7 @@ export async function getRecentOrders(userId: string) {
   try {
     const orders = await prisma.parcel.findMany({
       where: {
-        userId: userId,
+        userId,
       },
       orderBy: { createdAt: "desc" },
       take: 5,

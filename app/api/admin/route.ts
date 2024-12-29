@@ -13,7 +13,7 @@ export async function GET() {
   return NextResponse.json(users, { status: 200 });
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   try {
     const { id } = await req.json();
     if (!id) {
