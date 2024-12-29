@@ -24,7 +24,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
-import { ParcelStatus } from "@prisma/client";
 import { sessionUser } from "@/types";
 
 const orderStats = [
@@ -81,7 +80,7 @@ export default function ProfilePage({ user, recentOrders }: Props) {
                         {order.createdAt.toLocaleDateString()}
                       </TableCell>
                       <TableCell>
-                        <StatusBadge status={order.status as ParcelStatus} />
+                        <StatusBadge status={order.status} />
                       </TableCell>
                       <TableCell>{order?.pickupAddress?.region}</TableCell>
                       <TableCell>{order?.deliveryAddress?.region}</TableCell>
@@ -121,7 +120,7 @@ type Variants =
   | "destructive"
   | null
   | undefined;
-const StatusBadge = ({ status }: { status: ParcelStatus }) => {
+const StatusBadge = ({ status }: { status: string }) => {
   let icon;
   let variant;
   let text;
