@@ -1,11 +1,8 @@
 import React from "react";
+import { redirect } from "next/navigation";
 
 type Props = {};
 
-export default function Page({}: Props) {
-  return (
-    <section className="min-h-screen bg-grid-gray-100">
-      <p>This is the profile page</p>
-    </section>
-  );
+export default async function Profile({}: Props) {
+  return redirect("/me/profile");
 }
