@@ -284,7 +284,7 @@ export default function QuoteForm() {
       {/* Additional Information */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">
-          4. Additional Information
+          4. Parcel Information
         </h2>
         <div className="space-y-2">
           <label
@@ -347,6 +347,11 @@ export default function QuoteForm() {
                 <p className="pl-1">or drag and drop</p>
               </div>
               <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              {formData.parcelImage && (
+                <p className="mt-2 text-sm text-gray-700">
+                  {formData.parcelImage.name}
+                </p>
+              )}
             </div>
           </div>
         </div>
