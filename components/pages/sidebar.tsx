@@ -121,7 +121,9 @@ export default function UserSidenav({ user, permission, userData }: Props) {
                   navigator.clipboard
                     .writeText(user.email)
                     .then(() => {
-                      toast.success("Email Copied Successfully");
+                      toast.success("Email Copied Successfully", {
+                        position: "top-center",
+                      });
                     })
                     .catch((error) => {
                       toast.error("Failed to copy email");
