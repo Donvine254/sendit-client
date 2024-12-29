@@ -1,3 +1,4 @@
+"use client";
 import {
   MoreHorizontal,
   Eye,
@@ -8,6 +9,7 @@ import {
   Truck,
   AlarmClockPlus,
   XCircle,
+  Package,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,10 +38,9 @@ type Props = {
   recentOrders: any | [];
 };
 
-export default function ProfilePage({ user, recentOrders }: Props) {
-  console.log(user);
+export default function ProfilePage({ recentOrders }: Props) {
   return (
-    <section className="bg-stone-100">
+    <section className="">
       <div className="container mx-auto flex-grow">
         <div className="w-full grid xsm:grid-cols-1 grid-cols-3 py-4 gap-5">
           {orderStats.map((stat, index) => (
@@ -58,11 +59,16 @@ export default function ProfilePage({ user, recentOrders }: Props) {
         </div>
 
         <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-lg font-semibold mb-4">Recent Orders</h2>
-          <Table>
+          <h2 className="text-lg font-semibold mb-4 inline-flex items-center gap-1">
+            {" "}
+            <Package />
+            Recent Orders
+          </h2>
+          <Table className="table-auto overflow-x-auto">
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
+                <TableHead>#</TableHead>
+                <TableHead>Description</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Origin</TableHead>
@@ -72,10 +78,13 @@ export default function ProfilePage({ user, recentOrders }: Props) {
             </TableHeader>
             <TableBody>
               {recentOrders && recentOrders.length > 0
-                ? recentOrders.map((order: any) => (
+                ? recentOrders.map((order: any, index: number) => (
                     <TableRow key={order.id}>
                       <TableCell>
-                        <Badge variant="outline">#{order.id}</Badge>
+                        <Badge variant="outline">{index + 1}</Badge>
+                      </TableCell>
+                      <TableCell className="capitalize">
+                        {order.description}
                       </TableCell>
                       <TableCell>
                         {order.createdAt.toLocaleDateString()}
@@ -129,12 +138,12 @@ const StatusBadge = ({ status }: { status: string }) => {
   switch (status) {
     case "PENDING":
       icon = <AlarmClockPlus className="mr-2 h-4 w-4" />;
-      variant = "secondary";
+      variant = "default";
       text = "Pending";
       break;
     case "IN_TRANSIT":
       icon = <Truck className="mr-2 h-4 w-4" />;
-      variant = "default";
+      variant = "secondary";
       text = "In Transit";
       break;
     case "DELIVERED":
@@ -150,7 +159,7 @@ const StatusBadge = ({ status }: { status: string }) => {
   }
 
   return (
-    <Badge variant={variant as Variants} className="justify-start">
+    <Badge variant={variant as Variants} className="justify-start font-normal">
       {icon}
       {text}
     </Badge>
