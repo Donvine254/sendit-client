@@ -15,7 +15,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+
 import { sessionUser } from "@/types";
+import { toast } from "sonner";
 
 const navItems = [
   {
@@ -74,6 +76,7 @@ export default function UserSidenav({ user, permission, userData }: Props) {
     return new Date().toLocaleDateString("en-US", options);
   }
   const date = getCurrentDate();
+
   return (
     <div>
       <div className="w-full bg-white border shadow rounded-md  transition-all duration-300">
@@ -113,7 +116,18 @@ export default function UserSidenav({ user, permission, userData }: Props) {
             <p className="text-sm text-muted-foreground">Email</p>
             <p className="flex items-center gap-1">
               <span className="text-sm">{user.email}</span>
-              <button>
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(user.email)
+                    .then(() => {
+                      toast.success("Email Copied Successfully");
+                    })
+                    .catch((error) => {
+                      toast.error("Failed to copy email");
+                      console.error("Clipboard error:", error);
+                    });
+                }}>
                 <CopyIcon className="h-3 w-3 text-blue-500" />
               </button>
             </p>
