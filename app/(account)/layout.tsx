@@ -20,19 +20,32 @@ export const metadata: Metadata = {
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-
-export default function RootLayout({
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { sessionUser } from "@/types";
+import { redirect } from "next/navigation";
+import UserSidenav from "@/components/pages/sidebar";
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { getUser } = getKindeServerSession();
+  const user = (await getUser()) as sessionUser;
+  if (!user) {
+    return redirect(`/api/auth/login`);
+  }
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <NavigationMenu />
         <Toaster />
-        {children}
+        <section className="bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10">
+          <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8 mt:24 md:mt-6 py-10 ">
+            <UserSidenav user={user} />
+            <section className="md:flex-1"> {children}</section>
+          </div>
+        </section>
         <Footer />
       </body>
     </html>

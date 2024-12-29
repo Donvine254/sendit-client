@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { Users, init } from "@kinde/management-api-js";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
 export async function GET() {
   const { isAuthenticated, getPermission } = getKindeServerSession();
   const permission = await getPermission("admin");
@@ -11,4 +12,16 @@ export async function GET() {
   init();
   const { users } = await Users.getUsers();
   return NextResponse.json(users, { status: 200 });
+}
+
+export async function POST(req: NextRequest, res: NextResponse) {
+  const { id } = await req.json();
+  if (id) {
+    const params = {
+      id: id,
+    };
+    init();
+    const userData = await Users.getUserData(params);
+    return NextResponse.json(userData);
+  } else return NextResponse.json({ error: "User not found" }, { status: 404 });
 }
