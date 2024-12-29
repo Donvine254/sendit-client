@@ -51,6 +51,22 @@ export async function getRecentOrders(userId: string) {
   }
 }
 
+export async function getUserOrders(userId: string) {
+  try {
+    const orders = await prisma.parcel.findMany({
+      where: {
+        userId,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+    return orders;
+  } catch (error) {
+    console.error(error);
+    return null;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
 export async function getUserOrderStatistics(userId: string) {
   try {
     const orders = await prisma.parcel.findMany({
