@@ -39,8 +39,8 @@ export default function Heropage() {
                 </Button>
               </Link>
             </div>
-            <div className="">
-              <div className="flex mt-4 ">
+            <div className="md:hidden">
+              <div className="flex mt-4">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}

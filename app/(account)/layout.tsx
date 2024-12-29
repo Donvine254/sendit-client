@@ -1,14 +1,19 @@
 import React from "react";
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 
-const eb_garamond = EB_Garamond({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +40,8 @@ export default async function RootLayout({
   const userData = await getUserData(user.id);
   return (
     <html lang="en">
-      <body className={`antialiased smooth-scroll ${eb_garamond.className}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <NavigationMenu />
         <Toaster />
         <section

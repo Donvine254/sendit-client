@@ -150,7 +150,7 @@ export default function UserSidenav({ user, permission, userData }: Props) {
                   ? "hover:bg-destructive hover:text-destructive-foreground"
                   : "hover:bg-blue-100"
               } ${
-                pathname === item.href
+                pathname === item.href || pathname.includes(item.href)
                   ? "text-blue-600 bg-blue-100 font-semibold"
                   : ""
               }`}>
