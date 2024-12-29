@@ -30,3 +30,19 @@ export type sessionUser = {
   username?: string;
   phone_number?: string;
 };
+
+export interface QuoteFormData {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  pickupRegion: string;
+  pickupDistrict: string;
+  pickupAddress: string;
+  deliveryRegion: string;
+  deliveryDistrict: string;
+  deliveryAddress: string;
+  description: string;
+  weight: number;
+  parcelImage: File | null;
+}
