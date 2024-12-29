@@ -160,9 +160,10 @@ export default function Navbar({}: Props) {
                   height={32}
                   alt="avatar"
                   title="open menu"
-                  className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none"
+                  className="hidden md:block w-8 h-8 rounded-full focus:outline-none focus-within:outline-none"
                 />
               )}
+              <span className="md:hidden">My Account</span>
               <svg
                 className="w-4 h-4 ml-1"
                 fill="currentColor"
