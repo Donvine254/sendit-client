@@ -9,9 +9,7 @@ import {
   CircleFadingPlus,
   HeadsetIcon,
   HouseIcon,
-  ChevronDown,
   CopyIcon,
-  Dot,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -52,10 +50,12 @@ const navItems = [
 
 type Props = {
   user: sessionUser;
+  permission: any;
+  userData: any | {};
 };
-export default function UserSidenav({ user }: Props) {
+export default function UserSidenav({ user, permission, userData }: Props) {
   const pathname = usePathname();
-  console.log(user);
+  const isAdmin = permission?.isGranted;
   return (
     <div className="w-full bg-white border shadow rounded-md  transition-all duration-300">
       <div className="flex justify-between items-center px-4 py-2">
@@ -92,14 +92,21 @@ export default function UserSidenav({ user }: Props) {
         <div className="space-y-1">
           <p className="text-sm text-muted-foreground">Account</p>
           <button className="text-sm font-medium  px-2 rounded-xl bg-white text-blue-500 border flex items-center justify-start gap-1">
-            <span>&#x2022;</span> <span>Normal User</span>
+            <span>&#x2022;</span>{" "}
+            <span>{isAdmin ? "Admin" : "Normal User"}</span>
           </button>
         </div>
 
         <div className="space-y-1">
           <p className="text-sm text-muted-foreground">Joined</p>
           <p className="text-sm font-medium">
-            {new Date().toLocaleDateString()}
+            {new Date(userData.created_on).toLocaleDateString()}
+          </p>
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm text-muted-foreground">Last Login</p>
+          <p className="text-sm font-medium">
+            {new Date(userData.last_signed_in).toLocaleString()}
           </p>
         </div>
       </div>

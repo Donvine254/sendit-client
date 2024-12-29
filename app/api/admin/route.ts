@@ -1,7 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { Users, init } from "@kinde/management-api-js";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { RESPONSE_LIMIT_DEFAULT } from "next/dist/server/api-utils";
 export async function GET() {
   const { isAuthenticated, getPermission } = getKindeServerSession();
   const permission = await getPermission("admin");
@@ -15,6 +14,10 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  const { isAuthenticated } = getKindeServerSession();
+  if (!isAuthenticated) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
   const { id } = await req.json();
   if (id) {
     const params = {
