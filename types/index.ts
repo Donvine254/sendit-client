@@ -42,6 +42,7 @@ export interface QuoteFormData {
   deliveryRegion: string;
   deliveryDistrict: string;
   deliveryAddress: string;
-  message: string;
+  description: string;
+  weight: number;
   parcelImage: File | null;
 }

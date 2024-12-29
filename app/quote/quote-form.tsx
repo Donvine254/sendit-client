@@ -17,7 +17,8 @@ export default function QuoteForm() {
     deliveryRegion: "",
     deliveryDistrict: "",
     deliveryAddress: "",
-    message: "",
+    description: "",
+    weight: 0,
     parcelImage: null,
   });
 
@@ -54,13 +55,13 @@ export default function QuoteForm() {
       {/* Personal Information */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">
-          Personal Information
+          1. Personal Information
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <label
               htmlFor="firstName"
-              className="block font-semibold text-gray-700">
+              className="block font-semibold text-muted-foreground">
               First Name
             </label>
             <Input
@@ -76,7 +77,7 @@ export default function QuoteForm() {
           <div className="space-y-1">
             <label
               htmlFor="lastName"
-              className="block font-semibold text-gray-700">
+              className="block font-semibold text-muted-foreground">
               Last Name
             </label>
             <Input
@@ -92,7 +93,7 @@ export default function QuoteForm() {
           <div className="space-y-1">
             <label
               htmlFor="email"
-              className="block font-semibold text-gray-700">
+              className="block font-semibold text-muted-foreground">
               Email Address (optional)
             </label>
             <Input
@@ -107,7 +108,7 @@ export default function QuoteForm() {
           <div className="space-y-1">
             <label
               htmlFor="phone"
-              className="block font-semibold  text-gray-700">
+              className="block font-semibold  text-muted-foreground">
               Phone Number
             </label>
             <div className="flex items-center group">
@@ -138,12 +139,14 @@ export default function QuoteForm() {
 
       {/* Pickup Address */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Pickup Address</h2>
+        <h2 className="text-xl font-semibold text-gray-900">
+          2. Pickup Address
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <label
               htmlFor="pickupRegion"
-              className="block font-semibold text-gray-700">
+              className="block font-semibold text-muted-foreground">
               Region
             </label>
             <select
@@ -151,7 +154,7 @@ export default function QuoteForm() {
               name="pickupRegion"
               value={formData.pickupRegion}
               onChange={handleInputChange}
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background  placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               required>
               <option value="">Select Region</option>
               {regions.map((region) => (
@@ -161,26 +164,34 @@ export default function QuoteForm() {
               ))}
             </select>
           </div>
-          <div>
+          <div className="space-y-1">
             <label
               htmlFor="pickupDistrict"
-              className="block text-sm font-medium text-gray-700">
+              className="block font-semibold text-muted-foreground">
               District
             </label>
-            <input
-              type="text"
+            <select
               id="pickupDistrict"
               name="pickupDistrict"
               value={formData.pickupDistrict}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              required
-            />
+              disabled={!formData.pickupRegion}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              required>
+              <option value="">Select a region</option>
+              {regions
+                .find((region) => region.county === formData.pickupRegion)
+                ?.subcounties.map((subcounty) => (
+                  <option key={subcounty} value={subcounty}>
+                    {subcounty}
+                  </option>
+                ))}
+            </select>
           </div>
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 space-y-1">
             <label
               htmlFor="pickupAddress"
-              className="block text-sm font-medium text-gray-700">
+              className="block font-semibold text-muted-foreground">
               Detailed Address
             </label>
             <textarea
@@ -188,8 +199,8 @@ export default function QuoteForm() {
               name="pickupAddress"
               value={formData.pickupAddress}
               onChange={handleInputChange}
-              rows={3}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              rows={2}
+              className=" block w-full rounded-md border border-input bg-background placeholder:text-muted-foreground focus-visible:outline-none shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 px-3 py-2 text-base md:text-sm"
               placeholder="Street name and nearby landmark"
               required
             />
@@ -200,13 +211,13 @@ export default function QuoteForm() {
       {/* Delivery Address */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">
-          Delivery Address
+          3. Delivery Address
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <label
               htmlFor="deliveryRegion"
-              className="block font-semibold text-gray-700">
+              className="block font-semibold text-muted-foreground">
               Region
             </label>
             <select
@@ -214,7 +225,7 @@ export default function QuoteForm() {
               name="deliveryRegion"
               value={formData.deliveryRegion}
               onChange={handleInputChange}
-              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               required>
               <option value="">Select Region</option>
               {regions.map((region) => (
@@ -224,26 +235,35 @@ export default function QuoteForm() {
               ))}
             </select>
           </div>
-          <div>
+          <div className="space-y-1">
             <label
               htmlFor="deliveryDistrict"
-              className="block text-sm font-medium text-gray-700">
+              className="block font-semibold text-muted-foreground">
               District
             </label>
-            <input
-              type="text"
+            <select
               id="deliveryDistrict"
               name="deliveryDistrict"
               value={formData.deliveryDistrict}
               onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              required
-            />
+              disabled={!formData.deliveryRegion}
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              required>
+              <option value="">Select a region</option>
+              {regions
+                .find((region) => region.county === formData.deliveryRegion)
+                ?.subcounties.map((subcounty) => (
+                  <option key={subcounty} value={subcounty}>
+                    {subcounty}
+                  </option>
+                ))}
+            </select>
           </div>
-          <div className="md:col-span-2">
+
+          <div className="md:col-span-2 space-y-1">
             <label
               htmlFor="deliveryAddress"
-              className="block text-sm font-medium text-gray-700">
+              className="block font-semibold text-muted-foreground">
               Detailed Address
             </label>
             <textarea
@@ -251,8 +271,8 @@ export default function QuoteForm() {
               name="deliveryAddress"
               value={formData.deliveryAddress}
               onChange={handleInputChange}
-              rows={3}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              rows={2}
+              className="block w-full rounded-md border border-input bg-background placeholder:text-muted-foreground focus-visible:outline-none shadow-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 px-3 py-2 text-base md:text-sm"
               placeholder="Street name and nearby landmark"
               required
             />
@@ -263,28 +283,47 @@ export default function QuoteForm() {
       {/* Additional Information */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold text-gray-900">
-          Additional Information
+          4. Additional Information
         </h2>
-        <div>
+        <div className="space-y-2">
           <label
-            htmlFor="message"
-            className="block text-sm font-medium text-gray-700">
-            Message
+            htmlFor="description"
+            className="block font-semibold text-muted-foreground">
+            Parcel Description
           </label>
           <textarea
-            id="message"
-            name="message"
-            value={formData.message}
+            id="description"
+            name="description"
+            value={formData.description}
             onChange={handleInputChange}
-            rows={4}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-            placeholder="Any additional details about your parcel..."
+            rows={3}
+            required
+            className="block w-full rounded-md border border-input bg-background placeholder:text-muted-foreground focus-visible:outline-none shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 px-3 py-2 text-base md:text-sm"
+            placeholder="What are you sending..."
+          />
+        </div>
+        <div className="my-1">
+          <label
+            htmlFor="weight"
+            className="block font-semibold text-muted-foreground">
+            Weight (kg)
+          </label>
+          <Input
+            type="number"
+            id="weight"
+            name="weight"
+            min="0.1"
+            placeholder="Weight in Kgs"
+            step="0.1"
+            value={formData.weight || ""}
+            onChange={handleInputChange}
+            required
           />
         </div>
 
         {/* File Upload */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="block text-sm font-medium text-muted-foreground">
             Parcel Image (Optional)
           </label>
           <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-blue-500 transition-colors">
