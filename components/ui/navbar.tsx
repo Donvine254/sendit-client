@@ -1,6 +1,6 @@
 "use client";
 import Script from "next/script";
-import React, { useMemo } from "react";
+import React from "react";
 import {
   motion,
   useScroll,

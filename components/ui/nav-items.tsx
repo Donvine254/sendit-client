@@ -2,10 +2,9 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-type Props = {};
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ChevronDown } from "lucide-react";
-export default function Navbar({}: Props) {
+export default function Navbar() {
   const { user } = useKindeBrowserClient();
 
   return (
@@ -160,9 +159,10 @@ export default function Navbar({}: Props) {
                   height={32}
                   alt="avatar"
                   title="open menu"
-                  className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none"
+                  className="hidden md:block w-8 h-8 rounded-full focus:outline-none focus-within:outline-none"
                 />
               )}
+              <span className="md:hidden">My Account</span>
               <svg
                 className="w-4 h-4 ml-1"
                 fill="currentColor"
@@ -180,6 +180,7 @@ export default function Navbar({}: Props) {
               className="hidden bg-white text-base z-10 list-none divide-y divide-gray-200 rounded shadow my-4 w-[84%] md:w-44">
               <ul className="py-1" aria-labelledby="dropdownLargeButton">
                 <li>
+                  {/* eslint-disable-next-line */}
                   <a
                     href="/me/profile"
                     className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
@@ -187,6 +188,7 @@ export default function Navbar({}: Props) {
                   </a>
                 </li>
                 <li>
+                  {/* eslint-disable-next-line */}
                   <a
                     href="/me/orders"
                     className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
@@ -194,6 +196,7 @@ export default function Navbar({}: Props) {
                   </a>
                 </li>
                 <li>
+                  {/* eslint-disable-next-line */}
                   <a
                     href="/me/settings"
                     className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">

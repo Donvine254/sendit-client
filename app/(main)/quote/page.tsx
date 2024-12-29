@@ -1,9 +1,7 @@
 import React from "react";
 import QuoteForm from "./quote-form";
 
-type Props = {};
-
-export default function page({}: Props) {
+export default function page() {
   return (
     <section className="min-h-screen bg-grid-gray-100">
       <div className="bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/v1735350473/illustrations/woqbj1kwbaszfwovpbh1.webp')] bg-cover bg-center bg-no-repeat pt-10">

@@ -4,13 +4,12 @@ import { CircleCheck } from "lucide-react";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-type Props = {};
 export const metadata: Metadata = {
   title: "Sendit Courier- Pricing Information",
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-export default function Pricing({}: Props) {
+export default function Pricing() {
   return (
     <section className="min-h-screen bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]">
       <div className="bg-[url('https://res.cloudinary.com/dipkbpinx/image/upload/v1735350473/illustrations/woqbj1kwbaszfwovpbh1.webp')] bg-cover bg-center bg-no-repeat pt-10">

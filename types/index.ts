@@ -25,6 +25,7 @@ export type sessionUser = {
   email: string;
   id: string;
   family_name?: string;
+  full_name?: string;
   given_name?: string;
   picture?: string;
   username?: string;
@@ -46,3 +47,28 @@ export interface QuoteFormData {
   weight: number;
   parcelImage: File | null;
 }
+export type Order = {
+  id: string;
+  userId: string;
+  description: string;
+  createdAt: Date;
+  updatedAt?: Date | null;
+  status: string;
+  pickupAddress: {
+    fullName?: string;
+    phone: string;
+    email?: string;
+    region: string;
+    district: string;
+    address: string;
+  };
+  deliveryAddress: {
+    fullName?: string;
+    phone: string;
+    email?: string;
+    region: string;
+    district: string;
+    address: string;
+  };
+  price: number;
+};
