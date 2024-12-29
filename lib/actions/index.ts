@@ -11,6 +11,8 @@ export async function createOrder(parcelData: ParcelOrderData) {
   } catch (error: any) {
     console.log(error);
     return { success: true, error: "Something went wrong" };
+  } finally {
+    await prisma.$disconnect();
   }
 }
 
@@ -28,5 +30,23 @@ export async function getUserData(userId: string) {
   } catch (error) {
     console.error(error);
     return null;
+  }
+}
+
+export async function getRecentOrders(userId: string) {
+  try {
+    const orders = await prisma.parcel.findMany({
+      where: {
+        userId: userId,
+      },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+    });
+    return orders;
+  } catch (error) {
+    console.error(error);
+    return null;
+  } finally {
+    await prisma.$disconnect();
   }
 }
