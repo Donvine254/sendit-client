@@ -24,7 +24,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
-import { Parcel, ParcelStatus } from "@prisma/client";
+import { ParcelStatus } from "@prisma/client";
 import { sessionUser } from "@/types";
 
 const orderStats = [
