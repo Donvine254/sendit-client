@@ -80,10 +80,10 @@ export default function UserSidenav({ user, permission, userData }: Props) {
         <div className="flex justify-between items-center px-4 py-2">
           <div className="flex items-center space-x-4">
             <Image
-              className="w-8 h-8 rounded-full ring-offset-4 ring-2 ring-blue-600 ring-offset-white object-cover"
+              className="w-12 h-12 rounded-full ring-offset-2 ring-2 ring-blue-600 ring-offset-white object-cover"
               alt="user-avatar"
-              height={32}
-              width={32}
+              height={48}
+              width={48}
               src={
                 user.picture ||
                 "https://res.cloudinary.com/dipkbpinx/image/upload/v1734556978/carhub/avatars/paqrtcgyypq1qelyzrwj.png"
@@ -91,7 +91,8 @@ export default function UserSidenav({ user, permission, userData }: Props) {
             />
             <div className="flex flex-col">
               <span className="text-gray-700 font-semibold text-sm capitalize">
-                {user.full_name ?? `${user.given_name} ${user.family_name}`}
+                {user.full_name ??
+                  `${userData.first_name} ${userData.last_name}`}
               </span>
               <span className="text-xs md:text-sm text-muted-foreground">
                 {date}
@@ -100,7 +101,10 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           </div>
 
           <div className="flex space-x-2 px-4 py-2">
-            <CircleFadingPlus className="h-5 w-5" />
+            <Link title="update shipping address" href="/me/settings">
+              {" "}
+              <CircleFadingPlus className="h-5 w-5 text-blue-600" />
+            </Link>
           </div>
         </div>
         <hr />
@@ -125,7 +129,7 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Joined</p>
             <p className="text-sm font-medium">
-              {new Date(userData.created_on).toLocaleString()}
+              {new Date(userData.created_on).toLocaleDateString()}
             </p>
           </div>
           <div className="space-y-1 md:border-l-2 md:px-2">

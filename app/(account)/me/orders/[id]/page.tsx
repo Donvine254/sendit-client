@@ -4,9 +4,9 @@ import Orderform from "./order-form";
 import StatusBadge from "@/components/ui/status-badge";
 import Progress from "./order-progress";
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function OrderPage({ params }: Props) {

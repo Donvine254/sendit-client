@@ -197,7 +197,7 @@ export default function Orderform({ order }: Props) {
         {/* Delivery Address */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-gray-900">
-            3. Delivery Address
+            4. Delivery Address
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
@@ -252,7 +252,7 @@ export default function Orderform({ order }: Props) {
         {/* Additional Information */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-gray-900">
-            4. Parcel Information
+            5. Parcel Information
           </h2>
           <div className="space-y-2">
             <label
