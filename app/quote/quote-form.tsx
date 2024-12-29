@@ -5,6 +5,7 @@ import { QuoteFormData } from "@/types";
 import { regions } from "@/constants";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 export default function QuoteForm() {
   const [formData, setFormData] = useState<QuoteFormData>({
     firstName: "",
@@ -322,8 +323,8 @@ export default function QuoteForm() {
         </div>
 
         {/* File Upload */}
-        <div>
-          <label className="block text-sm font-medium text-muted-foreground">
+        <div className="space-y-1">
+          <label className="block font-semibold text-muted-foreground">
             Parcel Image (Optional)
           </label>
           <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-blue-500 transition-colors">
@@ -352,12 +353,16 @@ export default function QuoteForm() {
       </div>
 
       {/* Submit Button */}
-      <div>
-        <button
+      <div className="flex items-center justify-end gap-4">
+        <Button type="reset" variant="outline">
+          Cancel
+        </Button>
+        <Button
           type="submit"
-          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+          variant="secondary"
+          className=" text-sm font-medium text-white bg-blue-600 hover:bg-blue-700  transition-colors">
           Request Quote
-        </button>
+        </Button>
       </div>
     </form>
   );
