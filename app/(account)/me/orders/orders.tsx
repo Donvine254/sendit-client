@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Eye, MoreHorizontal, Search, X } from "lucide-react";
+import { Eye, Filter, MoreHorizontal, Search, X } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -157,7 +157,7 @@ export default function DataTable({ data }: DataTableProps) {
     <div className="w-full">
       <div className="flex items-center py-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           <Input
             placeholder="Search by descriptions..."
             value={
@@ -166,14 +166,14 @@ export default function DataTable({ data }: DataTableProps) {
             onChange={(event) =>
               table.getColumn("description")?.setFilterValue(event.target.value)
             }
-            className="max-w-3xl pl-10"
+            className="flex-1 max-w-3xl pl-10"
           />
         </div>
 
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
+            <Button variant="outline" className="ml-auto justify-start">
+              <Filter className="h-4 w-4 mr-2" /> Columns
             </Button>
           </PopoverTrigger>
           <PopoverContent align="end" className="flex flex-col gap-2">

@@ -3,6 +3,12 @@ import { sessionUser } from "@/types";
 import { redirect } from "next/navigation";
 import { getUserOrders } from "@/lib/actions";
 import DataTable from "./orders";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Sendit Courier- My Account | Orders",
+  description:
+    "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
+};
 export default async function Page() {
   const { getUser } = getKindeServerSession();
   const user = (await getUser()) as sessionUser;

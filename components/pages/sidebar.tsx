@@ -163,6 +163,7 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           </Link>
         ))}
       </nav>
+      <hr />
     </div>
   );
 }
