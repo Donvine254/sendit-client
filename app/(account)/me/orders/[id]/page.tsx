@@ -23,7 +23,13 @@ export default async function OrderPage({ params }: Props) {
       <h2 className="text-lg font-semibold mb-4 my-2 inline-flex items-center gap-1">
         Order Information <StatusBadge status={order.status as string} />
       </h2>
-      {order.status !== "CANCELLED" && <Progress status={order.status} />}
+      {order.status !== "CANCELLED" && (
+        <Progress
+          status={order.status}
+          createdAt={order.createdAt}
+          updatedAt={order.updatedAt || order.createdAt}
+        />
+      )}
       <Orderform order={order} />
     </section>
   );

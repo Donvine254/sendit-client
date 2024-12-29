@@ -1,18 +1,34 @@
 import { CircleCheck, Clock, Truck } from "lucide-react";
 import React from "react";
 
-const steps = [
-  { title: "Placed", status: "PENDING", icon: Clock },
-  { title: "Shipped", status: "IN_TRANSIT", icon: Truck },
-  { title: "Delivered", status: "DELIVERED", icon: CircleCheck },
-];
+export default function Progress({
+  status,
+  createdAt,
+  updatedAt,
+}: {
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+}) {
+  const steps = [
+    {
+      title: `Placed ${new Date(createdAt).toLocaleDateString()}`,
+      status: "PENDING",
+      icon: Clock,
+    },
+    { title: "Shipped", status: "IN_TRANSIT", icon: Truck },
+    {
+      title: `Delivered ${new Date(updatedAt).toLocaleDateString()}`,
+      status: "DELIVERED",
+      icon: CircleCheck,
+    },
+  ];
 
-export default function Progress({ status }: { status: string }) {
   const currentStep = steps.findIndex((step) => step.status === status);
   return (
     <nav
       aria-label="Progress "
-      className="bg-white rounded-md p-8 mb-4 border-l-4 border-l-blue-500">
+      className="bg-white rounded-md border shadow p-8 mb-4 border-l-4 border-l-blue-500">
       <h3 className="text-lg font-semibold text-muted-foreground mb-2">
         Order Progress
       </h3>
@@ -38,7 +54,9 @@ export default function Progress({ status }: { status: string }) {
               } border-2`}>
               <step.icon className="h-6 w-6" />
             </div>
-            <small className="absolute font-medium">{step.title}</small>
+            <small className="absolute font-medium xsm:text-xs">
+              {step.title}
+            </small>
           </li>
         ))}
       </ol>
