@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Clock, MailIcon, MapPinnedIcon, Package, Phone } from "lucide-react";
+import { Clock, MailIcon, MapPinnedIcon, Phone } from "lucide-react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -65,12 +65,13 @@ export default function Footer() {
                 Company
               </h6>
               <p className="mb-4">
-                <a
+                <Link
+                  prefetch={false}
                   href="/deliveries"
                   title="book a car of your choice"
                   className="text-neutral-600 hover:text-blue-500">
                   Send Parcel
-                </a>
+                </Link>
               </p>
               <p className="mb-4">
                 <Link
@@ -103,31 +104,33 @@ export default function Footer() {
                 Quick Links
               </h6>
               <p className="mb-4">
-                <a href="/faq" className="text-neutral-600 hover:text-blue-500">
+                <Link
+                  href="/faq"
+                  className="text-neutral-600 hover:text-blue-500">
                   FAQs
-                </a>
+                </Link>
               </p>
               <p className="mb-4">
-                <a
+                <Link
                   href="/terms"
                   className="text-neutral-600 hover:text-blue-500">
                   Terms & Conditions
-                </a>
+                </Link>
               </p>
 
               <p className="mb-4">
-                <a
+                <Link
                   href="/privacy"
                   className="text-neutral-600 hover:text-blue-500">
                   Privacy Policy
-                </a>
+                </Link>
               </p>
               <p>
-                <a
+                <Link
                   href="/help"
                   className="text-neutral-600 hover:text-blue-500">
                   Help Center
-                </a>
+                </Link>
               </p>
             </div>
 

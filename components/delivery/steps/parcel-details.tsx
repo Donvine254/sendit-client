@@ -4,6 +4,7 @@ import React from "react";
 
 interface ParcelDetailsProps {
   data: ParcelFormData;
+  // eslint-disable-next-line
   onChange: (data: ParcelFormData) => void;
   onNext: () => void;
 }

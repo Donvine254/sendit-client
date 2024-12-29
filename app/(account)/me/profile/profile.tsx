@@ -37,6 +37,7 @@ type Props = {
 };
 
 export default function ProfilePage({ user, recentOrders }: Props) {
+  console.log(user);
   return (
     <section className="bg-stone-100">
       <div className="container mx-auto flex-grow">

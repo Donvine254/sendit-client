@@ -174,7 +174,7 @@ export const reviewCard = () => {
           Love Our Services? Leave Us a Review{" "}
         </h3>
         <p className="text-sm text-gray-100">
-          We'd love to hear your feedback! Please take a moment to review our
+          We&apos;d love to hear your feedback! Please take a moment to review our
           service.
         </p>
         <Button variant="secondary" className="w-full">
