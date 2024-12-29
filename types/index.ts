@@ -25,6 +25,7 @@ export type sessionUser = {
   email: string;
   id: string;
   family_name?: string;
+  full_name?: string;
   given_name?: string;
   picture?: string;
   username?: string;
