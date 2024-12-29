@@ -11,6 +11,7 @@ import {
   HouseIcon,
   CopyIcon,
   FileText,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -135,15 +136,19 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           </div>
         </div>
       </div>
-      <nav className="flex items-center space-x-4 overflow-x-auto gap-4 py-4">
-        {navItems.map((item) => (
-          <Link key={item.href} href={item.href} title={item.title}>
+      <nav className="flex items-center  overflow-x-auto py-4">
+        {navItems.map((item, index) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            title={item.title}
+            className="flex items-center gap-2">
             <Button
               variant="ghost"
               className={`w-full justify-start ${
                 item.label === "Sign out"
                   ? "hover:bg-destructive hover:text-destructive-foreground"
-                  : ""
+                  : "hover:bg-blue-100"
               } ${
                 pathname === item.href
                   ? "text-blue-600 bg-blue-100 font-semibold"
@@ -152,6 +157,9 @@ export default function UserSidenav({ user, permission, userData }: Props) {
               <item.icon className="h-4 w-4" />
               {item.label}
             </Button>
+            <ChevronRight
+              className={`text-muted-foreground ${index === 5 ? "hidden" : ""}`}
+            />
           </Link>
         ))}
       </nav>
@@ -174,8 +182,8 @@ export const reviewCard = () => {
           Love Our Services? Leave Us a Review{" "}
         </h3>
         <p className="text-sm text-gray-100">
-          We&apos;d love to hear your feedback! Please take a moment to review our
-          service.
+          We&apos;d love to hear your feedback! Please take a moment to review
+          our service.
         </p>
         <Button variant="secondary" className="w-full">
           Leave a Review

@@ -10,6 +10,7 @@ import {
   AlarmClockPlus,
   XCircle,
   Package,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -27,30 +28,49 @@ import {
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { sessionUser } from "@/types";
+import Link from "next/link";
+import Image from "next/image";
 
-const orderStats = [
-  { title: "Upcoming Orders", value: 3, icon: CalendarClock },
-  { title: "Cancelled Orders", value: 1, icon: CalendarX },
-  { title: "Total Orders", value: 25, icon: CalendarCheck },
-];
 type Props = {
   user: sessionUser;
   recentOrders: any | [];
+  orderStats: {
+    total_orders: number;
+    cancelled_orders: number;
+    pending_orders: number;
+  } | null;
 };
 
-export default function ProfilePage({ recentOrders }: Props) {
+export default function ProfilePage({ recentOrders, orderStats }: Props) {
+  const stats = [
+    {
+      title: "Upcoming Orders",
+      value: orderStats?.pending_orders,
+      icon: CalendarClock,
+    },
+    {
+      title: "Cancelled Orders",
+      value: orderStats?.cancelled_orders,
+      icon: CalendarX,
+    },
+    {
+      title: "Total Orders",
+      value: orderStats?.total_orders,
+      icon: CalendarCheck,
+    },
+  ];
   return (
     <section className="">
       <div className="container mx-auto flex-grow">
         <div className="w-full grid xsm:grid-cols-1 grid-cols-3 py-4 gap-5">
-          {orderStats.map((stat, index) => (
+          {stats.map((stat, index) => (
             <div
               key={index}
               className="bg-white p-6 rounded-lg shadow-sm border">
               <div className="flex items-start flex-col space-y-3  mb-2 p-4">
-                <stat.icon className="h-12 w-12 text-green-500" />
+                <stat.icon className="h-12 w-12 text-blue-500" />
                 <h3 className="text-3xl lg:text-5xl font-bold ">
-                  {stat.value}
+                  0{stat.value}
                 </h3>
                 <span className="text-base text-gray-500">{stat.title}</span>
               </div>
@@ -64,58 +84,90 @@ export default function ProfilePage({ recentOrders }: Props) {
             <Package />
             Recent Orders
           </h2>
-          <Table className="table-auto overflow-x-auto">
-            <TableHeader>
-              <TableRow>
-                <TableHead>#</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead>Date</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Origin</TableHead>
-                <TableHead>Destination</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recentOrders && recentOrders.length > 0
-                ? recentOrders.map((order: any, index: number) => (
-                    <TableRow key={order.id}>
-                      <TableCell>
-                        <Badge variant="outline">{index + 1}</Badge>
-                      </TableCell>
-                      <TableCell className="capitalize">
-                        {order.description}
-                      </TableCell>
-                      <TableCell>
-                        {order.createdAt.toLocaleDateString()}
-                      </TableCell>
-                      <TableCell>
-                        <StatusBadge status={order.status} />
-                      </TableCell>
-                      <TableCell>{order?.pickupAddress?.region}</TableCell>
-                      <TableCell>{order?.deliveryAddress?.region}</TableCell>
-                      <TableCell>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button variant="ghost" className="h-8 w-8 p-0">
-                              <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-40">
-                            <Button
-                              variant="ghost"
-                              className="w-full justify-start gap-2">
-                              <Eye className="h-4 w-4" />
-                              View Details
-                            </Button>
-                          </PopoverContent>
-                        </Popover>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                : null}
-            </TableBody>
-          </Table>
+          {recentOrders && recentOrders.length > 0 ? (
+            <Table className="table-auto overflow-x-auto">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>#</TableHead>
+                  <TableHead>Description</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Origin</TableHead>
+                  <TableHead>Destination</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {recentOrders && recentOrders.length > 0
+                  ? recentOrders.map((order: any, index: number) => (
+                      <TableRow key={order.id}>
+                        <TableCell>
+                          <Badge variant="outline">{index + 1}</Badge>
+                        </TableCell>
+                        <TableCell className="capitalize">
+                          {order.description}
+                        </TableCell>
+                        <TableCell>
+                          {order.createdAt.toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <StatusBadge status={order.status} />
+                        </TableCell>
+                        <TableCell>
+                          {order?.pickupAddress?.region},{" "}
+                          {order?.pickupAddress?.district}{" "}
+                        </TableCell>
+                        <TableCell>
+                          {order?.deliveryAddress?.region},{" "}
+                          {order?.deliveryAddress?.district}{" "}
+                        </TableCell>
+                        <TableCell>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button variant="ghost" className="h-8 w-8 p-0">
+                                <MoreHorizontal className="h-4 w-4" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-40 space-y-2">
+                              <Button
+                                variant="ghost"
+                                asChild
+                                className="w-full justify-start">
+                                <Link href={`/me/orders/${order.id}`}>
+                                  <Eye className="h-4 w-4" />
+                                  View Details
+                                </Link>
+                              </Button>
+                              {order.status === "PENDING" && (
+                                <Button
+                                  variant="ghost"
+                                  className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
+                                  <X className="h-4 w-4" />
+                                  Cancel order
+                                </Button>
+                              )}
+                            </PopoverContent>
+                          </Popover>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  : null}
+              </TableBody>
+            </Table>
+          ) : (
+            <div className="flex items-center flex-col justify-center">
+              <h2 className="text-muted-foreground my-2 font-semibold">
+                You have no recent orders
+              </h2>
+              <Image
+                src="https://res.cloudinary.com/dipkbpinx/image/upload/t_hiring-banner/v1735480973/illustrations/kcptm5kpjghhthitqemj.avif"
+                alt="illustration"
+                width={400}
+                height={500}
+                className=""
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>

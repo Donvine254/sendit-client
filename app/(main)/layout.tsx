@@ -1,19 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { EB_Garamond } from "next/font/google";
 import "../globals.css";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import { Toaster } from "@/components/ui/sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const eb_garamond = EB_Garamond({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -29,8 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
+      <body className={`${eb_garamond.className} antialiased smooth-scroll`}>
         <NavigationMenu />
         <Toaster />
         {children}

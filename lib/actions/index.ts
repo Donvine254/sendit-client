@@ -50,3 +50,23 @@ export async function getRecentOrders(userId: string) {
     await prisma.$disconnect();
   }
 }
+
+export async function getUserOrderStatistics(userId: string) {
+  try {
+    const orders = await prisma.parcel.findMany({
+      where: { userId },
+    });
+    return {
+      total_orders: orders.length || 0,
+      pending_orders:
+        orders.filter((order) => order.status === "PENDING").length || 0,
+      cancelled_orders:
+        orders.filter((order) => order.status === "CANCELLED").length || 0,
+    };
+  } catch (error) {
+    console.error(error);
+    return null;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
