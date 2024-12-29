@@ -1,6 +1,10 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
 import { ParcelOrderData } from "@/types";
+const baseUrl =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:3000/api/admin"
+    : "https://senditkenya.vercel.app/api/admin";
 export async function createOrder(parcelData: ParcelOrderData) {
   try {
     const order = await prisma.parcel.create({
@@ -18,7 +22,7 @@ export async function createOrder(parcelData: ParcelOrderData) {
 
 export async function getUserData(userId: string) {
   try {
-    const response = await fetch("http://localhost:3000/api/admin", {
+    const response = await fetch(baseUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
