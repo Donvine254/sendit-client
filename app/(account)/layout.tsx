@@ -44,7 +44,7 @@ export default async function RootLayout({
         <NavigationMenu />
         <Toaster />
         <section className="bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10">
-          <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8 mt:24 md:mt-6 py-10 ">
+          <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8 mt:24 md:mt-6 py-10">
             <UserSidenav
               user={user}
               permission={permission}
