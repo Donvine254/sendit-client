@@ -36,7 +36,7 @@ export default function Progress({
         {/* Line behind circles */}
         <div className="absolute top-1/2 w-full h-1 bg-gray-400 z-0"></div>
         <div
-          className="absolute top-1/2 h-0.5 bg-green-600 z-0"
+          className="absolute top-1/2 h-1 bg-green-600 z-0"
           style={{
             width: `${(100 / (steps.length - 1)) * currentStep}%`,
           }}></div>
@@ -49,7 +49,7 @@ export default function Progress({
             <div
               className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${
                 index <= currentStep
-                  ? "bg-green-500 text-white border-green-600"
+                  ? "bg-green-600 text-white border-green-600"
                   : "bg-white text-gray-400 border-gray-400"
               } border-2`}>
               <step.icon className="h-6 w-6" />
