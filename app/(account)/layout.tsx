@@ -30,7 +30,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { getUser } = getKindeServerSession();
+  const { getUser, getPermission } = getKindeServerSession();
+  const permission = await getPermission("admin");
   const user = await getUser();
   const userData = await getUserData(user.id);
   return (
@@ -43,7 +44,7 @@ export default async function RootLayout({
           <section
             className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
             <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">
-              <UserSidenav data={userData} />
+              <UserSidenav data={userData} permission={permission} />
               <section> {children}</section>
             </div>
           </section>
