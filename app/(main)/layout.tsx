@@ -6,6 +6,8 @@ import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "../AuthProvider";
+import { sessionUser } from "@/types";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,18 +25,20 @@ export const metadata: Metadata = {
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { getUser } = getKindeServerSession();
+  const user = (await getUser()) as sessionUser;
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <Toaster richColors closeButton theme="light" />
         <AuthProvider>
-          <NavigationMenu />
+          <NavigationMenu user={user} />
           {children}
           <Footer />
         </AuthProvider>

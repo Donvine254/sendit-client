@@ -11,7 +11,8 @@ import {
 
 import Navbar from "./nav-items";
 import { usePathname } from "next/navigation";
-export default function NavigationMenu() {
+import { sessionUser } from "@/types";
+export default function NavigationMenu({ user }: { user: sessionUser }) {
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const pathname = usePathname();
@@ -55,7 +56,7 @@ export default function NavigationMenu() {
       <motion.section
         className="xsm:!bg-white text-blue-600 md:text-gray-700  z-20 py-4  top-0  w-full shadow"
         style={motionStyle as any}>
-        <Navbar />
+        <Navbar user={user} />
       </motion.section>
     </menu>
   );

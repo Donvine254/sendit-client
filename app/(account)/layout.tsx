@@ -9,6 +9,7 @@ import UserSidenav from "@/components/pages/sidebar";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { AuthProvider } from "../AuthProvider";
 import { getUserData } from "@/lib/actions";
+import { sessionUser } from "@/types";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export default async function RootLayout({
 }>) {
   const { getUser, getPermission } = getKindeServerSession();
   const permission = await getPermission("admin");
-  const user = await getUser();
+  const user = (await getUser()) as sessionUser;
   const userData = await getUserData(user.id);
   return (
     <html lang="en">
@@ -40,7 +41,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <Toaster richColors closeButton theme="light" />
         <AuthProvider>
-          <NavigationMenu />
+          <NavigationMenu user={user} />
           <section
             className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
             <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">
