@@ -1,21 +1,52 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Download, Printer } from "lucide-react";
+import { FileSpreadsheet, Printer } from "lucide-react";
 import Image from "next/image";
+import Script from "next/script";
 import React from "react";
+import { toast } from "sonner";
 
 type Props = {
   order: any | [];
 };
-
+declare const inkHtml: any;
 export default function Orderform({ order }: Props) {
+  const handlePrint = async () => {
+    const print = inkHtml;
+    print(document.getElementById("print-div"));
+  };
+  const handleExportExcel = () => {
+    const csvContent = `Order ID,Description,Status,Price,Weight,Customer Name,Pickup Address,Pickup Phone,Recipient Name,Delivery Address,Delivery Phone,Created At
+  ${order.id},"${order.description}",${order.status.toLowerCase()},"KSH${
+      order.price
+    }",${order.weight},"${order.pickupAddress.fullName}","${
+      order.pickupAddress.address
+    }, ${order.pickupAddress.district}, ${
+      order.pickupAddress.region
+    }","254${order.pickupAddress.phone.toString()}","${
+      order.deliveryAddress.fullName
+    }","${order.deliveryAddress.address}, ${order.deliveryAddress.district}, ${
+      order.deliveryAddress.region
+    }","254${order.deliveryAddress.phone.toString()}",${new Date(
+      order.createdAt
+    ).toLocaleDateString()}`;
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `order-${order.id}.csv`;
+    link.click();
+  };
+
   return (
-    <form className="bg-white max-w-5xl mx-auto shadow-lg rounded-lg">
-      <section className="p-8 space-y-6">
+    <div className="bg-white max-w-5xl mx-auto shadow-lg rounded-lg">
+      <Script src="https://unpkg.com/ink-html/dist/index.js"></Script>
+      <section className="p-8 space-y-6" id="print-div">
         {/* Personal Information */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-gray-900">
-            1. Sender Information
+            1. Customer Information
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
@@ -30,7 +61,6 @@ export default function Orderform({ order }: Props) {
                 className="border-2 "
                 readOnly
                 aria-disabled
-                disabled
                 defaultValue={order.pickupAddress?.fullName}
               />
             </div>
@@ -45,7 +75,6 @@ export default function Orderform({ order }: Props) {
                 id="email"
                 className="border-2 "
                 readOnly
-                disabled
                 aria-disabled
                 defaultValue={order.pickupAddress?.email}
               />
@@ -70,7 +99,6 @@ export default function Orderform({ order }: Props) {
                   readOnly
                   defaultValue={`+254${order.pickupAddress?.phone}`}
                   className="border-2 rounded-l-none border-l-1 "
-                  disabled
                   aria-disabled
                 />
               </div>
@@ -95,7 +123,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.pickupAddress?.region}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2"
               />
             </div>
@@ -108,7 +135,6 @@ export default function Orderform({ order }: Props) {
               <Input
                 type="text"
                 defaultValue={order.pickupAddress?.district}
-                disabled
                 aria-disabled
                 className="border-2"
                 readOnly
@@ -125,7 +151,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.pickupAddress?.address}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2"
               />
             </div>
@@ -145,7 +170,6 @@ export default function Orderform({ order }: Props) {
               <Input
                 type="text"
                 id="firstName"
-                disabled
                 className="border-2"
                 aria-disabled
                 readOnly
@@ -162,8 +186,8 @@ export default function Orderform({ order }: Props) {
                 type="email"
                 id="email"
                 defaultValue={order.deliveryAddress?.email}
-                disabled
                 aria-disabled
+                readOnly
                 className="border-2"
               />
             </div>
@@ -187,7 +211,6 @@ export default function Orderform({ order }: Props) {
                   readOnly
                   defaultValue={`+254${order.deliveryAddress?.phone}`}
                   className="border-2 rounded-l-none border-l-1 "
-                  disabled
                   aria-disabled
                 />
               </div>
@@ -197,7 +220,7 @@ export default function Orderform({ order }: Props) {
         {/* Delivery Address */}
         <div className="space-y-4">
           <h2 className="text-xl font-semibold text-gray-900">
-            4. Delivery Address
+            4. Shipping Address
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
@@ -211,7 +234,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.deliveryAddress?.region}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2 disabled:text-gray-700"
               />
             </div>
@@ -226,7 +248,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.deliveryAddress?.district}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2 disabled:text-gray-700"
               />
             </div>
@@ -241,7 +262,6 @@ export default function Orderform({ order }: Props) {
                 type="text"
                 defaultValue={order.deliveryAddress?.address}
                 readOnly
-                disabled
                 aria-disabled
                 className="border-2 disabled:text-gray-700"
               />
@@ -264,7 +284,6 @@ export default function Orderform({ order }: Props) {
               type="text"
               defaultValue={order.description}
               readOnly
-              disabled
               aria-disabled
               aria-describedby="description"
               className=" border-2 disabled:text-gray-700"
@@ -279,7 +298,6 @@ export default function Orderform({ order }: Props) {
             <Input
               type="number"
               id="weight"
-              disabled
               aria-disabled
               defaultValue={order.weight}
               className=" border-2 disabled:text-gray-700"
@@ -324,18 +342,23 @@ export default function Orderform({ order }: Props) {
         <Button
           variant="outline"
           title="print"
-          className="justify-start hover:bg-blue-600 hover:text-white">
+          className="justify-start hover:bg-blue-600 hover:text-white"
+          onClick={handlePrint}>
           {" "}
-          <Printer className="mr-2 h-4 w-4" /> Print
+          <Printer className="h-4 w-4" /> Print
         </Button>
         <Button
           variant="secondary"
-          title="print"
+          title="export to excel"
+          onClick={() => {
+            toast.success("Processing file...", { position: "top-center" });
+            handleExportExcel();
+          }}
           className="bg-gray-800 hover:bg-black text-white justify-start">
           {" "}
-          <Download className="mr-2 h-4 w-4" /> Export
+          <FileSpreadsheet className="h-4 w-4" /> Export
         </Button>
       </div>
-    </form>
+    </div>
   );
 }

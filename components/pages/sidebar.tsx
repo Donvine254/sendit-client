@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { toast } from "sonner";
 
 const navItems = [
@@ -57,10 +56,14 @@ const navItems = [
   },
 ];
 
-export default function UserSidenav({ data }: { data: any }) {
+export default function UserSidenav({
+  data,
+  permission,
+}: {
+  data: any | {};
+  permission: any | {};
+}) {
   const pathname = usePathname();
-  const { user, getPermission } = useKindeAuth();
-  const permission = getPermission("admin");
   const isAdmin = permission?.isGranted;
   function getCurrentDate(): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -76,7 +79,7 @@ export default function UserSidenav({ data }: { data: any }) {
   return (
     <div>
       <div className="w-full bg-white border shadow rounded-md  transition-all duration-300">
-        <div className="flex justify-between items-center px-4 py-2">
+        <div className="flex justify-between items-center px-4 pb-2 pt-4">
           <div className="flex items-center space-x-4">
             <Image
               className="w-12 h-12 rounded-full ring-offset-2 ring-2 ring-blue-600 ring-offset-white object-cover"
@@ -84,13 +87,13 @@ export default function UserSidenav({ data }: { data: any }) {
               height={48}
               width={48}
               src={
-                user?.picture ||
+                data?.picture ||
                 "https://res.cloudinary.com/dipkbpinx/image/upload/v1734556978/carhub/avatars/paqrtcgyypq1qelyzrwj.png"
               }
             />
             <div className="flex flex-col">
               <span className="text-gray-700 font-semibold text-sm capitalize">
-                {`${user?.given_name} ${user?.family_name}`}
+                {`${data?.first_name} ${data?.last_name}`}
               </span>
               <span className="text-xs md:text-sm text-muted-foreground">
                 {date}
@@ -112,12 +115,14 @@ export default function UserSidenav({ data }: { data: any }) {
         <div className="flex flex-wrap items-center gap-4 md:gap-8 lg:gap-10 p-4 w-full">
           <div className="space-y-1 ">
             <p className="text-sm text-muted-foreground">Email</p>
-            <p className="flex items-center gap-1">
-              <span className="text-sm">{user?.email}</span>
+            <p className="flex items-center gap-1 text-gray-600">
+              <span className="text-sm xsm:text-xs">
+                {data.preferred_email}
+              </span>
               <button
                 onClick={() => {
                   navigator.clipboard
-                    .writeText(user?.email || "")
+                    .writeText(data.preferred_email || "")
                     .then(() => {
                       toast.success("Email Copied Successfully", {
                         position: "top-center",
@@ -134,21 +139,23 @@ export default function UserSidenav({ data }: { data: any }) {
           </div>
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Account</p>
-            <button className="text-sm font-medium  px-2 rounded-xl bg-white text-blue-500 border flex items-center justify-start gap-1">
-              <span>&#x2022;</span>{" "}
-              <span>{isAdmin ? "Admin" : "Normal User"}</span>
+            <button
+              className={`text-sm xsm:text-xs font-medium  px-2 rounded-xl border flex items-center justify-start gap-1 ${
+                isAdmin ? "bg-blue-500 text-white" : "bg-white text-blue-500 "
+              }`}>
+              <span>{isAdmin ? "✪ Admin" : "🟄 Normal User"}</span>
             </button>
           </div>
 
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Joined</p>
-            <p className="text-sm font-medium">
+            <p className="text-sm xsm:text-xs text-gray-600">
               {new Date(data.created_on).toLocaleDateString()}
             </p>
           </div>
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Last Login</p>
-            <p className="text-sm font-medium">
+            <p className="text-sm xsm:text-xs text-gray-600 ">
               {new Date(data.last_signed_in).toLocaleString()}
             </p>
           </div>
