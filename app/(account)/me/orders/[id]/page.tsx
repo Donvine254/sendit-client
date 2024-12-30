@@ -3,6 +3,25 @@ import { redirect } from "next/navigation";
 import Orderform from "./order-form";
 import StatusBadge from "@/components/ui/status-badge";
 import Progress from "./order-progress";
+
+export async function generateStaticParams() {
+  try {
+    const orders = await prisma.parcel.findMany({
+      select: {
+        id: true,
+      },
+    });
+    const idArray = orders.map((order) => ({ id: order.id }));
+
+    return idArray;
+  } catch (error) {
+    console.error("Error fetching order data:", error);
+    return [];
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 type Props = {
   params: Promise<{
     id: string;
@@ -11,6 +30,9 @@ type Props = {
 
 export default async function OrderPage({ params }: Props) {
   const { id } = await params;
+  if (!id) {
+    redirect("/me/orders");
+  }
   const order = await prisma.parcel.findUnique({
     where: { id: id },
   });
