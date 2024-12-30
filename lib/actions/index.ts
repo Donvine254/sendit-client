@@ -73,7 +73,7 @@ export const getUserOrders = unstable_cache(
       await prisma.$disconnect();
     }
   },
-  ["posts"],
+  ["orders"],
   { revalidate: 3600, tags: ["orders"] }
 );
 export const getOrderData = unstable_cache(
@@ -92,26 +92,30 @@ export const getOrderData = unstable_cache(
       await prisma.$disconnect();
     }
   },
-  ["posts"],
+  ["order"],
   { revalidate: 3600, tags: ["order"] }
 );
 
-export async function getUserOrderStatistics(userId: string) {
-  try {
-    const orders = await prisma.parcel.findMany({
-      where: { userId },
-    });
-    return {
-      total_orders: orders.length || 0,
-      pending_orders:
-        orders.filter((order) => order.status === "PENDING").length || 0,
-      cancelled_orders:
-        orders.filter((order) => order.status === "CANCELLED").length || 0,
-    };
-  } catch (error) {
-    console.error(error);
-    return null;
-  } finally {
-    await prisma.$disconnect();
-  }
-}
+export const getUserOrderStatistics = unstable_cache(
+  async (userId: string) => {
+    try {
+      const orders = await prisma.parcel.findMany({
+        where: { userId },
+      });
+      return {
+        total_orders: orders.length || 0,
+        pending_orders:
+          orders.filter((order) => order.status === "PENDING").length || 0,
+        cancelled_orders:
+          orders.filter((order) => order.status === "CANCELLED").length || 0,
+      };
+    } catch (error) {
+      console.error(error);
+      return { total_orders: 0, pending_orders: 0, cancelled_orders: 0 };
+    } finally {
+      await prisma.$disconnect();
+    }
+  },
+  ["statistics"],
+  { revalidate: 3600, tags: ["statistics"] }
+);
