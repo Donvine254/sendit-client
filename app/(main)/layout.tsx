@@ -5,6 +5,7 @@ import "../globals.css";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "../AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,10 +32,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
-        <NavigationMenu />
-        <Toaster />
-        {children}
-        <Footer />
+        <Toaster richColors closeButton theme="light" />
+        <AuthProvider>
+          <NavigationMenu />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

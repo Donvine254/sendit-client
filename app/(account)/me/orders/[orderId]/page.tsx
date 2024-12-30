@@ -1,19 +1,19 @@
-import { prisma } from "@/prisma/prisma";
 import { redirect } from "next/navigation";
 import Orderform from "./order-form";
 import StatusBadge from "@/components/ui/status-badge";
 import Progress from "./order-progress";
-type Props = {
-  params: Promise<{
-    id: string;
-  }>;
-};
+import { getOrderData } from "@/lib/actions";
 
-export default async function OrderPage({ params }: Props) {
-  const { id } = await params;
-  const order = await prisma.parcel.findUnique({
-    where: { id: id },
-  });
+export const dynamic = "force-dynamic";
+export default async function OrderPage({
+  params,
+}: {
+  params: Promise<{ orderId: string }>;
+}) {
+  const { orderId } = await params;
+
+  const order = await getOrderData(orderId);
+
   if (!order) {
     redirect("/me/orders");
   }

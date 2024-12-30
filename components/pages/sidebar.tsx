@@ -15,8 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-import { sessionUser } from "@/types";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import { toast } from "sonner";
 
 const navItems = [
@@ -58,13 +57,10 @@ const navItems = [
   },
 ];
 
-type Props = {
-  user: sessionUser;
-  permission: any;
-  userData: any | {};
-};
-export default function UserSidenav({ user, permission, userData }: Props) {
+export default function UserSidenav({ data }: { data: any }) {
   const pathname = usePathname();
+  const { user, getPermission } = useKindeAuth();
+  const permission = getPermission("admin");
   const isAdmin = permission?.isGranted;
   function getCurrentDate(): string {
     const options: Intl.DateTimeFormatOptions = {
@@ -88,14 +84,13 @@ export default function UserSidenav({ user, permission, userData }: Props) {
               height={48}
               width={48}
               src={
-                user.picture ||
+                user?.picture ||
                 "https://res.cloudinary.com/dipkbpinx/image/upload/v1734556978/carhub/avatars/paqrtcgyypq1qelyzrwj.png"
               }
             />
             <div className="flex flex-col">
               <span className="text-gray-700 font-semibold text-sm capitalize">
-                {user.full_name ??
-                  `${userData.first_name} ${userData.last_name}`}
+                {`${user?.given_name} ${user?.family_name}`}
               </span>
               <span className="text-xs md:text-sm text-muted-foreground">
                 {date}
@@ -104,7 +99,10 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           </div>
 
           <div className="flex space-x-2 px-4 py-2">
-            <Link title="update shipping address" href="/me/settings">
+            <Link
+              title="update shipping address"
+              prefetch={false}
+              href="/me/settings">
               {" "}
               <CircleFadingPlus className="h-5 w-5 text-blue-600" />
             </Link>
@@ -115,11 +113,11 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           <div className="space-y-1 ">
             <p className="text-sm text-muted-foreground">Email</p>
             <p className="flex items-center gap-1">
-              <span className="text-sm">{user.email}</span>
+              <span className="text-sm">{user?.email}</span>
               <button
                 onClick={() => {
                   navigator.clipboard
-                    .writeText(user.email)
+                    .writeText(user?.email || "")
                     .then(() => {
                       toast.success("Email Copied Successfully", {
                         position: "top-center",
@@ -145,13 +143,13 @@ export default function UserSidenav({ user, permission, userData }: Props) {
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Joined</p>
             <p className="text-sm font-medium">
-              {new Date(userData.created_on).toLocaleDateString()}
+              {new Date(data.created_on).toLocaleDateString()}
             </p>
           </div>
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Last Login</p>
             <p className="text-sm font-medium">
-              {new Date(userData.last_signed_in).toLocaleString()}
+              {new Date(data.last_signed_in).toLocaleString()}
             </p>
           </div>
         </div>
@@ -162,6 +160,7 @@ export default function UserSidenav({ user, permission, userData }: Props) {
             key={item.href}
             href={item.href}
             title={item.title}
+            prefetch={false}
             className="flex items-center gap-2">
             <Button
               variant="ghost"

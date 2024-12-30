@@ -5,7 +5,10 @@ import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
-
+import UserSidenav from "@/components/pages/sidebar";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { AuthProvider } from "../AuthProvider";
+import { getUserData } from "@/lib/actions";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,41 +24,31 @@ export const metadata: Metadata = {
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { sessionUser } from "@/types";
-import { redirect } from "next/navigation";
-import UserSidenav from "@/components/pages/sidebar";
-import { getUserData } from "@/lib/actions";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { getUser, getPermission } = getKindeServerSession();
-  const permission = await getPermission("admin");
-  const user = (await getUser()) as sessionUser;
-  if (!user) {
-    return redirect(`/api/auth/login`);
-  }
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   const userData = await getUserData(user.id);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
-        <NavigationMenu />
-        <Toaster />
-        <section
-          className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
-          <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">
-            <UserSidenav
-              user={user}
-              permission={permission}
-              userData={userData}
-            />
-            <section> {children}</section>
-          </div>
-        </section>
-        <Footer />
+        <Toaster richColors closeButton theme="light" />
+        <AuthProvider>
+          <NavigationMenu />
+          <section
+            className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
+            <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">
+              <UserSidenav data={userData} />
+              <section> {children}</section>
+            </div>
+          </section>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

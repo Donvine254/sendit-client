@@ -1,4 +1,4 @@
-import { CircleCheck, Clock, Truck } from "lucide-react";
+import { AlarmClockPlus, Check, Truck } from "lucide-react";
 import React from "react";
 
 export default function Progress({
@@ -14,13 +14,13 @@ export default function Progress({
     {
       title: `Placed ${new Date(createdAt).toLocaleDateString()}`,
       status: "PENDING",
-      icon: Clock,
+      icon: AlarmClockPlus,
     },
     { title: "Shipped", status: "IN_TRANSIT", icon: Truck },
     {
       title: `Delivered ${new Date(updatedAt).toLocaleDateString()}`,
       status: "DELIVERED",
-      icon: CircleCheck,
+      icon: Check,
     },
   ];
 
@@ -34,9 +34,9 @@ export default function Progress({
       </h3>
       <ol className="flex items-center justify-between relative w-full mb-4 ">
         {/* Line behind circles */}
-        <div className="absolute top-1/2 w-full h-0.5 bg-gray-300 z-0"></div>
+        <div className="absolute top-1/2 w-full h-1 bg-gray-400 z-0"></div>
         <div
-          className="absolute top-1/2 h-0.5 bg-blue-500 z-0"
+          className="absolute top-1/2 h-1 bg-green-600 z-0"
           style={{
             width: `${(100 / (steps.length - 1)) * currentStep}%`,
           }}></div>
@@ -49,8 +49,8 @@ export default function Progress({
             <div
               className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium ${
                 index <= currentStep
-                  ? "bg-blue-500 text-white border-blue-500"
-                  : "bg-white text-gray-500 border-gray-300"
+                  ? "bg-green-600 text-white border-green-600"
+                  : "bg-white text-gray-400 border-gray-400"
               } border-2`}>
               <step.icon className="h-6 w-6" />
             </div>
