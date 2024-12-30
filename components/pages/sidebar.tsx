@@ -106,7 +106,9 @@ export default function UserSidenav({
             <div className="flex flex-col">
               <span className="text-gray-700 font-semibold text-sm capitalize flex gap-1 items-baseline">
                 {`${data?.first_name} ${data?.last_name}`}{" "}
-                <BadgeCheck className="text-sm h-3 w-3 text-blue-500" />
+                {isAdmin && (
+                  <BadgeCheck className="text-sm h-3 w-3 text-blue-500" />
+                )}
               </span>
               <span className="text-xs md:text-sm text-muted-foreground">
                 {date}
