@@ -75,22 +75,33 @@ export default function UserSidenav({
     return new Date().toLocaleDateString("en-US", options);
   }
   const date = getCurrentDate();
-
   return (
     <div>
       <div className="w-full bg-white border shadow rounded-md  transition-all duration-300">
         <div className="flex justify-between items-center px-4 pb-2 pt-4">
           <div className="flex items-center space-x-4">
-            <Image
-              className="w-12 h-12 rounded-full ring-offset-2 ring-2 ring-blue-600 ring-offset-white object-cover"
-              alt="user-avatar"
-              height={48}
-              width={48}
-              src={
-                data?.picture ||
-                "https://res.cloudinary.com/dipkbpinx/image/upload/v1734556978/carhub/avatars/paqrtcgyypq1qelyzrwj.png"
-              }
-            />
+            {data.picture &&
+            data.picture.startsWith("https://gravatar.com/avatar") ? (
+              <Image
+                className="w-12 h-12 rounded-full ring-offset-2 ring-2 ring-blue-600 ring-offset-white object-cover"
+                alt="user-avatar"
+                height={48}
+                width={48}
+                src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${data.first_name}+${data.last_name}`}
+              />
+            ) : (
+              <Image
+                className="w-12 h-12 rounded-full ring-offset-2 ring-2 ring-blue-600 ring-offset-white object-cover"
+                alt="user-avatar"
+                height={48}
+                width={48}
+                src={
+                  data.picture ||
+                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${data.first_name}+${data.last_name}`
+                }
+              />
+            )}
+
             <div className="flex flex-col">
               <span className="text-gray-700 font-semibold text-sm capitalize">
                 {`${data?.first_name} ${data?.last_name}`}

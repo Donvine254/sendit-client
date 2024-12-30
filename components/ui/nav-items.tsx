@@ -2,11 +2,9 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ChevronDown } from "lucide-react";
-export default function Navbar() {
-  const { user } = useKindeBrowserClient();
-
+import { sessionUser } from "@/types";
+export default function Navbar({ user }: { user: sessionUser }) {
   return (
     <div className="flex flex-wrap items-center justify-between  px-4 w-full">
       <Link href="/" className="flex items-center gap-1 text-blue-600">
@@ -35,7 +33,7 @@ export default function Navbar() {
               height={32}
               alt="avatar"
               title="open menu"
-              className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none"
+              className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none ring-offset-2 ring-2 ring-blue-600 ring-offset-white"
             />
             <ChevronDown className="h-5 w-5" />
           </>
@@ -142,26 +140,37 @@ export default function Navbar() {
               </div>
             </div>
           </li>
-
           {/* dropdown for account */}
           <li className={`${!user ? "hidden" : "block"}`}>
             <button
               id="dropdownNavbarLink"
               data-dropdown-toggle="dropdownNavbar"
               className=" hover:bg-gray-50 border-b border-gray-100 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2  md:p-0 font-medium flex items-center justify-between w-full md:w-auto hover:underline underline-offset-2">
-              {user && (
+              {user &&
+              user.picture &&
+              user.picture.startsWith("https://gravatar.com/avatar") ? (
+                <Image
+                  src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`}
+                  width={32}
+                  height={32}
+                  alt="avatar"
+                  title="open menu"
+                  className="hidden md:block w-8 h-8 rounded-full focus:outline-none focus-within:outline-none ring-offset-2 ring-2 ring-blue-600 ring-offset-white"
+                />
+              ) : (
                 <Image
                   src={
                     user?.picture ||
-                    "https://res.cloudinary.com/dipkbpinx/image/upload/v1734556978/carhub/avatars/paqrtcgyypq1qelyzrwj.png"
+                    `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
                   }
                   width={32}
                   height={32}
                   alt="avatar"
                   title="open menu"
-                  className="hidden md:block w-8 h-8 rounded-full focus:outline-none focus-within:outline-none"
+                  className="hidden md:block w-8 h-8 rounded-full focus:outline-none focus-within:outline-none ring-offset-2 ring-2 ring-blue-600 ring-offset-white"
                 />
               )}
+
               <span className="md:hidden">My Account</span>
               <svg
                 className="w-4 h-4 ml-1"
