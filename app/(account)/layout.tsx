@@ -39,7 +39,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <NavigationMenu />
-        <Toaster />
+        <Toaster richColors closeButton theme="light" />
         <section
           className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
           <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">

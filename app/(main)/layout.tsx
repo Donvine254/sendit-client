@@ -32,7 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
         <NavigationMenu />
-        <Toaster />
+        <Toaster richColors closeButton theme="light" />
         {children}
         <Footer />
       </body>
