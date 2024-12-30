@@ -30,7 +30,6 @@ export default function Orderform({ order }: Props) {
                 className="border-2 "
                 readOnly
                 aria-disabled
-                disabled
                 defaultValue={order.pickupAddress?.fullName}
               />
             </div>
@@ -45,7 +44,6 @@ export default function Orderform({ order }: Props) {
                 id="email"
                 className="border-2 "
                 readOnly
-                disabled
                 aria-disabled
                 defaultValue={order.pickupAddress?.email}
               />
@@ -70,7 +68,6 @@ export default function Orderform({ order }: Props) {
                   readOnly
                   defaultValue={`+254${order.pickupAddress?.phone}`}
                   className="border-2 rounded-l-none border-l-1 "
-                  disabled
                   aria-disabled
                 />
               </div>
@@ -95,7 +92,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.pickupAddress?.region}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2"
               />
             </div>
@@ -108,7 +104,6 @@ export default function Orderform({ order }: Props) {
               <Input
                 type="text"
                 defaultValue={order.pickupAddress?.district}
-                disabled
                 aria-disabled
                 className="border-2"
                 readOnly
@@ -125,7 +120,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.pickupAddress?.address}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2"
               />
             </div>
@@ -145,7 +139,6 @@ export default function Orderform({ order }: Props) {
               <Input
                 type="text"
                 id="firstName"
-                disabled
                 className="border-2"
                 aria-disabled
                 readOnly
@@ -162,7 +155,6 @@ export default function Orderform({ order }: Props) {
                 type="email"
                 id="email"
                 defaultValue={order.deliveryAddress?.email}
-                disabled
                 aria-disabled
                 className="border-2"
               />
@@ -187,7 +179,6 @@ export default function Orderform({ order }: Props) {
                   readOnly
                   defaultValue={`+254${order.deliveryAddress?.phone}`}
                   className="border-2 rounded-l-none border-l-1 "
-                  disabled
                   aria-disabled
                 />
               </div>
@@ -211,7 +202,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.deliveryAddress?.region}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2 disabled:text-gray-700"
               />
             </div>
@@ -226,7 +216,6 @@ export default function Orderform({ order }: Props) {
                 defaultValue={order.deliveryAddress?.district}
                 readOnly
                 aria-disabled
-                disabled
                 className="border-2 disabled:text-gray-700"
               />
             </div>
@@ -241,7 +230,6 @@ export default function Orderform({ order }: Props) {
                 type="text"
                 defaultValue={order.deliveryAddress?.address}
                 readOnly
-                disabled
                 aria-disabled
                 className="border-2 disabled:text-gray-700"
               />
@@ -264,7 +252,6 @@ export default function Orderform({ order }: Props) {
               type="text"
               defaultValue={order.description}
               readOnly
-              disabled
               aria-disabled
               aria-describedby="description"
               className=" border-2 disabled:text-gray-700"
@@ -279,7 +266,6 @@ export default function Orderform({ order }: Props) {
             <Input
               type="number"
               id="weight"
-              disabled
               aria-disabled
               defaultValue={order.weight}
               className=" border-2 disabled:text-gray-700"
