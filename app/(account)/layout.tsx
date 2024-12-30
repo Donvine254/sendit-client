@@ -5,9 +5,9 @@ import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { sessionUser } from "@/types";
 import UserSidenav from "@/components/pages/sidebar";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { AuthProvider } from "../AuthProvider";
 import { getUserData } from "@/lib/actions";
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,28 +30,25 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { getUser, getPermission } = getKindeServerSession();
-  const permission = await getPermission("admin");
-  const user = (await getUser()) as sessionUser;
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
   const userData = await getUserData(user.id);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
-        <NavigationMenu />
         <Toaster richColors closeButton theme="light" />
-        <section
-          className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
-          <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">
-            <UserSidenav
-              user={user}
-              permission={permission}
-              userData={userData}
-            />
-            <section> {children}</section>
-          </div>
-        </section>
-        <Footer />
+        <AuthProvider>
+          <NavigationMenu />
+          <section
+            className={`bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff] p-2 pt-10 `}>
+            <div className="w-full max-w-5xl  min-h-[500px] mx-auto px-2 md:px-8  py-8">
+              <UserSidenav data={userData} />
+              <section> {children}</section>
+            </div>
+          </section>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

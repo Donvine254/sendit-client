@@ -12,7 +12,6 @@ export default async function Page() {
   const { getUser } = getKindeServerSession();
   const user = (await getUser()) as sessionUser;
   const orders = await getUserOrders(user.id);
-
   return (
     <section>
       <DataTable data={orders} />
