@@ -12,7 +12,7 @@ export async function generateStaticParams() {
       },
     });
     const idArray = orders.map((order) => ({ id: order.id }));
-
+    console.log(idArray);
     return idArray;
   } catch (error) {
     console.error("Error fetching order data:", error);
