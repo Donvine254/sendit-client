@@ -105,7 +105,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                           {order.description}
                         </TableCell>
                         <TableCell>
-                          {order.createdAt.toLocaleDateString()}
+                          {new Date(order.createdAt).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
                           <StatusBadge status={order.status} />

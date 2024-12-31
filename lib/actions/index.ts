@@ -1,17 +1,18 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
 import { ParcelOrderData } from "@/types";
-import { unstable_cache } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 const baseUrl =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:3000/api/admin"
     : "https://senditkenya.vercel.app/api/admin";
 export async function createOrder(parcelData: ParcelOrderData) {
   try {
-    const order = await prisma.parcel.create({
+    await prisma.parcel.create({
       data: parcelData,
     });
-    console.log(order);
+    await revalidateTag("statistics");
+    await revalidateTag("orders");
     return { success: true, message: "Order created successfully" };
   } catch (error: any) {
     console.log(error);
@@ -38,23 +39,27 @@ export async function getUserData(userId: string) {
   }
 }
 
-export async function getRecentOrders(userId: string) {
-  try {
-    const orders = await prisma.parcel.findMany({
-      where: {
-        userId,
-      },
-      orderBy: { createdAt: "desc" },
-      take: 5,
-    });
-    return orders;
-  } catch (error) {
-    console.error(error);
-    return null;
-  } finally {
-    await prisma.$disconnect();
-  }
-}
+export const getRecentOrders = unstable_cache(
+  async (userId: string) => {
+    try {
+      const orders = await prisma.parcel.findMany({
+        where: {
+          userId,
+        },
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      });
+      return orders;
+    } catch (error) {
+      console.error(error);
+      return null;
+    } finally {
+      await prisma.$disconnect();
+    }
+  },
+  ["orders"],
+  { revalidate: 600, tags: ["orders"] }
+);
 
 export const getUserOrders = unstable_cache(
   async (userId: string) => {
@@ -117,5 +122,5 @@ export const getUserOrderStatistics = unstable_cache(
     }
   },
   ["statistics"],
-  { revalidate: 3600, tags: ["statistics"] }
+  { revalidate: 600, tags: ["statistics"] }
 );
