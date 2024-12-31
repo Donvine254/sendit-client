@@ -30,6 +30,7 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
         <Input
           type="text"
           id="fullName"
+          minLength={5}
           value={data.fullName}
           placeholder="Enter Full Name"
           onChange={(e) => onChange({ ...data, fullName: e.target.value })}
@@ -52,7 +53,7 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
               />
             </div>
             <Input
-              type="tel"
+              type="number"
               id="phone"
               minLength={9}
               maxLength={9}
@@ -133,6 +134,7 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
           id="address"
           name="address"
           rows={3}
+          minLength={5}
           className=" block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border bg-white"
           placeholder="Street name and nearby landmark"
           value={data.address}

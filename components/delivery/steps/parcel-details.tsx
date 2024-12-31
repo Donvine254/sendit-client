@@ -28,6 +28,7 @@ const ParcelDetails = ({ data, onChange, onNext }: ParcelDetailsProps) => {
         <textarea
           id="description"
           rows={4}
+          minLength={5}
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border bg-white"
           placeholder="Describe what you're sending..."
           value={data.description}
@@ -46,12 +47,16 @@ const ParcelDetails = ({ data, onChange, onNext }: ParcelDetailsProps) => {
           min="0.1"
           placeholder="Weight in Kgs"
           step="0.1"
+          max={70}
           value={data.weight || ""}
           onChange={(e) =>
             onChange({ ...data, weight: parseFloat(e.target.value) })
           }
           required
         />
+        <small className="text-muted-foreground xsm:text-xs">
+          Maximum 70kgs per parcel
+        </small>
       </div>
 
       <div className="flex justify-end">
