@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse, NextRequest } from "next/server";
 
 const KINDE_ISSUER_URL = process.env.KINDE_ISSUER_URL!;
 const KINDE_CLIENT_ID = process.env.KINDE_CLIENT_ID!;
@@ -52,13 +52,8 @@ async function updateUserDetails(
   return userDetails;
 }
 //function to update user details
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const { user_id, given_name, family_name } = req.body;
-
-  if (!user_id) {
-    return res.status(400).json({ error: "Missing user_id in request body" });
-  }
-
+export async function POST(req: NextRequest) {
+  const { user_id, given_name, family_name } = await req.json();
   try {
     const accessToken = await getToken();
     const userDetails = await updateUserDetails(
@@ -67,9 +62,12 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
       given_name,
       family_name
     );
-    return res.status(200).json(userDetails);
+    return NextResponse.json(userDetails);
   } catch (error: any) {
     console.error("Error fetching user details:", error.message);
-    return res.status(500).json({ error: "Internal server error" });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
