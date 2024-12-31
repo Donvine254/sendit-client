@@ -52,9 +52,6 @@ const statusStyles = {
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
   const handlePay = () => console.log("Pay invoice:", invoice.id);
   // TODO: Implement Insta-send API for payment gateway
-  // TODO: Implement invoice-generator API to create invoice PDFs
-  const handlePrint = () => console.log("Print invoice:", invoice.id);
-  const handleDispute = () => console.log("Dispute invoice:", invoice.id);
 
   return (
     <Popover>
@@ -85,7 +82,7 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
           <Button
             variant="ghost"
             className="w-full justify-start"
-            onClick={handlePrint}>
+            onClick={() => GenerateInvoice(invoice)}>
             <Printer className="mr-2 h-4 w-4" />
             Print
           </Button>
@@ -93,7 +90,7 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
             <Button
               variant="ghost"
               className="w-full justify-start hover:bg-destructive hover:text-destructive-foreground"
-              onClick={handleDispute}>
+              disabled>
               <AlertTriangle className="mr-2 h-4 w-4" />
               Dispute
             </Button>
