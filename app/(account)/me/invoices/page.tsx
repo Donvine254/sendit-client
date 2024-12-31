@@ -13,11 +13,14 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 export default async function Page() {
   const { getUser } = getKindeServerSession();
+  let invoices;
   const user = (await getUser()) as sessionUser;
-  const invoices = (await getUserInvoices(user.id)) as Invoice[];
+  if (user) {
+    invoices = (await getUserInvoices(user.id)) as Invoice[];
+  }
   return (
     <section>
-      <InvoiceDataTable data={invoices} />
+      <InvoiceDataTable data={invoices as Invoice[]} />
     </section>
   );
 }
