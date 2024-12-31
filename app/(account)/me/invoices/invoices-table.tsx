@@ -104,6 +104,15 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
 
 const columns: ColumnDef<Invoice>[] = [
   {
+    id: "select",
+    header: () => {
+      return <input type="checkbox" name="select" />;
+    },
+    cell: () => {
+      return <input type="checkbox" name="select" />;
+    },
+  },
+  {
     accessorKey: "invoice_number",
     header: ({ column }) => {
       return (
