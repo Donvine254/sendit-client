@@ -52,7 +52,7 @@ async function updateUserDetails(
   return userDetails;
 }
 //function to update user details
-export default async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { user_id, given_name, family_name } = req.body;
 
   if (!user_id) {
