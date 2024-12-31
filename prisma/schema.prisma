@@ -36,9 +36,28 @@ model shippingAddress {
   location String
 }
 
+model Invoice {
+  id               String        @id @default(cuid())
+  invoice_number   Int           @unique @default(autoincrement())
+  fullName         String
+  shipping_address String
+  item             String
+  amount           Int
+  userId           String
+  parcelId         String
+  status           InvoiceStatus @default(DRAFT)
+}
+
 enum ParcelStatus {
   PENDING
   IN_TRANSIT
   DELIVERED
   CANCELLED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PAID
+  OVERDUE
+  DISPUTED
 }
