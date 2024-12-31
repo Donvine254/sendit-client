@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Eye, Filter, MoreHorizontal, Search, X } from "lucide-react";
+import { Eye, Filter, MoreHorizontal, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -32,6 +32,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Order } from "@/types";
 import StatusBadge from "@/components/ui/status-badge";
+import CancelButton from "@/components/ui/cancel-button";
 
 const columns: ColumnDef<Order>[] = [
   {
@@ -109,14 +110,7 @@ const columns: ColumnDef<Order>[] = [
                 View Details
               </Link>
             </Button>
-            {order.status === "PENDING" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <X className="h-4 w-4" />
-                Cancel order
-              </Button>
-            )}
+            {order.status === "PENDING" && <CancelButton orderId={order.id} />}
           </PopoverContent>
         </Popover>
       );

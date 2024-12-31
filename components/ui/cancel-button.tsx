@@ -7,8 +7,12 @@ import { toast } from "sonner";
 
 export default function CancelButton({ orderId }: { orderId: string }) {
   async function cancelOrder() {
+    const toastId = toast.loading("Processing Request...", {
+      position: "top-center",
+    });
     try {
       const res = await updateOrderStatus(orderId, "CANCELLED");
+      toast.dismiss(toastId);
       if (res.success) {
         toast.success("Order Cancelled successfully", {
           position: "top-center",
