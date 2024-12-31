@@ -18,6 +18,7 @@ import {
   Printer,
   CreditCard,
   AlertTriangle,
+  Search,
 } from "lucide-react";
 import {
   Table,
@@ -39,10 +40,12 @@ import { MoreHorizontal } from "lucide-react";
 import { Invoice } from "@prisma/client";
 
 const statusStyles = {
-  DRAFT: "bg-gray-100 text-gray-800",
-  PAID: "bg-green-100 text-green-800",
-  OVERDUE: "bg-red-100 text-red-800",
-  DISPUTED: "bg-yellow-100 text-yellow-800",
+  DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
+  PAID: "bg-green-100 text-green-800 hover:bg-green-500 hover:text-white",
+  OVERDUE:
+    "bg-red-100 text-red-800 hover:bg-destructive hover:text-destructive-foreground",
+  DISPUTED:
+    "bg-yellow-100 text-yellow-800 hover:bg-yellow-500 hover:text-white",
 };
 
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
@@ -87,7 +90,7 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
           {invoice.status === "PAID" && (
             <Button
               variant="ghost"
-              className="w-full justify-start"
+              className="w-full justify-start hover:bg-destructive hover:text-destructive-foreground"
               onClick={handleDispute}>
               <AlertTriangle className="mr-2 h-4 w-4" />
               Dispute
@@ -223,17 +226,19 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
   });
 
   return (
-    <div className="w-full">
-      <div className="flex items-center py-4">
+    <div className="w-full ">
+      <div className="relative w-full py-4">
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
         <Input
           placeholder="Search invoices..."
           value={(table.getColumn("item")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("item")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="w-full pl-8"
         />
       </div>
+
       <div className=" border  bg-white rounded-lg">
         <Table className="table-auto overflow-x-auto">
           <TableHeader>
