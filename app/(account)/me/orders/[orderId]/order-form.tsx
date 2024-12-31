@@ -342,7 +342,8 @@ export default function Orderform({ order }: Props) {
         <Button
           variant="outline"
           title="print"
-          className="justify-start hover:bg-blue-600 hover:text-white"
+          disabled={order.status === "CANCELLED"}
+          className="justify-start hover:bg-blue-600 hover:text-white disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed"
           onClick={handlePrint}>
           {" "}
           <Printer className="h-4 w-4" /> Print
@@ -350,11 +351,12 @@ export default function Orderform({ order }: Props) {
         <Button
           variant="secondary"
           title="export to excel"
+          disabled={order.status === "CANCELLED"}
           onClick={() => {
             toast.success("Processing file...", { position: "top-center" });
             handleExportExcel();
           }}
-          className="bg-gray-800 hover:bg-black text-white justify-start">
+          className="bg-gray-800 hover:bg-black text-white justify-start disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed">
           {" "}
           <FileSpreadsheet className="h-4 w-4" /> Export
         </Button>

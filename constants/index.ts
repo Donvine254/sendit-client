@@ -1,3 +1,5 @@
+import { Invoice } from "@prisma/client";
+
 export const faqData = {
   Order: [
     {
@@ -576,3 +578,57 @@ export const regions = [
     subcounties: ["Central Pokot", "North Pokot", "Pokot South", "West Pokot"],
   },
 ];
+export const sampleInvoices = [
+  {
+    id: "cuid1",
+    invoice_number: 1,
+    fullName: "Alice Johnson",
+    shipping_address: "123 Elm Street, Nairobi, Kenya",
+    item: "Electronics",
+    amount: 5000,
+    userId: "user1",
+    parcelId: "parcel1",
+    status: "DRAFT",
+    createdAt: new Date("2024-12-01T10:00:00Z"),
+    updatedAt: new Date("2024-12-01T10:00:00Z"),
+  },
+  {
+    id: "cuid2",
+    invoice_number: 2,
+    fullName: "Bob Smith",
+    shipping_address: "456 Maple Avenue, Mombasa, Kenya",
+    item: "Furniture",
+    amount: 12000,
+    userId: "user2",
+    parcelId: "parcel2",
+    status: "PAID",
+    createdAt: new Date("2024-12-05T12:30:00Z"),
+    updatedAt: new Date("2024-12-06T14:45:00Z"),
+  },
+  {
+    id: "cuid3",
+    invoice_number: 3,
+    fullName: "Clara Onyango",
+    shipping_address: "789 Pine Lane, Kisumu, Kenya",
+    item: "Clothing",
+    amount: 2500,
+    userId: "user3",
+    parcelId: "parcel3",
+    status: "OVERDUE",
+    createdAt: new Date("2024-12-10T08:15:00Z"),
+    updatedAt: new Date("2024-12-12T09:20:00Z"),
+  },
+  {
+    id: "cuid4",
+    invoice_number: 4,
+    fullName: "David Okello",
+    shipping_address: "321 Oak Drive, Eldoret, Kenya",
+    item: "Appliances",
+    amount: 15000,
+    userId: "user4",
+    parcelId: "parcel4",
+    status: "DISPUTED",
+    createdAt: new Date("2024-12-15T16:00:00Z"),
+    updatedAt: new Date("2024-12-16T17:00:00Z"),
+  },
+] satisfies Invoice[];

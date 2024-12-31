@@ -5,7 +5,6 @@ import {
   CalendarX,
   CalendarCheck,
   Package,
-  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +25,7 @@ import { sessionUser } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import StatusBadge from "@/components/ui/status-badge";
+import CancelButton from "@/components/ui/cancel-button";
 
 type Props = {
   user: sessionUser;
@@ -66,7 +66,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
               <div className="flex items-start flex-col space-y-3  mb-2 p-4">
                 <stat.icon className="h-12 w-12 text-blue-500" />
                 <h3 className="text-3xl lg:text-5xl font-bold ">
-                  0{stat.value}
+                  {String(stat.value).padStart(2, "0")}
                 </h3>
                 <span className="text-base text-gray-500">{stat.title}</span>
               </div>
@@ -99,13 +99,15 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                   ? recentOrders.map((order: any, index: number) => (
                       <TableRow key={order.id}>
                         <TableCell>
-                          <Badge variant="outline">{index + 1}</Badge>
+                          <Badge variant="outline">
+                            {String(index + 1).padStart(3, "0")}
+                          </Badge>
                         </TableCell>
                         <TableCell className="capitalize">
                           {order.description}
                         </TableCell>
                         <TableCell>
-                          {order.createdAt.toLocaleDateString()}
+                          {new Date(order.createdAt).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
                           <StatusBadge status={order.status} />
@@ -142,12 +144,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                                 </Link>
                               </Button>
                               {order.status === "PENDING" && (
-                                <Button
-                                  variant="ghost"
-                                  className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                                  <X className="h-4 w-4" />
-                                  Cancel order
-                                </Button>
+                                <CancelButton orderId={order.id} />
                               )}
                             </PopoverContent>
                           </Popover>

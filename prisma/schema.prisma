@@ -34,6 +34,24 @@ model shippingAddress {
   city     String
   district String
   location String
+
+  @@index([userId])
+}
+
+model Invoice {
+  id               String        @id @default(cuid())
+  invoice_number   Int           @unique @default(autoincrement())
+  fullName         String
+  shipping_address String
+  item             String
+  amount           Int
+  userId           String
+  parcelId         String        @unique
+  status           InvoiceStatus @default(DRAFT)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([userId, parcelId])
 }
 
 enum ParcelStatus {
@@ -41,4 +59,11 @@ enum ParcelStatus {
   IN_TRANSIT
   DELIVERED
   CANCELLED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  PAID
+  OVERDUE
+  DISPUTED
 }

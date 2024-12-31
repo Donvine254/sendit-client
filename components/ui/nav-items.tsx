@@ -27,14 +27,25 @@ export default function Navbar({ user }: { user: sessionUser }) {
         <span className="sr-only">Open main menu</span>
         {user && user.picture ? (
           <>
-            <Image
-              src={user.picture}
-              width={32}
-              height={32}
-              alt="avatar"
-              title="open menu"
-              className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none ring-offset-2 ring-2 ring-blue-600 ring-offset-white"
-            />
+            {user.picture.startsWith("https://gravatar.com/avatar") ? (
+              <Image
+                src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`}
+                width={32}
+                height={32}
+                alt="avatar"
+                title="open menu"
+                className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none ring-offset-2 ring-2 ring-blue-600 ring-offset-white"
+              />
+            ) : (
+              <Image
+                src={user.picture}
+                width={32}
+                height={32}
+                alt="avatar"
+                title="open menu"
+                className="w-8 h-8 rounded-full focus:outline-none focus-within:outline-none ring-offset-2 ring-2 ring-blue-600 ring-offset-white"
+              />
+            )}
             <ChevronDown className="h-5 w-5" />
           </>
         ) : (

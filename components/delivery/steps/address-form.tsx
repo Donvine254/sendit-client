@@ -30,8 +30,11 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
         <Input
           type="text"
           id="fullName"
+          minLength={5}
           value={data.fullName}
           placeholder="Enter Full Name"
+          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$"
+          title="Full Name must include two names with letters and spaces"
           onChange={(e) => onChange({ ...data, fullName: e.target.value })}
           required
         />
@@ -56,8 +59,10 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
               id="phone"
               minLength={9}
               maxLength={9}
+              pattern="^[1-9][0-9]{8}$"
               className="rounded-l-none"
               placeholder="Enter phone number"
+              title="Phone number must be 9 digits and cannot start with 0"
               value={data.phone}
               onChange={(e) => onChange({ ...data, phone: e.target.value })}
               required
@@ -74,6 +79,8 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
             id="email"
             name="email"
             placeholder="Enter your email address"
+            pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
+            title="Provide a valid email address"
             value={data.email}
             onChange={(e) => onChange({ ...data, email: e.target.value })}
           />
@@ -133,6 +140,7 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
           id="address"
           name="address"
           rows={3}
+          minLength={5}
           className=" block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 px-3 border bg-white"
           placeholder="Street name and nearby landmark"
           value={data.address}

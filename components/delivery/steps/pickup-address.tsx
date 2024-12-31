@@ -9,7 +9,7 @@ interface PickupAddressProps {
   onNext: () => void;
   onBack: () => void;
 }
-
+// TO-DO: Pass user data and shipping address information as the default data
 const PickupAddress = (props: PickupAddressProps) => {
   return <AddressForm title="Pickup Address" {...props} />;
 };

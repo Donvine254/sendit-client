@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { toast } from "sonner";
+import { sessionUser } from "@/types";
 
 const navItems = [
   {
@@ -60,8 +61,10 @@ const navItems = [
 export default function UserSidenav({
   data,
   permission,
+  user,
 }: {
   data: any | {};
+  user: sessionUser | null;
   permission: any | {};
 }) {
   const pathname = usePathname();
@@ -81,8 +84,8 @@ export default function UserSidenav({
       <div className="w-full bg-white border shadow rounded-md  transition-all duration-300">
         <div className="flex justify-between items-center px-4 pb-2 pt-4">
           <div className="flex items-center space-x-4">
-            {data.picture &&
-            data.picture.startsWith("https://gravatar.com/avatar") ? (
+            {user?.picture &&
+            user?.picture.startsWith("https://gravatar.com/avatar") ? (
               <Image
                 className="w-12 h-12 rounded-full ring-offset-2 ring-2 ring-blue-600 ring-offset-white object-cover"
                 alt="user-avatar"
@@ -97,7 +100,7 @@ export default function UserSidenav({
                 height={48}
                 width={48}
                 src={
-                  data.picture ||
+                  user?.picture ??
                   `https://ui-avatars.com/api/?background=007bff&color=fff&name=${data.first_name}+${data.last_name}`
                 }
               />

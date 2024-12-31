@@ -25,9 +25,9 @@ const DeliveryForm = ({ user }: Props) => {
     weight: 0,
   });
   const [pickupAddress, setPickupAddress] = useState<AddressFormData>({
-    fullName: "",
+    fullName: `${user?.given_name}${" "}${user?.family_name}` || "",
     phone: "",
-    email: "",
+    email: user?.email || "",
     region: "",
     district: "",
     address: "",

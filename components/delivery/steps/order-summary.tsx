@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-import { Package } from "lucide-react";
+import { Info, Package } from "lucide-react";
 import { AddressFormData, ParcelFormData, sessionUser } from "@/types";
 import { toast } from "sonner";
-import { createOrder } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
+import Link from "next/link";
+import { createOrder } from "@/lib/actions/orders";
 
 interface OrderSummaryProps {
   parcelData: ParcelFormData;
@@ -148,6 +149,18 @@ const OrderSummary = ({
             <Loader className="animate-spin text-blue-500 h-5 w-5" />
           )}
         </button>
+      </div>
+      <div className="inline-flex items-center gap-1 xsm:gap-2">
+        <Info className="text-blue-600 h-6 w-6 sm:h-4 sm:2-4" />
+        <p className="text-sm xsm:text-xs text-muted-foreground">
+          {" "}
+          Price is subject to change after confirmation of parcel weight.{" "}
+          <Link
+            href="/pricing"
+            className="text-blue-500 hover:text-blue-600 hover:underline">
+            See more about our pricing.
+          </Link>
+        </p>
       </div>
     </form>
   );

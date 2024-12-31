@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Eye, Filter, MoreHorizontal, Search, X } from "lucide-react";
+import { Eye, Filter, MoreHorizontal, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -32,12 +32,13 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Order } from "@/types";
 import StatusBadge from "@/components/ui/status-badge";
+import CancelButton from "@/components/ui/cancel-button";
 
 const columns: ColumnDef<Order>[] = [
   {
     id: "index",
     header: "#",
-    cell: ({ row }) => row.index + 1,
+    cell: ({ row }) => String(row.index + 1).padStart(3, "0"),
   },
   {
     accessorKey: "description",
@@ -109,14 +110,7 @@ const columns: ColumnDef<Order>[] = [
                 View Details
               </Link>
             </Button>
-            {order.status === "PENDING" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <X className="h-4 w-4" />
-                Cancel order
-              </Button>
-            )}
+            {order.status === "PENDING" && <CancelButton orderId={order.id} />}
           </PopoverContent>
         </Popover>
       );
@@ -155,9 +149,9 @@ export default function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+      <div className="flex items-center py-4 gap-4">
+        <div className="relative w-full">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
           <Input
             placeholder="Search by descriptions..."
             value={
@@ -166,7 +160,7 @@ export default function DataTable({ data }: DataTableProps) {
             onChange={(event) =>
               table.getColumn("description")?.setFilterValue(event.target.value)
             }
-            className="flex-1 max-w-3xl pl-10"
+            className="flex-1 max-w-3xl  pl-8"
           />
         </div>
 
