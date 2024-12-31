@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Info, Package } from "lucide-react";
 import { AddressFormData, ParcelFormData, sessionUser } from "@/types";
 import { toast } from "sonner";
-import { createOrder } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { createOrder } from "@/lib/actions/orders";
 
 interface OrderSummaryProps {
   parcelData: ParcelFormData;
