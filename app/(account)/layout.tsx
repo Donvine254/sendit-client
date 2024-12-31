@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavigationMenu from "@/components/ui/navbar";
@@ -10,12 +10,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { AuthProvider } from "../AuthProvider";
 import { getUserData } from "@/lib/actions";
 import { sessionUser } from "@/types";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
-const geistMono = Geist_Mono({
+const noto_sans = Noto_Sans({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -37,8 +33,7 @@ export default async function RootLayout({
   const userData = await getUserData(user.id);
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased smooth-scroll`}>
+      <body className={`${noto_sans.variable} antialiased smooth-scroll`}>
         <Toaster richColors closeButton theme="light" />
         <AuthProvider>
           <NavigationMenu user={user} />
