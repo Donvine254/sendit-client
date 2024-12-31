@@ -67,7 +67,7 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
           {(invoice.status === "DRAFT" || invoice.status === "OVERDUE") && (
             <Button
               variant="ghost"
-              className="w-full justify-start"
+              className="w-full justify-start hover:bg-green-500 hover:text-white"
               onClick={handlePay}>
               <CreditCard className="mr-2 h-4 w-4" />
               Pay Invoice
@@ -126,7 +126,7 @@ const columns: ColumnDef<Invoice>[] = [
       );
     },
     cell: ({ row }) => (
-      <div>INV{String(row.getValue("invoice_number")).padStart(6, "0")}</div>
+      <div>INV{String(row.getValue("invoice_number")).padStart(4, "0")}</div>
     ),
   },
   {

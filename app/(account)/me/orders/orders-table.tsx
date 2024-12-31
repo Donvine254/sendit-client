@@ -38,7 +38,7 @@ const columns: ColumnDef<Order>[] = [
   {
     id: "index",
     header: "#",
-    cell: ({ row }) => row.index + 1,
+    cell: ({ row }) => String(row.index + 1).padStart(3, "0"),
   },
   {
     accessorKey: "description",

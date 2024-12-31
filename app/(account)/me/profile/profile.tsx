@@ -66,7 +66,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
               <div className="flex items-start flex-col space-y-3  mb-2 p-4">
                 <stat.icon className="h-12 w-12 text-blue-500" />
                 <h3 className="text-3xl lg:text-5xl font-bold ">
-                  0{stat.value}
+                  {String(stat.value).padStart(2, "0")}
                 </h3>
                 <span className="text-base text-gray-500">{stat.title}</span>
               </div>
@@ -99,7 +99,9 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                   ? recentOrders.map((order: any, index: number) => (
                       <TableRow key={order.id}>
                         <TableCell>
-                          <Badge variant="outline">{index + 1}</Badge>
+                          <Badge variant="outline">
+                            {String(index + 1).padStart(3, "0")}
+                          </Badge>
                         </TableCell>
                         <TableCell className="capitalize">
                           {order.description}
