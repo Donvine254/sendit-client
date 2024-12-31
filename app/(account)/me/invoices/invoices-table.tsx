@@ -50,7 +50,9 @@ const statusStyles = {
 
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
   const handlePay = () => console.log("Pay invoice:", invoice.id);
+  // TODO: Implement Insta-send API for payment gateway
   const handleDownload = () => console.log("Download invoice:", invoice.id);
+  // TODO: Implement invoice-generator API to create invoice PDFs
   const handlePrint = () => console.log("Print invoice:", invoice.id);
   const handleDispute = () => console.log("Dispute invoice:", invoice.id);
 
