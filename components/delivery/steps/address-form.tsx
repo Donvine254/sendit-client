@@ -33,6 +33,8 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
           minLength={5}
           value={data.fullName}
           placeholder="Enter Full Name"
+          pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$"
+          title="Full Name must include two names with letters and spaces"
           onChange={(e) => onChange({ ...data, fullName: e.target.value })}
           required
         />
@@ -53,12 +55,14 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
               />
             </div>
             <Input
-              type="number"
+              type="tel"
               id="phone"
               minLength={9}
               maxLength={9}
+              pattern="^[1-9][0-9]{8}$"
               className="rounded-l-none"
               placeholder="Enter phone number"
+              title="Phone number must be 9 digits and cannot start with 0"
               value={data.phone}
               onChange={(e) => onChange({ ...data, phone: e.target.value })}
               required
