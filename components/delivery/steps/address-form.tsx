@@ -79,6 +79,8 @@ const AddressForm = ({ data, onChange, onNext, onBack }: AddressFormProps) => {
             id="email"
             name="email"
             placeholder="Enter your email address"
+            pattern="[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+(\.[\-a-zA-Z0-9~!$%^&amp;*_=+\}\{'?]+)*@[a-zA-Z0-9_][\-a-zA-Z0-9_]*(\.[\-a-zA-Z0-9_]+)*\.[cC][oO][mM](:[0-9]{1,5})?"
+            title="Provide a valid email address"
             value={data.email}
             onChange={(e) => onChange({ ...data, email: e.target.value })}
           />
