@@ -20,7 +20,7 @@ async function createInvoicesFromParcels() {
       amount: parcel.price,
       item: parcel.description,
       fullName: parcel.pickupAddress.fullName,
-      shipping_address: `${parcel.deliveryAddress.address} ${parcel.deliveryAddress.district} ${parcel.deliveryAddress.region}`,
+      shipping_address: `${parcel.deliveryAddress.address}, ${parcel.deliveryAddress.district}, ${parcel.deliveryAddress.region}`,
     };
     // Create the invoice in the database
     await prisma.invoice.create({

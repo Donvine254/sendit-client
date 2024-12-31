@@ -108,3 +108,19 @@ export const getUserOrderStatistics = unstable_cache(
   ["statistics"],
   { revalidate: 600, tags: ["statistics"] }
 );
+
+export const getUserInvoices = unstable_cache(
+  async (userId: string) => {
+    try {
+      const invoices = await prisma.invoice.findMany({
+        where: { userId },
+      });
+      return invoices;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  ["invoices"],
+  { revalidate: 600, tags: ["invoices"] }
+);
