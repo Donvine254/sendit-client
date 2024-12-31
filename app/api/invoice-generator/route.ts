@@ -9,11 +9,11 @@ export async function POST(req: NextRequest) {
   }
   try {
     const payload = {
-      from: "Sendit Kenya",
+      from: "Sendit Kenya\n123 Kimathi St,\nNairobi, Kenya.",
       to: data.fullName,
       ship_to: data.shipping_address,
       logo: "https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png",
-      number: data.invoice_number,
+      number: String(data.invoice_number).padStart(4, "0"),
       currency: "KES",
       date: new Date(data.createdAt).toLocaleDateString(),
       due_date: new Date(data.updatedAt).toLocaleDateString(),
