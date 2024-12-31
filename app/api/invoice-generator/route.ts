@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
         shipping: false,
       },
       tax: 0.16 * data.amount,
+      invoice_number_title: "INV#",
       notes:
         "Thanks for doing business with us. Please pay before the due date.",
     };
