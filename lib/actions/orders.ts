@@ -26,6 +26,9 @@ export async function cancelOrder(orderId: string, status: OrderStatus) {
         status: status,
       },
     });
+    await revalidateTag("orders");
+    await revalidateTag("order");
+    await revalidateTag("statistics");
     return { success: true, message: "Order Status updated successfully" };
   } catch (error: any) {
     console.error(error);
