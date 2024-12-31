@@ -46,7 +46,7 @@ model Invoice {
   item             String
   amount           Int
   userId           String
-  parcelId         String
+  parcelId         String        @unique
   status           InvoiceStatus @default(DRAFT)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
