@@ -33,49 +33,53 @@ const stats = [
 export default function Testimonials() {
   return (
     <section className=" bg-grid-gray-100">
-      <div className="container mx-auto p-2 md:p-4 bg-[#f2f2f2] bg-opacity-70">
-        <div className="flex flex-col items-center justify-center mb-4">
-          <p className="text-xl font-bold text-center text-blue-500 py-1 px-4 border bg-gray-200 w-fit">
-            Testimonials
-          </p>
-          <h1 className="text-4xl font-bold text-center">
-            What our customer&apos;s say
-          </h1>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8  py-2 md:mb-4">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow border text-center">
-              <p className="text-gray-600 mb-4">
-                <q>{testimonial.quote}</q>
-              </p>
-              <div className="flex mb-2 justify-center">
-                {[...Array(testimonial.stars)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className="w-5 h-5 text-yellow-400 fill-current"
-                  />
-                ))}
+      <div className="bg-[#f2f2f2] bg-opacity-70">
+        <div className="container mx-auto p-2 md:p-4 ">
+          <div className="flex flex-col items-center justify-center mb-4">
+            <p className="text-xl font-bold text-center text-blue-500 py-1 px-4 border bg-gray-200 w-fit">
+              Testimonials
+            </p>
+            <h1 className="text-4xl font-bold text-center">
+              What our customer&apos;s say
+            </h1>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8  py-2 md:mb-4">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow border text-center">
+                <p className="text-gray-600 mb-4">
+                  <q>{testimonial.quote}</q>
+                </p>
+                <div className="flex mb-2 justify-center">
+                  {[...Array(testimonial.stars)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="w-5 h-5 text-yellow-400 fill-current"
+                    />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {testimonial.author}
+                </p>
+                <p className="font-semibold text-gray-500">
+                  {testimonial.role}
+                </p>
               </div>
-              <p className="text-sm text-muted-foreground">
-                {testimonial.author}
-              </p>
-              <p className="font-semibold text-gray-500">{testimonial.role}</p>
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-3 gap-4 mx-auto text-center divide-x py-2 my-10">
-          {stats.map((stat, index) => (
-            <div key={index}>
-              <p className=" text-2xl md:text-4xl font-bold text-blue-600 mb-2">
-                {stat.value}
-              </p>
-              <p className="text-sm md:text-base text-muted-foreground">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
+          <div className="grid grid-cols-3 gap-4 mx-auto text-center divide-x py-2 my-10">
+            {stats.map((stat, index) => (
+              <div key={index}>
+                <p className=" text-2xl md:text-4xl font-bold text-blue-600 mb-2">
+                  {stat.value}
+                </p>
+                <p className="text-sm md:text-base text-muted-foreground">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
