@@ -34,6 +34,8 @@ model shippingAddress {
   city     String
   district String
   location String
+
+  @@index([userId])
 }
 
 model Invoice {
@@ -46,6 +48,10 @@ model Invoice {
   userId           String
   parcelId         String
   status           InvoiceStatus @default(DRAFT)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([userId, parcelId])
 }
 
 enum ParcelStatus {
