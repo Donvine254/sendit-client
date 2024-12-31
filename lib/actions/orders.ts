@@ -1,3 +1,4 @@
+"use server";
 import { prisma } from "@/prisma/prisma";
 import { ParcelOrderData } from "@/types";
 import { revalidateTag } from "next/cache";
@@ -18,7 +19,7 @@ export async function createOrder(parcelData: ParcelOrderData) {
 }
 
 type OrderStatus = "PENDING" | "IN_TRANSIT" | "DELIVERED" | "CANCELLED";
-export async function cancelOrder(orderId: string, status: OrderStatus) {
+export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   try {
     await prisma.parcel.update({
       where: { id: orderId },

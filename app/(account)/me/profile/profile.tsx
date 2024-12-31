@@ -5,7 +5,6 @@ import {
   CalendarX,
   CalendarCheck,
   Package,
-  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +25,7 @@ import { sessionUser } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import StatusBadge from "@/components/ui/status-badge";
+import CancelButton from "@/components/ui/cancel-button";
 
 type Props = {
   user: sessionUser;
@@ -142,12 +142,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                                 </Link>
                               </Button>
                               {order.status === "PENDING" && (
-                                <Button
-                                  variant="ghost"
-                                  className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                                  <X className="h-4 w-4" />
-                                  Cancel order
-                                </Button>
+                                <CancelButton orderId={order.id} />
                               )}
                             </PopoverContent>
                           </Popover>
