@@ -1,26 +1,10 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
-import { ParcelOrderData } from "@/types";
-import { revalidateTag, unstable_cache } from "next/cache";
+import { unstable_cache } from "next/cache";
 const baseUrl =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:3000/api/admin"
     : "https://senditkenya.vercel.app/api/admin";
-export async function createOrder(parcelData: ParcelOrderData) {
-  try {
-    await prisma.parcel.create({
-      data: parcelData,
-    });
-    await revalidateTag("statistics");
-    await revalidateTag("orders");
-    return { success: true, message: "Order created successfully" };
-  } catch (error: any) {
-    console.log(error);
-    return { success: true, error: "Something went wrong" };
-  } finally {
-    await prisma.$disconnect();
-  }
-}
 
 export async function getUserData(userId: string) {
   try {
