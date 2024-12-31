@@ -25,26 +25,7 @@ async function getToken(): Promise<string> {
   const { access_token } = await tokenResponse.json();
   return access_token;
 }
-//eslint-disable-next-line
-async function getUserDetails(userId: string, accessToken: string) {
-  const userResponse = await fetch(
-    `${KINDE_ISSUER_URL}/api/v1/user?id=${userId}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
 
-  if (!userResponse.ok) {
-    throw new Error(`Failed to fetch user details: ${userResponse.statusText}`);
-  }
-
-  const userDetails = await userResponse.json();
-  return userDetails;
-}
 async function updateUserDetails(
   userId: string,
   accessToken: string,

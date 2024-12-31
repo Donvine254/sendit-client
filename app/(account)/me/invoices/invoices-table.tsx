@@ -38,6 +38,7 @@ import {
 } from "@/components/ui/popover";
 import { MoreHorizontal } from "lucide-react";
 import { Invoice } from "@prisma/client";
+import { GenerateInvoice } from "@/lib/actions/invoices";
 
 const statusStyles = {
   DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
@@ -51,7 +52,6 @@ const statusStyles = {
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
   const handlePay = () => console.log("Pay invoice:", invoice.id);
   // TODO: Implement Insta-send API for payment gateway
-  const handleDownload = () => console.log("Download invoice:", invoice.id);
   // TODO: Implement invoice-generator API to create invoice PDFs
   const handlePrint = () => console.log("Print invoice:", invoice.id);
   const handleDispute = () => console.log("Dispute invoice:", invoice.id);
@@ -78,7 +78,7 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
           <Button
             variant="ghost"
             className="w-full justify-start"
-            onClick={handleDownload}>
+            onClick={() => GenerateInvoice(invoice)}>
             <Download className="mr-2 h-4 w-4" />
             Download
           </Button>
