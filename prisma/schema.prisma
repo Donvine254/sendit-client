@@ -26,10 +26,10 @@ model Parcel {
 
 model shippingAddress {
   id        String   @id @default(cuid())
-  userId    String @unique
+  userId    String   @unique
   email     String?
   fullName  String
-  phone     Int
+  phone     String
   region    String
   district  String
   address   String

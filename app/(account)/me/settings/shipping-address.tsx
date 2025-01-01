@@ -65,7 +65,6 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
               value={formData.fullName}
               onChange={handleInputChange}
               required
-              defaultValue={`${user.given_name} ${user.family_name}`}
               autoComplete="name"
             />
           </div>
@@ -95,7 +94,6 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
                 onChange={handleInputChange}
                 pattern="^[1-9][0-9]{8}$"
                 className="rounded-l-none"
-                defaultValue={user.phone_number || ""}
                 placeholder="Enter phone number"
                 title="Phone number must be 9 digits and cannot start with 0"
                 required

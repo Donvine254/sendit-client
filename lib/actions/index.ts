@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
-import { AddressFormData, ShippingAddressData } from "@/types";
+import { ShippingAddressData } from "@/types";
 import { unstable_cache } from "next/cache";
 const baseUrl =
   process.env.NODE_ENV !== "production"
