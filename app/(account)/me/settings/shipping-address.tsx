@@ -28,7 +28,7 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPending(true);
-    const toastId = toast.loading("Sending message...", {
+    const toastId = toast.loading("Processing Request...", {
       position: "top-center",
     });
     const response = await submitAddress(formData);

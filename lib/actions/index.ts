@@ -129,8 +129,14 @@ export const getUserInvoices = unstable_cache(
 export async function submitAddress(data: ShippingAddressData) {
   try {
     //  save the address to your database
-    await prisma.shippingAddress.create({
-      data,
+    await prisma.shippingAddress.upsert({
+      where: { userId: data.userId },
+      create: {
+        ...data,
+      },
+      update: {
+        ...data,
+      },
     });
     return {
       success: true,
