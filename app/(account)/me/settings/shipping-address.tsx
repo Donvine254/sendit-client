@@ -7,15 +7,22 @@ import Image from "next/image";
 import { regions } from "@/constants";
 import { sessionUser, ShippingAddressData } from "@/types";
 import { toast } from "sonner";
-export default function ShippingAddressForm({ user }: { user: sessionUser }) {
+import { shippingAddress } from "@prisma/client";
+export default function ShippingAddressForm({
+  user,
+  address,
+}: {
+  user: sessionUser;
+  address: shippingAddress;
+}) {
   const [formData, setFormData] = useState<ShippingAddressData>({
     userId: user.id,
-    phone: user.phone_number || "",
+    phone: address.phone || user.phone_number || "",
     email: user.email,
-    fullName: `${user.given_name} ${user.family_name}`,
-    region: "",
-    district: "",
-    address: "",
+    fullName: address.fullName || `${user.given_name} ${user.family_name}`,
+    region: address.region || "",
+    district: address.district || "",
+    address: address.address || "",
   });
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -37,15 +44,6 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
     if (response.success) {
       toast.success("Shipping address updated successfully", {
         position: "top-center",
-      });
-      setFormData({
-        userId: user.id,
-        fullName: `${user.given_name} ${user.family_name}`,
-        phone: "",
-        email: user.email,
-        region: "",
-        district: "",
-        address: "",
       });
     } else {
       toast.error("Something went horribly wrong!", {
@@ -140,6 +138,8 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
               id="district"
               name="district"
               disabled={!formData.region}
+              value={formData.district}
+              onChange={handleInputChange}
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               required>
               <option value="">Select your subcounty</option>

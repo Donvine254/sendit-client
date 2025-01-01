@@ -4,6 +4,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { sessionUser } from "@/types";
 import Script from "next/script";
 
+
 export const metadata: Metadata = {
   title: "Sendit Courier- Welcome ",
   description:
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   const { getUser } = getKindeServerSession();
   const user = (await getUser()) as sessionUser;
+  
   return (
     <section className="min-h-screen bg-[#F8F9FA]">
       <Script

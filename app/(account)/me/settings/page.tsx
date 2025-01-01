@@ -1,9 +1,11 @@
 import { sessionUser } from "@/types";
+import { prisma } from "@/prisma/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { InfoIcon } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
 import ShippingAddressForm from "./shipping-address";
+import { shippingAddress } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Sendit Courier- My Account | Settings",
@@ -15,6 +17,11 @@ export const dynamic = "force-dynamic";
 export default async function Settings() {
   const { getUser } = getKindeServerSession();
   const user = (await getUser()) as sessionUser;
+  const address = (await prisma.shippingAddress.findUnique({
+    where: {
+      userId: user.id,
+    },
+  })) as shippingAddress;
   return (
     <div className="mt-4 p-4 md:p-6 w-full bg-white rounded-md shadow">
       <h1 className="text-lg font-semibold my-2">Basic Information</h1>
@@ -96,7 +103,7 @@ export default async function Settings() {
       <p className="text-gray-600 mb-6">
         Please enter your address details below.
       </p>
-      <ShippingAddressForm user={user}/>
+      <ShippingAddressForm user={user} address={address} />
     </div>
   );
 }
