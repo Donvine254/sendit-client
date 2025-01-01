@@ -132,6 +132,8 @@ export async function submitAddress(
 ): Promise<ActionResponse> {
   try {
     const data = {
+      userId: formData.get("userId"),
+      email: formData.get("email"),
       fullName: formData.get("fullName"),
       phone: formData.get("phone"),
       region: formData.get("region"),

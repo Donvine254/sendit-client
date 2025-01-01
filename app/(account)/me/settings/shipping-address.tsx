@@ -20,6 +20,26 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
   return (
     <form action={action} className="space-y-6" autoComplete="on">
       <div className="space-y-4">
+        <input
+          type="text"
+          defaultValue={user.id}
+          name="userId"
+          id="userId"
+          hidden
+          aria-hidden
+          readOnly
+          aria-readonly
+        />
+        <input
+          type="email"
+          defaultValue={user.email}
+          name="email"
+          id="email"
+          hidden
+          aria-hidden
+          readOnly
+          aria-readonly
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label htmlFor="fullName" className="font-semibold  text-gray-700">
