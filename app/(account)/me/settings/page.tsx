@@ -1,11 +1,11 @@
 import { sessionUser } from "@/types";
-import { prisma } from "@/prisma/prisma";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { InfoIcon } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
 import ShippingAddressForm from "./shipping-address";
 import { shippingAddress } from "@prisma/client";
+import { getShippingAddress } from "@/lib/actions";
 
 export const metadata: Metadata = {
   title: "Sendit Courier- My Account | Settings",
@@ -17,21 +17,21 @@ export const dynamic = "force-dynamic";
 export default async function Settings() {
   const { getUser } = getKindeServerSession();
   const user = (await getUser()) as sessionUser;
-  const address = (await prisma.shippingAddress.findUnique({
-    where: {
-      userId: user.id,
-    },
-  })) as shippingAddress;
+  const address = (await getShippingAddress(user.id)) as shippingAddress;
   return (
     <div className="mt-4 p-4 md:p-6 w-full bg-white rounded-md shadow">
       <h1 className="text-lg font-semibold my-2">Basic Information</h1>
-      <p className="flex items-center justify-start gap-1 xsm:gap-2">
-        <InfoIcon className="h-6 w-6 sm:h-4 sm:2-4 text-blue-600" />
-        <span className="text-xs md:text-sm text-blue-600">
-          If you registered using Facebook or Google, you cannot edit your user
-          details.
-        </span>
-      </p>
+      <div
+        role="alert"
+        className="w-full border p-2 rounded-md bg-blue-100 border-blue-400 text-blue-700">
+        <p className="flex items-center justify-start gap-1 xsm:gap-2">
+          <InfoIcon className="h-6 w-6 sm:h-4 sm:2-4 text-blue-600" />
+          <span className="text-xs md:text-sm text-blue-600">
+            If you registered using Facebook or Google, you cannot edit your
+            user details.
+          </span>
+        </p>
+      </div>
       <div className="space-y-2 my-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">

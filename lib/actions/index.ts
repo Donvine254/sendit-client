@@ -109,22 +109,7 @@ export const getUserOrderStatistics = unstable_cache(
   ["statistics"],
   { revalidate: 600, tags: ["statistics"] }
 );
-//function to get user shipping address information
-export const getShippingAddress = unstable_cache(
-  async (userId: string) => {
-    try {
-      const address = await prisma.shippingAddress.findUnique({
-        where: { userId },
-      });
-      return address;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  },
-  ["address"],
-  { revalidate: 600, tags: ["address"] }
-);
+
 export const getUserInvoices = unstable_cache(
   async (userId: string) => {
     try {
@@ -168,3 +153,19 @@ export async function submitAddress(data: ShippingAddressData) {
     await prisma.$disconnect();
   }
 }
+//function to get user shipping address information
+export const getShippingAddress = unstable_cache(
+  async (userId: string) => {
+    try {
+      const address = await prisma.shippingAddress.findUnique({
+        where: { userId },
+      });
+      return address;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  ["address"],
+  { revalidate: 600, tags: ["address"] }
+);

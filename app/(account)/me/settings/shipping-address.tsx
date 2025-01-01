@@ -17,12 +17,12 @@ export default function ShippingAddressForm({
 }) {
   const [formData, setFormData] = useState<ShippingAddressData>({
     userId: user.id,
-    phone: address.phone || user.phone_number || "",
+    phone: address?.phone || user.phone_number || "",
     email: user.email,
-    fullName: address.fullName || `${user.given_name} ${user.family_name}`,
-    region: address.region || "",
-    district: address.district || "",
-    address: address.address || "",
+    fullName: address?.fullName || `${user.given_name} ${user.family_name}`,
+    region: address?.region || "",
+    district: address?.district || "",
+    address: address?.address || "",
   });
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
