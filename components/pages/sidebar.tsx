@@ -122,7 +122,7 @@ export default function UserSidenav({
           <div className="flex space-x-2 px-4 py-2">
             <Link
               title="update shipping address"
-              scroll={false}
+              scroll
               href="/me/settings#shipping">
               {" "}
               <CircleFadingPlus className="h-5 w-5 text-blue-600" />
@@ -138,6 +138,7 @@ export default function UserSidenav({
                 {data.preferred_email}
               </span>
               <button
+                title="copy email"
                 onClick={() => {
                   navigator.clipboard
                     .writeText(data.preferred_email || "")
