@@ -16,8 +16,8 @@ model Parcel {
   description     String
   status          ParcelStatus @default(PENDING)
   price           Float
-  pickupAddress   Json         @default("{\"street\": \"\", \"city\": \"\", \"state\": \"\", \"postalCode\": \"\", \"country\": \"\"}")
-  deliveryAddress Json         @default("{\"street\": \"\", \"city\": \"\", \"state\": \"\", \"postalCode\": \"\", \"country\": \"\"}")
+  pickupAddress   Json         @default("{\"region\": \"\", \"district\": \"\", \"address\": \"\", \"fullName\": \"\",\"phone\": \"\", \"email\": \"\"}")
+  deliveryAddress Json         @default("{\"region\": \"\", \"district\": \"\", \"address\": \"\", \"fullName\": \"\",\"phone\": \"\", \"email\": \"\"}")
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
 
@@ -25,15 +25,16 @@ model Parcel {
 }
 
 model shippingAddress {
-  id       String @id @default(cuid())
-  userId   String
-  fullName String
-  phone    Int
-  email    String
-  region   String
-  city     String
-  district String
-  location String
+  id        String   @id @default(cuid())
+  userId    String
+  email     String?
+  fullName  String
+  phone     Int
+  region    String
+  district  String
+  address   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }

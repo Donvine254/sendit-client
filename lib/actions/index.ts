@@ -1,5 +1,6 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
+import { ActionResponse } from "@/types";
 import { unstable_cache } from "next/cache";
 const baseUrl =
   process.env.NODE_ENV !== "production"
@@ -124,3 +125,31 @@ export const getUserInvoices = unstable_cache(
   ["invoices"],
   { revalidate: 600, tags: ["invoices"] }
 );
+
+export async function submitAddress(
+  prevState: ActionResponse | null,
+  formData: FormData
+): Promise<ActionResponse> {
+  try {
+    const data = {
+      fullName: formData.get("fullName"),
+      phone: formData.get("phone"),
+      region: formData.get("region"),
+      district: formData.get("district"),
+      address: formData.get("address"),
+    };
+    // Here you would typically save the address to your database
+    console.log("Address submitted:", data);
+
+    return {
+      success: true,
+      message: "Address saved successfully!",
+    };
+  } catch (error: any) {
+    console.error("Error: ", error);
+    return {
+      success: false,
+      message: "An unexpected error occurred",
+    };
+  }
+}

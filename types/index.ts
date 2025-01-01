@@ -72,3 +72,8 @@ export type Order = {
   };
   price: number;
 };
+export interface ActionResponse {
+  success: boolean;
+  message: string;
+  errors?: Partial<Record<keyof AddressFormData, string[]>>;
+}
