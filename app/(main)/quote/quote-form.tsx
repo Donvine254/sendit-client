@@ -7,7 +7,9 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 export default function QuoteForm() {
+  const router = useRouter();
   const [formData, setFormData] = useState<QuoteFormData>({
     firstName: "",
     lastName: "",
@@ -46,7 +48,6 @@ export default function QuoteForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const form = e.currentTarget;
     const toastId = toast.loading("Sending message...", {
       position: "top-center",
     });
@@ -73,12 +74,32 @@ export default function QuoteForm() {
           position: "top-center",
         }
       );
-      form.reset();
+      resetForm();
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
     } else {
       toast.error("Failed to send message. Please try again.");
     }
   }
-
+  //function to reset the form
+  function resetForm() {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      pickupRegion: "",
+      pickupDistrict: "",
+      pickupAddress: "",
+      deliveryRegion: "",
+      deliveryDistrict: "",
+      deliveryAddress: "",
+      description: "",
+      weight: 0,
+      parcelImage: null,
+    });
+  }
   return (
     <form
       onSubmit={handleSubmit}
@@ -389,7 +410,7 @@ export default function QuoteForm() {
 
       {/* Submit Button */}
       <div className="flex items-center justify-end gap-4">
-        <Button type="reset" variant="outline">
+        <Button type="reset" variant="outline" onClick={resetForm}>
           Cancel
         </Button>
         <Button
