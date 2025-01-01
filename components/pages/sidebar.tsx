@@ -122,8 +122,8 @@ export default function UserSidenav({
           <div className="flex space-x-2 px-4 py-2">
             <Link
               title="update shipping address"
-              prefetch={false}
-              href="/me/settings">
+              scroll={false}
+              href="/me/settings#shipping">
               {" "}
               <CircleFadingPlus className="h-5 w-5 text-blue-600" />
             </Link>
