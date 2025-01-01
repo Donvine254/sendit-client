@@ -28,8 +28,12 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPending(true);
+    const toastId = toast.loading("Sending message...", {
+      position: "top-center",
+    });
     const response = await submitAddress(formData);
     setPending(false);
+    toast.dismiss(toastId);
     if (response.success) {
       toast.success("Shipping address updated successfully", {
         position: "top-center",
