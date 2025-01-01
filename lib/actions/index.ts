@@ -130,19 +130,26 @@ export async function submitAddress(
   prevState: ActionResponse | null,
   formData: FormData
 ): Promise<ActionResponse> {
-  try {
-    const data = {
-      userId: formData.get("userId"),
-      email: formData.get("email"),
-      fullName: formData.get("fullName"),
-      phone: formData.get("phone"),
-      region: formData.get("region"),
-      district: formData.get("district"),
-      address: formData.get("address"),
+  const data = {
+    userId: formData.get("userId") as string,
+    email: formData.get("email") as string | null,
+    fullName: formData.get("fullName") as string,
+    phone: Number(`254${formData.get("phone")}`),
+    region: formData.get("region") as string,
+    district: formData.get("district") as string,
+    address: formData.get("address") as string,
+  };
+  if (!data.userId) {
+    return {
+      success: false,
+      message: "User ID is required",
     };
-    // Here you would typically save the address to your database
-    console.log("Address submitted:", data);
-
+  }
+  try {
+    //  save the address to your database
+    await prisma.shippingAddress.create({
+      data,
+    });
     return {
       success: true,
       message: "Address saved successfully!",
