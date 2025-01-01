@@ -1,45 +1,58 @@
 "use client";
-import { ChangeEvent, useActionState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { CheckCircle2 } from "lucide-react";
 import { submitAddress } from "@/lib/actions";
 import Image from "next/image";
 import { regions } from "@/constants";
-import { ActionResponse, sessionUser } from "@/types";
-const initialState: ActionResponse = {
-  success: false,
-  message: "",
-};
+import { sessionUser, ShippingAddressData } from "@/types";
+import { toast } from "sonner";
 export default function ShippingAddressForm({ user }: { user: sessionUser }) {
-  const [state, action, isPending] = useActionState(
-    submitAddress,
-    initialState
-  );
+  const [formData, setFormData] = useState<ShippingAddressData>({
+    userId: user.id,
+    phone: user.phone_number || "",
+    email: user.email,
+    fullName: `${user.given_name} ${user.family_name}`,
+    region: "",
+    district: "",
+    address: "",
+  });
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setPending(true);
+    const response = await submitAddress(formData);
+    setPending(false);
+    if (response.success) {
+      toast.success("Shipping address updated successfully", {
+        position: "top-center",
+      });
+      setFormData({
+        userId: user.id,
+        fullName: `${user.given_name} ${user.family_name}`,
+        phone: "",
+        email: user.email,
+        region: "",
+        district: "",
+        address: "",
+      });
+    } else {
+      toast.error("Something went horribly wrong!", {
+        position: "top-center",
+      });
+    }
+  };
+  const [isPending, setPending] = useState(false);
   return (
-    <form action={action} className="space-y-6" autoComplete="on">
+    <form onSubmit={handleSubmit} className="space-y-6" autoComplete="on">
       <div className="space-y-4">
-        <input
-          type="text"
-          defaultValue={user.id}
-          name="userId"
-          id="userId"
-          hidden
-          aria-hidden
-          readOnly
-          aria-readonly
-        />
-        <input
-          type="email"
-          defaultValue={user.email}
-          name="email"
-          id="email"
-          hidden
-          aria-hidden
-          readOnly
-          aria-readonly
-        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label htmlFor="fullName" className="font-semibold  text-gray-700">
@@ -49,6 +62,8 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
               id="fullName"
               name="fullName"
               placeholder="John Doe"
+              value={formData.fullName}
+              onChange={handleInputChange}
               required
               defaultValue={`${user.given_name} ${user.family_name}`}
               autoComplete="name"
@@ -76,6 +91,8 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
                 name="phone"
                 minLength={9}
                 maxLength={9}
+                value={formData.phone}
+                onChange={handleInputChange}
                 pattern="^[1-9][0-9]{8}$"
                 className="rounded-l-none"
                 defaultValue={user.phone_number || ""}
@@ -98,28 +115,8 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
                 id="region"
                 name="region"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-                onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                  const district = document.getElementById(
-                    "district"
-                  ) as HTMLSelectElement;
-                  if (e.target.value !== "") {
-                    district.removeAttribute("disabled");
-                    const subcounties =
-                      regions.find((region) => region.county === e.target.value)
-                        ?.subcounties || [];
-                    district.innerHTML = `<option value="">Select a district</option>`;
-                    // Add new options
-                    subcounties.forEach((subcounty) => {
-                      const option = document.createElement("option");
-                      option.value = subcounty;
-                      option.textContent = subcounty;
-                      district.appendChild(option);
-                    });
-                  } else {
-                    district.setAttribute("disabled", "true");
-                    district.value = "";
-                  }
-                }}
+                value={formData.region}
+                onChange={handleInputChange}
                 required>
                 <option value="">Select a region</option>
                 {regions.map((region) => (
@@ -140,10 +137,17 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
             <select
               id="district"
               name="district"
-              disabled
+              disabled={!formData.region}
               className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
               required>
               <option value="">Select your subcounty</option>
+              {regions
+                .find((region) => region.county === formData.region)
+                ?.subcounties.map((subcounty) => (
+                  <option key={subcounty} value={subcounty}>
+                    {subcounty}
+                  </option>
+                ))}
             </select>
           </div>
         </div>
@@ -153,6 +157,8 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
           <textarea
             id="address"
             name="address"
+            value={formData.address}
+            onChange={handleInputChange}
             placeholder="Enter your street address"
             required
             className="w-full px-3 py-2 text-gray-700 border rounded-md focus:outline-none  focus:ring-2 focus:ring-black"
@@ -160,14 +166,6 @@ export default function ShippingAddressForm({ user }: { user: sessionUser }) {
           />
         </div>
       </div>
-
-      {state?.message && (
-        <Alert variant={state.success ? "default" : "destructive"}>
-          {state.success && <CheckCircle2 className="h-4 w-4" />}
-          <AlertDescription>{state.message}</AlertDescription>
-        </Alert>
-      )}
-
       <div className="flex items-center justify-end gap-4">
         <Button type="reset" variant="outline" disabled={isPending}>
           Reset

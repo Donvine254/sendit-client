@@ -1,6 +1,6 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
-import { ActionResponse } from "@/types";
+import { AddressFormData, ShippingAddressData } from "@/types";
 import { unstable_cache } from "next/cache";
 const baseUrl =
   process.env.NODE_ENV !== "production"
@@ -126,26 +126,7 @@ export const getUserInvoices = unstable_cache(
   { revalidate: 600, tags: ["invoices"] }
 );
 
-export async function submitAddress(
-  prevState: ActionResponse | null,
-  formData: FormData
-): Promise<ActionResponse> {
-  const data = {
-    userId: formData.get("userId") as string,
-    email: formData.get("email") as string,
-    fullName: formData.get("fullName") as string,
-    phone: Number(`254${formData.get("phone")}`),
-    region: formData.get("region") as string,
-    district: formData.get("district") as string,
-    address: formData.get("address") as string,
-  };
-  if (!data.userId) {
-    return {
-      success: false,
-      message: "User ID is required",
-    };
-  }
-  console.log(data);
+export async function submitAddress(data: ShippingAddressData) {
   try {
     //  save the address to your database
     await prisma.shippingAddress.create({
