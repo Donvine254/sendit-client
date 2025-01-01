@@ -132,7 +132,7 @@ export async function submitAddress(
 ): Promise<ActionResponse> {
   const data = {
     userId: formData.get("userId") as string,
-    email: formData.get("email") as string | null,
+    email: formData.get("email") as string,
     fullName: formData.get("fullName") as string,
     phone: Number(`254${formData.get("phone")}`),
     region: formData.get("region") as string,
@@ -145,6 +145,7 @@ export async function submitAddress(
       message: "User ID is required",
     };
   }
+  console.log(data);
   try {
     //  save the address to your database
     await prisma.shippingAddress.create({
@@ -154,11 +155,13 @@ export async function submitAddress(
       success: true,
       message: "Address saved successfully!",
     };
-  } catch (error: any) {
-    console.error("Error: ", error);
+  } catch (error) {
+    console.error(error);
     return {
       success: false,
       message: "An unexpected error occurred",
     };
+  } finally {
+    await prisma.$disconnect();
   }
 }
