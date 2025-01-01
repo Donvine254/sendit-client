@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Upload } from "lucide-react";
 import { QuoteFormData } from "@/types";
 import { regions } from "@/constants";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 export default function QuoteForm() {
   const [formData, setFormData] = useState<QuoteFormData>({
     firstName: "",
@@ -43,11 +44,40 @@ export default function QuoteForm() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form data:", formData);
-  };
+    const form = e.currentTarget;
+    const toastId = toast.loading("Sending message...", {
+      position: "top-center",
+    });
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: "134e33ca-5eb3-4993-bd97-5a12f68fb77a",
+        ...formData,
+        from_name: "Sendit Kenya",
+        subject:
+          "You have a quote request submission at senditkenya.vercel.app.",
+      }),
+    });
+    toast.dismiss(toastId);
+    const result = await response.json();
+    if (result.success) {
+      toast.success(
+        "We have received your message and will respond as soon as possible.",
+        {
+          position: "top-center",
+        }
+      );
+      form.reset();
+    } else {
+      toast.error("Failed to send message. Please try again.");
+    }
+  }
 
   return (
     <form
