@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
-import { unstable_cache } from "next/cache";
+import { ShippingAddressData } from "@/types";
+import { revalidateTag, unstable_cache } from "next/cache";
 const baseUrl =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:3000/api/admin"
@@ -123,4 +124,48 @@ export const getUserInvoices = unstable_cache(
   },
   ["invoices"],
   { revalidate: 600, tags: ["invoices"] }
+);
+
+export async function submitAddress(data: ShippingAddressData) {
+  try {
+    //  save the address to your database
+    await prisma.shippingAddress.upsert({
+      where: { userId: data.userId },
+      create: {
+        ...data,
+      },
+      update: {
+        ...data,
+      },
+    });
+    revalidateTag("address");
+    return {
+      success: true,
+      message: "Address saved successfully!",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message: "An unexpected error occurred",
+    };
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+//function to get user shipping address information
+export const getShippingAddress = unstable_cache(
+  async (userId: string) => {
+    try {
+      const address = await prisma.shippingAddress.findUnique({
+        where: { userId },
+      });
+      return address;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  ["address"],
+  { revalidate: 600, tags: ["address"] }
 );

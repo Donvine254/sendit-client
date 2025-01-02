@@ -8,6 +8,7 @@ import ParcelDetails from "@/components/delivery/steps/parcel-details";
 import PickupAddress from "@/components/delivery/steps/pickup-address";
 import DeliveryAddress from "@/components/delivery/steps/delivery-address";
 import OrderSummary from "@/components/delivery/steps/order-summary";
+import { shippingAddress } from "@prisma/client";
 
 const STEPS = [
   { title: "Parcel Details", description: "Describe your package" },
@@ -17,20 +18,24 @@ const STEPS = [
 ];
 type Props = {
   user: sessionUser;
+  address: shippingAddress;
 };
-const DeliveryForm = ({ user }: Props) => {
+const DeliveryForm = ({ user, address }: Props) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [parcelData, setParcelData] = useState<ParcelFormData>({
     description: "",
     weight: 0,
   });
   const [pickupAddress, setPickupAddress] = useState<AddressFormData>({
-    fullName: `${user?.given_name}${" "}${user?.family_name}` || "",
-    phone: "",
-    email: user?.email || "",
-    region: "",
-    district: "",
-    address: "",
+    fullName:
+      address?.fullName ||
+      `${user?.given_name}${" "}${user?.family_name}` ||
+      "",
+    phone: address?.phone || "",
+    email: address?.email || user?.email || "",
+    region: address?.region || "",
+    district: address?.district || "",
+    address: address?.address || "",
   });
   const [deliveryAddress, setDeliveryAddress] = useState<AddressFormData>({
     fullName: "",
@@ -58,7 +63,7 @@ const DeliveryForm = ({ user }: Props) => {
   };
 
   return (
-    <div className="min-h-screen  bg-gradient-to-tr from-blue-200 via-gray-100 to-blue-200 py-10">
+    <div className="min-h-screen  bg-gradient-to-tr from-blue-200 via-gray-100 to-blue-200 py-6 md:py-10">
       <div className="max-w-3xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="md:bg-white md:rounded-lg md:shadow-lg">
           <div className="p-2 sm:p-8">

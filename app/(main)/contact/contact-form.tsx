@@ -39,8 +39,8 @@ export default function ContactForm() {
         name,
         email,
         message,
-        from_name: "Senditcourier",
-        subject: "You have a new message at senditcourier.vercel.app.",
+        from_name: "Sendit Kenya",
+        subject: "You have a new message at senditkenya.vercel.app.",
       }),
     });
     toast.dismiss(toastId);

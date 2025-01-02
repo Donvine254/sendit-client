@@ -218,6 +218,14 @@ export default function Navbar({ user }: { user: sessionUser }) {
                 <li>
                   {/* eslint-disable-next-line */}
                   <a
+                    href="/me/invoices"
+                    className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                    My Invoices
+                  </a>
+                </li>
+                <li>
+                  {/* eslint-disable-next-line */}
+                  <a
                     href="/me/settings"
                     className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
                     Settings

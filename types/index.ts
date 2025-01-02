@@ -72,3 +72,12 @@ export type Order = {
   };
   price: number;
 };
+export interface ShippingAddressData {
+  userId: string;
+  phone: string;
+  fullName: string;
+  email: string;
+  region: string;
+  district: string;
+  address: string;
+};

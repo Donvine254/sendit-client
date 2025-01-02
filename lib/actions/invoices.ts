@@ -6,7 +6,7 @@ const baseUrl =
     ? "http://localhost:3000/api/invoice-generator"
     : "https://senditkenya.vercel.app/api/invoice-generator";
 export async function GenerateInvoice(data: Invoice) {
-  const toastId = toast.loading("Processing Request...", {
+  const toastId = toast.loading("Processing File...", {
     position: "top-center",
   });
   try {
