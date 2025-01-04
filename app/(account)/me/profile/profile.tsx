@@ -82,22 +82,28 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
           </h2>
           {recentOrders && recentOrders.length > 0 ? (
             <Table className="table-auto overflow-x-auto">
-              <TableHeader>
+              <TableHeader className="bg-blue-500 text-white">
                 <TableRow>
-                  <TableHead>#</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Origin</TableHead>
-                  <TableHead>Destination</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead className="text-white">#</TableHead>
+                  <TableHead className="text-white">Description</TableHead>
+                  <TableHead className="text-white">Date</TableHead>
+                  <TableHead className="text-white">Status</TableHead>
+                  <TableHead className="text-white">Origin</TableHead>
+                  <TableHead className="text-white">Destination</TableHead>
+                  <TableHead className="text-white">Price</TableHead>
+                  <TableHead className="text-white">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {recentOrders && recentOrders.length > 0
                   ? recentOrders.map((order: any, index: number) => (
-                      <TableRow key={order.id}>
+                      <TableRow
+                        key={order.id}
+                        className={`${
+                          order.status === "CANCELLED"
+                            ? "bg-red-100 bg-opacity-50"
+                            : ""
+                        } `}>
                         <TableCell>
                           <Badge variant="outline">
                             {String(index + 1).padStart(3, "0")}

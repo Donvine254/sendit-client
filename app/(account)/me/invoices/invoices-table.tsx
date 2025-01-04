@@ -42,11 +42,9 @@ import PaymentButton from "@/components/ui/payment-button";
 
 const statusStyles = {
   DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
-  PAID: "bg-green-100 text-green-800 hover:bg-green-500 hover:text-white",
-  OVERDUE:
-    "bg-red-100 text-red-800 hover:bg-destructive hover:text-destructive-foreground",
-  DISPUTED:
-    "bg-yellow-100 text-yellow-800 hover:bg-yellow-500 hover:text-white",
+  PAID: "bg-green-500 text-white hover:bg-green-600",
+  OVERDUE: "bg-destructive text-destructive-foreground",
+  DISPUTED: "bg-amber-500 text-white hover:bg-amber-600",
 };
 
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
@@ -258,7 +256,7 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="bg-blue-500 text-white">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -273,7 +271,13 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  className={`${
+                    row.getValue("status") === "DISPUTED"
+                      ? "bg-red-100 bg-opacity-50"
+                      : ""
+                  } `}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
