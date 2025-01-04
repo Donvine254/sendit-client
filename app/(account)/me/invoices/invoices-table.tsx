@@ -12,13 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Download,
-  Printer,
-  AlertTriangle,
-  Search,
-} from "lucide-react";
+import { Download, Printer, AlertTriangle, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -40,6 +34,7 @@ import { Invoice } from "@prisma/client";
 import { GenerateInvoice } from "@/lib/actions/invoices";
 import PaymentButton from "@/components/ui/payment-button";
 import Refresh from "@/components/pages/refresh";
+import { SortAll } from "@/assets";
 
 const statusStyles = {
   DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
@@ -108,9 +103,9 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           INV#
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -139,9 +134,9 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -163,9 +158,9 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           Due Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -180,9 +175,9 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           Status
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },

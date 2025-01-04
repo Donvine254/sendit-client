@@ -34,6 +34,7 @@ import { Order } from "@/types";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
 import Refresh from "@/components/pages/refresh";
+import { SortAll } from "@/assets";
 
 const columns: ColumnDef<Order>[] = [
   {
@@ -47,7 +48,17 @@ const columns: ColumnDef<Order>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Date",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          Date
+          <SortAll className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const date = new Date(row.getValue("createdAt"));
       return date.toLocaleDateString();
@@ -55,7 +66,17 @@ const columns: ColumnDef<Order>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          Status
+          <SortAll className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const status = row.getValue("status");
       return <StatusBadge status={status as string} />;
@@ -83,7 +104,17 @@ const columns: ColumnDef<Order>[] = [
   },
   {
     accessorKey: "price",
-    header: "Price",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          Price
+          <SortAll className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const price = parseFloat(row.getValue("price"));
       return `${new Intl.NumberFormat("en-US", {
