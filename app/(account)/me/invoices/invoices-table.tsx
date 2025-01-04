@@ -141,7 +141,16 @@ const columns: ColumnDef<Invoice>[] = [
       );
     },
     cell: ({ row }) => {
-      return <p>{new Date(row.getValue("createdAt")).toLocaleDateString()}</p>;
+      const date = new Date(row.getValue("createdAt"));
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
   {
@@ -165,7 +174,16 @@ const columns: ColumnDef<Invoice>[] = [
       );
     },
     cell: ({ row }) => {
-      return <p>{new Date(row.getValue("createdAt")).toLocaleDateString()}</p>;
+      const date = new Date(row.getValue("createdAt"));
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
   {
@@ -204,7 +222,6 @@ const columns: ColumnDef<Invoice>[] = [
   },
   {
     id: "actions",
-    header: "Actions",
     cell: ({ row }) => <InvoiceActions invoice={row.original} />,
   },
 ];

@@ -61,7 +61,15 @@ const columns: ColumnDef<Order>[] = [
     },
     cell: ({ row }) => {
       const date = new Date(row.getValue("createdAt"));
-      return date.toLocaleDateString();
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
   {

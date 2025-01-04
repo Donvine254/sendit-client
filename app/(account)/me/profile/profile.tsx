@@ -91,7 +91,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                   <TableHead className="text-white">Origin</TableHead>
                   <TableHead className="text-white">Destination</TableHead>
                   <TableHead className="text-white">Price</TableHead>
-                  <TableHead className="text-white">Actions</TableHead>
+                  <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -113,7 +113,17 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                           {order.description}
                         </TableCell>
                         <TableCell>
-                          {new Date(order.createdAt).toLocaleDateString()}
+                          <p className="whitespace-nowrap">
+                            {" "}
+                            {new Date(order.createdAt).toLocaleDateString(
+                              undefined,
+                              {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )}
+                          </p>
                         </TableCell>
                         <TableCell>
                           <StatusBadge status={order.status} />
