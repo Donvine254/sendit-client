@@ -2,7 +2,7 @@ import { revalidateCache } from "@/lib/actions";
 import { RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
+// eslint-disable-next-line no-undef
 let intervalRef: any | NodeJS.Timeout;
 export default function Refresh({ tag }: { tag: string }) {
   // functions to allow users to sync data and invalidate cache
