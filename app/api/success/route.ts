@@ -1,6 +1,7 @@
 import { updateInvoiceStatus } from "@/lib/actions/orders";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+// handle cases where payments are disputed or cancelled after succeeding
 export async function GET(req: NextRequest) {
   const sessionId = req.nextUrl.searchParams.get("session_id");
   const invoiceId = req.nextUrl.searchParams.get("invoice_id") as string;
