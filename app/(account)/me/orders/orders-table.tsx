@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Eye, Filter, MoreHorizontal, Search } from "lucide-react";
+import { Eye, Filter, MoreHorizontal, RefreshCcw, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -33,6 +33,10 @@ import Link from "next/link";
 import { Order } from "@/types";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
+import { useRouter } from "next/navigation";
+import { revalidateCache } from "@/lib/actions";
+
+let intervalRef: NodeJS.Timeout;
 
 const columns: ColumnDef<Order>[] = [
   {
@@ -127,6 +131,33 @@ export default function DataTable({ data }: DataTableProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+  // functions to allow users to sync data and invalidate cache
+  const [timeSinceLoad, setTimeSinceLoad] = useState("less than a minute ago");
+  const router = useRouter();
+  async function syncData() {
+    await revalidateCache("orders");
+    clearInterval(intervalRef);
+    setTimeSinceLoad("less than a minute ago");
+    router.refresh();
+  }
+  //keep track of the time since the last update
+  useEffect(() => {
+    const pageLoadTime = Date.now();
+    const updateTimeSinceLoad = () => {
+      const elapsedMs = Date.now() - pageLoadTime;
+      const elapsedMinutes = Math.floor(elapsedMs / 60000);
+      if (elapsedMinutes === 0) {
+        setTimeSinceLoad("less than a minute ago");
+      } else if (elapsedMinutes === 1) {
+        setTimeSinceLoad("a minute ago");
+      } else {
+        setTimeSinceLoad(`${elapsedMinutes} minutes ago`);
+      }
+    };
+    intervalRef = setInterval(updateTimeSinceLoad, 60000);
+    updateTimeSinceLoad();
+    return () => clearInterval(intervalRef);
+  }, []);
 
   const table = useReactTable({
     data,
@@ -149,25 +180,34 @@ export default function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4 gap-4">
+      <div className="flex items-center justify-start pt-2 gap-2 text-muted-foreground">
+        {/* keep track of the time since this page loads, without using useEffect hook unless it is necessary */}
+        <p className="text-sm xsm:text-xs">Last updated {timeSinceLoad}</p>
+        <button title="sync now" onClick={syncData}>
+          <RefreshCcw className="h-4 w-4 text-blue-500 cursor-pointer hover:animate-spin transition-all delay-150" />
+        </button>
+      </div>
+
+      <div className="flex items-center py-2 gap-4">
         <div className="relative w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4 " />
           <Input
-            placeholder="Search by descriptions..."
+            placeholder="Search by description..."
             value={
               (table.getColumn("description")?.getFilterValue() as string) ?? ""
             }
             onChange={(event) =>
               table.getColumn("description")?.setFilterValue(event.target.value)
             }
-            className="flex-1 max-w-3xl  pl-8"
+            className="flex-1 max-w-3xl xsm:text-sm pl-8"
           />
         </div>
 
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="outline" className="ml-auto justify-start">
-              <Filter className="h-4 w-4 mr-2" /> Columns
+              <Filter className="h-4 w-4 sm:mr-2" />{" "}
+              <span className="xsm:hidden">Columns</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent align="end" className="flex flex-col gap-2">
