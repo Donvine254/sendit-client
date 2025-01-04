@@ -33,6 +33,8 @@ import Link from "next/link";
 import { Order } from "@/types";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
+import Refresh from "@/components/pages/refresh";
+import { SortAll } from "@/assets";
 
 const columns: ColumnDef<Order>[] = [
   {
@@ -46,15 +48,43 @@ const columns: ColumnDef<Order>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Date",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          Date
+          <SortAll className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const date = new Date(row.getValue("createdAt"));
-      return date.toLocaleDateString();
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          Status
+          <SortAll className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const status = row.getValue("status");
       return <StatusBadge status={status as string} />;
@@ -82,7 +112,17 @@ const columns: ColumnDef<Order>[] = [
   },
   {
     accessorKey: "price",
-    header: "Price",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          Price
+          <SortAll className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const price = parseFloat(row.getValue("price"));
       return `${new Intl.NumberFormat("en-US", {
@@ -149,25 +189,27 @@ export default function DataTable({ data }: DataTableProps) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4 gap-4">
+      <Refresh tag="orders" />
+      <div className="flex items-center py-2 gap-4">
         <div className="relative w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4 " />
           <Input
-            placeholder="Search by descriptions..."
+            placeholder="Search by description..."
             value={
               (table.getColumn("description")?.getFilterValue() as string) ?? ""
             }
             onChange={(event) =>
               table.getColumn("description")?.setFilterValue(event.target.value)
             }
-            className="flex-1 max-w-3xl  pl-8"
+            className="flex-1 max-w-3xl xsm:text-sm pl-8"
           />
         </div>
 
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="outline" className="ml-auto justify-start">
-              <Filter className="h-4 w-4 mr-2" /> Columns
+              <Filter className="h-4 w-4 sm:mr-2" />{" "}
+              <span className="xsm:hidden">Columns</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent align="end" className="flex flex-col gap-2">
@@ -200,7 +242,9 @@ export default function DataTable({ data }: DataTableProps) {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="bg-blue-500 text-white">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -218,6 +262,11 @@ export default function DataTable({ data }: DataTableProps) {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  className={`${
+                    row.getValue("status") === "CANCELLED"
+                      ? "bg-red-100 bg-opacity-50"
+                      : ""
+                  } `}
                   data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

@@ -12,13 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import {
-  ArrowUpDown,
-  Download,
-  Printer,
-  AlertTriangle,
-  Search,
-} from "lucide-react";
+import { Download, Printer, AlertTriangle, Search } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -39,14 +33,14 @@ import { MoreHorizontal } from "lucide-react";
 import { Invoice } from "@prisma/client";
 import { GenerateInvoice } from "@/lib/actions/invoices";
 import PaymentButton from "@/components/ui/payment-button";
+import Refresh from "@/components/pages/refresh";
+import { SortAll } from "@/assets";
 
 const statusStyles = {
   DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
-  PAID: "bg-green-100 text-green-800 hover:bg-green-500 hover:text-white",
-  OVERDUE:
-    "bg-red-100 text-red-800 hover:bg-destructive hover:text-destructive-foreground",
-  DISPUTED:
-    "bg-yellow-100 text-yellow-800 hover:bg-yellow-500 hover:text-white",
+  PAID: "bg-green-500 text-white hover:bg-green-600",
+  OVERDUE: "bg-destructive text-destructive-foreground",
+  DISPUTED: "bg-amber-500 text-white hover:bg-amber-600",
 };
 
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
@@ -109,9 +103,9 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           INV#
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -140,14 +134,23 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      return <p>{new Date(row.getValue("createdAt")).toLocaleDateString()}</p>;
+      const date = new Date(row.getValue("createdAt"));
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
   {
@@ -164,14 +167,23 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           Due Date
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
     cell: ({ row }) => {
-      return <p>{new Date(row.getValue("createdAt")).toLocaleDateString()}</p>;
+      const date = new Date(row.getValue("createdAt"));
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
   {
@@ -181,9 +193,9 @@ const columns: ColumnDef<Invoice>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent">
+          className="p-0 hover:bg-transparent hover:text-gray-200">
           Status
-          <ArrowUpDown className="ml-2 h-4 w-4" />
+          <SortAll className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -210,7 +222,6 @@ const columns: ColumnDef<Invoice>[] = [
   },
   {
     id: "actions",
-    header: "Actions",
     cell: ({ row }) => <InvoiceActions invoice={row.original} />,
   },
 ];
@@ -240,6 +251,7 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
 
   return (
     <div className="w-full ">
+      <Refresh tag="invoices" />
       <div className="relative w-full py-4">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
         <Input
@@ -248,7 +260,7 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
           onChange={(event) =>
             table.getColumn("item")?.setFilterValue(event.target.value)
           }
-          className="w-full pl-8"
+          className="w-full pl-8 xsm:text-sm"
         />
       </div>
 
@@ -258,7 +270,7 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="bg-blue-500 text-white">
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -273,7 +285,13 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  className={`${
+                    row.getValue("status") === "DISPUTED"
+                      ? "bg-red-100 bg-opacity-50"
+                      : ""
+                  } `}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(

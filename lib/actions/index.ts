@@ -226,3 +226,7 @@ export const canDeleteAccount = unstable_cache(
   ["orders", "invoices"],
   { revalidate: 600, tags: ["orders", "invoices"] }
 );
+
+export async function revalidateCache(tag: string) {
+  revalidateTag(tag);
+}

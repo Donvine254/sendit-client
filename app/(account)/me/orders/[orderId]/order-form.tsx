@@ -316,7 +316,7 @@ export default function Orderform({ order }: Props) {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">VAT</span>
+                <span className="text-gray-600">VAT (16%)</span>
                 <span>
                   {" "}
                   {new Intl.NumberFormat("en-US", {

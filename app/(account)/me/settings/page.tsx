@@ -25,7 +25,7 @@ export default async function Settings() {
       <h1 className="text-lg font-semibold my-2">Basic Information</h1>
       <div
         role="alert"
-        className="w-full border p-2 rounded-md bg-blue-100 border-blue-400 text-blue-700">
+        className="w-full border p-2 rounded-md bg-blue-50 border-blue-400 text-blue-700">
         <p className="flex items-center justify-start gap-1 xsm:gap-2">
           <InfoIcon className="h-6 w-6 sm:h-4 sm:2-4 text-blue-600" />
           <span className="text-xs md:text-sm text-blue-600">
