@@ -39,4 +39,24 @@ export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   }
 }
 
-
+type InvoiceStatus = "DRAFT" | "PAID" | "OVERDUE" | "DISPUTED";
+export async function updateInvoiceStatus(
+  invoiceId: string,
+  status: InvoiceStatus
+) {
+  try {
+    await prisma.invoice.update({
+      where: { id: invoiceId },
+      data: {
+        status: status,
+      },
+    });
+    await revalidateTag("invoices");
+    return { success: true, message: "Invoice Status updated successfully" };
+  } catch (error: any) {
+    console.error(error);
+    return { success: false, error: error.message || "Something went wrong" };
+  } finally {
+    await prisma.$disconnect();
+  }
+}

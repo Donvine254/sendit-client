@@ -45,6 +45,8 @@ model Invoice {
   fullName         String
   shipping_address String
   item             String
+  email            String?
+  phone            String?
   amount           Int
   userId           String
   parcelId         String        @unique

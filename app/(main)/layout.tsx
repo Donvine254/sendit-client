@@ -4,6 +4,7 @@ import { Noto_Sans } from "next/font/google";
 import "../globals.css";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
+import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "../AuthProvider";
 import { sessionUser } from "@/types";
@@ -36,6 +37,7 @@ export default async function RootLayout({
           {children}
           <Footer />
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
