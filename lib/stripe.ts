@@ -41,7 +41,7 @@ export async function createCheckoutSession(invoice: Invoice): Promise<string> {
     phone_number_collection: { enabled: true },
     client_reference_id: invoice.userId,
     mode: "payment",
-    success_url: `${baseUrl}/me/invoices`,
+    success_url: `${baseUrl}/api/success?session_id={CHECKOUT_SESSION_ID}&invoice_id=${invoice.invoiceId}`,
     cancel_url: `${baseUrl}/me/invoices`,
     customer_email: invoice.email,
   });
@@ -49,6 +49,5 @@ export async function createCheckoutSession(invoice: Invoice): Promise<string> {
   if (!session.url) {
     throw new Error("Failed to create checkout session");
   }
-  console.log(session);
   return session.url;
 }
