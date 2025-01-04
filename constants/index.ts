@@ -1,5 +1,3 @@
-import { Invoice } from "@prisma/client";
-
 export const faqData = {
   Order: [
     {
@@ -43,7 +41,7 @@ export const faqData = {
     {
       title: "How can I track the status of my delivery?",
       content:
-        "We are currently working on implementing a parcel tracking system. However, our professional riders will keep you informed all the time.",
+        "We are currently working on implementing a parcel tracking system. However, our professional riders will keep you informed all the time. You can also contact our customer service team for updates.",
     },
     {
       title: "What are Sendit's delivery time frames?",
@@ -63,14 +61,14 @@ export const faqData = {
     {
       title: "Does Sendit Offer Shipment Insurance?",
       content:
-        "We handle every shipment with great care but accidents outside of our control can happen. During the order process, you will be prompted to provide an estimated value of your parcel for insurance purposes.Kindly provide the most accurate information. Note that damages resulting from poor packaging, sending prohibited goods, and  natural disasters such as storms, flooding, lightning strike, and earthquakes are not reimbursed.",
+        "We handle every shipment with great care but accidents outside of our control can happen. All goods on transit are insured against loss or damage. Note that damages resulting from poor packaging, sending prohibited goods, and  natural disasters such as storms, flooding, lightning strike, and earthquakes are not reimbursed.",
     },
   ],
   Payments: [
     {
       title: "How do I Pay for my Order?",
       content:
-        "Sendit allows you to pay once your parcel has been delivered. You can pay through cash, our Lipa na Mpesa Till Number or through a Bank Transfer.",
+        "Sendit allows you to pay once your parcel has been picked for delivery. You can pay securely online using your debit or credit card, bank transfer or any mobile money payment method of your choice.",
     },
     {
       title: "How customs impacts me?",
@@ -80,7 +78,7 @@ export const faqData = {
     {
       title: "Why am i being asked to pay up front?",
       content:
-        "While Sendit allows you to pay after delivery, some orders might require you to pay upfront. Such orders include groceries and any purchases made by riders on your behalf, high value orders such as electronics, jewelry, or luxury goods and orders made to remote locations (upcountry). ",
+        "While Sendit allows you to pay after delivery, some orders might require you to pay upfront. Such orders include groceries and any purchases made by riders on your behalf, high value orders such as electronics, jewelry, or luxury goods and orders made to remote locations (upcountry). Cancelling too many orders also affects your ability to post-pay deliveries. ",
     },
   ],
 };
@@ -578,57 +576,3 @@ export const regions = [
     subcounties: ["Central Pokot", "North Pokot", "Pokot South", "West Pokot"],
   },
 ];
-export const sampleInvoices = [
-  {
-    id: "cuid1",
-    invoice_number: 1,
-    fullName: "Alice Johnson",
-    shipping_address: "123 Elm Street, Nairobi, Kenya",
-    item: "Electronics",
-    amount: 5000,
-    userId: "user1",
-    parcelId: "parcel1",
-    status: "DRAFT",
-    createdAt: new Date("2024-12-01T10:00:00Z"),
-    updatedAt: new Date("2024-12-01T10:00:00Z"),
-  },
-  {
-    id: "cuid2",
-    invoice_number: 2,
-    fullName: "Bob Smith",
-    shipping_address: "456 Maple Avenue, Mombasa, Kenya",
-    item: "Furniture",
-    amount: 12000,
-    userId: "user2",
-    parcelId: "parcel2",
-    status: "PAID",
-    createdAt: new Date("2024-12-05T12:30:00Z"),
-    updatedAt: new Date("2024-12-06T14:45:00Z"),
-  },
-  {
-    id: "cuid3",
-    invoice_number: 3,
-    fullName: "Clara Onyango",
-    shipping_address: "789 Pine Lane, Kisumu, Kenya",
-    item: "Clothing",
-    amount: 2500,
-    userId: "user3",
-    parcelId: "parcel3",
-    status: "OVERDUE",
-    createdAt: new Date("2024-12-10T08:15:00Z"),
-    updatedAt: new Date("2024-12-12T09:20:00Z"),
-  },
-  {
-    id: "cuid4",
-    invoice_number: 4,
-    fullName: "David Okello",
-    shipping_address: "321 Oak Drive, Eldoret, Kenya",
-    item: "Appliances",
-    amount: 15000,
-    userId: "user4",
-    parcelId: "parcel4",
-    status: "DISPUTED",
-    createdAt: new Date("2024-12-15T16:00:00Z"),
-    updatedAt: new Date("2024-12-16T17:00:00Z"),
-  },
-] satisfies Invoice[];
