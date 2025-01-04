@@ -176,7 +176,7 @@ export default function ShippingAddressForm({
         <Button type="reset" variant="outline" disabled={isPending}>
           Reset
         </Button>
-        <Button type="submit" disabled={isPending}>
+        <Button type="submit" disabled={isPending} className="disabled:bg-muted disabled:text-muted-foreground bg-blue-500 text-white hover:bg-blue-600" title="save shipping address">
           {isPending ? "Saving..." : "Save Address"}
         </Button>
       </div>

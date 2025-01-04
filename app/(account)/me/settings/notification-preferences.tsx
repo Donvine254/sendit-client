@@ -85,7 +85,8 @@ export default function NotificationPreferences() {
         <Button
           type="submit"
           disabled={loading}
-          className="disabled:bg-muted disabled:text-muted-foreground">
+          title="save notification preferences"
+          className="disabled:bg-muted disabled:text-muted-foreground bg-blue-500 text-white hover:bg-blue-600">
           {loading ? "Saving....." : "Save preferences"}
         </Button>
       </div>
