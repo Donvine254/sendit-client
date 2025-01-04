@@ -19,6 +19,8 @@ async function createInvoicesFromParcels() {
       parcelId: parcel.id,
       amount: parcel.price,
       item: parcel.description,
+      email: parcel.pickupAddress.email,
+      phone: parcel.pickupAddress.phone,
       fullName: parcel.pickupAddress.fullName,
       shipping_address: `${parcel.deliveryAddress.address}, ${parcel.deliveryAddress.district}, ${parcel.deliveryAddress.region}`,
     };
