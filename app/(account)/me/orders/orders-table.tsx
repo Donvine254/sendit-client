@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Eye, Filter, MoreHorizontal, RefreshCcw, Search } from "lucide-react";
+import { Eye, Filter, MoreHorizontal, Search } from "lucide-react";
 import {
   Table,
   TableBody,

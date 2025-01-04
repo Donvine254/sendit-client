@@ -3,7 +3,7 @@ import { RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-let intervalRef: NodeJS.Timeout;
+let intervalRef: any;
 export default function Refresh({ tag }: { tag: string }) {
   // functions to allow users to sync data and invalidate cache
   const [timeSinceLoad, setTimeSinceLoad] = useState("less than a minute ago");
