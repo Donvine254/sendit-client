@@ -39,6 +39,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Invoice } from "@prisma/client";
 import { GenerateInvoice } from "@/lib/actions/invoices";
+import PaymentButton from "@/components/ui/payment-button";
 
 const statusStyles = {
   DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
@@ -50,9 +51,6 @@ const statusStyles = {
 };
 
 function InvoiceActions({ invoice }: { invoice: Invoice }) {
-  const handlePay = () => console.log("Pay invoice:", invoice.id);
-  // TODO: Implement Insta-send API for payment gateway
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -64,13 +62,7 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
       <PopoverContent align="end" className="w-[200px]">
         <div className="grid gap-1">
           {(invoice.status === "DRAFT" || invoice.status === "OVERDUE") && (
-            <Button
-              variant="ghost"
-              className="w-full justify-start hover:bg-green-500 hover:text-white"
-              onClick={handlePay}>
-              <CreditCard className="mr-2 h-4 w-4" />
-              Pay Invoice
-            </Button>
+            <PaymentButton invoice={invoice} />
           )}
           <Button
             variant="ghost"

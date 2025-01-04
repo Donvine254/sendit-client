@@ -3,8 +3,8 @@ import Stripe from "stripe";
 
 const baseUrl =
   process.env.NODE_ENV !== "production"
-    ? "http://localhost:3000/api/admin"
-    : "https://senditkenya.vercel.app/api/admin";
+    ? "http://localhost:3000"
+    : "https://senditkenya.vercel.app";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-12-18.acacia", // Use the latest API version
 });
@@ -12,8 +12,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 type Invoice = {
   customerName: string;
   email: string;
+  item: string;
   amount: number;
   userId: string;
+  shipping_address: string;
+  invoiceId: string;
 };
 
 export async function createCheckoutSession(invoice: Invoice): Promise<string> {
@@ -22,9 +25,9 @@ export async function createCheckoutSession(invoice: Invoice): Promise<string> {
     line_items: [
       {
         price_data: {
-          currency: "KES",
+          currency: "kes",
           product_data: {
-            name: "Delivery Service Charge",
+            name: `Delivery Service Charge for ${invoice.item} to ${invoice.shipping_address}`,
             images: [
               "https://res.cloudinary.com/dipkbpinx/image/upload/v1735945010/illustrations/undraw_delivery-truck_mjui_lxt1vo.svg",
             ],
@@ -34,16 +37,17 @@ export async function createCheckoutSession(invoice: Invoice): Promise<string> {
         quantity: 1,
       },
     ],
+    phone_number_collection: { enabled: true },
     client_reference_id: invoice.userId,
     mode: "payment",
-    success_url: `${baseUrl}/success`,
-    cancel_url: `${baseUrl}/cancel`,
-    // customer_email: invoice.email,
+    success_url: `${baseUrl}/me/invoices`,
+    cancel_url: `${baseUrl}/me/invoices`,
+    customer_email: invoice.email,
   });
 
   if (!session.url) {
     throw new Error("Failed to create checkout session");
   }
-
+  console.log(session);
   return session.url;
 }
