@@ -4,15 +4,18 @@ import { createCheckoutSession } from "../../lib/stripe";
 import { CreditCard } from "lucide-react";
 import { toast } from "sonner";
 import { Invoice } from "@prisma/client";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
 export default function PaymentButton({ invoice }: { invoice: Invoice }) {
+  const { getUser } = useKindeAuth();
+  const user = getUser();
   const invoiceData = {
     customerName: invoice.fullName,
     amount: invoice.amount * 100,
     shipping_address: invoice.shipping_address,
     item: invoice.item,
     invoiceId: invoice.id,
-    email: invoice.email || "",
+    email: invoice.email || user?.email!,
     phone: invoice.phone || "",
     userId: invoice.userId,
   };
