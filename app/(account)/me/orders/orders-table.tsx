@@ -200,7 +200,9 @@ export default function DataTable({ data }: DataTableProps) {
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="bg-blue-500 text-white">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -218,6 +220,11 @@ export default function DataTable({ data }: DataTableProps) {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
+                  className={`${
+                    row.getValue("status") === "CANCELLED"
+                      ? "bg-red-100 bg-opacity-50"
+                      : ""
+                  } `}
                   data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
