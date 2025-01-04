@@ -16,7 +16,6 @@ import {
   ArrowUpDown,
   Download,
   Printer,
-  CreditCard,
   AlertTriangle,
   Search,
 } from "lucide-react";
