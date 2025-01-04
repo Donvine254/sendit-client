@@ -18,7 +18,7 @@ type Invoice = {
 
 export async function createCheckoutSession(invoice: Invoice): Promise<string> {
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card", "link","googlepay"],
+    payment_method_types: ["card", "link"],
     line_items: [
       {
         price_data: {
