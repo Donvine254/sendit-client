@@ -12,6 +12,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 type Invoice = {
   customerName: string;
   email: string;
+  phone: string;
   item: string;
   amount: number;
   userId: string;
