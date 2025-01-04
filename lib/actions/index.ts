@@ -169,3 +169,60 @@ export const getShippingAddress = unstable_cache(
   ["address"],
   { revalidate: 600, tags: ["address"] }
 );
+// function to check whether a user can delete their account
+export const canDeleteAccount = unstable_cache(
+  async (userId: string) => {
+    try {
+      const hasUndeliveredParcels = await prisma.parcel.findFirst({
+        where: {
+          userId,
+          status: {
+            not: { in: ["DELIVERED", "CANCELLED"] },
+          },
+        },
+      });
+      // Check for invoices that are not paid
+      const hasUnpaidInvoices = await prisma.invoice.findFirst({
+        where: {
+          userId,
+          status: {
+            not: "PAID",
+          },
+        },
+      });
+
+      if (hasUndeliveredParcels && hasUnpaidInvoices) {
+        return {
+          canDelete: false,
+          message:
+            "You cannot delete your account because you have undelivered parcels and unpaid invoices.",
+        };
+      } else if (hasUndeliveredParcels) {
+        return {
+          canDelete: false,
+          message:
+            "You cannot delete your account because you have undelivered parcels.",
+        };
+      } else if (hasUnpaidInvoices) {
+        return {
+          canDelete: false,
+          message:
+            "You cannot delete your account because you have unpaid invoices.",
+        };
+      }
+      return {
+        canDelete: true,
+        message: "You can delete your account.",
+      };
+    } catch (error) {
+      console.error("Error checking account deletion eligibility:", error);
+      return {
+        canDelete: false,
+        message:
+          "An error occurred while checking your account status. Please try again later.",
+      };
+    }
+  },
+  ["orders", "invoices"],
+  { revalidate: 600, tags: ["orders", "invoices"] }
+);

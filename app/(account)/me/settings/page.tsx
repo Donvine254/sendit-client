@@ -6,6 +6,8 @@ import React from "react";
 import ShippingAddressForm from "./shipping-address";
 import { shippingAddress } from "@prisma/client";
 import { getShippingAddress } from "@/lib/actions";
+import NotificationPreferences from "./notification-preferences";
+import DangerZone from "./danger-zone";
 
 export const metadata: Metadata = {
   title: "Sendit Courier- My Account | Settings",
@@ -104,6 +106,14 @@ export default async function Settings() {
         Please enter your address details below.
       </p>
       <ShippingAddressForm user={user} address={address} />
+      <hr />
+      <h1 className="text-lg font-semibold my-2">Notifications</h1>
+      <p className="text-gray-600 mb-6">
+        Update your notification preferences.
+      </p>
+      <NotificationPreferences />
+      <hr />
+      <DangerZone userId={user.id} />
     </div>
   );
 }

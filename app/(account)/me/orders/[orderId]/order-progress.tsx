@@ -1,4 +1,4 @@
-import { AlarmClockPlus, Check, Truck } from "lucide-react";
+import { PackageCheck, Check, MapPinCheckInside } from "lucide-react";
 import React from "react";
 
 export default function Progress({
@@ -14,9 +14,9 @@ export default function Progress({
     {
       title: `Placed ${new Date(createdAt).toLocaleDateString()}`,
       status: "PENDING",
-      icon: AlarmClockPlus,
+      icon: PackageCheck,
     },
-    { title: "Shipped", status: "IN_TRANSIT", icon: Truck },
+    { title: "Shipped", status: "IN_TRANSIT", icon: MapPinCheckInside },
     {
       title: `Delivered ${new Date(updatedAt).toLocaleDateString()}`,
       status: "DELIVERED",

@@ -34,8 +34,8 @@ export default async function Page() {
         {!address && (
           <div
             role="alert"
-            className="relative w-full border p-4  bg-blue-100 border-blue-400 text-blue-700">
-            <h5 className="font-medium leading-none tracking-tight xsm:text-xs ">
+            className="relative w-full border p-4  bg-blue-50 border-blue-400 text-blue-700">
+            <h5 className="font-medium leading-none tracking-tight xsm:text-xs text-center ">
               ✨ We recommend updating your{" "}
               <Link href="/me/settings" className="underline" title="settings">
                 primary shipping address
