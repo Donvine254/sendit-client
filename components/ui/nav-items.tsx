@@ -7,16 +7,15 @@ import { sessionUser } from "@/types";
 export default function Navbar({ user }: { user: sessionUser }) {
   return (
     <div className="flex flex-wrap items-center justify-between  px-4 w-full">
-      <Link href="/" className="flex items-center gap-1 text-blue-600">
+      <Link href="/">
         <Image
-          src="https://res.cloudinary.com/dipkbpinx/image/upload/v1735352741/illustrations/by2cal2orce7rmqsceqi.svg"
-          height={32}
-          width={32}
-          alt="logo"
+          src="/logo.svg"
+          height={40}
+          width={120}
+          alt="Sendit Logo"
           priority
-          className="h-8 w-8 "
+          className=" "
         />
-        <h2 className="text-xl font-extrabold uppercase">Sendit</h2>
       </Link>
       <button
         data-collapse-toggle="mobile-menu"

@@ -16,22 +16,22 @@ const StatusBadge = ({ status }: { status: string }) => {
 
   switch (status) {
     case "PENDING":
-      icon = <AlarmClockPlus className="mr-2 h-4 w-4" />;
+      icon = <AlarmClockPlus className="mr-2 h-3 w-3" />;
       variant = "default";
       text = "Pending";
       break;
     case "IN_TRANSIT":
-      icon = <Truck className="mr-2 h-4 w-4" />;
+      icon = <Truck className="mr-2 h-3 w-3" />;
       variant = "secondary";
       text = "In Transit";
       break;
     case "DELIVERED":
-      icon = <CheckCircle className="mr-2 h-4 w-4" />;
+      icon = <CheckCircle className="mr-2 h-3 w-3" />;
       variant = "success";
       text = "Delivered";
       break;
     case "CANCELLED":
-      icon = <XCircle className="mr-2 h-4 w-4" />;
+      icon = <XCircle className="mr-2 h-3 w-3" />;
       variant = "destructive";
       text = "Cancelled";
       break;
