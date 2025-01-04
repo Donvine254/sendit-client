@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { canDeleteAccount } from "@/lib/actions";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -25,6 +26,14 @@ export default function DangerZone({ userId }: { userId: string }) {
     const toastId = toast.loading("Processing Request...", {
       position: "top-center",
     });
+    const res = await canDeleteAccount(userId);
+    if (!res.canDelete) {
+      toast.error(res.message, {
+        position: "top-center",
+      });
+      toast.dismiss(toastId);
+      return;
+    }
     try {
       const response = await fetch(`/api/admin/users?user_id=${userId}`, {
         method: "DELETE",
@@ -52,9 +61,10 @@ export default function DangerZone({ userId }: { userId: string }) {
           </h2>
         </div>
         <hr className="border border-red-500" />
-        <p>
+        <p className="text-muted-foreground text-sm xsm:text-xs">
           Once you delete your user account, there is no going back. Please be
-          certain.
+          certain. Kindly note you cannot delete your account if you have a
+          pending delivery or unpaid invoice.
         </p>
         <Button
           title="delete user account"
