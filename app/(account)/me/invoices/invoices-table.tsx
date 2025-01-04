@@ -39,6 +39,7 @@ import { MoreHorizontal } from "lucide-react";
 import { Invoice } from "@prisma/client";
 import { GenerateInvoice } from "@/lib/actions/invoices";
 import PaymentButton from "@/components/ui/payment-button";
+import Refresh from "@/components/pages/refresh";
 
 const statusStyles = {
   DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
@@ -238,6 +239,7 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
 
   return (
     <div className="w-full ">
+      <Refresh tag="invoices" />
       <div className="relative w-full py-4">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
         <Input
@@ -246,7 +248,7 @@ export default function InvoiceDataTable({ data }: DataTableProps) {
           onChange={(event) =>
             table.getColumn("item")?.setFilterValue(event.target.value)
           }
-          className="w-full pl-8"
+          className="w-full pl-8 xsm:text-sm"
         />
       </div>
 
