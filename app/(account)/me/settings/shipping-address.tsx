@@ -55,7 +55,7 @@ export default function ShippingAddressForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6"
+      className="space-y-6 mb-3"
       autoComplete="on"
       id="shipping">
       <div className="space-y-4">
