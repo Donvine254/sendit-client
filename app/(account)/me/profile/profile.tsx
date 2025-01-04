@@ -166,10 +166,10 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                 You have no recent orders
               </h2>
               <Image
-                src="https://res.cloudinary.com/dipkbpinx/image/upload/t_hiring-banner/v1735480973/illustrations/kcptm5kpjghhthitqemj.avif"
+                src="https://res.cloudinary.com/dipkbpinx/image/upload/v1736014893/illustrations/lo295srnzibudj3pyzj8.png"
                 alt="illustration"
-                width={400}
-                height={500}
+                width={250}
+                height={250}
                 className=""
               />
             </div>
