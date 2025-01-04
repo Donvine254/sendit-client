@@ -7,6 +7,7 @@ import ShippingAddressForm from "./shipping-address";
 import { shippingAddress } from "@prisma/client";
 import { getShippingAddress } from "@/lib/actions";
 import NotificationPreferences from "./notification-preferences";
+import DangerZone from "./danger-zone";
 
 export const metadata: Metadata = {
   title: "Sendit Courier- My Account | Settings",
@@ -111,6 +112,8 @@ export default async function Settings() {
         Update your notification preferences.
       </p>
       <NotificationPreferences />
+      <hr />
+      <DangerZone userId={user.id} />
     </div>
   );
 }

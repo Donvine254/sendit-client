@@ -26,7 +26,7 @@ export default function NotificationPreferences() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-6">
+      className="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-6 mb-3">
       <div className="rounded-lg border shadow p-6">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
