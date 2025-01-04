@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+
 async function createInvoicesFromParcels() {
   // Fetch parcels where the status is not 'CANCELLED' or 'PENDING'
   const parcels = await prisma.parcel.findMany({
@@ -24,12 +25,29 @@ async function createInvoicesFromParcels() {
       fullName: parcel.pickupAddress.fullName,
       shipping_address: `${parcel.deliveryAddress.address}, ${parcel.deliveryAddress.district}, ${parcel.deliveryAddress.region}`,
     };
-    // Create the invoice in the database
-    await prisma.invoice.create({
-      data: invoiceData,
-    });
 
-    console.log(`Invoice created for parcel ${parcel.id}`);
+    try {
+      // Check if the invoice already exists
+      const existingInvoice = await prisma.invoice.findUnique({
+        where: {
+          parcelId: parcel.id, // Assuming parcelId is unique for each invoice
+        },
+      });
+
+      if (!existingInvoice) {
+        // Create the invoice only if it doesn't exist
+        await prisma.invoice.create({
+          data: invoiceData,
+        });
+
+        console.log(`Invoice created for parcel ${parcel.id}`);
+      } else {
+        console.log(`Invoice already exists for parcel ${parcel.id}`);
+      }
+    } catch (error) {
+      // Log the error and continue with the next parcel
+      console.error(`Error creating invoice for parcel ${parcel.id}:`, error);
+    }
   }
 }
 
