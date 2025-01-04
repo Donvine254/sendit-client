@@ -71,3 +71,33 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  const user_id = req.nextUrl.searchParams.get("user_id");
+  try {
+    // TODO: Prevent users from deleting their account with a pending delivery or unpaid invoice (prisma.parcel.findMany({ where: { user_id: user_id, status: {not:["PENDING"]}} })) (prisma.invoice.findMany({ where: { user_id: user_id, status: {not:["PAID"]}} }))
+    const accessToken = await getToken();
+    const userResponse = await fetch(
+      `${KINDE_ISSUER_URL}/api/v1/user?id=${user_id}&is_delete_profile:${true}`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    if (!userResponse.ok) {
+      throw new Error(`Failed to delete user: ${userResponse.statusText}`);
+    }
+    // TODO: Delete associated user data from the database
+    return NextResponse.json({ message: "User deleted successfully" });
+  } catch (error: any) {
+    console.error("Error deleting user:", error.message);
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
+}

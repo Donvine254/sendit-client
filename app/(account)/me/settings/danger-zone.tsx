@@ -1,10 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { Router, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
 export default function DangerZone({ userId }: { userId: string }) {
+  const router = useRouter();
   async function handleDeleteAccount() {
     toast.message("Are you sure you?", {
       position: "top-center",
@@ -13,10 +15,30 @@ export default function DangerZone({ userId }: { userId: string }) {
       action: {
         label: "Delete",
 
-        onClick: () => console.log(userId),
+        onClick: () => deleteUser(),
       },
       actionButtonStyle: { backgroundColor: "red", color: "white" },
     });
+  }
+
+  async function deleteUser() {
+    const toastId = toast.loading("Processing Request...", {
+      position: "top-center",
+    });
+    try {
+      const response = await fetch(`/api/admin/users?user_id=${userId}`, {
+        method: "DELETE",
+      });
+      toast.dismiss(toastId);
+      if (response.ok) {
+        toast.success("User deleted successfully");
+        router.push("/api/auth/logout");
+      } else {
+        toast.error("Failed to delete user");
+      }
+    } catch (error: any) {
+      toast.error("Request failed", error.status);
+    }
   }
   return (
     <div>
