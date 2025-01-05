@@ -24,16 +24,9 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
+import { sessionUser } from "@/types";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}) {
+export function NavUser({ user }: { user: sessionUser }) {
   const { isMobile } = useSidebar();
 
   return (
@@ -46,15 +39,20 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
               <Image
                 className="h-8 w-8 rounded-lg"
-                alt={user.name}
-                src={user.avatar}
+                alt={user.given_name || "User Avatar"}
+                src={
+                  user.picture ??
+                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user.given_name}+${user.family_name}`
+                }
                 height={32}
                 width={32}
                 priority
               />
 
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
+                <span className="truncate capitalize font-semibold">
+                  {`${user.given_name} ${user.family_name}`}
+                </span>
                 <span className="truncate text-xs">{user.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -69,14 +67,20 @@ export function NavUser({
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Image
                   className="h-8 w-8 rounded-lg"
-                  alt={user.name}
-                  src={user.avatar}
+                  alt={user.given_name || "User Avatar"}
+                  src={
+                    user.picture ??
+                    `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user.given_name}+${user.family_name}`
+                  }
                   height={32}
                   width={32}
                   priority
                 />
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
+                  <span className="truncate font-semibold capitalize">
+                    {" "}
+                    {`${user.given_name} ${user.family_name}`}
+                  </span>
                   <span className="truncate text-xs">{user.email}</span>
                 </div>
               </div>

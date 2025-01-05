@@ -22,16 +22,10 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
+import { sessionUser } from "@/types";
 
 // This is sample data.
 const data = {
-  user: {
-    name: "Mary Mitchell",
-    email: "marymitchell@gmail.com",
-    avatar:
-      "https://res.cloudinary.com/dipkbpinx/image/upload/v1735219870/carhub/avatars/oujhowg1chdlguzsnnp1.png",
-  },
-
   items: [
     {
       name: "Dashboard",
@@ -83,12 +77,14 @@ const data = {
     },
   ],
 };
-
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  user: sessionUser;
+}
+export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader className="bg-[#F8F9FA] border-b">
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarHeader>
       <SidebarContent className="bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]">
         <NavItems items={data.items} />
