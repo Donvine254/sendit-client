@@ -29,31 +29,31 @@ const data = {
   items: [
     {
       name: "Dashboard",
-      url: "/",
+      url: "/admin/dashboard",
       title: "Overview",
       icon: LayoutDashboard,
     },
     {
       name: "Deliveries",
-      url: "/deliveries",
+      url: "admin/dashboard/deliveries",
       title: "Manage Deliveries",
       icon: Box,
     },
     {
       name: "Invoices",
-      url: "/invoices",
+      url: "admin/dashboard/invoices",
       title: "Manage Invoices",
       icon: FileText,
     },
     {
       name: "Customers",
-      url: "/customers",
+      url: "admin/dashboard/customers",
       title: "Manage Customers",
       icon: Users,
     },
     {
       name: "Riders",
-      url: "/riders",
+      url: "admin/dashboard/riders",
       title: "Manage Riders",
       icon: LucideTruck,
     },
@@ -72,7 +72,7 @@ const data = {
     {
       name: "Settings",
       title: "Adjust settings",
-      url: "/settings",
+      url: "admin/dashboard/settings",
       icon: Settings,
     },
   ],
