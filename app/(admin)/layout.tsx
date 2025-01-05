@@ -25,13 +25,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { getUser, getPermission } = getKindeServerSession();
-  const permission = await getPermission("admin");
-  const isAdmin = permission?.isGranted;
+  const { getUser } = getKindeServerSession();
   const user = (await getUser()) as sessionUser;
-  if (!isAdmin || !user) {
-    return redirect("/");
-  }
+
   return (
     <html lang="en">
       <body className={`${noto_sans.variable} antialiased smooth-scroll`}>
