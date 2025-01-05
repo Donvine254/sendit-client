@@ -48,7 +48,7 @@ export default function NavigationMenu({ user }: { user: sessionUser }) {
           position: "fixed",
         };
   return (
-    <menu className="relative bg-green-500 w-full">
+    <menu className="relative bg-green-500 w-full" suppressHydrationWarning>
       <Script
         async
         defer
