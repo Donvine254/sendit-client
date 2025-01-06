@@ -14,6 +14,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { Line } from "react-chartjs-2";
 import { revenueData, visitorsData } from "@/constants";
+import { useTheme } from "next-themes";
 
 // Register Chart.js components
 ChartJS.register(
@@ -29,6 +30,8 @@ ChartJS.register(
 
 export default function Charts() {
   // Prepare data for the revenue bar chart
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const revenueChartData = {
     labels: revenueData.map((item) => item.month),
     datasets: [
@@ -68,11 +71,17 @@ export default function Charts() {
     },
     scales: {
       x: {
+        ticks: {
+          color: isDark ? "#ffff" : "#6b7280",
+        },
         grid: {
           display: false,
         },
       },
       y: {
+        ticks: {
+          color: isDark ? "#ffff" : "#6b7280",
+        },
         grid: {
           color: "#e4e4e7",
         },
@@ -88,7 +97,7 @@ export default function Charts() {
         label: "Visitors",
         data: visitorsData.map((item) => item.visitors),
         borderColor: "#2563eb",
-        backgroundColor: "rgba(191, 219, 254, 0.5)",
+        backgroundColor: isDark ? "#60a5fa" : "rgba(191, 219, 254, 0.5)",
         fill: true,
         tension: 0.4,
         pointRadius: 4,
@@ -109,11 +118,17 @@ export default function Charts() {
     },
     scales: {
       x: {
+        ticks: {
+          color: isDark ? "#ffff" : "#6b7280",
+        },
         grid: {
           display: false,
         },
       },
       y: {
+        ticks: {
+          color: isDark ? "#ffff" : "#6b7280",
+        },
         grid: {
           color: "#e4e4e7",
         },
