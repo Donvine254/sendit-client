@@ -10,11 +10,11 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative h-8 w-14 rounded-full bg-gray-200 p-1 ring-1 ring-gray-300 transition-colors dark:bg-gray-800 dark:ring-gray-700"
+      className="relative h-8 w-14 rounded-full bg-gray-200 p-1 ring-1 ring-gray-300 transition-colors dark:bg-gray-800 dark:ring-gray-400"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}>
       <div
         className={`${
-          isDark ? "translate-x-6 bg-gray-800" : "translate-x-0 bg-white"
+          isDark ? "translate-x-6 bg-white" : "translate-x-0 bg-gray-800"
         } flex h-6 w-6 items-center justify-center rounded-full shadow-sm transition-transform duration-200`}>
         <Sun
           className={`${
