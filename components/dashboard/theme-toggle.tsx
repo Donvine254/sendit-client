@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Moon, Sun } from "lucide-react";
+import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 export function ThemeToggle({ className }: { className: string }) {
@@ -13,7 +13,7 @@ export function ThemeToggle({ className }: { className: string }) {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
         className,
-        "relative flex items-center gap-2 h-6 w-14 rounded-full bg-gray-200 p-1 ring-1 ring-gray-300 transition-colors dark:bg-gray-600 dark:ring-gray-400"
+        "relative flex items-center gap-2 h-6 w-14 rounded-full bg-gray-200 p-1 ring-1 ring-gray-300 transition-colors duration-300 dark:bg-gray-600 dark:ring-gray-400"
       )}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
@@ -26,13 +26,51 @@ export function ThemeToggle({ className }: { className: string }) {
       <Sun
         className={`${
           isDark ? "scale-100 translate-x-8" : "scale-0"
-        } absolute h-4 w-4 rotate-0 text-yellow-500 transition-all duration-200`}
+        } absolute h-4 w-4 text-yellow-500 transition-all duration-200`}
       />
       <Moon
         className={`${
           isDark ? "scale-0" : "scale-100"
-        } absolute h-4 w-4 rotate-90 text-blue-500 transition-all duration-200`}
+        } absolute h-4 w-4 text-blue-500 transition-all duration-200`}
       />
     </button>
   );
 }
+
+export const MobileThemeToggle = () => {
+  const { theme, setTheme } = useTheme() ?? "system";
+
+  return (
+    <div className="sm:hidden flex items-center  justify-center gap-8  border rounded-lg w-fit mx-auto p-1">
+      <button
+        className={` p-1 rounded-full transition-colors duration-300  ${
+          theme === "light" ? "bg-gray-200 dark:bg-gray-600 " : ""
+        }`}
+        type="button"
+        title="light theme"
+        onClick={() => setTheme("light")}>
+        {" "}
+        <Sun className="h-4 w-4  transition-all " />
+      </button>
+      <button
+        className={` p-1 rounded-full transition-colors duration-300  ${
+          theme === "system" ? "bg-gray-200 dark:bg-gray-600 " : ""
+        }`}
+        type="button"
+        title="system default"
+        onClick={() => setTheme("system")}>
+        {" "}
+        <Monitor className="h-4 w-4" />
+      </button>
+      <button
+        className={` p-1 rounded-full transition-colors duration-300  ${
+          theme === "dark" ? "bg-gray-200 dark:bg-gray-600 " : ""
+        }`}
+        type="button"
+        title="dark mode"
+        onClick={() => setTheme("dark")}>
+        <Moon className="h-4 w-4" />
+      </button>
+    </div>
+  );
+};

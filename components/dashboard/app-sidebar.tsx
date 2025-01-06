@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { sessionUser } from "@/types";
+import { MobileThemeToggle } from "./theme-toggle";
 
 // This is sample data.
 const data = {
@@ -100,13 +101,14 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         <NavItems items={data.items} />
       </SidebarContent>
       <SidebarFooter className="border-t dark:border-t-gray-200 dark:border-r dark:border-r-gray-200">
+        <MobileThemeToggle />
         <Image
           src="/logo.svg"
           width={100}
           height={30}
           priority
           alt="sendit-logo"
-          className="mx-auto"
+          className="mx-auto xsm:hidden"
         />
       </SidebarFooter>
       <SidebarRail />
