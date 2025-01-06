@@ -112,12 +112,14 @@ export function SearchCommand() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="relative flex items-center max-w-xs w-full px-3 py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
-        <Search className="h-4 w-4 text-gray-500 mr-2" />
-        <span className="text-sm text-gray-500 flex-grow text-left">
+        className="relative flex items-center max-w-xs w-full px-3 py-2 rounded-md border border-input bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer group">
+        <Search className="h-4 w-4 text-gray-500 dark:group-hover:text-white mr-2" />
+        <span className="text-sm text-gray-500 dark:group-hover:text-white  flex-grow text-left">
           Search...
         </span>
-        <span className="text-sm text-muted-foreground">⌘+K</span>
+        <span className="text-sm text-muted-foreground dark:group-hover:text-white ">
+          ⌘+K
+        </span>
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>

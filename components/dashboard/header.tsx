@@ -57,8 +57,8 @@ export default function Header({ user }: { user: sessionUser }) {
           <button
             title="Sync"
             type="button"
-            className="p-1 rounded-md bg-gray-200 text-blue-500 dark:bg-gray-600 dark:text-gray-100">
-            <RefreshCcw className="h-4 w-4" />
+            className="p-1 rounded-md bg-gray-200 text-blue-500 dark:bg-gray-600 dark:text-gray-100 group">
+            <RefreshCcw className="h-4 w-4 group-hover:animate-spin transition-all delay-150" />
           </button>
           <ThemeToggle className="xsm:hidden" />
         </div>
