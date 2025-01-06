@@ -43,6 +43,7 @@ import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
+import { PDFIcon } from "@/assets";
 
 const columns: ColumnDef<Parcel>[] = [
   {
@@ -268,37 +269,37 @@ const columns: ColumnDef<Parcel>[] = [
                 View Details
               </Link>
             </Button>
+            {parcel.status === "IN_TRANSIT" && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start hover:bg-green-500 hover:text-white"
+                type="button"
+                title="mark parcel as delivered">
+                <PackageCheck className="h-4 w-4" />
+                Mark as delivered
+              </Button>
+            )}
+            {parcel.status !== "CANCELLED" && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start hover:bg-red-100 dark:hover:bg-gray-600 "
+                type="button"
+                title="Generate an invoice for this order">
+                <PDFIcon />
+                Generate Invoice
+              </Button>
+            )}
             {parcel.status === "PENDING" && (
               <>
-                <CancelButton orderId={parcel.id} />
                 <Button
                   variant="ghost"
-                  className="w-full justify-start"
+                  className="w-full justify-start hover:bg-blue-100 dark:hover:bg-blue-500"
                   type="button"
                   title="mark parcel out for delivery">
                   <CircleDashed className="h-4 w-4" />
                   Mark as in-transit
                 </Button>
-              </>
-            )}
-            {parcel.status === "IN_TRANSIT" && (
-              <>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-green-500 hover:text-white"
-                  type="button"
-                  title="mark parcel as delivered">
-                  <PackageCheck className="h-4 w-4" />
-                  Mark as delivered
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-green-500 hover:text-white"
-                  type="button"
-                  title="Generate an invoice for this order">
-                  <PackageCheck className="h-4 w-4" />
-                  Generate Invoice
-                </Button>
+                <CancelButton orderId={parcel.id} />
               </>
             )}
           </PopoverContent>
