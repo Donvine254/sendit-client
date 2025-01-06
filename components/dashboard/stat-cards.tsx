@@ -1,7 +1,11 @@
 import { TrendingDown, TrendingUp } from "lucide-react";
 import React from "react";
 
-export default function statCards() {
+export default function statCards({
+  data,
+}: {
+  data: { totalOrders: number; totalRevenue: number };
+}) {
   return (
     <div className="grid gap-4 md:grid-cols-3 p-2 sm:p-4 md:p-6">
       {/* first card */}
@@ -13,7 +17,12 @@ export default function statCards() {
             20.1%
           </span>
         </div>
-        <div className="my-2 text-2xl md:text-4xl font-bold">$45,231.89</div>
+        <div className="my-2 text-2xl md:text-4xl font-bold">
+          {new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "KES",
+          }).format(data.totalRevenue)}
+        </div>
         <p className="text-xs text-muted-foreground">From Jan 1st - Jul 31st</p>
       </div>
       {/* second card */}
@@ -25,7 +34,9 @@ export default function statCards() {
             120.1%
           </span>
         </div>
-        <div className="my-2 text-2xl md:text-4xl font-bold">2,350</div>
+        <div className="my-2 text-2xl md:text-4xl font-bold">
+          {data.totalOrders}
+        </div>
         <p className="text-xs text-muted-foreground">From Jan 1st - Jul 31st</p>
       </div>
       <div className="rounded-lg border bg-card p-6 shadow">

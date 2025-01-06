@@ -13,18 +13,27 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Eye } from "lucide-react";
+import { MoreHorizontal, Eye, CornerRightUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "../ui/status-badge";
+import Refresh from "../pages/refresh";
 
 export default function RecentDeliveries({ data }: { data: Parcel[] }) {
   // table is causing the page to overflow
   return (
     <section className="w-full p-2 sm:p-4 md:p-6">
-      <h3 className="font-semibold mb-2">Recent Orders</h3>
-      <div className="overflow-x-auto bg-white rounded-lg border shadow ">
+      <div className="w-full flex items-center justify-between gap-4">
+        <h3 className="font-semibold text-lg md:text-xl">Recent Deliveries</h3>
+        <Button variant="ghost" asChild>
+          <Link href="/admin/dashboard/deliveries">
+            View All <CornerRightUp className="h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
+      <Refresh tag="orders" />
+      <div className="overflow-x-auto bg-white rounded-lg mt-2 border shadow ">
         <Table className="table-auto">
           <TableHeader className="bg-blue-500 text-white">
             <TableRow>

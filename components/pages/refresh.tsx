@@ -1,3 +1,4 @@
+"use client";
 import { revalidateCache } from "@/lib/actions";
 import { RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
