@@ -10,6 +10,7 @@ import {
   PieChart,
   Settings,
   Users,
+  WebhookIcon,
 } from "lucide-react";
 
 import { NavItems } from "./nav-items";
@@ -28,38 +29,44 @@ import { sessionUser } from "@/types";
 const data = {
   items: [
     {
-      name: "Dashboard",
+      name: "Overview",
       url: "/admin/dashboard",
       title: "Overview",
       icon: LayoutDashboard,
     },
     {
       name: "Deliveries",
-      url: "admin/dashboard/deliveries",
+      url: "/admin/dashboard/deliveries",
       title: "Manage Deliveries",
       icon: Box,
     },
     {
       name: "Invoices",
-      url: "admin/dashboard/invoices",
+      url: "/admin/dashboard/invoices",
       title: "Manage Invoices",
       icon: FileText,
     },
     {
       name: "Customers",
-      url: "admin/dashboard/customers",
-      title: "Manage Customers",
+      url: "https://sendit.kinde.com/admin",
+      title: "Manage Customers - External Link",
       icon: Users,
     },
     {
+      name: "Web Analytics",
+      url: "/admin/dashboard/customers",
+      title: "View website perfomance",
+      icon: WebhookIcon,
+    },
+    {
       name: "Riders",
-      url: "admin/dashboard/riders",
+      url: "#",
       title: "Manage Riders",
       icon: LucideTruck,
     },
     {
-      name: "Finance",
-      url: "/finance",
+      name: "Finances",
+      url: "#",
       title: "Manage Finances",
       icon: DollarSign,
     },
@@ -72,7 +79,7 @@ const data = {
     {
       name: "Settings",
       title: "Adjust settings",
-      url: "admin/dashboard/settings",
+      url: "/admin/dashboard/settings",
       icon: Settings,
     },
   ],

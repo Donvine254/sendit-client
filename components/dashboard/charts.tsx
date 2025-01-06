@@ -59,7 +59,6 @@ export default function Charts() {
       },
       tooltip: {
         callbacks: {
-          // eslint-disable-next-line
           label: function (context: any) {
             const value = context.raw;
             return `${(value / 1000).toFixed(1)}K`;

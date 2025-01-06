@@ -143,7 +143,7 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
                           variant="ghost"
                           className="w-full justify-start"
                           asChild>
-                          <Link href={`/orders/${order.id}`}>
+                          <Link href={`/me/orders/${order.id}`}>
                             {" "}
                             <Eye className="mr-2 h-4 w-4" />
                             View details
