@@ -7,18 +7,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenuItem,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { MoreHorizontal, Eye, CornerRightUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "../ui/status-badge";
 import Refresh from "../pages/refresh";
+import { PopoverTrigger, Popover, PopoverContent } from "../ui/popover";
 
 export default function RecentDeliveries({ data }: { data: Parcel[] }) {
   // table is causing the page to overflow
@@ -139,28 +135,26 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
                   <StatusBadge status={order.status} />
                 </TableCell>
                 <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                  <Popover>
+                    <PopoverTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
                         <span className="sr-only">Open menu</span>
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          asChild>
-                          <Link href={`/me/orders/${order.id}`}>
-                            {" "}
-                            <Eye className="mr-2 h-4 w-4" />
-                            View details
-                          </Link>
-                        </Button>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-40 space-y-2">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start"
+                        asChild>
+                        <Link href={`/me/orders/${order.id}`}>
+                          {" "}
+                          <Eye className="mr-2 h-4 w-4" />
+                          View details
+                        </Link>
+                      </Button>
+                    </PopoverContent>
+                  </Popover>
                 </TableCell>
               </TableRow>
             ))}
