@@ -18,6 +18,7 @@ export function NavItems({
     url: string;
     title: string;
     icon: LucideIcon;
+    target?: string;
   }[];
 }) {
   const pathname = usePathname();
@@ -32,7 +33,10 @@ export function NavItems({
               className={`hover:bg-blue-100 hover:text-blue-600 ${
                 pathname === item.url ? "bg-blue-100 text-blue-700" : ""
               }`}>
-              <Link href={item.url} title={item.title}>
+              <Link
+                href={item.url}
+                title={item.title}
+                target={item.target ?? "_parent"}>
                 <item.icon />
                 <span>{item.name}</span>
               </Link>

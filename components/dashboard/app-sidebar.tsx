@@ -51,12 +51,14 @@ const data = {
       url: "https://sendit.kinde.com/admin",
       title: "Manage Customers - External Link",
       icon: Users,
+      target: "_blank",
     },
     {
       name: "Web Analytics",
       url: "https://vercel.com/donvine254s-projects/sendit/analytics",
       title: "View website performance",
       icon: WebhookIcon,
+      target: "_blank",
     },
     {
       name: "Riders",
@@ -69,6 +71,7 @@ const data = {
       url: "https://dashboard.stripe.com/test/payments",
       title: "Manage Finances",
       icon: DollarSign,
+      target: "_blank",
     },
     {
       name: "Sales & Marketing",
