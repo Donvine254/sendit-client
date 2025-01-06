@@ -32,7 +32,7 @@ export default async function RootLayout({
   const user = (await getUser()) as sessionUser;
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${noto_sans.variable} antialiased smooth-scroll`}>
         <ThemeProvider
           attribute="class"

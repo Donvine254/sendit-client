@@ -17,7 +17,8 @@ export function ThemeToggle({ className }: { className: string }) {
       )}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       title={isDark ? "Switch to light theme" : "Switch to dark theme"}
-      type="button">
+      type="button"
+      suppressHydrationWarning>
       <div
         className={`${
           isDark ? " bg-white" : "translate-x-8 bg-gray-950"

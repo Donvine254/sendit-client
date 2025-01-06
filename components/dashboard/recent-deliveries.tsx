@@ -147,11 +147,11 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
                     <PopoverContent className="w-40 space-y-2">
                       <Button
                         variant="ghost"
-                        className="w-full justify-start"
+                        className="w-full justify-start gap-1"
                         asChild>
                         <Link href={`/me/orders/${order.id}`}>
                           {" "}
-                          <Eye className="mr-2 h-4 w-4" />
+                          <Eye className="h-4 w-4" />
                           View details
                         </Link>
                       </Button>
