@@ -39,10 +39,10 @@ export function NavUser({ user }: { user: sessionUser }) {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
               <Image
                 className="h-8 w-8 rounded-lg"
-                alt={user.given_name || "User Avatar"}
+                alt={user?.given_name || "User Avatar"}
                 src={
-                  user.picture ??
-                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user.given_name}+${user.family_name}`
+                  user?.picture ??
+                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
                 }
                 height={32}
                 width={32}
@@ -51,9 +51,9 @@ export function NavUser({ user }: { user: sessionUser }) {
 
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate capitalize font-semibold">
-                  {`${user.given_name} ${user.family_name}`}
+                  {`${user?.given_name} ${user?.family_name}`}
                 </span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate text-xs">{user?.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -70,7 +70,7 @@ export function NavUser({ user }: { user: sessionUser }) {
                   alt={user.given_name || "User Avatar"}
                   src={
                     user.picture ??
-                    `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user.given_name}+${user.family_name}`
+                    `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
                   }
                   height={32}
                   width={32}
@@ -79,9 +79,9 @@ export function NavUser({ user }: { user: sessionUser }) {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold capitalize">
                     {" "}
-                    {`${user.given_name} ${user.family_name}`}
+                    {`${user?.given_name} ${user?.family_name}`}
                   </span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-xs">{user?.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
