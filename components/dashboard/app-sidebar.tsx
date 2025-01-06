@@ -54,8 +54,8 @@ const data = {
     },
     {
       name: "Web Analytics",
-      url: "/admin/dashboard/customers",
-      title: "View website perfomance",
+      url: "https://vercel.com/donvine254s-projects/sendit/analytics",
+      title: "View website performance",
       icon: WebhookIcon,
     },
     {
@@ -66,7 +66,7 @@ const data = {
     },
     {
       name: "Finances",
-      url: "#",
+      url: "https://dashboard.stripe.com/test/payments",
       title: "Manage Finances",
       icon: DollarSign,
     },
