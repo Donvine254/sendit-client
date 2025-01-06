@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { recentTransactions } from "@/constants";
 import {
   DropdownMenuItem,
   DropdownMenu,
@@ -17,8 +16,10 @@ import {
 import { MoreHorizontal, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Parcel } from "@prisma/client";
+import StatusBadge from "../ui/status-badge";
 
-export default function RecentDeliveries() {
+export default function RecentDeliveries({ data }: { data: Parcel[] }) {
   // table is causing the page to overflow
   return (
     <section className="w-full p-2 sm:p-4 md:p-6">
@@ -28,48 +29,105 @@ export default function RecentDeliveries() {
           <TableHeader className="bg-blue-500 text-white">
             <TableRow>
               <TableHead className="text-white">ID</TableHead>
+              <TableHead className="text-white">Description</TableHead>
               <TableHead className="text-white">Customer</TableHead>
               <TableHead className="text-white">Date</TableHead>
+              {/* <TableHead className="text-white">Origin</TableHead>
+              <TableHead className="text-white">Destination</TableHead> */}
               <TableHead className="text-white">Amount</TableHead>
               <TableHead className="text-white">Status</TableHead>
               <TableHead className="text-white"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {recentTransactions.map((transaction) => (
-              <TableRow key={transaction.id}>
-                <TableCell>
-                  #{String(transaction.id).padStart(3, "0")}
+            {data.map((order, index) => (
+              <TableRow key={order.id}>
+                <TableCell>#{String(index).padStart(3, "0")}</TableCell>
+                <TableCell
+                  className="truncate max-w-32"
+                  title={order.description}>
+                  {order.description}
                 </TableCell>
-                <TableCell>{transaction.customer}</TableCell>
+                <TableCell>
+                  {(order.pickupAddress as { fullName: string } | undefined)
+                    ?.fullName ?? "John Doe"}
+                </TableCell>
                 <TableCell>
                   <p className="whitespace-nowrap">
-                    {new Date(transaction.date).toLocaleDateString(undefined, {
+                    {new Date(order.createdAt).toLocaleDateString(undefined, {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
                   </p>
                 </TableCell>
+                {/* 
+                <TableCell>
+                  {order.pickupAddress
+                    ? `${
+                        (
+                          order.pickupAddress as {
+                            address: string;
+                            district: string;
+                            region: string;
+                          }
+                        ).address
+                      }, ${
+                        (
+                          order.pickupAddress as {
+                            address: string;
+                            district: string;
+                            region: string;
+                          }
+                        ).district
+                      }, ${
+                        (
+                          order.pickupAddress as {
+                            address: string;
+                            district: string;
+                            region: string;
+                          }
+                        ).region
+                      }`
+                    : "Address not available"}
+                </TableCell> */}
+                {/* <TableCell>
+                  {order.deliveryAddress
+                    ? `${
+                        (
+                          order.deliveryAddress as {
+                            address: string;
+                            district: string;
+                            region: string;
+                          }
+                        ).address
+                      }, ${
+                        (
+                          order.deliveryAddress as {
+                            address: string;
+                            district: string;
+                            region: string;
+                          }
+                        ).district
+                      }, ${
+                        (
+                          order.deliveryAddress as {
+                            address: string;
+                            district: string;
+                            region: string;
+                          }
+                        ).region
+                      }`
+                    : "Address not available"}
+                </TableCell> */}
                 <TableCell>
                   {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "KSH",
-                  }).format(transaction.amount)}
+                  }).format(order.price)}
                 </TableCell>
                 <TableCell>
-                  {" "}
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full whitespace-nowrap text-white
-                    ${
-                      transaction.status === "Delivered"
-                        ? "bg-green-500 "
-                        : transaction.status === "In Transit"
-                        ? "bg-blue-500 "
-                        : "bg-amber-500 "
-                    }`}>
-                    {transaction.status}
-                  </span>
+                  <StatusBadge status={order.status} />
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
@@ -85,7 +143,7 @@ export default function RecentDeliveries() {
                           variant="ghost"
                           className="w-full justify-start"
                           asChild>
-                          <Link href="#">
+                          <Link href={`/orders/${order.id}`}>
                             {" "}
                             <Eye className="mr-2 h-4 w-4" />
                             View details
