@@ -44,8 +44,8 @@ export function NavItems({
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
-        <div className="p-2 border rounded-md shadow dark:border-gray-200">
-          <ThemeToggle className="sm:hidden mx-auto" />
+        <div className="p-2 sm:hidden  border rounded-md shadow dark:border-gray-200">
+          <ThemeToggle className="mx-auto" />
         </div>
       </SidebarMenu>
     </SidebarGroup>
