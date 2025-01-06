@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export function NavItems({
   items,
@@ -43,6 +44,9 @@ export function NavItems({
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
+        <div className="p-2 border rounded-md shadow dark:border-gray-200">
+          <ThemeToggle className="sm:hidden mx-auto" />
+        </div>
       </SidebarMenu>
     </SidebarGroup>
   );

@@ -83,11 +83,11 @@ export default function Header({ user }: { user: sessionUser }) {
         </div>
 
         {/* Right Section (Sync Button and Theme Toggle) */}
-        <div className="hidden sm:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0">
+        <div className="md:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0">
           <button title="Sync" type="button" className="p-1">
             <RefreshCcw className="h-5 w-5 text-blue-700 dark:text-gray-200" />
           </button>
-          <ThemeToggle />
+          <ThemeToggle className="xsm:hidden" />
         </div>
       </div>
     </SidebarHeader>

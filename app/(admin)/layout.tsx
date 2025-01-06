@@ -45,7 +45,7 @@ export default async function RootLayout({
               <AppSidebar user={user} />
               <SidebarGroup className="bg-[#F8F9FA] dark:bg-gray-950 transition-colors duration-300 !p-0">
                 <Header user={user} />
-                <div className="space-y-2 pt-20 sm:pt-16">{children}</div>
+                <div className="space-y-2 pt-20 lg:pt-16">{children}</div>
               </SidebarGroup>
             </SidebarProvider>
           </AuthProvider>
