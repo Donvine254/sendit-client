@@ -24,28 +24,6 @@ export default function Header({ user }: { user: sessionUser }) {
   }
 
   return (
-    // <SidebarHeader className="fixed top-0 h-20 z-10 bg-red-500 w-full  border-b">
-    //   <div className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-    //     <div className="flex items-center gap-2 px-4 h-full">
-    //       <SidebarTrigger className="-ml-1" title="collapse menu" />
-    //       <Separator orientation="vertical" className="mr-2 h-4" />
-    //       <p className="tracking-tight leading-tight inline-flex flex-col py-2 ">
-    //         <span className="font-semibold leading-tight capitalize">
-    //           {greetUser()} {user?.given_name}
-    //         </span>
-    //         <span className="text-muted-foreground text-xs sm:text-sm">
-    //           {new Date().toLocaleDateString(undefined, {
-    //             weekday: "long",
-    //             month: "short",
-    //             day: "numeric",
-    //             year: "numeric",
-    //           })}
-    //         </span>
-    //       </p>
-    //     </div>
-    //     {/* TODO: Add search bar, sync button and theme toggle button */}
-    //   </div>
-    // </SidebarHeader>
     <SidebarHeader className="fixed top-0 h-20 z-10 bg-white dark:bg-black transition-colors duration-300 w-full border-b dark:border-b-gray-200">
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4 h-full w-full px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
         {/* Left Section */}
@@ -69,15 +47,18 @@ export default function Header({ user }: { user: sessionUser }) {
         </div>
 
         {/* Center Section (Search Bar) */}
-
-        <SearchCommand />
-
+        <div className="hidden md:block">
+          <SearchCommand />
+        </div>
         {/* Right Section (Sync Button and Theme Toggle) */}
         <div
-          className="md:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0"
+          className="md:flex md:static items-center gap-2 lg:gap-4 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0"
           suppressHydrationWarning>
-          <button title="Sync" type="button" className="p-1">
-            <RefreshCcw className="h-5 w-5 text-blue-700 dark:text-gray-200" />
+          <button
+            title="Sync"
+            type="button"
+            className="p-1 rounded-md bg-gray-200 text-blue-500 dark:bg-gray-600 dark:text-gray-100">
+            <RefreshCcw className="h-4 w-4" />
           </button>
           <ThemeToggle className="xsm:hidden" />
         </div>

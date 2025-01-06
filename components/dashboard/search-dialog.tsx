@@ -110,18 +110,16 @@ export function SearchCommand() {
 
   return (
     <>
-      <div className="relative flex items-center max-w-xs">
-        <Search className="absolute left-2 h-4 w-4 text-gray-500" />
-        <input
-          type="search"
-          placeholder="Search..."
-          onClick={() => setOpen(true)}
-          className="w-full pl-8 pr-10 py-1 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-500 text-sm cursor-pointer"
-        />
-        <span className="absolute right-2 text-sm text-muted-foreground">
-          ⌘+K
+      <button
+        onClick={() => setOpen(true)}
+        className="relative flex items-center max-w-xs w-full px-3 py-2 rounded-md border border-gray-300 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+        <Search className="h-4 w-4 text-gray-500 mr-2" />
+        <span className="text-sm text-gray-500 flex-grow text-left">
+          Search...
         </span>
-      </div>
+        <span className="text-sm text-muted-foreground">⌘+K</span>
+      </button>
+
       <CommandDialog open={open} onOpenChange={setOpen}>
         <DialogTitle />
         <CommandInput placeholder="Type a command or search..." />
