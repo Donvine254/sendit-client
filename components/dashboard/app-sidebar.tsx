@@ -94,13 +94,13 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="bg-[#F8F9FA] dark:bg-black transition-colors duration-300 border-b dark:border-r dark:border-r-gray-200 dark:border-b-gray-200 h-20">
+      <SidebarHeader className="bg-[#F8F9FA] dark:bg-black transition-colors duration-300 border-b border-input h-20">
         <NavUser user={user} />
       </SidebarHeader>
-      <SidebarContent className="dark:bg-none  bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]  transition-colors duration-300 border-r dark:border-r-gray-200">
+      <SidebarContent className="dark:bg-none  bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]  transition-colors duration-300 border-r border-input">
         <NavItems items={data.items} />
       </SidebarContent>
-      <SidebarFooter className="border-t dark:border-t-gray-200 dark:border-r dark:border-r-gray-200">
+      <SidebarFooter className="border-t  border-input">
         <MobileThemeToggle />
         <Image
           src="/logo.svg"
