@@ -2,8 +2,9 @@ import { sessionUser } from "@/types";
 import React from "react";
 import { SidebarHeader, SidebarTrigger } from "../ui/sidebar";
 import { Separator } from "../ui/separator";
-import { RefreshCcw, Search } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
+import { SearchCommand } from "./search-dialog";
 
 export default function Header({ user }: { user: sessionUser }) {
   function greetUser() {
@@ -68,22 +69,13 @@ export default function Header({ user }: { user: sessionUser }) {
         </div>
 
         {/* Center Section (Search Bar) */}
-        <div className="hidden md:flex items-center min-w-md">
-          <div className="relative flex items-center w-full">
-            <Search className="absolute left-2 h-5 w-5 text-gray-500" />
-            <input
-              type="search"
-              placeholder="Search.."
-              className="w-full pl-8 pr-10 py-1 px-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-500"
-            />
-            <span className="absolute right-2 text-sm text-muted-foreground">
-              ⌘+K
-            </span>
-          </div>
-        </div>
+
+        <SearchCommand />
 
         {/* Right Section (Sync Button and Theme Toggle) */}
-        <div className="md:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0" suppressHydrationWarning>
+        <div
+          className="md:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0"
+          suppressHydrationWarning>
           <button title="Sync" type="button" className="p-1">
             <RefreshCcw className="h-5 w-5 text-blue-700 dark:text-gray-200" />
           </button>

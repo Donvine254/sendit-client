@@ -21,7 +21,7 @@ export default function statCards({
             20.1%
           </span>
         </div>
-        <div className="my-2 text-2xl md:text-4xl font-bold">
+        <div className="my-2 text-2xl md:text-3xl lg:text-4xl font-bold">
           {new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "KES",
