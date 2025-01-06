@@ -29,7 +29,7 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
         </Button>
       </div>
       <Refresh tag="orders" />
-      <div className="overflow-x-auto bg-white dark:bg-gray-900  rounded-lg mt-2 border shadow ">
+      <div className="overflow-x-auto bg-white dark:bg-gray-900  rounded-lg mt-2 border dark:border-gray-200 shadow ">
         <Table className="table-auto">
           <TableHeader className="bg-blue-500 text-white">
             <TableRow>
@@ -46,7 +46,9 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
           </TableHeader>
           <TableBody>
             {data.map((order, index) => (
-              <TableRow key={order.id}>
+              <TableRow
+                key={order.id}
+                className="dark:border-b dark:border-b-gray-200">
                 <TableCell>#{String(index).padStart(3, "0")}</TableCell>
                 <TableCell
                   className="truncate max-w-32"

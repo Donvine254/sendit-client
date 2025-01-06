@@ -123,14 +123,14 @@ export default function Charts() {
 
   return (
     <div className="grid gap-4 md:grid-cols-2 p-2 sm:p-4 md:p-6">
-      <div className="rounded-lg border bg-card p-2 md:p-4 ">
+      <div className="rounded-lg border dark:border-gray-200  bg-card p-2 md:p-4 ">
         <h3 className="font-semibold mb-4">Revenue Trend</h3>
         <div style={{ height: 350 }} className="w-full ">
           <Bar data={revenueChartData} options={revenueChartOptions} />
         </div>
       </div>
 
-      <div className="rounded-lg border bg-card p-2 md:p-4">
+      <div className="rounded-lg border bg-card dark:border-gray-200  p-2 md:p-4">
         <h3 className="font-semibold mb-4">Site Visitors</h3>
         <div style={{ height: 350 }} className="w-full">
           <Line data={visitorsChartData} options={visitorsChartOptions} />
