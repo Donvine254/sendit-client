@@ -90,7 +90,7 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="bg-[#F8F9FA] border-b">
+      <SidebarHeader className="bg-[#F8F9FA] border-b h-20">
         <NavUser user={user} />
       </SidebarHeader>
       <SidebarContent className="bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]">

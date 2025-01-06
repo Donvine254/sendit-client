@@ -39,9 +39,7 @@ export default async function RootLayout({
             <AppSidebar user={user} />
             <SidebarGroup className="bg-[#F8F9FA] !p-0">
               <Header user={user} />
-              <div className="space-y-2 mt-20 sm:mt-16 md:mt-14">
-                {children}
-              </div>
+              <div className="space-y-2 pt-20 sm:pt-16">{children}</div>
             </SidebarGroup>
           </SidebarProvider>
         </AuthProvider>
