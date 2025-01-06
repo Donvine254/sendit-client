@@ -2,8 +2,8 @@ import { sessionUser } from "@/types";
 import React from "react";
 import { SidebarHeader, SidebarTrigger } from "../ui/sidebar";
 import { Separator } from "../ui/separator";
-import { Moon, RefreshCcw, Search } from "lucide-react";
-import { Button } from "../ui/button";
+import { RefreshCcw, Search } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Header({ user }: { user: sessionUser }) {
   function greetUser() {
@@ -52,7 +52,8 @@ export default function Header({ user }: { user: sessionUser }) {
           <SidebarTrigger className="-ml-1" title="collapse menu" />
           <Separator orientation="vertical" className="mr-2 h-4" />
           <p className="tracking-tight leading-tight inline-flex flex-col py-2">
-            <span className="font-semibold leading-tight capitalize">
+            {/* account for when users have a really long name */}
+            <span className="font-semibold leading-tight truncate capitalize">
               {greetUser()} {user?.given_name}
             </span>
             <span className="text-muted-foreground text-xs sm:text-sm">
@@ -82,13 +83,11 @@ export default function Header({ user }: { user: sessionUser }) {
         </div>
 
         {/* Right Section (Sync Button and Theme Toggle) */}
-        <div className="md:flex md:static items-center justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-1">
-          <Button variant="ghost" size="icon" title="Sync">
+        <div className="md:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0">
+          <button title="Sync" type="button" className="p-1">
             <RefreshCcw className="h-5 w-5 text-blue-700" />
-          </Button>
-          <Button variant="ghost" size="icon" title="Toggle Theme">
-            <Moon className="h-5 w-5 text-gray-700" />
-          </Button>
+          </button>
+          <ThemeToggle />
         </div>
       </div>
     </SidebarHeader>
