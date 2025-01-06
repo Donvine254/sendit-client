@@ -31,7 +31,7 @@ export function NavUser({ user }: { user: sessionUser }) {
   const { isMobile } = useSidebar();
 
   return (
-    <SidebarMenu>
+    <SidebarMenu className="h-full flex items-center justify-center">
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
