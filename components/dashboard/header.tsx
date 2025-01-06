@@ -24,6 +24,7 @@ export default function Header({ user }: { user: sessionUser }) {
             </span>
           </p>
         </div>
+        {/* TODO: Add search bar, sync button and theme toggle button */}
       </div>
     </SidebarHeader>
   );
