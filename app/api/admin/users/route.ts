@@ -1,5 +1,6 @@
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { NextResponse, NextRequest } from "next/server";
-
+import { Users, init } from "@kinde/management-api-js";
 const KINDE_ISSUER_URL = process.env.KINDE_ISSUER_URL!;
 const KINDE_CLIENT_ID = process.env.KINDE_CLIENT_ID!;
 const KINDE_CLIENT_SECRET = process.env.KINDE_CLIENT_SECRET!;
@@ -75,7 +76,6 @@ export async function POST(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   const user_id = req.nextUrl.searchParams.get("user_id");
   try {
-    // TODO: Prevent users from deleting their account with a pending delivery or unpaid invoice (prisma.parcel.findMany({ where: { user_id: user_id, status: {not:["PENDING"]}} })) (prisma.invoice.findMany({ where: { user_id: user_id, status: {not:["PAID"]}} }))
     const accessToken = await getToken();
     const userResponse = await fetch(
       `${KINDE_ISSUER_URL}/api/v1/user?id=${user_id}&is_delete_profile:${true}`,
@@ -99,5 +99,24 @@ export async function DELETE(req: NextRequest) {
       { message: "Something went wrong" },
       { status: 500 }
     );
+  }
+}
+
+export async function GET() {
+  const { getPermission } = getKindeServerSession();
+  const permission = await getPermission("admin");
+  const isAdmin = permission?.isGranted;
+  if (!isAdmin) {
+    return NextResponse.json({ error: "Unauthorized Request", code: 401 });
+  }
+  try {
+    init();
+    const { users } = await Users.getUsers({
+      pageSize: 500,
+    });
+    return NextResponse.json(users);
+  } catch (error: any) {
+    console.log(error);
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
