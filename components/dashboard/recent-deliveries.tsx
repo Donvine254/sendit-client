@@ -7,23 +7,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenuItem,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { MoreHorizontal, Eye, CornerRightUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "../ui/status-badge";
 import Refresh from "../pages/refresh";
+import { PopoverTrigger, Popover, PopoverContent } from "../ui/popover";
 
 export default function RecentDeliveries({ data }: { data: Parcel[] }) {
   // table is causing the page to overflow
   return (
-    <section className="w-full p-2 sm:p-4 md:p-6">
+    <section className="w-full p-2 sm:p-4 md:p-6 dark:bg-none">
       <div className="w-full flex items-center justify-between gap-4">
         <h3 className="font-semibold text-lg md:text-xl">Recent Deliveries</h3>
         <Button variant="ghost" asChild>
@@ -33,7 +29,7 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
         </Button>
       </div>
       <Refresh tag="orders" />
-      <div className="overflow-x-auto bg-white rounded-lg mt-2 border shadow ">
+      <div className="overflow-x-auto bg-white dark:bg-gray-900  rounded-lg mt-2 border dark:border-gray-200 shadow ">
         <Table className="table-auto">
           <TableHeader className="bg-blue-500 text-white">
             <TableRow>
@@ -50,7 +46,9 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
           </TableHeader>
           <TableBody>
             {data.map((order, index) => (
-              <TableRow key={order.id}>
+              <TableRow
+                key={order.id}
+                className="dark:border-b dark:border-b-gray-200">
                 <TableCell>#{String(index).padStart(3, "0")}</TableCell>
                 <TableCell
                   className="truncate max-w-32"
@@ -139,28 +137,26 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
                   <StatusBadge status={order.status} />
                 </TableCell>
                 <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                  <Popover>
+                    <PopoverTrigger asChild>
                       <Button variant="ghost" className="h-8 w-8 p-0">
                         <span className="sr-only">Open menu</span>
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-start"
-                          asChild>
-                          <Link href={`/me/orders/${order.id}`}>
-                            {" "}
-                            <Eye className="mr-2 h-4 w-4" />
-                            View details
-                          </Link>
-                        </Button>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-40 space-y-2">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start gap-1"
+                        asChild>
+                        <Link href={`/me/orders/${order.id}`}>
+                          {" "}
+                          <Eye className="h-4 w-4" />
+                          View details
+                        </Link>
+                      </Button>
+                    </PopoverContent>
+                  </Popover>
                 </TableCell>
               </TableRow>
             ))}

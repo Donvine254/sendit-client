@@ -14,6 +14,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { Line } from "react-chartjs-2";
 import { revenueData, visitorsData } from "@/constants";
+import { useTheme } from "next-themes";
 
 // Register Chart.js components
 ChartJS.register(
@@ -29,6 +30,8 @@ ChartJS.register(
 
 export default function Charts() {
   // Prepare data for the revenue bar chart
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const revenueChartData = {
     labels: revenueData.map((item) => item.month),
     datasets: [
@@ -69,7 +72,7 @@ export default function Charts() {
     scales: {
       x: {
         ticks: {
-          color: "#6b7280",
+          color: isDark ? "#ffff" : "#6b7280",
         },
         grid: {
           display: false,
@@ -77,7 +80,7 @@ export default function Charts() {
       },
       y: {
         ticks: {
-          color: "#6b7280",
+          color: isDark ? "#ffff" : "#6b7280",
         },
         grid: {
           color: "#e4e4e7",
@@ -94,7 +97,7 @@ export default function Charts() {
         label: "Visitors",
         data: visitorsData.map((item) => item.visitors),
         borderColor: "#2563eb",
-        backgroundColor: "rgba(191, 219, 254, 0.5)",
+        backgroundColor: isDark ? "#60a5fa" : "rgba(191, 219, 254, 0.5)",
         fill: true,
         tension: 0.4,
         pointRadius: 4,
@@ -116,7 +119,7 @@ export default function Charts() {
     scales: {
       x: {
         ticks: {
-          color: "#6b7280",
+          color: isDark ? "#ffff" : "#6b7280",
         },
         grid: {
           display: false,
@@ -124,7 +127,7 @@ export default function Charts() {
       },
       y: {
         ticks: {
-          color: "#6b7280",
+          color: isDark ? "#ffff" : "#6b7280",
         },
         grid: {
           color: "#e4e4e7",
@@ -135,14 +138,14 @@ export default function Charts() {
 
   return (
     <div className="grid gap-4 md:grid-cols-2 p-2 sm:p-4 md:p-6">
-      <div className="rounded-lg border bg-card p-2 md:p-4 ">
+      <div className="rounded-lg border dark:border-gray-200  bg-card p-2 md:p-4 ">
         <h3 className="font-semibold mb-4">Revenue Trend</h3>
         <div style={{ height: 350 }} className="w-full ">
           <Bar data={revenueChartData} options={revenueChartOptions} />
         </div>
       </div>
 
-      <div className="rounded-lg border bg-card p-2 md:p-4">
+      <div className="rounded-lg border bg-card dark:border-gray-200  p-2 md:p-4">
         <h3 className="font-semibold mb-4">Site Visitors</h3>
         <div style={{ height: 350 }} className="w-full">
           <Line data={visitorsChartData} options={visitorsChartOptions} />

@@ -18,7 +18,7 @@ export default async function Page() {
   }
 
   return (
-    <section>
+    <section className="dark:bg-gray-100 transition-colors duration-300">
       <DataTable data={orders} />
     </section>
   );

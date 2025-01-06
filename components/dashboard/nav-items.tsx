@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 export function NavItems({
   items,
@@ -18,6 +19,7 @@ export function NavItems({
     url: string;
     title: string;
     icon: LucideIcon;
+    target?: string;
   }[];
 }) {
   const pathname = usePathname();
@@ -32,13 +34,19 @@ export function NavItems({
               className={`hover:bg-blue-100 hover:text-blue-600 ${
                 pathname === item.url ? "bg-blue-100 text-blue-700" : ""
               }`}>
-              <Link href={item.url} title={item.title}>
+              <Link
+                href={item.url}
+                title={item.title}
+                target={item.target ?? "_parent"}>
                 <item.icon />
                 <span>{item.name}</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}
+        <div className="p-2 sm:hidden  border rounded-md shadow dark:border-gray-200">
+          <ThemeToggle className="mx-auto" />
+        </div>
       </SidebarMenu>
     </SidebarGroup>
   );

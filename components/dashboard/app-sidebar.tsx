@@ -51,12 +51,14 @@ const data = {
       url: "https://sendit.kinde.com/admin",
       title: "Manage Customers - External Link",
       icon: Users,
+      target: "_blank",
     },
     {
       name: "Web Analytics",
       url: "https://vercel.com/donvine254s-projects/sendit/analytics",
       title: "View website performance",
       icon: WebhookIcon,
+      target: "_blank",
     },
     {
       name: "Riders",
@@ -69,6 +71,7 @@ const data = {
       url: "https://dashboard.stripe.com/test/payments",
       title: "Manage Finances",
       icon: DollarSign,
+      target: "_blank",
     },
     {
       name: "Sales & Marketing",
@@ -90,13 +93,13 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="bg-[#F8F9FA] border-b h-20">
+      <SidebarHeader className="bg-[#F8F9FA] dark:bg-black transition-colors duration-300 border-b dark:border-r dark:border-r-gray-200 dark:border-b-gray-200 h-20">
         <NavUser user={user} />
       </SidebarHeader>
-      <SidebarContent className="bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]">
+      <SidebarContent className="dark:bg-none  bg-gradient-to-b from-[#f6faff] via-[#f8f9fa] to-[#eaf3ff]  transition-colors duration-300 border-r dark:border-r-gray-200">
         <NavItems items={data.items} />
       </SidebarContent>
-      <SidebarFooter className="border-t">
+      <SidebarFooter className="border-t dark:border-t-gray-200 dark:border-r dark:border-r-gray-200">
         <Image
           src="/logo.svg"
           width={100}
