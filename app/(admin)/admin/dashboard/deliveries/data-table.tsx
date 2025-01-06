@@ -356,7 +356,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
     <div className="w-full p-4">
       {/* <Refresh tag="parcels" /> */}
       <div className="flex items-center py-4 gap-4 flex-wrap">
-        <div className="relative flex-1">
+        <div className="relative flex-1 xsm:w-full">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4 " />
           <Input
             placeholder="Search by description..."
@@ -369,55 +369,59 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
           onChange={(range) => setDateRange(range)}
           placeholder="Select date range"
         /> */}
-        <select
-          onChange={(event) =>
-            table
-              .getColumn("status")
-              ?.setFilterValue(
-                event.target.value === "ALL" ? "" : event.target.value
-              )
-          }
-          defaultValue="ALL"
-          className="w-[180px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-muted-foreground">
-          <option value="ALL">All Statuses</option>
-          <option value="PENDING">Pending</option>
-          <option value="IN_TRANSIT">In Transit</option>
-          <option value="DELIVERED">Delivered</option>
-          <option value="CANCELLED">Cancelled</option>
-        </select>
+        <div className="flex items-center gap-4 w-full">
+          <select
+            onChange={(event) =>
+              table
+                .getColumn("status")
+                ?.setFilterValue(
+                  event.target.value === "ALL" ? "" : event.target.value
+                )
+            }
+            defaultValue="ALL"
+            className="w-[180px] px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-muted-foreground">
+            <option value="ALL">All Statuses</option>
+            <option value="PENDING">Pending</option>
+            <option value="IN_TRANSIT">In Transit</option>
+            <option value="DELIVERED">Delivered</option>
+            <option value="CANCELLED">Cancelled</option>
+          </select>
 
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline" className="ml-auto justify-start">
-              <Filter className="sm:mr-2 h-4 w-4" /> Columns
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent align="end" className="w-[200px] flex flex-col gap-2">
-            {table
-              .getAllColumns()
-              .filter(
-                (column) =>
-                  typeof column.accessorFn !== "undefined" &&
-                  column.getCanHide()
-              )
-              .map((column) => {
-                return (
-                  <label
-                    key={column.id}
-                    className="capitalize flex items-center gap-4 justify-start text-sm xsm:text-xs">
-                    <input
-                      type="checkbox"
-                      checked={column.getIsVisible()}
-                      onChange={(e) =>
-                        column.toggleVisibility(e.target.checked)
-                      }
-                    />
-                    {column.id}
-                  </label>
-                );
-              })}
-          </PopoverContent>
-        </Popover>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" className="ml-auto justify-start">
+                <Filter className="sm:mr-2 h-4 w-4" /> Columns
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              align="end"
+              className="w-[200px] flex flex-col gap-2">
+              {table
+                .getAllColumns()
+                .filter(
+                  (column) =>
+                    typeof column.accessorFn !== "undefined" &&
+                    column.getCanHide()
+                )
+                .map((column) => {
+                  return (
+                    <label
+                      key={column.id}
+                      className="capitalize flex items-center gap-4 justify-start text-sm xsm:text-xs">
+                      <input
+                        type="checkbox"
+                        checked={column.getIsVisible()}
+                        onChange={(e) =>
+                          column.toggleVisibility(e.target.checked)
+                        }
+                      />
+                      {column.id}
+                    </label>
+                  );
+                })}
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
       <div className="rounded-md border shadow dark:bg-none border-input overflow-x-auto bg-white dark:bg-gray-950">
         <Table className="table-auto">
