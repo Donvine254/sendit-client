@@ -13,7 +13,7 @@ export default function statCards({
   return (
     <div className="grid gap-4 md:grid-cols-3 p-2 sm:p-4 md:p-6">
       {/* first card */}
-      <div className="rounded-lg border bg-card shadow p-6">
+      <div className="rounded-lg border dark:border-gray-200 bg-card shadow p-6">
         <div className="text-sm font-medium text-muted-foreground flex justify-between gap-2 items-center">
           <h3 className="font-semibold text-lg">Total Revenue</h3>
           <span className="bg-green-100 text-green-700 text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-md">

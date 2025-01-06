@@ -45,7 +45,7 @@ export default function Header({ user }: { user: sessionUser }) {
     //     {/* TODO: Add search bar, sync button and theme toggle button */}
     //   </div>
     // </SidebarHeader>
-    <SidebarHeader className="fixed top-0 h-20 z-10 bg-white w-full border-b">
+    <SidebarHeader className="fixed top-0 h-20 z-10 bg-white dark:bg-black transition-colors duration-300 w-full border-b dark:border-b-gray-200">
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4 h-full w-full px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
         {/* Left Section */}
         <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ export default function Header({ user }: { user: sessionUser }) {
         </div>
 
         {/* Right Section (Sync Button and Theme Toggle) */}
-        <div className="md:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0">
+        <div className="hidden sm:flex md:static items-center gap-2 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0">
           <button title="Sync" type="button" className="p-1">
             <RefreshCcw className="h-5 w-5 text-blue-700" />
           </button>

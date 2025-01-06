@@ -10,6 +10,7 @@ import { sessionUser } from "@/types";
 import { SidebarGroup, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/dashboard/app-sidebar";
 import Header from "@/components/dashboard/header";
+import { ThemeProvider } from "next-themes";
 
 const noto_sans = Noto_Sans({
   variable: "--font-geist-mono",
@@ -33,17 +34,23 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${noto_sans.variable} antialiased smooth-scroll`}>
-        <Toaster richColors closeButton theme="light" />
-        <AuthProvider>
-          <SidebarProvider>
-            <AppSidebar user={user} />
-            <SidebarGroup className="bg-[#F8F9FA] !p-0">
-              <Header user={user} />
-              <div className="space-y-2 pt-20 sm:pt-16">{children}</div>
-            </SidebarGroup>
-          </SidebarProvider>
-        </AuthProvider>
-        <Analytics />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <Toaster richColors closeButton theme="light" />
+          <AuthProvider>
+            <SidebarProvider>
+              <AppSidebar user={user} />
+              <SidebarGroup className="bg-[#F8F9FA] dark:bg-gray-900 transition-colors duration-300 !p-0">
+                <Header user={user} />
+                <div className="space-y-2 pt-20 sm:pt-16">{children}</div>
+              </SidebarGroup>
+            </SidebarProvider>
+          </AuthProvider>
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

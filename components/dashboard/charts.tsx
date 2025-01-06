@@ -68,17 +68,11 @@ export default function Charts() {
     },
     scales: {
       x: {
-        ticks: {
-          color: "#6b7280",
-        },
         grid: {
           display: false,
         },
       },
       y: {
-        ticks: {
-          color: "#6b7280",
-        },
         grid: {
           color: "#e4e4e7",
         },
@@ -115,17 +109,11 @@ export default function Charts() {
     },
     scales: {
       x: {
-        ticks: {
-          color: "#6b7280",
-        },
         grid: {
           display: false,
         },
       },
       y: {
-        ticks: {
-          color: "#6b7280",
-        },
         grid: {
           color: "#e4e4e7",
         },

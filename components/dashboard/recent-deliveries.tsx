@@ -19,7 +19,7 @@ import { PopoverTrigger, Popover, PopoverContent } from "../ui/popover";
 export default function RecentDeliveries({ data }: { data: Parcel[] }) {
   // table is causing the page to overflow
   return (
-    <section className="w-full p-2 sm:p-4 md:p-6">
+    <section className="w-full p-2 sm:p-4 md:p-6 dark:bg-none">
       <div className="w-full flex items-center justify-between gap-4">
         <h3 className="font-semibold text-lg md:text-xl">Recent Deliveries</h3>
         <Button variant="ghost" asChild>
@@ -29,7 +29,7 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
         </Button>
       </div>
       <Refresh tag="orders" />
-      <div className="overflow-x-auto bg-white rounded-lg mt-2 border shadow ">
+      <div className="overflow-x-auto bg-white dark:bg-gray-900  rounded-lg mt-2 border shadow ">
         <Table className="table-auto">
           <TableHeader className="bg-blue-500 text-white">
             <TableRow>
