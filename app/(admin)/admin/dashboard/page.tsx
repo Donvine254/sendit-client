@@ -7,7 +7,6 @@ export const revalidate = 600;
 export default async function page() {
   const orders = await getRecentOrders();
   const statistics = await getDashboardStatistics();
-  console.log(statistics);
   return (
     <section>
       <StatCards data={statistics} />

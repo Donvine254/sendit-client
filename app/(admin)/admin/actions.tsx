@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "@/prisma/prisma";
 import { unstable_cache } from "next/cache";
-
+import { Users, init } from "@kinde/management-api-js";
 export const getRecentOrders = unstable_cache(
   async () =>
     await prisma.parcel.findMany({
@@ -19,8 +19,17 @@ export const getRecentOrders = unstable_cache(
   { revalidate: 600, tags: ["orders"] }
 );
 
+async function getAllUsers() {
+  init();
+  const { users } = await Users.getUsers({
+    pageSize: 500,
+  });
+  return users;
+}
+
 export const getDashboardStatistics = unstable_cache(
   async () => {
+    const totalUsers = await getAllUsers();
     const totalOrders = await prisma.parcel.count({
       where: {
         status: { not: "CANCELLED" },
@@ -37,6 +46,7 @@ export const getDashboardStatistics = unstable_cache(
     return {
       totalOrders: totalOrders || 0,
       totalRevenue: totalRevenue._sum.amount || 0,
+      totalUsers: totalUsers?.length || 0,
     };
   },
   ["statistics"],

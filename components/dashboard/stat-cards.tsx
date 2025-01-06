@@ -4,7 +4,11 @@ import React from "react";
 export default function statCards({
   data,
 }: {
-  data: { totalOrders: number; totalRevenue: number };
+  data: {
+    totalOrders: number;
+    totalRevenue: number;
+    totalUsers: number;
+  };
 }) {
   return (
     <div className="grid gap-4 md:grid-cols-3 p-2 sm:p-4 md:p-6">
@@ -47,7 +51,9 @@ export default function statCards({
             20.1%
           </span>
         </div>
-        <div className="my-2 text-2xl md:text-4xl font-bold">64</div>
+        <div className="my-2 text-2xl md:text-4xl font-bold">
+          {data.totalUsers}
+        </div>
         <p className="text-xs text-muted-foreground">Previous 365 days</p>
       </div>
     </div>
