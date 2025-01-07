@@ -52,7 +52,7 @@ export default function Header({ user }: { user: sessionUser }) {
         </div>
         {/* Right Section (Sync Button and Theme Toggle) */}
         <div
-          className="md:flex md:static items-center gap-2 lg:gap-4 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0"
+          className="flex md:static items-center gap-4 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0"
           suppressHydrationWarning>
           <button
             title="Sync"

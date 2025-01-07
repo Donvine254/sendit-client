@@ -355,21 +355,21 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
   return (
     <div className="w-full p-4">
       {/* <Refresh tag="parcels" /> */}
-      <div className="flex items-center py-4 gap-4 flex-wrap">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap items-center py-4 gap-4 ">
         <div className="relative flex-1 xsm:w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4 " />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white h-4 w-4" />
           <Input
             placeholder="Search by description..."
             value={globalFilter ?? ""}
             onChange={(event) => setGlobalFilter(String(event.target.value))}
-            className="flex-1 w-full  xsm:text-sm pl-8"
+            className="flex-1 w-full  xsm:text-sm pl-8 dark:text-white"
           />
         </div>
         {/* <DateRangePicker
           onChange={(range) => setDateRange(range)}
           placeholder="Select date range"
         /> */}
-        <div className="flex items-center gap-4 w-full">
+        <div className="flex items-center gap-4 xsm:w-full">
           <select
             onChange={(event) =>
               table
@@ -379,7 +379,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
                 )
             }
             defaultValue="ALL"
-            className="w-[180px] px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-muted-foreground">
+            className="w-[180px] px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-muted-foreground dark:text-white">
             <option value="ALL">All Statuses</option>
             <option value="PENDING">Pending</option>
             <option value="IN_TRANSIT">In Transit</option>
@@ -389,8 +389,10 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
 
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="ml-auto justify-start">
-                <Filter className="sm:mr-2 h-4 w-4" /> Columns
+              <Button
+                variant="outline"
+                className="ml-auto justify-start text-muted-foreground dark:text-white">
+                <Filter className="h-4 w-4" /> Columns
               </Button>
             </PopoverTrigger>
             <PopoverContent

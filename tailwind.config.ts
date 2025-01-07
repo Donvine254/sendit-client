@@ -11,7 +11,7 @@ export default {
     extend: {
       screens: {
         xsm: {
-          max: "480px",
+          max: "640px",
         },
       },
       colors: {
