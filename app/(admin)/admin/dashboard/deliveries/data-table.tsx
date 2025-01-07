@@ -35,8 +35,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import { DateRangePicker } from "@/components/ui/date-range-picker";
-
+import { DateRangePicker } from "@/components/dashboard/date-range-picker";
 import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "@/components/ui/status-badge";
@@ -330,19 +329,22 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
     <div className="w-full p-2 sm:p-4">
       {/* <Refresh tag="parcels" /> */}
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-center py-4 gap-4 ">
-        <div className="relative flex-1 xsm:w-full">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white h-4 w-4" />
-          <Input
-            placeholder="Search all columns..."
-            value={globalFilter ?? ""}
-            onChange={(event) => setGlobalFilter(String(event.target.value))}
-            className="flex-1 w-full  xsm:text-sm pl-8 dark:text-white"
+        <div className="flex flex-1 items-center gap-4 xsm:w-full">
+          <div className="relative flex-1 xsm:w-full">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-white h-4 w-4" />
+            <Input
+              placeholder="Search all columns..."
+              value={globalFilter ?? ""}
+              onChange={(event) => setGlobalFilter(String(event.target.value))}
+              className="flex-1 w-full  xsm:text-sm pl-8 dark:text-white"
+            />
+          </div>
+          <DateRangePicker
+            onChange={(range) => console.log(range)}
+            placeholder="Select date range"
           />
         </div>
-        {/* <DateRangePicker
-          onChange={(range) => setDateRange(range)}
-          placeholder="Select date range"
-        /> */}
+
         <div className="flex items-center gap-4 xsm:w-full">
           <select
             onChange={(event) =>
