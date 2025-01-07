@@ -31,7 +31,7 @@ ChartJS.register(
 export default function Charts() {
   // Prepare data for the revenue bar chart
   const { theme } = useTheme();
-  const isDark = theme === "dark";
+  const isLight = theme === "light";
   const revenueChartData = {
     labels: revenueData.map((item) => item.month),
     datasets: [
@@ -72,7 +72,7 @@ export default function Charts() {
     scales: {
       x: {
         ticks: {
-          color: isDark ? "#ffff" : "#6b7280",
+          color: isLight ? "#6b7280" : "#ffff",
         },
         grid: {
           display: false,
@@ -80,7 +80,7 @@ export default function Charts() {
       },
       y: {
         ticks: {
-          color: isDark ? "#ffff" : "#6b7280",
+          color: isLight ? "#6b7280" : "#ffff",
         },
         grid: {
           color: "#e4e4e7",
@@ -97,7 +97,7 @@ export default function Charts() {
         label: "Visitors",
         data: visitorsData.map((item) => item.visitors),
         borderColor: "#2563eb",
-        backgroundColor: isDark ? "#60a5fa" : "rgba(191, 219, 254, 0.5)",
+        backgroundColor: isLight ? "rgba(191, 219, 254, 0.5)" : "#60a5fa",
         fill: true,
         tension: 0.4,
         pointRadius: 4,
@@ -119,7 +119,7 @@ export default function Charts() {
     scales: {
       x: {
         ticks: {
-          color: isDark ? "#ffff" : "#6b7280",
+          color: isLight ? "#6b7280" : "#ffff",
         },
         grid: {
           display: false,
@@ -127,7 +127,7 @@ export default function Charts() {
       },
       y: {
         ticks: {
-          color: isDark ? "#ffff" : "#6b7280",
+          color: isLight ? "#6b7280" : "#ffff",
         },
         grid: {
           color: "#e4e4e7",
