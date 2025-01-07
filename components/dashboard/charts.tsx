@@ -137,7 +137,7 @@ export default function Charts() {
   };
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 p-2 sm:p-4 md:p-6">
+    <div className="grid gap-4 md:md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-2 lg:grid-cols-2 p-2 sm:p-4 md:p-6">
       <div className="rounded-lg border border-input  bg-card p-2 md:p-4 ">
         <h3 className="font-semibold mb-4">Revenue Trend</h3>
         <div style={{ height: 350 }} className="w-full ">

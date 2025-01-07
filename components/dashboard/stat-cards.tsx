@@ -11,7 +11,7 @@ export default function statCards({
   };
 }) {
   return (
-    <div className="grid gap-4 md:grid-cols-3 p-2 sm:p-4 md:p-6">
+    <div className="grid gap-4 p-2 sm:p-4 md:p-6 md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-3 lg:grid-cols-3">
       {/* first card */}
       <div className="rounded-lg border border-input bg-card shadow p-6">
         <div className="text-sm font-medium text-muted-foreground flex justify-between gap-2 items-center">
