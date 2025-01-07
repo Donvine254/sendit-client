@@ -278,21 +278,9 @@ const columns: ColumnDef<Parcel>[] = [
                 Mark as delivered
               </Button>
             )}
-
-            {/* {parcel.status !== "CANCELLED" && (
-            // invoice is generated automatically when the order is marked as in progress
-              <Button
-                variant="ghost"
-                className="w-full justify-start hover:bg-red-100 dark:hover:bg-gray-600 "
-                type="button"
-                title="Generate an invoice for this order">
-                <PDFIcon />
-                Generate Invoice
-              </Button>
-            )} */}
             {parcel.status === "PENDING" && (
               <>
-                <ProgressButton parcel={parcel} />
+                <ProgressButton Parcel={parcel} />
                 <CancelButton orderId={parcel.id} />
               </>
             )}

@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { CircleDashed } from "lucide-react";
 import { toast } from "sonner";
 import { MarkInProgress } from "../../actions";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-export function ProgressButton(Parcel: any) {
+export function ProgressButton({ Parcel }: { Parcel: any }) {
   const router = useRouter();
   async function handleClick() {
     const toastId = toast.loading("Processing Request...", {
@@ -16,7 +16,7 @@ export function ProgressButton(Parcel: any) {
       toast.dismiss(toastId);
       if (res.message) {
         toast.success(res.message);
-        router.reload();
+        router.refresh();
       } else {
         toast.error(res.error);
       }
