@@ -29,7 +29,7 @@ export default function RecentDeliveries({ data }: { data: Parcel[] }) {
         </Button>
       </div>
       <Refresh tag="orders" />
-      <div className="overflow-x-auto bg-white dark:bg-gray-900  rounded-lg mt-2 border dark:border-gray-200 shadow ">
+      <div className="overflow-x-auto bg-white dark:bg-gray-900  rounded-lg mt-2 border border-input shadow ">
         <Table className="table-auto">
           <TableHeader className="bg-blue-500 text-white">
             <TableRow>

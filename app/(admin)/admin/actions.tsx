@@ -18,6 +18,16 @@ export const getRecentOrders = unstable_cache(
   ["orders"],
   { revalidate: 600, tags: ["orders"] }
 );
+export const getOrders = unstable_cache(
+  async () =>
+    await prisma.parcel.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    }),
+  ["orders"],
+  { revalidate: 600, tags: ["orders"] }
+);
 
 async function getAllUsers() {
   init();
