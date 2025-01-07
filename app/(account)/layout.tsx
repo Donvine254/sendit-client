@@ -5,7 +5,7 @@ import "../globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavigationMenu from "@/components/ui/navbar";
 import Footer from "@/components/ui/footer";
-import UserSidenav from "@/components/pages/sidebar";
+import UserSidenav from "@/components/pages/sidenav";
 import { Analytics } from "@vercel/analytics/react";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { AuthProvider } from "../AuthProvider";
