@@ -167,7 +167,7 @@ export default function UserSidenav({
             <p className="text-sm text-muted-foreground">Account</p>
             {isAdmin ? (
               <Link
-                href="admin/dashboard"
+                href="/admin/dashboard?utm=profile"
                 className="text-sm xsm:text-xs font-medium  px-2 rounded-xl border flex items-center justify-start bg-blue-500 text-white">
                 ✪ Admin
               </Link>

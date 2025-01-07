@@ -36,10 +36,10 @@ export default async function RootLayout({
       <body className={`${noto_sans.variable} antialiased smooth-scroll`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange>
-          <Toaster richColors closeButton theme="light" />
+          <Toaster richColors closeButton />
           <AuthProvider>
             <SidebarProvider>
               <AppSidebar user={user} />
