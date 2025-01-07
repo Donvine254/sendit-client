@@ -49,7 +49,7 @@ export function MarkCompleteButton({ orderId }: { orderId: string }) {
       const res = await updateOrderStatus(orderId, "DELIVERED");
       toast.dismiss(toastId);
       if (res.success) {
-        toast.success("Order Cancelled successfully", {
+        toast.success("Order delivered successfully", {
           position: "top-center",
         });
         if (typeof window !== "undefined" && window) {

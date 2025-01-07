@@ -327,7 +327,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
   });
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full p-2 sm:p-4">
       {/* <Refresh tag="parcels" /> */}
       <div className="flex flex-col sm:flex-row sm:flex-wrap items-center py-4 gap-4 ">
         <div className="relative flex-1 xsm:w-full">
