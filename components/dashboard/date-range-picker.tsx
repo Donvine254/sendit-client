@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, X } from "lucide-react";
 
 export function DateRangePicker({
   className,
@@ -50,6 +50,15 @@ export function DateRangePicker({
               )
             ) : (
               <span>{placeholder}</span>
+            )}
+            {date && (
+              <X
+                className="h-4 w-4 cursor-pointer hover:text-red-500"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setDate(undefined);
+                }}
+              />
             )}
           </Button>
         </PopoverTrigger>

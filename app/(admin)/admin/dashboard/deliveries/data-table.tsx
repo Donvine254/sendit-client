@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -288,24 +288,28 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [globalFilter, setGlobalFilter] = useState("");
-  //   const [dateRange, setDateRange] = useState<
-  //     { from: Date; to: Date } | undefined
-  //   >(undefined);
+  const [dateRange, setDateRange] = useState<
+    { from: Date; to: Date } | undefined
+  >(undefined);
+  const handleDateRangeChange = useCallback(
+    (range: { from: Date; to: Date }) => {
+      setDateRange(range);
+    },
+    []
+  );
 
-  //   const filteredData = useMemo(() => {
-  //     return (data || []).filter((parcel) => {
-  //       if (dateRange?.from && dateRange?.to) {
-  //         const parcelDate = new Date(parcel.createdAt);
-  //         if (parcelDate < dateRange.from || parcelDate > dateRange.to) {
-  //           return false;
-  //         }
-  //       }
-  //       return true;
-  //     });
-  //   }, [data, dateRange]);
+  const filteredData = useMemo(() => {
+    return (data || []).filter((parcel) => {
+      if (dateRange?.from && dateRange?.to) {
+        const parcelDate = new Date(parcel.createdAt);
+        return parcelDate >= dateRange.from && parcelDate <= dateRange.to;
+      }
+      return true;
+    });
+  }, [data, dateRange]);
 
   const table = useReactTable({
-    data,
+    data: filteredData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -340,7 +344,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
             />
           </div>
           <DateRangePicker
-            onChange={(range) => console.log(range)}
+            onChange={handleDateRangeChange}
             placeholder="Select date range"
           />
         </div>
