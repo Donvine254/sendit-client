@@ -1,9 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { CircleDashed } from "lucide-react";
+import { CircleDashed, PackageCheck } from "lucide-react";
 import { toast } from "sonner";
 import { MarkInProgress } from "../../actions";
 import { useRouter } from "next/navigation";
+import { updateOrderStatus } from "@/lib/actions/orders";
 
 export function ProgressButton({ Parcel }: { Parcel: any }) {
   const router = useRouter();
@@ -35,6 +36,42 @@ export function ProgressButton({ Parcel }: { Parcel: any }) {
       onClick={handleClick}>
       <CircleDashed className="h-4 w-4" />
       Mark as in-transit
+    </Button>
+  );
+}
+
+export function MarkCompleteButton({ orderId }: { orderId: string }) {
+  async function handleClick() {
+    const toastId = toast.loading("Processing Request...", {
+      position: "top-center",
+    });
+    try {
+      const res = await updateOrderStatus(orderId, "DELIVERED");
+      toast.dismiss(toastId);
+      if (res.success) {
+        toast.success("Order Cancelled successfully", {
+          position: "top-center",
+        });
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
+      } else {
+        toast.error(res.error || "Something went wrong");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  }
+  return (
+    <Button
+      variant="ghost"
+      className="w-full justify-start hover:bg-green-500 hover:text-white"
+      type="button"
+      title="mark parcel as delivered"
+      onClick={handleClick}>
+      <PackageCheck className="h-4 w-4" />
+      Mark as delivered
     </Button>
   );
 }

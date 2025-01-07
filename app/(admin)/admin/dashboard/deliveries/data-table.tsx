@@ -16,7 +16,6 @@ import {
   Eye,
   Filter,
   MoreHorizontal,
-  PackageCheck,
   Search,
   SortAsc,
   SortDesc,
@@ -42,7 +41,7 @@ import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
-import { ProgressButton } from "./action-buttons";
+import { MarkCompleteButton, ProgressButton } from "./action-buttons";
 
 const columns: ColumnDef<Parcel>[] = [
   {
@@ -269,14 +268,7 @@ const columns: ColumnDef<Parcel>[] = [
               </Link>
             </Button>
             {parcel.status === "IN_TRANSIT" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start hover:bg-green-500 hover:text-white"
-                type="button"
-                title="mark parcel as delivered">
-                <PackageCheck className="h-4 w-4" />
-                Mark as delivered
-              </Button>
+              <MarkCompleteButton orderId={parcel.id} />
             )}
             {parcel.status === "PENDING" && (
               <>
