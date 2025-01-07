@@ -36,7 +36,7 @@ export default async function RootLayout({
       <body className={`${noto_sans.variable} antialiased smooth-scroll`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
           <Toaster richColors closeButton />

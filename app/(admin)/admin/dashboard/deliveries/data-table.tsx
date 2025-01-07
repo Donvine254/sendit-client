@@ -391,7 +391,13 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
                           column.toggleVisibility(e.target.checked)
                         }
                       />
-                      {column.id}
+                      {column.id === "pickupAddress"
+                        ? "Origin"
+                        : column.id === "deliveryAddress"
+                        ? "Destination"
+                        : column.id === "createdAt"
+                        ? "Order Date"
+                        : column.id}
                     </label>
                   );
                 })}
