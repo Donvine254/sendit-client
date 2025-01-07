@@ -18,6 +18,49 @@ export async function createOrder(parcelData: ParcelOrderData) {
   }
 }
 
+interface Address {
+  email?: string;
+  phone: string;
+  fullName: string;
+  region: string;
+  district: string;
+  address: string;
+}
+interface ParcelData {
+  userId: string;
+  id: string;
+  price: number;
+  description: string;
+  pickupAddress: Address;
+  deliveryAddress: Address;
+}
+export async function GenerateInvoice(parcel: ParcelData) {
+  const { pickupAddress, deliveryAddress } = parcel;
+  try {
+    const invoiceData = {
+      userId: parcel.userId,
+      parcelId: parcel.id,
+      amount: parcel.price,
+      item: parcel.description,
+      email: pickupAddress.email,
+      phone: pickupAddress.phone,
+      fullName: pickupAddress.fullName,
+      shipping_address: `${deliveryAddress.address}, ${deliveryAddress.district}, ${deliveryAddress.region}`,
+    };
+    await prisma.invoice.create({
+      data: invoiceData,
+    });
+  } catch (error: any) {
+    console.log(error);
+    if (error.code === "P2002" && error.meta?.target?.includes("parcelId")) {
+      return {
+        success: false,
+        error: "Invoice already exists for this delivery",
+      };
+    }
+  }
+}
+
 type OrderStatus = "PENDING" | "IN_TRANSIT" | "DELIVERED" | "CANCELLED";
 export async function updateOrderStatus(orderId: string, status: OrderStatus) {
   try {

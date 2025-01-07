@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
+export const dynamic = "force-dynamic";
 export function ThemeToggle({ className }: { className: string }) {
   const { theme, setTheme } = useTheme();
   const isDark = theme === "dark";
@@ -41,7 +42,9 @@ export const MobileThemeToggle = () => {
   const { theme, setTheme } = useTheme() ?? "system";
 
   return (
-    <div className="sm:hidden flex items-center  justify-center gap-8  border rounded-lg w-fit mx-auto p-1">
+    <div
+      className="sm:hidden flex items-center  justify-center gap-8  border rounded-lg w-fit mx-auto p-1"
+      suppressHydrationWarning>
       <button
         className={` p-1 rounded-full transition-colors duration-300  ${
           theme === "light" ? "bg-gray-200 dark:bg-gray-600 " : ""

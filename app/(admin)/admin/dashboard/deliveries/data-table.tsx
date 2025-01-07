@@ -13,7 +13,6 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  CircleDashed,
   Eye,
   Filter,
   MoreHorizontal,
@@ -43,7 +42,7 @@ import Link from "next/link";
 import { Parcel } from "@prisma/client";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
-import { PDFIcon } from "@/assets";
+import { ProgressButton } from "./action-buttons";
 
 const columns: ColumnDef<Parcel>[] = [
   {
@@ -279,7 +278,9 @@ const columns: ColumnDef<Parcel>[] = [
                 Mark as delivered
               </Button>
             )}
-            {parcel.status !== "CANCELLED" && (
+
+            {/* {parcel.status !== "CANCELLED" && (
+            // invoice is generated automatically when the order is marked as in progress
               <Button
                 variant="ghost"
                 className="w-full justify-start hover:bg-red-100 dark:hover:bg-gray-600 "
@@ -288,17 +289,10 @@ const columns: ColumnDef<Parcel>[] = [
                 <PDFIcon />
                 Generate Invoice
               </Button>
-            )}
+            )} */}
             {parcel.status === "PENDING" && (
               <>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start hover:bg-blue-100 dark:hover:bg-blue-500"
-                  type="button"
-                  title="mark parcel out for delivery">
-                  <CircleDashed className="h-4 w-4" />
-                  Mark as in-transit
-                </Button>
+                <ProgressButton parcel={parcel} />
                 <CancelButton orderId={parcel.id} />
               </>
             )}

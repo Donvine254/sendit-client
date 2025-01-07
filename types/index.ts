@@ -6,6 +6,14 @@ export type AddressFormData = {
   district: string;
   address: string;
 };
+export interface Address {
+  email?: string;
+  phone: string;
+  fullName: string;
+  region: string;
+  district: string;
+  address: string;
+}
 
 export type ParcelFormData = {
   description: string;
@@ -80,4 +88,4 @@ export interface ShippingAddressData {
   region: string;
   district: string;
   address: string;
-};
+}
