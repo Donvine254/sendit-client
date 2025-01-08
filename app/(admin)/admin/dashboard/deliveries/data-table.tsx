@@ -46,7 +46,7 @@ import { MarkCompleteButton, ProgressButton } from "./action-buttons";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import {
-  DeliveryTracker,
+  StatsCard,
   SatisfactionCard,
 } from "@/components/dashboard/charts";
 
@@ -400,7 +400,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
   return (
     <div className="w-full p-2 sm:p-4">
       <div className="grid md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-2 lg:grid-cols-2 md:justify-between gap-4 ">
-        <DeliveryTracker
+        <StatsCard
           stats={deliveryStats}
           totalOrders={totalOrders}
           title="Delivery Orders"

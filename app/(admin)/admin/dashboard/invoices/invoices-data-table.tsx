@@ -43,7 +43,7 @@ import Image from "next/image";
 import { PDFIcon } from "@/assets";
 import { Badge } from "@/components/ui/badge";
 import { GenerateInvoicePDF } from "@/lib/actions/invoices";
-import { SatisfactionCard } from "@/components/dashboard/charts";
+import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 
 // TODO: Add row with email and phone number
 
@@ -366,10 +366,44 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
       globalFilter,
     },
   });
+  // stats for the card
+  const paidInvoices =
+    data.filter((item) => item.status === "PAID").length || 0;
+  const draftInvoices =
+    data.filter((item) => item.status === "DRAFT").length || 0;
+  const overdueInvoices =
+    data.filter((item) => item.status === "OVERDUE").length || 0;
+  const totalInvoices =
+    data.filter((item) => item.status !== "DISPUTED").length || 0;
+  const invoiceStats = [
+    {
+      status: "Paid",
+      count: paidInvoices,
+      percentage: ((paidInvoices / totalInvoices) * 100).toFixed(0),
+      color: "bg-emerald-500",
+    },
+    {
+      status: "Draft",
+      count: draftInvoices,
+      percentage: ((draftInvoices / totalInvoices) * 100).toFixed(0),
+      color: "bg-gray-100",
+    },
+    {
+      status: "Overdue",
+      count: overdueInvoices,
+      percentage: ((overdueInvoices / totalInvoices) * 100).toFixed(0),
+      color: "bg-red-500",
+    },
+  ];
 
   return (
     <div className="w-full p-2 sm:p-4">
       <div className="grid md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-2 lg:grid-cols-2 md:justify-between gap-4 ">
+        <StatsCard
+          title="Invoices"
+          totalOrders={data.length}
+          stats={invoiceStats}
+        />
         <SatisfactionCard percentage={95} />
       </div>
       <div className="py-4 flex items-center justify-between gap-4">

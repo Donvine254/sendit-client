@@ -161,7 +161,7 @@ type stat = {
   percentage: number | string;
   color: string;
 };
-export function DeliveryTracker({
+export function StatsCard({
   stats,
   totalOrders,
   title,
