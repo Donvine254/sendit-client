@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { motion } from "framer-motion";
 import {
   Chart as ChartJS,
   BarElement,
@@ -150,6 +151,139 @@ export default function Charts() {
         <div style={{ height: 350 }} className="w-full">
           <Line data={visitorsChartData} options={visitorsChartOptions} />
         </div>
+      </div>
+    </div>
+  );
+}
+type stat = {
+  status: string;
+  count: number;
+  percentage: number | string;
+  color: string;
+};
+export function DeliveryTracker({
+  stats,
+  totalOrders,
+}: {
+  stats: stat[];
+  totalOrders: number;
+}) {
+  return (
+    <div className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow">
+      <div className="space-y-1.5 pb-4">
+        <div className="text-2xl font-medium text-muted-foreground text-center">
+          Delivery Orders
+        </div>
+        <div className="text-[2.75rem] font-semibold tracking-tight">
+          {totalOrders.toLocaleString()}
+        </div>
+      </div>
+      <div className="space-y-4">
+        {/* Progress bar */}
+        <div className="h-2 flex rounded-full overflow-hidden">
+          {stats.map((stat) => (
+            <div
+              key={stat.status}
+              className={`${stat.color} transition-all duration-500`}
+              style={{ width: `${stat.percentage}%` }}
+            />
+          ))}
+        </div>
+        {/* Stats */}
+        <div className="space-y-2">
+          {stats.map((stat) => (
+            <div
+              key={stat.status}
+              className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className={`h-3 w-3 rounded-full ${stat.color}`} />
+                <span className="text-sm text-muted-foreground">
+                  {stat.status}
+                </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <span className="text-sm tabular-nums">
+                  {stat.count.toLocaleString()}
+                </span>
+                <span className="text-sm text-muted-foreground w-12 text-right">
+                  {stat.percentage}%
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SatisfactionCard({ percentage }: { percentage: number }) {
+  const radius = 85;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  return (
+    <div className="w-full rounded-lg border border-input bg-card p-6 text-card-foreground shadow mx-auto">
+      <h2 className="text-2xl font-medium text-muted-foreground text-center">
+        Customer Satisfaction
+      </h2>
+      <div className="relative w-[200px] h-[100px] mx-auto my-2">
+        {/* Background circle */}
+        <svg
+          className="w-full h-full -rotate-90 transform"
+          viewBox="0 0 200 200">
+          <circle
+            cx="100"
+            cy="100"
+            r={radius}
+            className="stroke-slate-100"
+            strokeWidth="12"
+            fill="none"
+          />
+          {/* Animated progress circle */}
+          <motion.circle
+            cx="100"
+            cy="100"
+            r={radius}
+            className="stroke-green-500"
+            strokeWidth="12"
+            fill="none"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          />
+        </svg>
+        {/* Center emoji */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.5, type: "spring" }}>
+            <svg
+              width="1.5rem"
+              height="1.5rem"
+              fill="currentColor"
+              viewBox="0 0 512 512"
+              className="w-6 h-6 text-green-500">
+              <path d="M0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0zm407.4 75.5c5-11.8-7-22.5-19.3-18.7-39.7 12.2-84.5 19-131.8 19s-92.1-6.8-131.8-19c-12.3-3.8-24.3 6.9-19.3 18.7 25 59.1 83.2 100.5 151.1 100.5s126.2-41.4 151.1-100.5zM160 120c-3.1 0-5.9 1.8-7.2 4.6l-16.6 34.7-38.1 5c-3.1.4-5.6 2.5-6.6 5.5s-.1 6.2 2.1 8.3l27.9 26.5-7 37.8c-.6 3 .7 6.1 3.2 7.9s5.8 2 8.5.6l33.8-18.4 33.8 18.3c2.7 1.5 6 1.3 8.5-.6s3.7-4.9 3.2-7.9l-7-37.8 27.9-26.5c2.2-2.1 3.1-5.3 2.1-8.3s-3.5-5.1-6.6-5.5l-38.1-5-16.6-34.7c-1.3-2.8-4.1-4.6-7.2-4.6zm192 0c-3.1 0-5.9 1.8-7.2 4.6l-16.6 34.7-38.1 5c-3.1.4-5.6 2.5-6.6 5.5s-.1 6.2 2.1 8.3l27.9 26.5-7 37.8c-.6 3 .7 6.1 3.2 7.9s5.8 2 8.5.6l33.8-18.4 33.8 18.3c2.7 1.5 6 1.3 8.5-.6s3.7-4.9 3.2-7.9l-7-37.8 27.9-26.5c2.2-2.1 3.1-5.3 2.1-8.3s-3.5-5.1-6.6-5.5l-38.1-5-16.6-34.7c-1.3-2.8-4.1-4.6-7.2-4.6z" />
+            </svg>
+          </motion.div>
+        </div>
+      </div>
+      <div className="text-center py-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}>
+          <h3 className="text-emerald-400 text-lg md:text-xl font-bold">
+            Superb!
+          </h3>
+          <p className="text-muted-foreground my-1">
+            <span className="font-bold">{percentage}%</span> of patients
+            satisfied with their deliveries.
+          </p>
+        </motion.div>
       </div>
     </div>
   );

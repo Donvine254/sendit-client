@@ -44,6 +44,10 @@ import CancelButton from "@/components/ui/cancel-button";
 import { MarkCompleteButton, ProgressButton } from "./action-buttons";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import {
+  DeliveryTracker,
+  SatisfactionCard,
+} from "@/components/dashboard/charts";
 
 // TODO: Add row with customer name
 
@@ -362,9 +366,42 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
       globalFilter,
     },
   });
+  // stats for the card
+  const deliveredOrders =
+    data.filter((item) => item.status === "DELIVERED").length || 0;
+  const pendingOrders =
+    data.filter((item) => item.status === "PENDING").length || 0;
+  const InProgressOrders =
+    data.filter((item) => item.status === "IN_TRANSIT").length || 0;
+  const totalOrders =
+    data.filter((item) => item.status !== "CANCELLED").length || 0;
+  const deliveryStats = [
+    {
+      status: "Delivered",
+      count: deliveredOrders,
+      percentage: ((deliveredOrders / totalOrders) * 100).toFixed(0),
+      color: "bg-green-500",
+    },
+    {
+      status: "In Progress",
+      count: InProgressOrders,
+      percentage: ((InProgressOrders / totalOrders) * 100).toFixed(0),
+      color: "bg-blue-500",
+    },
+    {
+      status: "Pending",
+      count: pendingOrders,
+      percentage: ((pendingOrders / totalOrders) * 100).toFixed(0),
+      color: "bg-orange-500",
+    },
+  ];
 
   return (
     <div className="w-full p-2 sm:p-4">
+      <div className="grid md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-2 lg:grid-cols-2 md:justify-between gap-4 ">
+        <DeliveryTracker stats={deliveryStats} totalOrders={totalOrders} />
+        <SatisfactionCard percentage={95} />
+      </div>
       <div className="flex flex-col md:flex-row items-center py-4 gap-2 sm:gap-4  ">
         {/* first child with two children */}
         <div className="flex flex-row items-center gap-2 sm:gap-4 w-full md:w-1/2">
