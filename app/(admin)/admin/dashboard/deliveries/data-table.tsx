@@ -285,6 +285,7 @@ const columns: ColumnDef<Parcel>[] = [
   },
   {
     id: "actions",
+    header: "Actions",
     cell: ({ row }) => {
       const parcel = row.original;
 
@@ -595,13 +596,19 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
         </div>
       </div>
       <div className="rounded-md border shadow dark:bg-none border-input overflow-x-auto bg-white dark:bg-gray-950">
-        <Table className="table-auto">
+        <Table className="table-auto relative">
           <TableHeader className="bg-blue-500 hover:bg-blue-600 hover:opacity-100">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-white">
+                    <TableHead
+                      key={header.id}
+                      className={`text-white ${
+                        header.column.columnDef.header === "Actions"
+                          ? "sticky right-0 bg-blue-500 z-[1px]"
+                          : ""
+                      }`}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -621,7 +628,13 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={`${
+                        cell.column.columnDef.header === "Actions"
+                          ? "sticky right-0 z-[1px] bg-white dark:bg-background"
+                          : ""
+                      }`}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
