@@ -260,7 +260,17 @@ export function StatsCard({
   );
 }
 
-export function SatisfactionCard({ percentage }: { percentage: number }) {
+export function SatisfactionCard({
+  percentage,
+  title,
+  text,
+  callout
+}: {
+  percentage: number;
+  title: string;
+  text: string;
+  callout: string;
+}) {
   const radius = 85;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
@@ -268,7 +278,7 @@ export function SatisfactionCard({ percentage }: { percentage: number }) {
   return (
     <div className="w-full rounded-lg border border-input bg-card p-6 text-card-foreground shadow mx-auto dark:shadow-yellow-600">
       <h2 className="text-2xl font-semibold text-muted-foreground text-center">
-        Customer Satisfaction
+        {title}
       </h2>
       <div className="relative w-[200px] h-[100px] mx-auto my-2">
         {/* Background circle */}
@@ -320,11 +330,10 @@ export function SatisfactionCard({ percentage }: { percentage: number }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.5 }}>
           <h3 className="text-emerald-400 text-lg md:text-xl font-bold">
-            Superb!
+            {callout}
           </h3>
           <p className="text-muted-foreground my-1">
-            <span className="font-bold">{percentage}%</span> of customers
-            satisfied with their deliveries.
+            <span className="font-bold">{percentage}%</span> {text}
           </p>
         </motion.div>
       </div>

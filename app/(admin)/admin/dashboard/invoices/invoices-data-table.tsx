@@ -13,11 +13,15 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
+  CircleAlert,
   DownloadIcon,
   Filter,
   FilterX,
+  HandCoins,
   MoreHorizontal,
   Search,
+  ShieldAlert,
+  ShieldCheck,
   SortAsc,
   SortDesc,
 } from "lucide-react";
@@ -313,6 +317,38 @@ const columns: ColumnDef<Invoice>[] = [
               <DownloadIcon className="mr-2 h-4 w-4" />
               Download
             </Button>
+            {invoice.status === "DRAFT" && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
+                <ShieldAlert className="mr-2 h-4 w-4" />
+                Mark as Overdue
+              </Button>
+            )}
+            {invoice.status === "OVERDUE" && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white">
+                <HandCoins className="mr-2 h-4 w-4" />
+                Claim Payment
+              </Button>
+            )}
+            {invoice.status === "PAID" && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
+                <CircleAlert className="mr-2 h-4 w-4" />
+                Dispute Payment
+              </Button>
+            )}
+            {invoice.status === "DISPUTED" && (
+              <Button
+                variant="ghost"
+                className="w-full justify-start text-green-500 hover:text-white hover:bg-green-500">
+                <ShieldCheck className="mr-2 h-4 w-4 " />
+                Resolve Dispute
+              </Button>
+            )}
           </PopoverContent>
         </Popover>
       );
@@ -373,8 +409,9 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
     data.filter((item) => item.status === "DRAFT").length || 0;
   const overdueInvoices =
     data.filter((item) => item.status === "OVERDUE").length || 0;
-  const totalInvoices =
-    data.filter((item) => item.status !== "DISPUTED").length || 0;
+  const disputedInvoices =
+    data.filter((item) => item.status === "DISPUTED").length || 0;
+  const totalInvoices = data.length || 0;
   const invoiceStats = [
     {
       status: "Paid",
@@ -392,6 +429,12 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
       status: "Overdue",
       count: overdueInvoices,
       percentage: ((overdueInvoices / totalInvoices) * 100).toFixed(0),
+      color: "bg-amber-500",
+    },
+    {
+      status: "Disputed",
+      count: disputedInvoices,
+      percentage: ((disputedInvoices / totalInvoices) * 100).toFixed(0),
       color: "bg-red-500",
     },
   ];
@@ -404,7 +447,15 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
           totalOrders={data.length}
           stats={invoiceStats}
         />
-        <SatisfactionCard percentage={95} />
+        <SatisfactionCard
+          percentage={Number(
+            ((disputedInvoices / data.length) * 100).toFixed(0)
+          )}
+          title="Dispute Rate"
+          text="of payments disputed by customers. A $15 Dispute fee applies for each dispute.
+          "
+          callout={"Low!"}
+        />
       </div>
       <div className="py-4 flex items-center justify-between gap-4">
         <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">

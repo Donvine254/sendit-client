@@ -45,10 +45,7 @@ import CancelButton from "@/components/ui/cancel-button";
 import { MarkCompleteButton, ProgressButton } from "./action-buttons";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import {
-  StatsCard,
-  SatisfactionCard,
-} from "@/components/dashboard/charts";
+import { StatsCard, SatisfactionCard } from "@/components/dashboard/charts";
 
 // TODO: Add row with customer name
 
@@ -405,7 +402,13 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
           totalOrders={totalOrders}
           title="Delivery Orders"
         />
-        <SatisfactionCard percentage={95} />
+        <SatisfactionCard
+          percentage={95}
+          title="Customer Satisfaction"
+          text="of customers
+            satisfied with their deliveries."
+          callout={"Superb!"}
+        />
       </div>
       <div className="py-4 flex items-center justify-between gap-4">
         <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">
