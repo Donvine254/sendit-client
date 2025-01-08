@@ -371,26 +371,34 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
     data.filter((item) => item.status === "PENDING").length || 0;
   const InProgressOrders =
     data.filter((item) => item.status === "IN_TRANSIT").length || 0;
-  const totalOrders =
-    data.filter((item) => item.status !== "CANCELLED").length || 0;
+  const cancelledOrders =
+    data.filter((item) => item.status === "CANCELLED").length || 0;
+  const totalOrders = data.length || 0;
   const deliveryStats = [
-    {
-      status: "Delivered",
-      count: deliveredOrders,
-      percentage: ((deliveredOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-emerald-500",
-    },
-    {
-      status: "In Progress",
-      count: InProgressOrders,
-      percentage: ((InProgressOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-blue-500",
-    },
     {
       status: "Pending",
       count: pendingOrders,
-      percentage: ((pendingOrders / totalOrders) * 100).toFixed(0),
+      percentage: (pendingOrders / totalOrders) * 100,
       color: "bg-gray-200",
+    },
+
+    {
+      status: "In Progress",
+      count: InProgressOrders,
+      percentage: (InProgressOrders / totalOrders) * 100,
+      color: "bg-blue-500",
+    },
+    {
+      status: "Delivered",
+      count: deliveredOrders,
+      percentage: (deliveredOrders / totalOrders) * 100,
+      color: "bg-emerald-500",
+    },
+    {
+      status: "Cancelled",
+      count: cancelledOrders,
+      percentage: (cancelledOrders / totalOrders) * 100,
+      color: "bg-red-500",
     },
   ];
 

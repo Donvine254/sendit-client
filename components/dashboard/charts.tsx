@@ -158,7 +158,7 @@ export default function Charts() {
 type stat = {
   status: string;
   count: number;
-  percentage: number | string;
+  percentage: number;
   color: string;
 };
 export function StatsCard({
@@ -209,50 +209,39 @@ export function StatsCard({
             />
           ))}
         </div>
-        {/* Stats */}
-        <div className="space-y-2">
+        {/* stats */}
+        <div className="grid grid-cols-2 gap-2 items-center pt-2">
           {stats.map((stat, index) => (
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                delay: 0.8 + index * 0.1,
-                duration: 0.5,
-              }}
-              key={stat.status}
-              className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{
-                    delay: 1 + index * 0.1,
-                    type: "spring",
-                    stiffness: 200,
-                  }}
-                  className={`h-3 w-3 rounded-full ${stat.color}`}
-                />
-                <span className="text-sm text-muted-foreground">
-                  {stat.status}
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
-                  className="text-sm tabular-nums">
-                  {stat.count.toLocaleString()}
-                </motion.span>
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
-                  className="text-sm text-muted-foreground w-12 text-right">
-                  {stat.percentage}%
-                </motion.span>
-              </div>
-            </motion.div>
+            <div key={stat.status} className="flex items-center gap-2 ">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{
+                  delay: 1 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200,
+                }}
+                className={`h-3 w-3 rounded-full ${stat.color}`}
+              />{" "}
+              <span className="text-sm text-muted-foreground">
+                {" "}
+                {stat.status}:{" "}
+              </span>
+              <motion.span
+                className="text-sm tabular-nums"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}>
+                {stat.count}
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
+                className="text-muted-foreground text-sm">
+                ({stat.percentage.toFixed(0)}%)
+              </motion.span>
+            </div>
           ))}
         </div>
       </div>
@@ -264,7 +253,7 @@ export function SatisfactionCard({
   percentage,
   title,
   text,
-  callout
+  callout,
 }: {
   percentage: number;
   title: string;
@@ -324,16 +313,17 @@ export function SatisfactionCard({
           </motion.div>
         </div>
       </div>
-      <div className="text-center py-2">
+      <div className="text-center py-0.5">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.5 }}>
           <h3 className="text-emerald-400 text-lg md:text-xl font-bold">
+            {/* callout text */}
             {callout}
           </h3>
           <p className="text-muted-foreground my-1">
-            <span className="font-bold">{percentage}%</span> {text}
+            <span className="font-bold">{percentage.toFixed(0)}%</span> {text}
           </p>
         </motion.div>
       </div>

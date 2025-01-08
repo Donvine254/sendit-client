@@ -48,6 +48,7 @@ import { PDFIcon } from "@/assets";
 import { Badge } from "@/components/ui/badge";
 import { GenerateInvoicePDF } from "@/lib/actions/invoices";
 import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
+import Alert from "@/components/ui/alert";
 
 // TODO: Add row with email and phone number
 
@@ -414,33 +415,34 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
   const totalInvoices = data.length || 0;
   const invoiceStats = [
     {
-      status: "Paid",
-      count: paidInvoices,
-      percentage: ((paidInvoices / totalInvoices) * 100).toFixed(0),
-      color: "bg-emerald-500",
-    },
-    {
       status: "Draft",
       count: draftInvoices,
-      percentage: ((draftInvoices / totalInvoices) * 100).toFixed(0),
-      color: "bg-gray-100",
+      percentage: (draftInvoices / totalInvoices) * 100,
+      color: "bg-gray-300",
+    },
+    {
+      status: "Paid",
+      count: paidInvoices,
+      percentage: (paidInvoices / totalInvoices) * 100,
+      color: "bg-emerald-500",
     },
     {
       status: "Overdue",
       count: overdueInvoices,
-      percentage: ((overdueInvoices / totalInvoices) * 100).toFixed(0),
+      percentage: (overdueInvoices / totalInvoices) * 100,
       color: "bg-amber-500",
     },
     {
       status: "Disputed",
       count: disputedInvoices,
-      percentage: ((disputedInvoices / totalInvoices) * 100).toFixed(0),
+      percentage: (disputedInvoices / totalInvoices) * 100,
       color: "bg-red-500",
     },
   ];
 
   return (
     <div className="w-full p-2 sm:p-4">
+      <Alert />
       <div className="grid md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-2 lg:grid-cols-2 md:justify-between gap-4 ">
         <StatsCard
           title="Invoices"
@@ -452,7 +454,7 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
             ((disputedInvoices / data.length) * 100).toFixed(0)
           )}
           title="Dispute Rate"
-          text="of payments disputed by customers. A $15 Dispute fee applies for each dispute.
+          text="of payments disputed by customers.
           "
           callout={"Low!"}
         />
@@ -719,7 +721,7 @@ const handleExportExcel = (invoices: Invoice[]) => {
       /"/g,
       '""'
     )}","${invoice.item.replace(/"/g, '""')}",${invoice.email || ""},${
-      invoice.phone || ""
+      "254" + invoice.phone || ""
     },${invoice.amount},${invoice.userId},${invoice.parcelId},${
       invoice.status
     },${new Date(invoice.createdAt).toLocaleDateString()},${new Date(
