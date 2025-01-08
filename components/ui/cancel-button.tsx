@@ -6,6 +6,19 @@ import { updateOrderStatus } from "@/lib/actions/orders";
 import { toast } from "sonner";
 
 export default function CancelButton({ orderId }: { orderId: string }) {
+  function handleClick() {
+    toast.message("Are you sure you?", {
+      position: "top-center",
+      duration: Infinity,
+      description: "Cancelling too many orders might affect your account.",
+      action: {
+        label: "Confirm",
+        onClick: () => cancelOrder(),
+      },
+      actionButtonStyle: { backgroundColor: "red", color: "white" },
+    });
+  }
+
   async function cancelOrder() {
     const toastId = toast.loading("Processing Request...", {
       position: "top-center",
@@ -32,7 +45,7 @@ export default function CancelButton({ orderId }: { orderId: string }) {
     <Button
       variant="ghost"
       className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground"
-      onClick={cancelOrder}>
+      onClick={handleClick}>
       <X className="h-4 w-4" />
       Cancel order
     </Button>
