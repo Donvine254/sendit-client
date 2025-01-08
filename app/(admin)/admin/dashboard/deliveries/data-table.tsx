@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -283,30 +283,46 @@ const columns: ColumnDef<Parcel>[] = [
 ];
 
 export default function ParcelDataTable({ data }: { data: Parcel[] }) {
+  const [filteredData, setFilteredData] = useState(data || []);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
   const [globalFilter, setGlobalFilter] = useState("");
-  const [dateRange, setDateRange] = useState<
-    { from: Date; to: Date } | undefined
-  >(undefined);
+  // const handleDateRangeChange = useCallback(
+  //   (range: { from: Date; to: Date }) => {
+  //     setDateRange(range);
+  //   },
+  //   []
+  // );
   const handleDateRangeChange = useCallback(
-    (range: { from: Date; to: Date }) => {
-      setDateRange(range);
-    },
-    []
-  );
+    (range: { from: Date; to: Date } | undefined) => {
+      // Filter data directly here
+      const newFilteredData = (data || []).filter((parcel) => {
+        if (range?.from && range?.to) {
+          const parcelDate = new Date(parcel.createdAt);
+          return parcelDate >= range.from && parcelDate <= range.to;
+        }
+        return true;
+      });
 
-  const filteredData = useMemo(() => {
-    return (data || []).filter((parcel) => {
-      if (dateRange?.from && dateRange?.to) {
-        const parcelDate = new Date(parcel.createdAt);
-        return parcelDate >= dateRange.from && parcelDate <= dateRange.to;
-      }
-      return true;
-    });
-  }, [data, dateRange]);
+      setFilteredData(newFilteredData);
+    },
+    [data]
+  );
+  const handleFilterReset = useCallback(() => {
+    setFilteredData(data || []);
+  }, [data]);
+
+  // const filteredData = useMemo(() => {
+  //   return (data || []).filter((parcel) => {
+  //     if (dateRange?.from && dateRange?.to) {
+  //       const parcelDate = new Date(parcel.createdAt);
+  //       return parcelDate >= dateRange.from && parcelDate <= dateRange.to;
+  //     }
+  //     return true;
+  //   });
+  // }, [data, dateRange]);
 
   const table = useReactTable({
     data: filteredData,
@@ -346,6 +362,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
           <DateRangePicker
             onChange={handleDateRangeChange}
             placeholder="Select date range"
+            clearFilter={handleFilterReset}
           />
         </div>
 

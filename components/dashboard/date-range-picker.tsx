@@ -17,6 +17,7 @@ export function DateRangePicker({
   className,
   onChange,
   placeholder,
+  clearFilter,
 }: DateRangePickerProps) {
   const [date, setDate] = React.useState<DateRange | undefined>();
 
@@ -52,13 +53,16 @@ export function DateRangePicker({
               <span>{placeholder}</span>
             )}
             {date && (
-              <X
-                className="h-4 w-4 cursor-pointer hover:text-red-500"
+              <span
                 onClick={(event) => {
                   event.stopPropagation();
                   setDate(undefined);
+                  clearFilter();
                 }}
-              />
+                className="cursor-pointer hover:text-red-500 z-10"
+                title="clear filters">
+                <X className="h-4 w-4 " />
+              </span>
             )}
           </Button>
         </PopoverTrigger>
@@ -81,4 +85,5 @@ interface DateRangePickerProps {
   // eslint-disable-next-line
   onChange: (range: { from: Date; to: Date }) => void;
   placeholder: string;
+  clearFilter: () => void;
 }
