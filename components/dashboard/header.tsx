@@ -9,10 +9,10 @@ import { toZonedTime } from "date-fns-tz";
 export default function Header({ user }: { user: sessionUser }) {
   function greetUser() {
     const data: [number, number, string][] = [
-      [0, 4, "Good Night"],
+      [23, 4, "Good Night"],
       [5, 11, "Good Morning"],
       [12, 17, "Good Afternoon"],
-      [18, 23, "Good Night"],
+      [18, 22, "Good Evening"],
     ];
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const now = new Date();
