@@ -2,6 +2,8 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function createInvoicesFromParcels() {
+  console.log("📦 Creating invoices from parcels...");
+
   // Fetch parcels where the status is not 'CANCELLED' or 'PENDING'
   const parcels = await prisma.parcel.findMany({
     where: {
@@ -10,10 +12,11 @@ async function createInvoicesFromParcels() {
           in: ["CANCELLED", "PENDING"],
         },
       },
+      invoice: {
+        is: null,
+      },
     },
   });
-
-  // Loop through the parcels and create invoices
   for (const parcel of parcels) {
     const invoiceData = {
       userId: parcel.userId,
@@ -27,28 +30,25 @@ async function createInvoicesFromParcels() {
     };
 
     try {
-      // Check if the invoice already exists
-      const existingInvoice = await prisma.invoice.findUnique({
-        where: {
-          parcelId: parcel.id, // Assuming parcelId is unique for each invoice
-        },
+      // Attempt to create the invoice
+      await prisma.invoice.create({
+        data: invoiceData,
       });
-
-      if (!existingInvoice) {
-        // Create the invoice only if it doesn't exist
-        await prisma.invoice.create({
-          data: invoiceData,
-        });
-
-        console.log(`Invoice created for parcel ${parcel.id}`);
-      } else {
-        console.log(`Invoice already exists for parcel ${parcel.id}`);
-      }
+      console.log(`✅ Invoice created for parcel ${parcel.id}`);
     } catch (error) {
-      // Log the error and continue with the next parcel
-      console.error(`Error creating invoice for parcel ${parcel.id}:`, error);
+      if (error.code === "P2002" && error.meta?.target?.includes("parcelId")) {
+        console.log(`⚠️ Skipping parcel ${parcel.id}: Invoice already exists.`);
+        continue; // Move to the next parcel
+      } else {
+        console.error(
+          `❌ Error creating invoice for parcel ${parcel.id}:`,
+          error
+        );
+      }
     }
   }
+
+  console.log("🏁 Finished processing parcels.");
 }
 
 createInvoicesFromParcels()
@@ -58,3 +58,11 @@ createInvoicesFromParcels()
   .catch((error) => {
     console.error("Error creating invoices:", error);
   });
+
+// async function cleanDb() {
+//   console.log("🧹 Cleaning database...");
+//   await prisma.invoice.deleteMany();
+//   console.log("✅ Cleared data from the Invoice model");
+// }
+
+// cleanDb();

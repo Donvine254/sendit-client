@@ -5,6 +5,7 @@ import {
   Bell,
   ChevronsUpDown,
   CreditCard,
+  Home,
   LogOut,
 } from "lucide-react";
 
@@ -38,17 +39,29 @@ export function NavUser({ user }: { user: sessionUser }) {
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-              <Image
-                className="h-8 w-8 rounded-lg"
-                alt={user?.given_name || "User Avatar"}
-                src={
-                  user?.picture ??
-                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
-                }
-                height={32}
-                width={32}
-                priority
-              />
+              {user?.picture &&
+              user?.picture.startsWith("https://gravatar.com/avatar") ? (
+                <Image
+                  className="h-8 w-8 rounded-lg"
+                  alt={user.given_name || "User Avatar"}
+                  height={32}
+                  width={32}
+                  priority
+                  src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`}
+                />
+              ) : (
+                <Image
+                  className="h-8 w-8 rounded-lg"
+                  alt={user.given_name || "User Avatar"}
+                  priority
+                  height={32}
+                  width={32}
+                  src={
+                    user?.picture ??
+                    `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
+                  }
+                />
+              )}
 
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate capitalize font-semibold">
@@ -66,17 +79,29 @@ export function NavUser({ user }: { user: sessionUser }) {
             sideOffset={4}>
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Image
-                  className="h-8 w-8 rounded-lg"
-                  alt={user.given_name || "User Avatar"}
-                  src={
-                    user.picture ??
-                    `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
-                  }
-                  height={32}
-                  width={32}
-                  priority
-                />
+                {user?.picture &&
+                user?.picture.startsWith("https://gravatar.com/avatar") ? (
+                  <Image
+                    className="h-8 w-8 rounded-lg"
+                    alt={user.given_name || "User Avatar"}
+                    priority
+                    height={32}
+                    width={32}
+                    src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`}
+                  />
+                ) : (
+                  <Image
+                    className="h-8 w-8 rounded-lg"
+                    alt={user.given_name || "User Avatar"}
+                    priority
+                    height={32}
+                    width={32}
+                    src={
+                      user?.picture ??
+                      `https://ui-avatars.com/api/?background=007bff&color=fff&name=${user?.given_name}+${user?.family_name}`
+                    }
+                  />
+                )}
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold capitalize">
                     {" "}
@@ -89,6 +114,12 @@ export function NavUser({ user }: { user: sessionUser }) {
             <DropdownMenuSeparator />
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
+              <DropdownMenuItem asChild>
+                <Link href="/">
+                  <Home />
+                  Home
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/me/profile">
                   <BadgeCheck />

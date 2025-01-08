@@ -20,6 +20,7 @@ model Parcel {
   deliveryAddress Json         @default("{\"region\": \"\", \"district\": \"\", \"address\": \"\", \"fullName\": \"\",\"phone\": \"\", \"email\": \"\"}")
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
+  invoice         Invoice?
 
   @@index([userId])
 }
@@ -50,6 +51,7 @@ model Invoice {
   amount           Int
   userId           String
   parcelId         String        @unique
+  parcel           Parcel        @relation(fields: [parcelId], references: [id], onDelete: Cascade)
   status           InvoiceStatus @default(DRAFT)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt

@@ -13,6 +13,7 @@ export default {
         xsm: {
           max: "640px",
         },
+        lg: "1080px",
       },
       colors: {
         background: "hsl(var(--background))",

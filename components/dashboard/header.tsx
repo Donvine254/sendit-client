@@ -5,17 +5,19 @@ import { Separator } from "../ui/separator";
 import { RefreshCcw } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { SearchCommand } from "./search-dialog";
-
+import { toZonedTime } from "date-fns-tz";
 export default function Header({ user }: { user: sessionUser }) {
   function greetUser() {
     const data: [number, number, string][] = [
       [0, 4, "Good Night"],
       [5, 11, "Good Morning"],
       [12, 17, "Good Afternoon"],
-      [18, 24, "Good Night"],
+      [18, 23, "Good Night"],
     ];
-    const hr = new Date().getHours();
-
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const now = new Date();
+    const zonedTime = toZonedTime(now, userTimezone);
+    const hr = zonedTime.getHours();
     for (let i = 0; i < data.length; i++) {
       if (hr >= data[i][0] && hr <= data[i][1]) {
         return data[i][2];

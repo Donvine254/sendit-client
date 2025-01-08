@@ -13,6 +13,8 @@ import {
   FileText,
   ChevronRight,
   BadgeCheck,
+  Sparkles,
+  Grid2x2Plus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -107,11 +109,9 @@ export default function UserSidenav({
             )}
 
             <div className="flex flex-col">
-              <span className="text-gray-700 font-semibold text-sm capitalize flex gap-1 items-baseline">
+              <span className="text-gray-700 font-semibold text-sm capitalize flex gap-1 items-baseline truncate">
                 {`${data?.first_name} ${data?.last_name}`}{" "}
-                {isAdmin && (
-                  <BadgeCheck className="text-sm h-3 w-3 text-blue-500" />
-                )}
+                <BadgeCheck className="text-sm h-3 w-3 text-blue-500" />
               </span>
               <span className="text-xs md:text-sm text-muted-foreground">
                 {date}
@@ -119,7 +119,14 @@ export default function UserSidenav({
             </div>
           </div>
 
-          <div className="flex space-x-2 px-4 py-2">
+          <div
+            className="flex space-x-2 gap-2 px-4 py-2"
+            title="Go to dashboard">
+            {isAdmin && (
+              <Link href="/admin/dashboard?utm=profile">
+                <Grid2x2Plus className="h-5 w-5 text-blue-600" />
+              </Link>
+            )}
             <Link
               title="update shipping address"
               scroll
@@ -134,7 +141,7 @@ export default function UserSidenav({
           <div className="space-y-1 ">
             <p className="text-sm text-muted-foreground">Email</p>
             <p className="flex items-center gap-1 text-gray-600">
-              <span className="text-sm xsm:text-xs">
+              <span className="text-sm xsm:text-xs truncate">
                 {data.preferred_email}
               </span>
               <button
@@ -158,12 +165,18 @@ export default function UserSidenav({
           </div>
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Account</p>
-            <button
-              className={`text-sm xsm:text-xs font-medium  px-2 rounded-xl border flex items-center justify-start gap-1 ${
-                isAdmin ? "bg-blue-500 text-white" : "bg-white text-blue-500 "
-              }`}>
-              <span>{isAdmin ? "✪ Admin" : "🟄 Normal User"}</span>
-            </button>
+            {isAdmin ? (
+              <Link
+                href="/admin/dashboard?utm=profile"
+                className="text-sm xsm:text-xs font-medium  px-2 rounded-xl border flex items-center justify-start bg-blue-500 text-white">
+                ✪ Admin
+              </Link>
+            ) : (
+              <button className="text-sm xsm:text-xs font-medium  px-2 rounded-xl border flex items-center justify-start gap-1 bg-white text-blue-500">
+                <Sparkles className="h-3 w-3 text-yellow-500" />
+                <span> Normal User</span>
+              </button>
+            )}
           </div>
 
           <div className="space-y-1 md:border-l-2 md:px-2">

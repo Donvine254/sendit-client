@@ -39,7 +39,7 @@ export default async function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange>
-          <Toaster richColors closeButton theme="light" />
+          <Toaster richColors closeButton />
           <AuthProvider>
             <SidebarProvider>
               <AppSidebar user={user} />
