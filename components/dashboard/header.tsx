@@ -2,10 +2,10 @@ import { sessionUser } from "@/types";
 import React from "react";
 import { SidebarHeader, SidebarTrigger } from "../ui/sidebar";
 import { Separator } from "../ui/separator";
-import { RefreshCcw } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { SearchCommand } from "./search-dialog";
 import { toZonedTime } from "date-fns-tz";
+import SyncButton from "./sync-button";
 export default function Header({ user }: { user: sessionUser }) {
   function greetUser() {
     const data: [number, number, string][] = [
@@ -56,12 +56,7 @@ export default function Header({ user }: { user: sessionUser }) {
         <div
           className="flex md:static items-center gap-4 justify-start group-has-[[data-collapsible=icon]]/sidebar-wrapper:justify-center absolute right-0"
           suppressHydrationWarning>
-          <button
-            title="Sync"
-            type="button"
-            className="p-1 rounded-md bg-gray-200 text-blue-500 dark:bg-gray-600 dark:text-gray-100 group">
-            <RefreshCcw className="h-4 w-4 group-hover:animate-spin transition-all delay-150" />
-          </button>
+          <SyncButton />
           <ThemeToggle className="xsm:hidden" />
         </div>
       </div>

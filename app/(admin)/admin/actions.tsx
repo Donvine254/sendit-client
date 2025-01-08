@@ -139,3 +139,9 @@ export async function MarkInProgress(parcel: any) {
     await prisma.$disconnect();
   }
 }
+
+export const SyncDatabase = async () => {
+  await revalidateTag("orders");
+  await revalidateTag("statistics");
+  await revalidateTag("invoices");
+};
