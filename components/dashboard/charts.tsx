@@ -173,7 +173,7 @@ export function DeliveryTracker({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow">
+      className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow dark:shadow-purple-600">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -264,7 +264,7 @@ export function SatisfactionCard({ percentage }: { percentage: number }) {
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="w-full rounded-lg border border-input bg-card p-6 text-card-foreground shadow mx-auto">
+    <div className="w-full rounded-lg border border-input bg-card p-6 text-card-foreground shadow mx-auto dark:shadow-yellow-600">
       <h2 className="text-2xl font-semibold text-muted-foreground text-center">
         Customer Satisfaction
       </h2>
