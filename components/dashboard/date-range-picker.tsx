@@ -29,17 +29,21 @@ export function DateRangePicker({
   };
 
   return (
-    <div className={cn("grid gap-2", className)}>
+    <div
+      className={cn(
+        "grid gap-2 xsm:gap-0.5 w-full md:w-full md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:w-fit lg:md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:w-full",
+        className
+      )}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id="date"
             variant={"outline"}
             className={cn(
-              "w-fit justify-start text-left font-normal truncate",
+              "w-full justify-start xsm:text-xs text-left font-normal truncate",
               !date && "text-muted-foreground"
             )}>
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 xsm:mr-0.5 h-4 w-4" />
             {date?.from ? (
               date.to ? (
                 <>
