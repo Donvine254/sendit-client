@@ -28,7 +28,7 @@ function Alert() {
               Learn how to identify fraud and design a strategy to prevent it to
               keep the business running!{" "}
               <a
-                className="hover:text-blue-500 hover:underline"
+                className="hover:text-blue-500 underline"
                 href="https://docs.stripe.com/disputes/prevention"
                 target="_blank"
                 referrerPolicy="no-referrer"
