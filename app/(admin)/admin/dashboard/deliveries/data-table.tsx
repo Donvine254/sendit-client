@@ -13,6 +13,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
+  DownloadIcon,
   Eye,
   Filter,
   FilterX,
@@ -380,7 +381,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
       status: "Delivered",
       count: deliveredOrders,
       percentage: ((deliveredOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-green-500",
+      color: "bg-emerald-500",
     },
     {
       status: "In Progress",
@@ -392,7 +393,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
       status: "Pending",
       count: pendingOrders,
       percentage: ((pendingOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-orange-500",
+      color: "bg-gray-200",
     },
   ];
 
@@ -402,7 +403,20 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
         <DeliveryTracker stats={deliveryStats} totalOrders={totalOrders} />
         <SatisfactionCard percentage={95} />
       </div>
-      <div className="flex flex-col md:flex-row items-center py-4 gap-2 sm:gap-4  ">
+      <div className="py-4 flex items-center justify-between gap-4">
+        <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">
+          Manage Deliveries
+        </h2>
+        <Button
+          variant="outline"
+          type="button"
+          title="Export to Excel"
+          className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900">
+          <DownloadIcon className="h-4 w-4" /> Export
+        </Button>
+      </div>
+      <hr className="shadow dark:shadow-md dark:shadow-blue-500 " />
+      <div className="flex flex-col md:flex-row items-center py-4 gap-2 sm:gap-4">
         {/* first child with two children */}
         <div className="flex flex-row items-center gap-2 sm:gap-4 w-full md:w-1/2">
           <div className="relative flex-1 xsm:w-full sm:w-full md:flex-1">

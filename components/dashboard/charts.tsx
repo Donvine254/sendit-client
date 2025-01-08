@@ -169,51 +169,6 @@ export function DeliveryTracker({
   totalOrders: number;
 }) {
   return (
-    // <div className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow">
-    //   <div className="space-y-1.5 pb-4">
-    //     <div className="text-2xl font-medium text-muted-foreground text-center">
-    //       Delivery Orders
-    //     </div>
-    //     <div className="text-[2.75rem] font-semibold tracking-tight">
-    //       {totalOrders.toLocaleString()}
-    //     </div>
-    //   </div>
-    //   <div className="space-y-4">
-    //     {/* Progress bar */}
-    //     <div className="h-2 flex rounded-full overflow-hidden">
-    //       {stats.map((stat) => (
-    //         <div
-    //           key={stat.status}
-    //           className={`${stat.color} transition-all duration-500`}
-    //           style={{ width: `${stat.percentage}%` }}
-    //         />
-    //       ))}
-    //     </div>
-    //     {/* Stats */}
-    //     <div className="space-y-2">
-    //       {stats.map((stat) => (
-    //         <div
-    //           key={stat.status}
-    //           className="flex items-center justify-between">
-    //           <div className="flex items-center gap-2">
-    //             <div className={`h-3 w-3 rounded-full ${stat.color}`} />
-    //             <span className="text-sm text-muted-foreground">
-    //               {stat.status}
-    //             </span>
-    //           </div>
-    //           <div className="flex items-center gap-4">
-    //             <span className="text-sm tabular-nums">
-    //               {stat.count.toLocaleString()}
-    //             </span>
-    //             <span className="text-sm text-muted-foreground w-12 text-right">
-    //               {stat.percentage}%
-    //             </span>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </div>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -224,7 +179,7 @@ export function DeliveryTracker({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         className="space-y-1.5 pb-4">
-        <div className="text-2xl font-medium text-muted-foreground text-center">
+        <div className="text-2xl font-semibold text-muted-foreground text-center">
           Delivery Orders
         </div>
         <motion.div
@@ -310,7 +265,7 @@ export function SatisfactionCard({ percentage }: { percentage: number }) {
 
   return (
     <div className="w-full rounded-lg border border-input bg-card p-6 text-card-foreground shadow mx-auto">
-      <h2 className="text-2xl font-medium text-muted-foreground text-center">
+      <h2 className="text-2xl font-semibold text-muted-foreground text-center">
         Customer Satisfaction
       </h2>
       <div className="relative w-[200px] h-[100px] mx-auto my-2">
@@ -366,7 +321,7 @@ export function SatisfactionCard({ percentage }: { percentage: number }) {
             Superb!
           </h3>
           <p className="text-muted-foreground my-1">
-            <span className="font-bold">{percentage}%</span> of patients
+            <span className="font-bold">{percentage}%</span> of customers
             satisfied with their deliveries.
           </p>
         </motion.div>
