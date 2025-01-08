@@ -169,51 +169,137 @@ export function DeliveryTracker({
   totalOrders: number;
 }) {
   return (
-    <div className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow">
-      <div className="space-y-1.5 pb-4">
+    // <div className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow">
+    //   <div className="space-y-1.5 pb-4">
+    //     <div className="text-2xl font-medium text-muted-foreground text-center">
+    //       Delivery Orders
+    //     </div>
+    //     <div className="text-[2.75rem] font-semibold tracking-tight">
+    //       {totalOrders.toLocaleString()}
+    //     </div>
+    //   </div>
+    //   <div className="space-y-4">
+    //     {/* Progress bar */}
+    //     <div className="h-2 flex rounded-full overflow-hidden">
+    //       {stats.map((stat) => (
+    //         <div
+    //           key={stat.status}
+    //           className={`${stat.color} transition-all duration-500`}
+    //           style={{ width: `${stat.percentage}%` }}
+    //         />
+    //       ))}
+    //     </div>
+    //     {/* Stats */}
+    //     <div className="space-y-2">
+    //       {stats.map((stat) => (
+    //         <div
+    //           key={stat.status}
+    //           className="flex items-center justify-between">
+    //           <div className="flex items-center gap-2">
+    //             <div className={`h-3 w-3 rounded-full ${stat.color}`} />
+    //             <span className="text-sm text-muted-foreground">
+    //               {stat.status}
+    //             </span>
+    //           </div>
+    //           <div className="flex items-center gap-4">
+    //             <span className="text-sm tabular-nums">
+    //               {stat.count.toLocaleString()}
+    //             </span>
+    //             <span className="text-sm text-muted-foreground w-12 text-right">
+    //               {stat.percentage}%
+    //             </span>
+    //           </div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full mx-auto rounded-lg border border-input bg-card p-6 text-card-foreground shadow">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="space-y-1.5 pb-4">
         <div className="text-2xl font-medium text-muted-foreground text-center">
           Delivery Orders
         </div>
-        <div className="text-[2.75rem] font-semibold tracking-tight">
+        <motion.div
+          initial={{ scale: 0.5 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
+          className="text-[2.75rem] font-semibold tracking-tight">
           {totalOrders.toLocaleString()}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       <div className="space-y-4">
         {/* Progress bar */}
         <div className="h-2 flex rounded-full overflow-hidden">
-          {stats.map((stat) => (
-            <div
+          {stats.map((stat, index) => (
+            <motion.div
               key={stat.status}
-              className={`${stat.color} transition-all duration-500`}
-              style={{ width: `${stat.percentage}%` }}
+              initial={{ width: 0 }}
+              animate={{ width: `${stat.percentage}%` }}
+              transition={{
+                delay: 0.5 + index * 0.1,
+                duration: 0.8,
+                ease: "easeOut",
+              }}
+              className={`${stat.color}`}
             />
           ))}
         </div>
         {/* Stats */}
         <div className="space-y-2">
-          {stats.map((stat) => (
-            <div
+          {stats.map((stat, index) => (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                delay: 0.8 + index * 0.1,
+                duration: 0.5,
+              }}
               key={stat.status}
               className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className={`h-3 w-3 rounded-full ${stat.color}`} />
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{
+                    delay: 1 + index * 0.1,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
+                  className={`h-3 w-3 rounded-full ${stat.color}`}
+                />
                 <span className="text-sm text-muted-foreground">
                   {stat.status}
                 </span>
               </div>
               <div className="flex items-center gap-4">
-                <span className="text-sm tabular-nums">
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
+                  className="text-sm tabular-nums">
                   {stat.count.toLocaleString()}
-                </span>
-                <span className="text-sm text-muted-foreground w-12 text-right">
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
+                  className="text-sm text-muted-foreground w-12 text-right">
                   {stat.percentage}%
-                </span>
+                </motion.span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
