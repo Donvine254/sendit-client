@@ -43,6 +43,9 @@ import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
 import { MarkCompleteButton, ProgressButton } from "./action-buttons";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+
+// TODO: Add row with customer name
 
 const columns: ColumnDef<Parcel>[] = [
   {
@@ -114,6 +117,35 @@ const columns: ColumnDef<Parcel>[] = [
             day: "numeric",
             year: "numeric",
           })}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "Customer",
+    header: "Customer",
+    cell: ({ row }) => {
+      const pickupAddress = row.getValue(
+        "pickupAddress"
+      ) as Parcel["pickupAddress"];
+      const { fullName } = pickupAddress as {
+        fullName: string;
+      };
+
+      return (
+        <p
+          className="capitalize truncate min-w-fit max-w-72 flex items-center gap-1"
+          title={fullName ?? "John Doe"}>
+          <Image
+            src={`https://ui-avatars.com/api/?background=random&name=${
+              fullName ?? "John Doe"
+            }`}
+            height={24}
+            width={24}
+            className="h-6 w-6 rounded-full"
+            alt="user avatar"
+          />{" "}
+          {fullName ?? "John Doe"}
         </p>
       );
     },
@@ -263,7 +295,7 @@ const columns: ColumnDef<Parcel>[] = [
           </PopoverTrigger>
           <PopoverContent className="w-60 space-y-2">
             <Button variant="ghost" asChild className="w-full justify-start">
-              <Link href={`/me/parcels/${parcel.id}`}>
+              <Link href={`/me/orders/${parcel.id}`}>
                 <Eye className="h-4 w-4" />
                 View Details
               </Link>
@@ -354,7 +386,7 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
                   variant="outline"
                   className="ml-auto justify-start text-muted-foreground dark:text-white">
                   <Filter className="h-4 w-4" />{" "}
-                  <span className="md:hidden xsm:hidden">Columns</span>
+                  <span className="md:hidden xsm:hidden lg:block">Columns</span>
                 </Button>
               </PopoverTrigger>
               <PopoverContent
