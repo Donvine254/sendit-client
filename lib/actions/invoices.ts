@@ -5,7 +5,7 @@ const baseUrl =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:3000/api/invoice-generator"
     : "https://senditkenya.vercel.app/api/invoice-generator";
-export async function GenerateInvoice(data: Invoice) {
+export async function GenerateInvoicePDF(data: Invoice) {
   const toastId = toast.loading("Processing File...", {
     position: "top-center",
   });

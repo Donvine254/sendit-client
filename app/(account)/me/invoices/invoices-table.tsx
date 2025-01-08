@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/popover";
 import { MoreHorizontal } from "lucide-react";
 import { Invoice } from "@prisma/client";
-import { GenerateInvoice } from "@/lib/actions/invoices";
+import {GenerateInvoicePDF } from "@/lib/actions/invoices";
 import PaymentButton from "@/components/ui/payment-button";
 import Refresh from "@/components/pages/refresh";
 import { PDFIcon, SortAll } from "@/assets";
@@ -60,14 +60,14 @@ function InvoiceActions({ invoice }: { invoice: Invoice }) {
           <Button
             variant="ghost"
             className="w-full justify-start"
-            onClick={() => GenerateInvoice(invoice)}>
+            onClick={() =>GenerateInvoicePDF(invoice)}>
             <Download className="mr-2 h-4 w-4" />
             Download
           </Button>
           <Button
             variant="ghost"
             className="w-full justify-start"
-            onClick={() => GenerateInvoice(invoice)}>
+            onClick={() =>GenerateInvoicePDF(invoice)}>
             <Printer className="mr-2 h-4 w-4" />
             Print
           </Button>

@@ -14,7 +14,6 @@ import {
 } from "@tanstack/react-table";
 import {
   DownloadIcon,
-  Eye,
   Filter,
   FilterX,
   MoreHorizontal,
@@ -38,21 +37,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DateRangePicker } from "@/components/dashboard/date-range-picker";
-import Link from "next/link";
-import { Parcel } from "@prisma/client";
-import StatusBadge from "@/components/ui/status-badge";
-import CancelButton from "@/components/ui/cancel-button";
-import { MarkCompleteButton, ProgressButton } from "./action-buttons";
+import { Invoice } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import {
-  DeliveryTracker,
-  SatisfactionCard,
-} from "@/components/dashboard/charts";
+import { PDFIcon } from "@/assets";
+import { Badge } from "@/components/ui/badge";
+import { GenerateInvoicePDF } from "@/lib/actions/invoices";
+import { SatisfactionCard } from "@/components/dashboard/charts";
 
-// TODO: Add row with customer name
+// TODO: Add row with email and phone number
 
-const columns: ColumnDef<Parcel>[] = [
+const statusStyles = {
+  DRAFT: "bg-gray-100 text-gray-800 hover:bg-muted hover:text-muted-foreground",
+  PAID: "bg-green-500 text-white hover:bg-green-600",
+  OVERDUE: "bg-destructive text-destructive-foreground",
+  DISPUTED: "bg-amber-500 text-white hover:bg-amber-600",
+};
+//
+const columns: ColumnDef<Invoice>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -78,18 +80,39 @@ const columns: ColumnDef<Parcel>[] = [
     enableHiding: false,
   },
   {
-    id: "index",
-    header: "#",
-    cell: ({ row }) => String(row.index + 1).padStart(3, "0"),
+    accessorKey: "invoice_number",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200">
+          INV#
+          {column.getIsSorted() === "asc" ? (
+            <SortAsc className="ml-2 h-4 w-4" />
+          ) : column.getIsSorted() === "desc" ? (
+            <SortDesc className="ml-2 h-4 w-4" />
+          ) : (
+            <SortAsc className="ml-2 h-4 w-4 opacity-50" />
+          )}
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="inline-flex gap-0.5 items-center whitespace-nowrap">
+        <PDFIcon />
+        <p>INV{String(row.getValue("invoice_number")).padStart(4, "0")}</p>
+      </div>
+    ),
   },
   {
-    accessorKey: "description",
-    header: "Description",
+    accessorKey: "item",
+    header: "Parcel",
     cell: ({ row }) => {
-      const description = row.getValue("description") as string;
+      const item = row.getValue("item") as string;
       return (
-        <p className="truncate max-w-32" title={description}>
-          {description}
+        <p className="truncate max-w-32" title={item}>
+          {item}
         </p>
       );
     },
@@ -127,35 +150,6 @@ const columns: ColumnDef<Parcel>[] = [
     },
   },
   {
-    accessorKey: "Customer",
-    header: "Customer",
-    cell: ({ row }) => {
-      const pickupAddress = row.getValue(
-        "pickupAddress"
-      ) as Parcel["pickupAddress"];
-      const { fullName } = pickupAddress as {
-        fullName: string;
-      };
-
-      return (
-        <p
-          className="capitalize truncate min-w-fit max-w-72 flex items-center gap-1"
-          title={fullName ?? "John Doe"}>
-          <Image
-            src={`https://ui-avatars.com/api/?background=random&name=${
-              fullName ?? "John Doe"
-            }`}
-            height={24}
-            width={24}
-            className="h-6 w-6 rounded-full"
-            alt="user avatar"
-          />{" "}
-          {fullName ?? "John Doe"}
-        </p>
-      );
-    },
-  },
-  {
     accessorKey: "status",
     header: ({ column }) => {
       return (
@@ -175,19 +169,79 @@ const columns: ColumnDef<Parcel>[] = [
       );
     },
     cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      return <StatusBadge status={status} />;
+      const status = row.getValue("status") as keyof typeof statusStyles;
+      return (
+        <Badge className={statusStyles[status]} variant="default">
+          {status.charAt(0) + status.slice(1).toLowerCase()}
+        </Badge>
+      );
+    },
+  },
+
+  {
+    accessorKey: "fullName",
+    header: "Customer",
+    cell: ({ row }) => {
+      const fullName = row.getValue("fullName") as string;
+      return (
+        <p
+          className="capitalize truncate min-w-fit max-w-72 flex items-center gap-1"
+          title={fullName ?? "John Doe"}>
+          <Image
+            src={`https://ui-avatars.com/api/?background=random&name=${
+              fullName ?? "John Doe"
+            }`}
+            height={24}
+            width={24}
+            className="h-6 w-6 rounded-full"
+            alt="user avatar"
+          />{" "}
+          {fullName ?? "John Doe"}
+        </p>
+      );
     },
   },
   {
-    accessorKey: "weight",
+    accessorKey: "phone",
+    header: "Contact",
+    cell: ({ row }) => {
+      const contact = row.getValue("phone") as string;
+      return <p title={contact}>+254{contact}</p>;
+    },
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+    cell: ({ row }) => {
+      const email = row.getValue("email") as string;
+      return (
+        <p title={email} className="truncate max-w-48">
+          {email}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "shipping_address",
+    header: "Shipping",
+    cell: ({ row }) => {
+      const shipping = row.getValue("shipping_address") as string;
+      return (
+        <p className="truncate max-w-32 capitalize" title={shipping}>
+          {shipping}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "updatedAt",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="p-0 hover:bg-transparent hover:text-gray-200">
-          Weight
+          Due Date
           {column.getIsSorted() === "asc" ? (
             <SortAsc className="ml-2 h-4 w-4" />
           ) : column.getIsSorted() === "desc" ? (
@@ -199,75 +253,28 @@ const columns: ColumnDef<Parcel>[] = [
       );
     },
     cell: ({ row }) => {
-      const weight = parseFloat(row.getValue("weight"));
-      return `${weight.toFixed(2)} kg`;
-    },
-  },
-  {
-    accessorKey: "pickupAddress",
-    header: "Origin",
-    cell: ({ row }) => {
-      const pickupAddress = row.getValue(
-        "pickupAddress"
-      ) as Parcel["pickupAddress"];
-
-      if (pickupAddress) {
-        const { address, district, region } = pickupAddress as {
-          address: string;
-          district: string;
-          region: string;
-        };
-
-        return (
-          <p
-            className="truncate max-w-32 capitalize"
-            title={`${address}, ${district}, ${region}`}>
-            {`${address}, ${district}, ${region}`}
-          </p>
-        );
-      }
-
-      return <p>Address not available</p>;
+      const date = new Date(row.getValue("updatedAt"));
+      return (
+        <p className="whitespace-nowrap">
+          {date.toLocaleDateString(undefined, {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </p>
+      );
     },
   },
 
   {
-    accessorKey: "deliveryAddress",
-    header: "Destination",
-    cell: ({ row }) => {
-      const deliveryAddress = row.getValue(
-        "deliveryAddress"
-      ) as Parcel["deliveryAddress"];
-
-      if (deliveryAddress) {
-        const { address, district, region } = deliveryAddress as {
-          address: string;
-          district: string;
-          region: string;
-        };
-
-        return (
-          <p
-            className="truncate max-w-32 capitalize"
-            title={`${address}, ${district}, ${region}`}>
-            {`${address}, ${district}, ${region}`}
-          </p>
-        );
-      }
-
-      return <p>Address not available</p>;
-    },
-  },
-
-  {
-    accessorKey: "price",
+    accessorKey: "amount",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="p-0 hover:bg-transparent hover:text-gray-200">
-          Price
+          Amount
           {column.getIsSorted() === "asc" ? (
             <SortAsc className="ml-2 h-4 w-4" />
           ) : column.getIsSorted() === "desc" ? (
@@ -279,18 +286,18 @@ const columns: ColumnDef<Parcel>[] = [
       );
     },
     cell: ({ row }) => {
-      const price = parseFloat(row.getValue("price"));
+      const price = parseFloat(row.getValue("amount"));
       return `${new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "KSH",
       }).format(price)}`;
     },
   },
+
   {
     id: "actions",
     cell: ({ row }) => {
-      const parcel = row.original;
-
+      const invoice = row.original;
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -299,21 +306,13 @@ const columns: ColumnDef<Parcel>[] = [
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-60 space-y-2">
-            <Button variant="ghost" asChild className="w-full justify-start">
-              <Link href={`/me/orders/${parcel.id}`}>
-                <Eye className="h-4 w-4" />
-                View Details
-              </Link>
+            <Button
+              variant="ghost"
+              className="w-full justify-start"
+              onClick={() => GenerateInvoicePDF(invoice)}>
+              <DownloadIcon className="mr-2 h-4 w-4" />
+              Download
             </Button>
-            {parcel.status === "IN_TRANSIT" && (
-              <MarkCompleteButton orderId={parcel.id} />
-            )}
-            {parcel.status === "PENDING" && (
-              <>
-                <ProgressButton Parcel={parcel} />
-                <CancelButton orderId={parcel.id} />
-              </>
-            )}
           </PopoverContent>
         </Popover>
       );
@@ -321,7 +320,7 @@ const columns: ColumnDef<Parcel>[] = [
   },
 ];
 
-export default function ParcelDataTable({ data }: { data: Parcel[] }) {
+export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
   const [filteredData, setFilteredData] = useState(data || []);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -367,49 +366,15 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
       globalFilter,
     },
   });
-  // stats for the card
-  const deliveredOrders =
-    data.filter((item) => item.status === "DELIVERED").length || 0;
-  const pendingOrders =
-    data.filter((item) => item.status === "PENDING").length || 0;
-  const InProgressOrders =
-    data.filter((item) => item.status === "IN_TRANSIT").length || 0;
-  const totalOrders =
-    data.filter((item) => item.status !== "CANCELLED").length || 0;
-  const deliveryStats = [
-    {
-      status: "Delivered",
-      count: deliveredOrders,
-      percentage: ((deliveredOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-emerald-500",
-    },
-    {
-      status: "In Progress",
-      count: InProgressOrders,
-      percentage: ((InProgressOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-blue-500",
-    },
-    {
-      status: "Pending",
-      count: pendingOrders,
-      percentage: ((pendingOrders / totalOrders) * 100).toFixed(0),
-      color: "bg-gray-200",
-    },
-  ];
 
   return (
     <div className="w-full p-2 sm:p-4">
       <div className="grid md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-2 lg:grid-cols-2 md:justify-between gap-4 ">
-        <DeliveryTracker
-          stats={deliveryStats}
-          totalOrders={totalOrders}
-          title="Delivery Orders"
-        />
         <SatisfactionCard percentage={95} />
       </div>
       <div className="py-4 flex items-center justify-between gap-4">
         <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">
-          Manage Deliveries
+          Manage Invoices
         </h2>
         <Button
           variant="outline"
@@ -467,12 +432,14 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
                             column.toggleVisibility(e.target.checked)
                           }
                         />
-                        {column.id === "pickupAddress"
-                          ? "Origin"
-                          : column.id === "deliveryAddress"
-                          ? "Destination"
+                        {column.id === "shipping_address"
+                          ? "Shipping Address"
+                          : column.id === "invoice_number"
+                          ? "Invoice Number"
                           : column.id === "createdAt"
-                          ? "Order Date"
+                          ? "Invoice Date"
+                          : column.id === "updatedAt"
+                          ? "Due Date"
                           : column.id}
                       </label>
                     );
@@ -576,10 +543,10 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
               "md:w-[180px] md:hidden md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:block lg:block xsm:flex-1 h-10 truncate px-3 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white font-normal text-sm  xsm:max-w-[25%] xsm:text-xs"
             )}>
             <option value="ALL">All Statuses</option>
-            <option value="PENDING">Pending</option>
-            <option value="IN_TRANSIT">In Transit</option>
-            <option value="DELIVERED">Delivered</option>
-            <option value="CANCELLED">Cancelled</option>
+            <option value="DRAFT">Draft</option>
+            <option value="PAID">Paid</option>
+            <option value="OVERDUE">Overdue</option>
+            <option value="DISPUTED">Disputed</option>
           </select>
         </div>
       </div>
@@ -657,29 +624,28 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
   );
 }
 
-// function to export excel data
-const handleExportExcel = (orders: any) => {
-  const headers = `Order ID,Description,Status,Price,Weight,Customer Name,Pickup Address,Pickup Phone,Recipient Name,Delivery Address,Delivery Phone,Created At`;
-  const rows = orders.map((order: any) => {
-    return `${order.id},"${order.description.replace(
+const handleExportExcel = (invoices: Invoice[]) => {
+  const headers = `ID,Invoice Number,Full Name,Shipping Address,Item,Email,Phone,Amount,User ID,Parcel ID,Status,Date,Due Date`;
+  const rows = invoices.map((invoice) => {
+    return `${invoice.id},${invoice.invoice_number},"${invoice.fullName.replace(
       /"/g,
       '""'
-    )}",${order.status.toLowerCase()},"KSH${order.price}",${order.weight},"${
-      order.pickupAddress.fullName
-    }","${order.pickupAddress.address}, ${order.pickupAddress.district}, ${
-      order.pickupAddress.region
-    }","254${order.pickupAddress.phone.toString()}","${
-      order.deliveryAddress.fullName
-    }","${order.deliveryAddress.address}, ${order.deliveryAddress.district}, ${
-      order.deliveryAddress.region
-    }","254${order.deliveryAddress.phone.toString()}",${new Date(
-      order.createdAt
+    )}","${invoice.shipping_address.replace(
+      /"/g,
+      '""'
+    )}","${invoice.item.replace(/"/g, '""')}",${invoice.email || ""},${
+      invoice.phone || ""
+    },${invoice.amount},${invoice.userId},${invoice.parcelId},${
+      invoice.status
+    },${new Date(invoice.createdAt).toLocaleDateString()},${new Date(
+      invoice.updatedAt
     ).toLocaleDateString()}`;
   });
+
   const csvContent = [headers, ...rows].join("\n");
   const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `orders-${new Date().toISOString().split("T")[0]}.csv`;
+  link.download = `invoices-${new Date().toISOString().split("T")[0]}.csv`;
   link.click();
 };

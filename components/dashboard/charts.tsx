@@ -164,9 +164,11 @@ type stat = {
 export function DeliveryTracker({
   stats,
   totalOrders,
+  title,
 }: {
   stats: stat[];
   totalOrders: number;
+  title: string;
 }) {
   return (
     <motion.div
@@ -180,7 +182,7 @@ export function DeliveryTracker({
         transition={{ delay: 0.2, duration: 0.5 }}
         className="space-y-1.5 pb-4">
         <div className="text-2xl font-semibold text-muted-foreground text-center">
-          Delivery Orders
+          {title}
         </div>
         <motion.div
           initial={{ scale: 0.5 }}
