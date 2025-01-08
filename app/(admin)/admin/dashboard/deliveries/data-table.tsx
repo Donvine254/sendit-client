@@ -411,7 +411,8 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
           variant="outline"
           type="button"
           title="Export to Excel"
-          className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900">
+          className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900"
+          onClick={() => handleExportExcel(data)}>
           <DownloadIcon className="h-4 w-4" /> Export
         </Button>
       </div>
@@ -651,3 +652,30 @@ export default function ParcelDataTable({ data }: { data: Parcel[] }) {
     </div>
   );
 }
+
+// function to export excel data
+const handleExportExcel = (orders: any) => {
+  const headers = `Order ID,Description,Status,Price,Weight,Customer Name,Pickup Address,Pickup Phone,Recipient Name,Delivery Address,Delivery Phone,Created At`;
+  const rows = orders.map((order: any) => {
+    return `${order.id},"${order.description.replace(
+      /"/g,
+      '""'
+    )}",${order.status.toLowerCase()},"KSH${order.price}",${order.weight},"${
+      order.pickupAddress.fullName
+    }","${order.pickupAddress.address}, ${order.pickupAddress.district}, ${
+      order.pickupAddress.region
+    }","254${order.pickupAddress.phone.toString()}","${
+      order.deliveryAddress.fullName
+    }","${order.deliveryAddress.address}, ${order.deliveryAddress.district}, ${
+      order.deliveryAddress.region
+    }","254${order.deliveryAddress.phone.toString()}",${new Date(
+      order.createdAt
+    ).toLocaleDateString()}`;
+  });
+  const csvContent = [headers, ...rows].join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `orders-${new Date().toISOString().split("T")[0]}.csv`;
+  link.click();
+};
