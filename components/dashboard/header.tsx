@@ -6,28 +6,6 @@ import { ThemeToggle } from "./theme-toggle";
 import { SearchCommand } from "./search-dialog";
 import SyncButton from "./sync-button";
 export default function Header({ user }: { user: sessionUser }) {
-  // function to check time based on user timezone
-  function greetUser() {
-    "use client";
-    const data: [number, number, string][] = [
-      [0, 4, "Good Night"],
-      [5, 11, "Good Morning"],
-      [12, 17, "Good Afternoon"],
-      [18, 24, "Good Night"],
-    ];
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    // Convert to the user's timezone and parse the hours
-    const dateString = new Date().toLocaleString("en-US", {
-      timeZone: userTimezone,
-    });
-    const hr = new Date(dateString).getHours();
-    for (let i = 0; i < data.length; i++) {
-      if (hr >= data[i][0] && hr <= data[i][1]) {
-        return data[i][2];
-      }
-    }
-  }
   return (
     <SidebarHeader className="fixed top-0 h-20 z-10 bg-white dark:bg-black transition-colors duration-300 w-full border-b border-input">
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4 h-full w-full px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -38,7 +16,7 @@ export default function Header({ user }: { user: sessionUser }) {
           <p className="tracking-tight leading-tight inline-flex flex-col py-2">
             {/* account for when users have a really long name */}
             <span className="font-semibold leading-tight truncate capitalize">
-              {greetUser()} {user?.given_name}
+              Hello {user?.given_name}!
             </span>
             <span className="text-muted-foreground text-xs sm:text-sm">
               {new Date().toLocaleDateString(undefined, {

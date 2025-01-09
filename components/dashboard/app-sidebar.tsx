@@ -2,15 +2,15 @@
 
 import * as React from "react";
 import {
+  Activity,
   Box,
-  DollarSign,
   FileText,
+  Landmark,
   LayoutDashboard,
   LucideTruck,
   PieChart,
   Settings,
   Users,
-  WebhookIcon,
 } from "lucide-react";
 
 import { NavItems } from "./nav-items";
@@ -58,7 +58,7 @@ const data = {
       name: "Web Analytics",
       url: "https://vercel.com/donvine254s-projects/sendit/analytics",
       title: "View website performance",
-      icon: WebhookIcon,
+      icon: Activity,
       target: "_blank",
     },
     {
@@ -71,7 +71,7 @@ const data = {
       name: "Finances",
       url: "https://dashboard.stripe.com/test/payments",
       title: "Manage Finances",
-      icon: DollarSign,
+      icon: Landmark,
       target: "_blank",
     },
     {
