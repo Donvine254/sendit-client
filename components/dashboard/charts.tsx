@@ -210,7 +210,55 @@ export function StatsCard({
           ))}
         </div>
         {/* stats */}
-        <div className="grid grid-cols-2 gap-2 items-center pt-2">
+        {/* show only on small devices */}
+        <div className="space-y-2 sm:hidden">
+          {stats.map((stat, index) => (
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                delay: 0.8 + index * 0.1,
+                duration: 0.5,
+              }}
+              key={stat.status}
+              className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{
+                    delay: 1 + index * 0.1,
+                    type: "spring",
+                    stiffness: 200,
+                  }}
+                  className={`h-3 w-3 rounded-full ${stat.color}`}
+                />
+                <span className="text-sm text-muted-foreground">
+                  {stat.status}
+                </span>
+              </div>
+              <div className="">
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.2 + index * 0.1, duration: 0.5 }}
+                  className="text-sm tabular-nums">
+                  {stat.count.toLocaleString()}
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
+                  className="text-sm text-muted-foreground italic w-12 text-right">
+                  ({stat.percentage.toFixed(0)}%)
+                </motion.span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* hide on small devices */}
+        <div className="hidden sm:grid grid-cols-2 xsm:leading-none gap-2 items-center pt-2">
           {stats.map((stat, index) => (
             <div key={stat.status} className="flex items-center gap-2 ">
               <motion.div
