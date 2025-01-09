@@ -49,10 +49,9 @@ const data = {
     },
     {
       name: "Customers",
-      url: "https://sendit.kinde.com/admin",
-      title: "Manage Customers - External Link",
+      url: "/admin/dashboard/customers",
+      title: "Manage Customers",
       icon: Users,
-      target: "_blank",
     },
     {
       name: "Web Analytics",
@@ -63,7 +62,7 @@ const data = {
     },
     {
       name: "Riders",
-      url: "#",
+      url: "/..",
       title: "Manage Riders",
       icon: LucideTruck,
     },
@@ -77,7 +76,7 @@ const data = {
     {
       name: "Sales & Marketing",
       title: "Sales & Marketing",
-      url: "#",
+      url: "/..",
       icon: PieChart,
     },
     {
