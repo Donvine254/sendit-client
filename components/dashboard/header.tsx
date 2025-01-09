@@ -8,6 +8,7 @@ import { toZonedTime } from "date-fns-tz";
 import SyncButton from "./sync-button";
 export default function Header({ user }: { user: sessionUser }) {
   function greetUser() {
+    // this would need to know user location
     const data: [number, number, string][] = [
       [23, 4, "Good Night"],
       [5, 11, "Good Morning"],
@@ -15,6 +16,7 @@ export default function Header({ user }: { user: sessionUser }) {
       [18, 22, "Good Evening"],
     ];
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log("userTimezone: " + userTimezone);
     const now = new Date();
     const zonedTime = toZonedTime(now, userTimezone);
     const hr = zonedTime.getHours();
