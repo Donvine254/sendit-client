@@ -4,29 +4,30 @@ import { SidebarHeader, SidebarTrigger } from "../ui/sidebar";
 import { Separator } from "../ui/separator";
 import { ThemeToggle } from "./theme-toggle";
 import { SearchCommand } from "./search-dialog";
-import { toZonedTime } from "date-fns-tz";
 import SyncButton from "./sync-button";
 export default function Header({ user }: { user: sessionUser }) {
+  // function to check time based on user timezone
   function greetUser() {
-    // this would need to know user location
+    "use client";
     const data: [number, number, string][] = [
-      [23, 4, "Good Night"],
+      [0, 4, "Good Night"],
       [5, 11, "Good Morning"],
       [12, 17, "Good Afternoon"],
-      [18, 22, "Good Evening"],
+      [18, 24, "Good Night"],
     ];
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    console.log("userTimezone: " + userTimezone);
-    const now = new Date();
-    const zonedTime = toZonedTime(now, userTimezone);
-    const hr = zonedTime.getHours();
+
+    // Convert to the user's timezone and parse the hours
+    const dateString = new Date().toLocaleString("en-US", {
+      timeZone: userTimezone,
+    });
+    const hr = new Date(dateString).getHours();
     for (let i = 0; i < data.length; i++) {
       if (hr >= data[i][0] && hr <= data[i][1]) {
         return data[i][2];
       }
     }
   }
-
   return (
     <SidebarHeader className="fixed top-0 h-20 z-10 bg-white dark:bg-black transition-colors duration-300 w-full border-b border-input">
       <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center gap-4 h-full w-full px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
