@@ -21,14 +21,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
-import { sessionUser } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
 
 type Props = {
-  user: sessionUser;
   recentOrders: any | [];
   orderStats: {
     total_orders: number;
