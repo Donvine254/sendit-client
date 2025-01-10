@@ -13,16 +13,14 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  Ban,
   DownloadIcon,
+  Eye,
   Filter,
   FilterX,
   MoreHorizontal,
   Search,
-  ShieldCheck,
   SortAsc,
   SortDesc,
-  Trash2Icon,
 } from "lucide-react";
 import {
   Table,
@@ -42,7 +40,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { KindeUser } from "@/types";
-import { toast } from "sonner";
+import Link from "next/link";
 
 const columns: ColumnDef<KindeUser>[] = [
   {
@@ -267,7 +265,8 @@ const columns: ColumnDef<KindeUser>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: () => {
+    cell: ({ row }) => {
+      const user = row.original;
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -280,35 +279,15 @@ const columns: ColumnDef<KindeUser>[] = [
               variant="ghost"
               type="button"
               className="w-full justify-start gap-1"
-              onClick={() =>
-                toast.info("Upcoming Feature", {
-                  position: "top-center",
-                })
-              }>
-              <ShieldCheck className="h-4 w-4" />
-              Permissions
-            </Button>
-            <Button
-              variant="ghost"
-              type="button"
-              className="w-full justify-start gap-1 text-amber-600 hover:bg-amber-600 hover:text-white"
-              onClick={() =>
-                toast.info("Upcoming Feature", {
-                  position: "top-center",
-                })
-              }>
-              <Ban className="h-4 w-4" /> Suspend User
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-1 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-              onClick={() =>
-                toast.info("Upcoming Feature", {
-                  position: "top-center",
-                })
-              }
-              type="button">
-              <Trash2Icon className="h-4 w-4" /> Delete User
+              title="Manage User Details in Kinde"
+              asChild>
+              <Link
+                prefetch={false}
+                href={`https://sendit.kinde.com/admin/cx/_:nav&m:user::_:submenu&s:details&id:${user.id}`}
+                target="_blank">
+                <Eye className="h-4 w-4" />
+                View Details
+              </Link>
             </Button>
           </PopoverContent>
         </Popover>
