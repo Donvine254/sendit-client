@@ -13,14 +13,12 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  CircleAlert,
   DownloadIcon,
   Filter,
   FilterX,
   HandCoins,
   MoreHorizontal,
   Search,
-  ShieldAlert,
   ShieldCheck,
   SortAsc,
   SortDesc,
@@ -51,7 +49,8 @@ import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 import Alert from "@/components/ui/alert";
 import { toast } from "sonner";
 import ExportButton from "@/components/dashboard/export-button";
-import { MarkInvoiceAsOverdue } from "../../actions";
+import Link from "next/link";
+import { DisputeButton, MarkOverdueButton } from "./actions-buttons";
 
 // TODO: Add row with email and phone number
 
@@ -307,26 +306,6 @@ const columns: ColumnDef<Invoice>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const invoice = row.original;
-      async function handleMarkOverdue(id: string) {
-        const toastId = toast.loading("Processing Request...", {
-          position: "top-center",
-        });
-        try {
-          const res = await MarkInvoiceAsOverdue(id);
-          toast.dismiss(toastId);
-          if (res.success) {
-            toast.success(res.message);
-            if (typeof window !== "undefined") {
-              window.location.reload();
-            }
-          } else toast.error(res.error);
-        } catch (error) {
-          console.error(error);
-          toast.dismiss(toastId);
-          toast.error("Something went wrong");
-        }
-      }
-
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -343,15 +322,10 @@ const columns: ColumnDef<Invoice>[] = [
               Download
             </Button>
             {invoice.status === "DRAFT" && (
-              <Button
-                variant="ghost"
-                onClick={() => handleMarkOverdue(invoice.id)}
-                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <ShieldAlert className="mr-2 h-4 w-4" />
-                Mark as Overdue
-              </Button>
+              <MarkOverdueButton invoiceId={invoice.id} />
             )}
             {invoice.status === "OVERDUE" && (
+              // implement functionality to send an email reminder to the client
               <Button
                 variant="ghost"
                 className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white"
@@ -365,31 +339,19 @@ const columns: ColumnDef<Invoice>[] = [
               </Button>
             )}
             {invoice.status === "PAID" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <CircleAlert
-                  className="mr-2 h-4 w-4"
-                  onClick={() =>
-                    toast.info("Upcoming Feature", {
-                      position: "top-center",
-                    })
-                  }
-                />
-                Dispute Payment
-              </Button>
+              <DisputeButton invoiceId={invoice.id} />
             )}
             {invoice.status === "DISPUTED" && (
               <Button
                 variant="ghost"
                 className="w-full justify-start text-green-500 hover:text-white hover:bg-green-500"
-                onClick={() =>
-                  toast.info("Upcoming Feature", {
-                    position: "top-center",
-                  })
-                }>
-                <ShieldCheck className="mr-2 h-4 w-4 " />
-                Resolve Dispute
+                asChild>
+                <Link
+                  href="https://dashboard.stripe.com/test/disputes"
+                  target="_blank">
+                  <ShieldCheck className="mr-2 h-4 w-4 " />
+                  Resolve Dispute
+                </Link>
               </Button>
             )}
           </PopoverContent>

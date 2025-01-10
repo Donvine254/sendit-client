@@ -164,13 +164,16 @@ export const SyncDatabase = async () => {
   await revalidateTag("invoices");
 };
 
-export async function MarkInvoiceAsOverdue(invoiceId: string) {
+export async function UpdateInvoiceStatus(
+  invoiceId: string,
+  status: "OVERDUE" | "DISPUTED"
+) {
   try {
     await prisma.invoice.update({
       where: {
         id: invoiceId,
       },
-      data: { status: "OVERDUE" },
+      data: { status: status },
     });
     await revalidateTag("statistics");
     await revalidateTag("invoices");
