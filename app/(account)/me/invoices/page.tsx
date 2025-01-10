@@ -10,17 +10,17 @@ export const metadata: Metadata = {
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const { getUser } = getKindeServerSession();
-  let invoices;
-  const user = (await getUser()) as sessionUser;
-  if (user) {
+  let invoices: Invoice[] = [];
+  const user = (await getUser()) as sessionUser | undefined;
+  if (user && user.id) {
     invoices = (await getUserInvoices(user.id)) as Invoice[];
   }
   return (
     <section>
-      <InvoiceDataTable data={invoices as Invoice[]} />
+      <InvoiceDataTable data={invoices} />
     </section>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
@@ -28,70 +29,84 @@ export default function statCards({
   return (
     <div className="grid gap-4 p-2 sm:p-4 md:p-6 md:group-has-[[data-collapsible=icon]]/sidebar-wrapper:grid-cols-3 lg:grid-cols-3">
       {/* first card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="rounded-lg border border-input bg-card shadow p-6 dark:shadow-purple-600">
-        <div className="text-sm font-medium text-muted-foreground flex justify-between gap-2 items-center">
-          <h3 className="font-semibold text-lg">Total Revenue</h3>
-          <span className="bg-green-100 text-green-700 text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-md">
-            <TrendingUp />
-            20.1%
-          </span>
-        </div>
-        <div className="my-2 text-2xl md:text-3xl lg:text-4xl font-bold">
-          {formatCurrency(data.totalRevenue)}
-        </div>
-        <p className="text-xs text-muted-foreground">From Jan 1st - Jul 31st</p>
-      </motion.div>
+      <StatCard
+        data={formatCurrency(data.totalRevenue)}
+        percentage={20.1}
+        title="Revenue"
+        variant="up"
+        period="From Jan 1st - Jul 31st"
+        className="dark:shadow-purple-600"
+      />
       {/* second card */}
-      <motion.div
-        className="rounded-lg border bg-card border-input p-6 shadow dark:shadow-blue-600"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}>
-        <div className="text-sm font-medium text-muted-foreground flex justify-between gap-2 items-center">
-          <h3 className="font-semibold text-lg">Deliveries</h3>
+      <StatCard
+        data={data.totalOrders}
+        percentage={120.1}
+        title="Deliveries"
+        variant="up"
+        period="From Jan 1st - Jul 31st"
+        className="dark:shadow-blue-600"
+      />
+      {/* third card */}
+      <StatCard
+        data={data.totalUsers}
+        percentage={20.1}
+        title="Total Users"
+        variant="down"
+        period="Previous 365 Days"
+        className="dark:shadow-purple-600"
+      />
+    </div>
+  );
+}
+
+export const StatCard = ({
+  data,
+  percentage,
+  title,
+  variant,
+  period,
+  className,
+}: {
+  data: number | string;
+  percentage: number;
+  title: string;
+  variant: "up" | "down";
+  period: string;
+  className?: string;
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={cn(
+        "rounded-lg border bg-card border-input p-6 shadow ",
+        className
+      )}>
+      <div className="text-sm font-medium text-muted-foreground flex justify-between gap-2 items-center">
+        <h3 className="font-semibold text-lg">{title}</h3>
+        {variant === "up" ? (
           <motion.span
             className="bg-green-100 text-green-700 text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-md"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}>
             <TrendingUp />
-            120.1%
+            {percentage}%
           </motion.span>
-        </div>
-        <motion.div
-          className="my-2 text-2xl md:text-4xl font-bold"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.8,
-            ease: "easeInOut",
-          }}>
-          {data.totalOrders}
-        </motion.div>
-        <p className="text-xs text-muted-foreground">From Jan 1st - Jul 31st</p>
-      </motion.div>
-      {/* third card */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="rounded-lg border bg-card border-input p-6 shadow dark:shadow-purple-600">
-        <div className="text-sm font-medium text-muted-foreground flex justify-between gap-2 items-center">
-          <h3 className="font-semibold text-lg">Active Users</h3>
-          <span className="bg-red-100 text-red-700 text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-md">
+        ) : (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-red-100 text-red-700 text-xs flex items-center gap-1 font-medium px-2 py-1 rounded-md">
             <TrendingDown />
-            20.1%
-          </span>
-        </div>
-        <div className="my-2 text-2xl md:text-4xl font-bold">
-          {data.totalUsers}
-        </div>
-        <p className="text-xs text-muted-foreground">Previous 365 days</p>
-      </motion.div>
-    </div>
+            {percentage}%
+          </motion.span>
+        )}
+      </div>
+      <div className="my-2 text-2xl md:text-4xl font-bold">{data}</div>
+      <p className="text-xs text-muted-foreground">{period}</p>
+    </motion.div>
   );
-}
+};

@@ -2,15 +2,15 @@
 
 import * as React from "react";
 import {
+  Activity,
   Box,
-  DollarSign,
   FileText,
+  Landmark,
   LayoutDashboard,
   LucideTruck,
   PieChart,
   Settings,
   Users,
-  WebhookIcon,
 } from "lucide-react";
 
 import { NavItems } from "./nav-items";
@@ -49,16 +49,15 @@ const data = {
     },
     {
       name: "Customers",
-      url: "https://sendit.kinde.com/admin",
-      title: "Manage Customers - External Link",
+      url: "/admin/dashboard/customers",
+      title: "Manage Customers",
       icon: Users,
-      target: "_blank",
     },
     {
       name: "Web Analytics",
       url: "https://vercel.com/donvine254s-projects/sendit/analytics",
       title: "View website performance",
-      icon: WebhookIcon,
+      icon: Activity,
       target: "_blank",
     },
     {
@@ -71,7 +70,7 @@ const data = {
       name: "Finances",
       url: "https://dashboard.stripe.com/test/payments",
       title: "Manage Finances",
-      icon: DollarSign,
+      icon: Landmark,
       target: "_blank",
     },
     {
@@ -89,7 +88,7 @@ const data = {
   ],
 };
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user: sessionUser;
+  user?: sessionUser;
 }
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (

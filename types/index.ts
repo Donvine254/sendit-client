@@ -39,6 +39,19 @@ export type sessionUser = {
   username?: string;
   phone_number?: string;
 };
+export interface KindeUser {
+  id: string;
+  email: string;
+  username: string;
+  full_name: string;
+  last_name: string;
+  first_name: string;
+  is_suspended: boolean;
+  created_on: string;
+  picture?: string;
+  total_sign_ins: number;
+  last_signed_in: string;
+}
 
 export interface QuoteFormData {
   firstName: string;

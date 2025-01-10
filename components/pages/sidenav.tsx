@@ -65,8 +65,8 @@ export default function UserSidenav({
   permission,
   user,
 }: {
-  data: any | {};
-  user: sessionUser | null;
+  data?: any | {};
+  user?: sessionUser;
   permission: any | {};
 }) {
   const pathname = usePathname();
@@ -93,7 +93,7 @@ export default function UserSidenav({
                 alt="user-avatar"
                 height={48}
                 width={48}
-                src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${data.first_name}+${data.last_name}`}
+                src={`https://ui-avatars.com/api/?background=007bff&color=fff&name=${data?.first_name}+${data?.last_name}`}
               />
             ) : (
               <Image
@@ -103,7 +103,7 @@ export default function UserSidenav({
                 width={48}
                 src={
                   user?.picture ??
-                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${data.first_name}+${data.last_name}`
+                  `https://ui-avatars.com/api/?background=007bff&color=fff&name=${data?.first_name}+${data?.last_name}`
                 }
               />
             )}
@@ -142,13 +142,13 @@ export default function UserSidenav({
             <p className="text-sm text-muted-foreground">Email</p>
             <p className="flex items-center gap-1 text-gray-600">
               <span className="text-sm xsm:text-xs truncate">
-                {data.preferred_email}
+                {data?.preferred_email}
               </span>
               <button
                 title="copy email"
                 onClick={() => {
                   navigator.clipboard
-                    .writeText(data.preferred_email || "")
+                    .writeText(data?.preferred_email || "")
                     .then(() => {
                       toast.success("Email Copied Successfully", {
                         position: "top-center",
@@ -182,13 +182,13 @@ export default function UserSidenav({
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Joined</p>
             <p className="text-sm xsm:text-xs text-gray-600">
-              {new Date(data.created_on).toLocaleDateString()}
+              {new Date(data?.created_on).toLocaleDateString()}
             </p>
           </div>
           <div className="space-y-1 md:border-l-2 md:px-2">
             <p className="text-sm text-muted-foreground">Last Login</p>
             <p className="text-sm xsm:text-xs text-gray-600 ">
-              {new Date(data.last_signed_in).toLocaleString()}
+              {new Date(data?.last_signed_in).toLocaleString()}
             </p>
           </div>
         </div>

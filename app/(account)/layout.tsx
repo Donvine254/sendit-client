@@ -30,8 +30,11 @@ export default async function RootLayout({
 }>) {
   const { getUser, getPermission } = getKindeServerSession();
   const permission = await getPermission("admin");
-  const user = (await getUser()) as sessionUser;
-  const userData = await getUserData(user.id);
+  const user = (await getUser()) as sessionUser | undefined;
+  let userData;
+  if (user) {
+    userData = await getUserData(user.id);
+  }
   return (
     <html lang="en">
       <body className={`${noto_sans.variable} antialiased smooth-scroll`}>

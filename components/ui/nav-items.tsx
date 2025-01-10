@@ -4,7 +4,7 @@ import Image from "next/image";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { ChevronDown } from "lucide-react";
 import { sessionUser } from "@/types";
-export default function Navbar({ user }: { user: sessionUser }) {
+export default function Navbar({ user }: { user?: sessionUser }) {
   return (
     <div className="flex flex-wrap items-center justify-between  px-4 w-full">
       <Link href="/">
@@ -37,7 +37,7 @@ export default function Navbar({ user }: { user: sessionUser }) {
               />
             ) : (
               <Image
-                src={user.picture}
+                src={user?.picture}
                 width={32}
                 height={32}
                 alt="avatar"

@@ -45,6 +45,14 @@ const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "description",
     header: "Description",
+    cell: ({ row }) => {
+      const description = row.getValue("description") as string;
+      return (
+        <p className="truncate max-w-60" title={description}>
+          {description}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "createdAt",
@@ -159,7 +167,7 @@ const columns: ColumnDef<Order>[] = [
 ];
 
 interface DataTableProps {
-  data: any | [];
+  data?: any | [];
 }
 
 export default function DataTable({ data }: DataTableProps) {
@@ -186,6 +194,9 @@ export default function DataTable({ data }: DataTableProps) {
       rowSelection,
     },
   });
+  if (!data) {
+    return null;
+  }
 
   return (
     <div className="w-full">

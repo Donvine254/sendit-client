@@ -6,8 +6,11 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
-export default function DangerZone({ userId }: { userId: string }) {
+export default function DangerZone({ userId = "" }: { userId?: string }) {
   const router = useRouter();
+  if (!userId) {
+    return null;
+  }
   async function handleDeleteAccount() {
     toast.message("Are you sure you?", {
       position: "top-center",

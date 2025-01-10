@@ -30,6 +30,7 @@ export const getOrders = unstable_cache(
   ["orders"],
   { revalidate: 600, tags: ["orders"] }
 );
+
 export const getInvoices = unstable_cache(
   async () =>
     await prisma.invoice.findMany({
@@ -48,7 +49,14 @@ async function getAllUsers() {
   });
   return users;
 }
-
+export const getUsers = unstable_cache(
+  async () => {
+    const users = await getAllUsers();
+    return users;
+  },
+  ["statistics"],
+  { revalidate: 600, tags: ["statistics"] }
+);
 export const getDashboardStatistics = unstable_cache(
   async () => {
     const totalUsers = await getAllUsers();

@@ -21,14 +21,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
-import { sessionUser } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import StatusBadge from "@/components/ui/status-badge";
 import CancelButton from "@/components/ui/cancel-button";
 
 type Props = {
-  user: sessionUser;
   recentOrders: any | [];
   orderStats: {
     total_orders: number;
@@ -109,8 +107,12 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                             {String(index + 1).padStart(3, "0")}
                           </Badge>
                         </TableCell>
-                        <TableCell className="capitalize">
-                          {order.description}
+                        <TableCell>
+                          <p
+                            className="capitalize truncate max-w-60"
+                            title={order.description}>
+                            {order.description}
+                          </p>
                         </TableCell>
                         <TableCell>
                           <p className="whitespace-nowrap">

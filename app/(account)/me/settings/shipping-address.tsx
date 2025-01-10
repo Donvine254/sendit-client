@@ -12,14 +12,14 @@ export default function ShippingAddressForm({
   user,
   address,
 }: {
-  user: sessionUser;
-  address: shippingAddress;
+  user?: sessionUser;
+  address?: shippingAddress;
 }) {
   const [formData, setFormData] = useState<ShippingAddressData>({
-    userId: user.id,
-    phone: address?.phone || user.phone_number || "",
-    email: user.email,
-    fullName: address?.fullName || `${user.given_name} ${user.family_name}`,
+    userId: user?.id || "",
+    phone: address?.phone || user?.phone_number || "",
+    email: user?.email || "",
+    fullName: address?.fullName || `${user?.given_name} ${user?.family_name}`,
     region: address?.region || "",
     district: address?.district || "",
     address: address?.address || "",
@@ -176,7 +176,11 @@ export default function ShippingAddressForm({
         <Button type="reset" variant="outline" disabled={isPending}>
           Reset
         </Button>
-        <Button type="submit" disabled={isPending} className="disabled:bg-muted disabled:text-muted-foreground bg-blue-500 text-white hover:bg-blue-600" title="save shipping address">
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="disabled:bg-muted disabled:text-muted-foreground bg-blue-500 text-white hover:bg-blue-600"
+          title="save shipping address">
           {isPending ? "Saving..." : "Save Address"}
         </Button>
       </div>

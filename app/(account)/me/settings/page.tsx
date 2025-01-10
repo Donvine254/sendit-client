@@ -14,12 +14,14 @@ export const metadata: Metadata = {
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-export const dynamic = "force-dynamic";
 
 export default async function Settings() {
   const { getUser } = getKindeServerSession();
-  const user = (await getUser()) as sessionUser;
-  const address = (await getShippingAddress(user.id)) as shippingAddress;
+  const user = (await getUser()) as sessionUser | undefined;
+  let address;
+  if (user && user.id) {
+    address = (await getShippingAddress(user.id)) as shippingAddress;
+  }
   return (
     <div className="mt-4 p-4 md:p-6 w-full bg-white rounded-md shadow">
       <h1 className="text-lg font-semibold my-2">Basic Information</h1>
@@ -45,7 +47,7 @@ export default async function Settings() {
             <input
               type="text"
               name="firstName"
-              defaultValue={user.given_name}
+              defaultValue={user?.given_name ?? "Unknown"}
               className="w-full rounded-md border border-input bg-background px-3 py-2 text-base cursor-not-allowed"
               readOnly
               aria-disabled
@@ -60,7 +62,7 @@ export default async function Settings() {
             <input
               type="text"
               name="lastName"
-              defaultValue={user.family_name}
+              defaultValue={user?.family_name || "Unknown"}
               className="w-full rounded-md border border-input bg-background px-3 py-2 text-base cursor-not-allowed"
               readOnly
               aria-disabled
@@ -77,7 +79,7 @@ export default async function Settings() {
             <input
               type="text"
               name="username"
-              defaultValue={user.username || "**********"}
+              defaultValue={user?.username || "**********"}
               readOnly
               aria-disabled
               className="rounded-md border border-input bg-background px-3 py-2 text-base cursor-not-allowed w-full"
@@ -92,7 +94,7 @@ export default async function Settings() {
             <input
               type="text"
               name="email"
-              defaultValue={user.email}
+              defaultValue={user?.email ?? "you@example.com"}
               readOnly
               aria-disabled
               className="rounded-md border border-input bg-background px-3 py-2 text-base cursor-not-allowed w-full"
@@ -113,7 +115,7 @@ export default async function Settings() {
       </p>
       <NotificationPreferences />
       <hr />
-      <DangerZone userId={user.id} />
+      <DangerZone userId={user?.id} />
     </div>
   );
 }
