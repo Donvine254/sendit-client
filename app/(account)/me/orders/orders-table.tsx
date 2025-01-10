@@ -45,6 +45,14 @@ const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "description",
     header: "Description",
+    cell: ({ row }) => {
+      const description = row.getValue("description") as string;
+      return (
+        <p className="truncate max-w-60" title={description}>
+          {description}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "createdAt",

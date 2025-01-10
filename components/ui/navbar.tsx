@@ -12,7 +12,7 @@ import {
 import Navbar from "./nav-items";
 import { usePathname } from "next/navigation";
 import { sessionUser } from "@/types";
-export default function NavigationMenu({ user }: { user: sessionUser }) {
+export default function NavigationMenu({ user }: { user?: sessionUser }) {
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const pathname = usePathname();

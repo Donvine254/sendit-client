@@ -109,8 +109,12 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                             {String(index + 1).padStart(3, "0")}
                           </Badge>
                         </TableCell>
-                        <TableCell className="capitalize">
-                          {order.description}
+                        <TableCell>
+                          <p
+                            className="capitalize truncate max-w-60"
+                            title={order.description}>
+                            {order.description}
+                          </p>
                         </TableCell>
                         <TableCell>
                           <p className="whitespace-nowrap">
