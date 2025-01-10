@@ -4,7 +4,12 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CircleAlert, ShieldAlert } from "lucide-react";
 import { UpdateInvoiceStatus } from "../../actions";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 export function MarkOverdueButton({ invoiceId }: { invoiceId: string }) {
   const router = useRouter();
   async function handleMarkOverdue() {
@@ -56,20 +61,31 @@ export function DisputeButton({ invoiceId }: { invoiceId: string }) {
     }
   }
   return (
-    <Button
-      variant="ghost"
-      className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground"
-      title="Dispute a payment if a customer cancelled the payment or payment was not received"
-      onClick={DisputeInvoice}>
-      <CircleAlert
-        className="mr-2 h-4 w-4"
-        onClick={() =>
-          toast.info("Upcoming Feature", {
-            position: "top-center",
-          })
-        }
-      />
-      Dispute Payment
-    </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground"
+            onClick={DisputeInvoice}>
+            <CircleAlert
+              className="mr-2 h-4 w-4"
+              onClick={() =>
+                toast.info("Upcoming Feature", {
+                  position: "top-center",
+                })
+              }
+            />
+            Dispute Payment
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent className="max-w-52">
+          <p>
+            Dispute a payment if a customer cancelled the payment or payment was
+            not received
+          </p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
