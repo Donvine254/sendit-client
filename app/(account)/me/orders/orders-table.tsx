@@ -167,7 +167,7 @@ const columns: ColumnDef<Order>[] = [
 ];
 
 interface DataTableProps {
-  data: any | [];
+  data?: any | [];
 }
 
 export default function DataTable({ data }: DataTableProps) {
@@ -194,6 +194,9 @@ export default function DataTable({ data }: DataTableProps) {
       rowSelection,
     },
   });
+  if (!data) {
+    return null;
+  }
 
   return (
     <div className="w-full">
