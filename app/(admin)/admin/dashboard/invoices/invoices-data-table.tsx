@@ -51,6 +51,7 @@ import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 import Alert from "@/components/ui/alert";
 import { toast } from "sonner";
 import ExportButton from "@/components/dashboard/export-button";
+import { MarkInvoiceAsOverdue } from "../../actions";
 
 // TODO: Add row with email and phone number
 
@@ -306,6 +307,26 @@ const columns: ColumnDef<Invoice>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const invoice = row.original;
+      async function handleMarkOverdue(id: string) {
+        const toastId = toast.loading("Processing Request...", {
+          position: "top-center",
+        });
+        try {
+          const res = await MarkInvoiceAsOverdue(id);
+          toast.dismiss(toastId);
+          if (res.success) {
+            toast.success(res.message);
+            if (typeof window !== "undefined") {
+              window.location.reload();
+            }
+          } else toast.error(res.error);
+        } catch (error) {
+          console.error(error);
+          toast.dismiss(toastId);
+          toast.error("Something went wrong");
+        }
+      }
+
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -324,11 +345,7 @@ const columns: ColumnDef<Invoice>[] = [
             {invoice.status === "DRAFT" && (
               <Button
                 variant="ghost"
-                onClick={() =>
-                  toast.info("Upcoming Feature", {
-                    position: "top-center",
-                  })
-                }
+                onClick={() => handleMarkOverdue(invoice.id)}
                 className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
                 <ShieldAlert className="mr-2 h-4 w-4" />
                 Mark as Overdue
