@@ -339,7 +339,7 @@ export default function CustomersDataTable({ data }: { data: KindeUser[] }) {
           Manage Users
         </h2>
         {/* change this to a popover */}
-        <ExportButton />
+        <ExportButton data={data} type="customers" />
       </div>
       <p className="text-sm xsm:text-xs text-muted-foreground mb-2">
         Powered by{" "}

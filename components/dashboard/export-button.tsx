@@ -8,8 +8,15 @@ import {
   FileSpreadsheet,
 } from "lucide-react";
 import { PopoverContent } from "../ui/popover";
+import { exportData } from "@/lib/utils";
 
-export default function ExportButton() {
+export default function ExportButton({
+  data,
+  type,
+}: {
+  data: any[];
+  type: "orders" | "invoices" | "customers";
+}) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -32,14 +39,16 @@ export default function ExportButton() {
           variant="ghost"
           type="button"
           title="Export to Excel"
-          className="justify-start gap-1 w-full">
+          className="justify-start gap-1 w-full"
+          onClick={() => exportData(data, "csv", type)}>
           <FileSpreadsheet className="h-4 w-4" /> Export CSV
         </Button>
         <Button
           variant="ghost"
           type="button"
           title="Export to Excel"
-          className="justify-start gap-1 w-full">
+          className="justify-start gap-1 w-full"
+          onClick={() => exportData(data, "json", type)}>
           <FileJson className="h-4 w-4" /> Export JSON
         </Button>
       </PopoverContent>
