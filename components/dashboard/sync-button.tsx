@@ -14,6 +14,10 @@ export default function SyncButton() {
       await SyncDatabase();
       setIsSyncing(false);
       router.refresh();
+      // hard refresh to sync client components
+      if (typeof window !== "undefined" && window) {
+        window.location.reload();
+      }
     }, 100);
     toast.success("Synced successfully", {
       position: "top-center",

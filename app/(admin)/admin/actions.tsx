@@ -166,7 +166,7 @@ export const SyncDatabase = async () => {
 
 export async function UpdateInvoiceStatus(
   invoiceId: string,
-  status: "OVERDUE" | "DISPUTED"
+  status: "OVERDUE" | "DISPUTED" |"PAID"
 ) {
   try {
     await prisma.invoice.update({

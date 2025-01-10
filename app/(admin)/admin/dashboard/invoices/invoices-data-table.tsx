@@ -16,7 +16,6 @@ import {
   DownloadIcon,
   Filter,
   FilterX,
-  HandCoins,
   MoreHorizontal,
   Search,
   ShieldCheck,
@@ -47,10 +46,14 @@ import { Badge } from "@/components/ui/badge";
 import { GenerateInvoicePDF } from "@/lib/actions/invoices";
 import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 import Alert from "@/components/ui/alert";
-import { toast } from "sonner";
 import ExportButton from "@/components/dashboard/export-button";
 import Link from "next/link";
-import { DisputeButton, MarkOverdueButton } from "./actions-buttons";
+import {
+  ClaimPaymentButton,
+  DisputeButton,
+  MarkOverdueButton,
+  MarkResolved,
+} from "./actions-buttons";
 
 // TODO: Add row with email and phone number
 
@@ -325,34 +328,26 @@ const columns: ColumnDef<Invoice>[] = [
               <MarkOverdueButton invoiceId={invoice.id} />
             )}
             {invoice.status === "OVERDUE" && (
-              // implement functionality to send an email reminder to the client
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white"
-                onClick={() =>
-                  toast.info("Upcoming Feature", {
-                    position: "top-center",
-                  })
-                }>
-                <HandCoins className="mr-2 h-4 w-4" />
-                Claim Payment
-              </Button>
+              <ClaimPaymentButton invoice={invoice} />
             )}
             {invoice.status === "PAID" && (
               <DisputeButton invoiceId={invoice.id} />
             )}
             {invoice.status === "DISPUTED" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-green-500 hover:text-white hover:bg-green-500"
-                asChild>
-                <Link
-                  href="https://dashboard.stripe.com/test/disputes"
-                  target="_blank">
-                  <ShieldCheck className="mr-2 h-4 w-4 " />
-                  Resolve Dispute
-                </Link>
-              </Button>
+              <>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start "
+                  asChild>
+                  <Link
+                    href="https://dashboard.stripe.com/test/disputes"
+                    target="_blank">
+                    <ShieldCheck className="mr-2 h-4 w-4 " />
+                    Resolve Dispute
+                  </Link>
+                </Button>
+                <MarkResolved invoiceId={invoice.id} />
+              </>
             )}
           </PopoverContent>
         </Popover>
