@@ -19,7 +19,7 @@ export default async function Page() {
     cancelled_orders: 0,
     pending_orders: 0,
   };
-  if (user) {
+  if (user && user.id) {
     recentOrders = await getRecentOrders(user.id);
     orderStats = await getUserOrderStatistics(user.id);
   }

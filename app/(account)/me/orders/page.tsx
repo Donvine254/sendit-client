@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   description:
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
-export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const { getUser } = getKindeServerSession();
   let orders;
-  const user = (await getUser()) as sessionUser;
-  if (user) {
+  const user = (await getUser()) as sessionUser | undefined;
+  if (user && user.id) {
     orders = await getUserOrders(user?.id);
   }
 
