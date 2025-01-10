@@ -88,7 +88,7 @@ const data = {
   ],
 };
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user: sessionUser;
+  user?: sessionUser;
 }
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   return (

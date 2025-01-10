@@ -28,7 +28,7 @@ import Image from "next/image";
 import { sessionUser } from "@/types";
 import Link from "next/link";
 
-export function NavUser({ user }: { user: sessionUser }) {
+export function NavUser({ user }: { user?: sessionUser }) {
   const { isMobile } = useSidebar();
 
   return (
@@ -52,7 +52,7 @@ export function NavUser({ user }: { user: sessionUser }) {
               ) : (
                 <Image
                   className="h-8 w-8 rounded-lg"
-                  alt={user.given_name || "User Avatar"}
+                  alt={user?.given_name || "User Avatar"}
                   priority
                   height={32}
                   width={32}
@@ -92,7 +92,7 @@ export function NavUser({ user }: { user: sessionUser }) {
                 ) : (
                   <Image
                     className="h-8 w-8 rounded-lg"
-                    alt={user.given_name || "User Avatar"}
+                    alt={user?.given_name || "User Avatar"}
                     priority
                     height={32}
                     width={32}
