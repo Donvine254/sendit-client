@@ -50,6 +50,7 @@ import { GenerateInvoicePDF } from "@/lib/actions/invoices";
 import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 import Alert from "@/components/ui/alert";
 import { toast } from "sonner";
+import ExportButton from "@/components/dashboard/export-button";
 
 // TODO: Add row with email and phone number
 
@@ -489,14 +490,7 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
         <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">
           Manage Invoices
         </h2>
-        <Button
-          variant="outline"
-          type="button"
-          title="Export to Excel"
-          className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900"
-          onClick={() => handleExportExcel(data)}>
-          <DownloadIcon className="h-4 w-4" /> Export
-        </Button>
+        <ExportButton data={data} type="invoices" />
       </div>
       <hr className="shadow dark:shadow-md dark:shadow-blue-500 " />
       <div className="flex flex-col md:flex-row items-center py-4 gap-2 sm:gap-4">
@@ -748,29 +742,3 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
     </div>
   );
 }
-
-const handleExportExcel = (invoices: Invoice[]) => {
-  const headers = `ID,Invoice Number,Full Name,Shipping Address,Item,Email,Phone,Amount,User ID,Parcel ID,Status,Date,Due Date`;
-  const rows = invoices.map((invoice) => {
-    return `${invoice.id},${invoice.invoice_number},"${invoice.fullName.replace(
-      /"/g,
-      '""'
-    )}","${invoice.shipping_address.replace(
-      /"/g,
-      '""'
-    )}","${invoice.item.replace(/"/g, '""')}",${invoice.email || ""},${
-      "254" + invoice.phone || ""
-    },${invoice.amount},${invoice.userId},${invoice.parcelId},${
-      invoice.status
-    },${new Date(invoice.createdAt).toLocaleDateString()},${new Date(
-      invoice.updatedAt
-    ).toLocaleDateString()}`;
-  });
-
-  const csvContent = [headers, ...rows].join("\n");
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = `invoices-${new Date().toISOString().split("T")[0]}.csv`;
-  link.click();
-};
