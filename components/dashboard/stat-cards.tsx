@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import Counter from "./counter";
 
 export default function statCards({
   data,
@@ -105,7 +106,11 @@ export const StatCard = ({
           </motion.span>
         )}
       </div>
-      <div className="my-2 text-2xl md:text-4xl font-bold">{data}</div>
+      <div className="my-2 text-2xl md:text-4xl font-bold">
+        <div className="my-2 text-2xl md:text-4xl font-bold">
+          {typeof data === "string" ? data : <Counter from={0} to={data} />}
+        </div>
+      </div>
       <p className="text-xs text-muted-foreground">{period}</p>
     </motion.div>
   );

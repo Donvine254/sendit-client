@@ -115,6 +115,7 @@ export const getUserInvoices = unstable_cache(
     try {
       const invoices = await prisma.invoice.findMany({
         where: { userId },
+        orderBy: { createdAt: "desc" },
       });
       return invoices;
     } catch (error) {

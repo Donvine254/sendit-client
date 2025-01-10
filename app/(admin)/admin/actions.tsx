@@ -163,3 +163,25 @@ export const SyncDatabase = async () => {
   await revalidateTag("statistics");
   await revalidateTag("invoices");
 };
+
+export async function UpdateInvoiceStatus(
+  invoiceId: string,
+  status: "OVERDUE" | "DISPUTED" |"PAID"
+) {
+  try {
+    await prisma.invoice.update({
+      where: {
+        id: invoiceId,
+      },
+      data: { status: status },
+    });
+    await revalidateTag("statistics");
+    await revalidateTag("invoices");
+    return { success: true, message: "Updated Invoice successfully" };
+  } catch (error: any) {
+    console.error(error);
+    return { success: false, error: error.message || "Something went wrong" };
+  } finally {
+    await prisma.$disconnect();
+  }
+}

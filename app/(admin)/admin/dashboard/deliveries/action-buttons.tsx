@@ -18,6 +18,7 @@ export function ProgressButton({ Parcel }: { Parcel: any }) {
       if (res.message) {
         toast.success(res.message);
         router.refresh();
+        router.push("/admin/dashboard/deliveries");
       } else {
         toast.error(res.error);
       }
@@ -41,6 +42,7 @@ export function ProgressButton({ Parcel }: { Parcel: any }) {
 }
 
 export function MarkCompleteButton({ orderId }: { orderId: string }) {
+  const router = useRouter();
   async function handleClick() {
     const toastId = toast.loading("Processing Request...", {
       position: "top-center",
@@ -52,9 +54,8 @@ export function MarkCompleteButton({ orderId }: { orderId: string }) {
         toast.success("Order delivered successfully", {
           position: "top-center",
         });
-        if (typeof window !== "undefined" && window) {
-          window.location.reload();
-        }
+        router.refresh();
+        router.push("/admin/dashboard/deliveries");
       } else {
         toast.error(res.error || "Something went wrong");
       }

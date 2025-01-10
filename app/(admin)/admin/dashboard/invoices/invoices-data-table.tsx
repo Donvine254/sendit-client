@@ -13,14 +13,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import {
-  CircleAlert,
   DownloadIcon,
   Filter,
   FilterX,
-  HandCoins,
   MoreHorizontal,
   Search,
-  ShieldAlert,
   ShieldCheck,
   SortAsc,
   SortDesc,
@@ -49,7 +46,14 @@ import { Badge } from "@/components/ui/badge";
 import { GenerateInvoicePDF } from "@/lib/actions/invoices";
 import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 import Alert from "@/components/ui/alert";
-import { toast } from "sonner";
+import ExportButton from "@/components/dashboard/export-button";
+import Link from "next/link";
+import {
+  ClaimPaymentButton,
+  DisputeButton,
+  MarkOverdueButton,
+  MarkResolved,
+} from "./actions-buttons";
 
 // TODO: Add row with email and phone number
 
@@ -321,58 +325,29 @@ const columns: ColumnDef<Invoice>[] = [
               Download
             </Button>
             {invoice.status === "DRAFT" && (
-              <Button
-                variant="ghost"
-                onClick={() =>
-                  toast.info("Upcoming Feature", {
-                    position: "top-center",
-                  })
-                }
-                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <ShieldAlert className="mr-2 h-4 w-4" />
-                Mark as Overdue
-              </Button>
+              <MarkOverdueButton invoiceId={invoice.id} />
             )}
             {invoice.status === "OVERDUE" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white"
-                onClick={() =>
-                  toast.info("Upcoming Feature", {
-                    position: "top-center",
-                  })
-                }>
-                <HandCoins className="mr-2 h-4 w-4" />
-                Claim Payment
-              </Button>
+              <ClaimPaymentButton invoice={invoice} />
             )}
             {invoice.status === "PAID" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <CircleAlert
-                  className="mr-2 h-4 w-4"
-                  onClick={() =>
-                    toast.info("Upcoming Feature", {
-                      position: "top-center",
-                    })
-                  }
-                />
-                Dispute Payment
-              </Button>
+              <DisputeButton invoiceId={invoice.id} />
             )}
             {invoice.status === "DISPUTED" && (
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-green-500 hover:text-white hover:bg-green-500"
-                onClick={() =>
-                  toast.info("Upcoming Feature", {
-                    position: "top-center",
-                  })
-                }>
-                <ShieldCheck className="mr-2 h-4 w-4 " />
-                Resolve Dispute
-              </Button>
+              <>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start "
+                  asChild>
+                  <Link
+                    href="https://dashboard.stripe.com/test/disputes"
+                    target="_blank">
+                    <ShieldCheck className="mr-2 h-4 w-4 " />
+                    Resolve Dispute
+                  </Link>
+                </Button>
+                <MarkResolved invoiceId={invoice.id} />
+              </>
             )}
           </PopoverContent>
         </Popover>
@@ -489,14 +464,7 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
         <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">
           Manage Invoices
         </h2>
-        <Button
-          variant="outline"
-          type="button"
-          title="Export to Excel"
-          className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900"
-          onClick={() => handleExportExcel(data)}>
-          <DownloadIcon className="h-4 w-4" /> Export
-        </Button>
+        <ExportButton data={data} type="invoices" />
       </div>
       <hr className="shadow dark:shadow-md dark:shadow-blue-500 " />
       <div className="flex flex-col md:flex-row items-center py-4 gap-2 sm:gap-4">
@@ -748,29 +716,3 @@ export default function InvoiceDataTable({ data }: { data: Invoice[] }) {
     </div>
   );
 }
-
-const handleExportExcel = (invoices: Invoice[]) => {
-  const headers = `ID,Invoice Number,Full Name,Shipping Address,Item,Email,Phone,Amount,User ID,Parcel ID,Status,Date,Due Date`;
-  const rows = invoices.map((invoice) => {
-    return `${invoice.id},${invoice.invoice_number},"${invoice.fullName.replace(
-      /"/g,
-      '""'
-    )}","${invoice.shipping_address.replace(
-      /"/g,
-      '""'
-    )}","${invoice.item.replace(/"/g, '""')}",${invoice.email || ""},${
-      "254" + invoice.phone || ""
-    },${invoice.amount},${invoice.userId},${invoice.parcelId},${
-      invoice.status
-    },${new Date(invoice.createdAt).toLocaleDateString()},${new Date(
-      invoice.updatedAt
-    ).toLocaleDateString()}`;
-  });
-
-  const csvContent = [headers, ...rows].join("\n");
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = `invoices-${new Date().toISOString().split("T")[0]}.csv`;
-  link.click();
-};
