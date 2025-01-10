@@ -15,6 +15,8 @@ import {
 import {
   DownloadIcon,
   Eye,
+  FileJson,
+  FileSpreadsheet,
   Filter,
   FilterX,
   MoreHorizontal,
@@ -96,7 +98,13 @@ const columns: ColumnDef<KindeUser>[] = [
           title={fullName ?? "John Doe"}>
           {picture ? (
             <Image
-              src={picture}
+              src={`${
+                picture.startsWith("https://gravatar.com/avatar")
+                  ? `https://ui-avatars.com/api/?background=random&name=${
+                      fullName ?? "John Doe"
+                    }`
+                  : picture
+              }`}
               height={24}
               width={24}
               className="h-6 w-6 rounded-lg"
@@ -333,13 +341,33 @@ export default function CustomersDataTable({ data }: { data: KindeUser[] }) {
           Manage Users
         </h2>
         {/* change this to a popover */}
-        <Button
-          variant="outline"
-          type="button"
-          title="Export to Excel"
-          className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900">
-          <DownloadIcon className="h-4 w-4" /> Export
-        </Button>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              type="button"
+              title="Export to Excel"
+              className="justify-start bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-300">
+              <DownloadIcon className="h-4 w-4" /> Export
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-48 space-y-2  bg-gray-900 text-white dark:bg-gray-200 dark:text-gray-900">
+            <Button
+              variant="ghost"
+              type="button"
+              title="Export to Excel"
+              className="justify-start gap-1 w-full">
+              <FileSpreadsheet className="h-4 w-4" /> Export CSV
+            </Button>
+            <Button
+              variant="ghost"
+              type="button"
+              title="Export to Excel"
+              className="justify-start gap-1 w-full">
+              <FileJson className="h-4 w-4" /> Export JSON
+            </Button>
+          </PopoverContent>
+        </Popover>
       </div>
       <p className="text-sm xsm:text-xs text-muted-foreground mb-2">
         Powered by{" "}

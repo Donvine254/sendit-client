@@ -62,7 +62,7 @@ const data = {
     },
     {
       name: "Riders",
-      url: "/..",
+      url: "#",
       title: "Manage Riders",
       icon: LucideTruck,
     },
@@ -76,7 +76,7 @@ const data = {
     {
       name: "Sales & Marketing",
       title: "Sales & Marketing",
-      url: "/..",
+      url: "#",
       icon: PieChart,
     },
     {
