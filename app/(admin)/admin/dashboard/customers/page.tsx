@@ -3,6 +3,7 @@ import React from "react";
 import { getUsers } from "../../actions";
 import { StatCard } from "@/components/dashboard/stat-cards";
 import { KindeUser } from "@/types";
+import CustomersDataTable from "./customers-table";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | Sendit Kenya",
@@ -42,6 +43,7 @@ export default async function CustomersPage() {
           className="dark:shadow-blue-600"
         />
       </div>
+      <CustomersDataTable data={users} />
     </section>
   );
 }

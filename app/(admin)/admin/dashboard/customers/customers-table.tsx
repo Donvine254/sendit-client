@@ -38,10 +38,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import Alert from "@/components/ui/alert";
 import { KindeUser } from "@/types";
 
-//
 const columns: ColumnDef<KindeUser>[] = [
   {
     id: "select",
@@ -67,15 +65,16 @@ const columns: ColumnDef<KindeUser>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+
   {
-    accessorKey: "id",
+    accessorKey: "full_name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent hover:text-gray-200">
-          ID#
+          className="p-0 hover:bg-transparent hover:text-gray-200 whitespace-nowrap">
+          Full Name
           {column.getIsSorted() === "asc" ? (
             <SortAsc className="ml-2 h-4 w-4" />
           ) : column.getIsSorted() === "desc" ? (
@@ -87,23 +86,11 @@ const columns: ColumnDef<KindeUser>[] = [
       );
     },
     cell: ({ row }) => {
-      const id = row.getValue("id") as string;
-      return (
-        <p className="truncate max-w-12" title={id}>
-          {id}
-        </p>
-      );
-    },
-  },
-  {
-    accessorKey: "full_name",
-    header: "Full Name",
-    cell: ({ row }) => {
       const fullName = row.getValue("full_name") as string;
-      const picture = row.getValue("picture") as string;
+      const picture = row.original.picture;
       return (
         <p
-          className="capitalize truncate min-w-fit max-w-72 flex items-center gap-1"
+          className="capitalize whitespace-nowrap w-fit flex items-center gap-1"
           title={fullName ?? "John Doe"}>
           {picture ? (
             <Image
@@ -131,7 +118,23 @@ const columns: ColumnDef<KindeUser>[] = [
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200 whitespace-nowrap">
+          Email
+          {column.getIsSorted() === "asc" ? (
+            <SortAsc className="ml-2 h-4 w-4" />
+          ) : column.getIsSorted() === "desc" ? (
+            <SortDesc className="ml-2 h-4 w-4" />
+          ) : (
+            <SortAsc className="ml-2 h-4 w-4 opacity-50" />
+          )}
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const email = row.getValue("email") as string;
       return (
@@ -148,7 +151,7 @@ const columns: ColumnDef<KindeUser>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="p-0 hover:bg-transparent hover:text-gray-200">
+          className="p-0 hover:bg-transparent hover:text-gray-200 whitespace-nowrap">
           Date Joined
           {column.getIsSorted() === "asc" ? (
             <SortAsc className="ml-2 h-4 w-4" />
@@ -210,7 +213,23 @@ const columns: ColumnDef<KindeUser>[] = [
 
   {
     accessorKey: "last_signed_in",
-    header: "Last Signed In",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200 whitespace-nowrap">
+          Last Login
+          {column.getIsSorted() === "asc" ? (
+            <SortAsc className="ml-2 h-4 w-4" />
+          ) : column.getIsSorted() === "desc" ? (
+            <SortDesc className="ml-2 h-4 w-4" />
+          ) : (
+            <SortAsc className="ml-2 h-4 w-4 opacity-50" />
+          )}
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const date = new Date(row.getValue("last_signed_in"));
       return <p className="whitespace-nowrap">{date.toLocaleString()}</p>;
@@ -218,7 +237,27 @@ const columns: ColumnDef<KindeUser>[] = [
   },
   {
     accessorKey: "total_sign_ins",
-    header: "Total Logins",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="p-0 hover:bg-transparent hover:text-gray-200 whitespace-nowrap">
+          Total Logins
+          {column.getIsSorted() === "asc" ? (
+            <SortAsc className="ml-2 h-4 w-4" />
+          ) : column.getIsSorted() === "desc" ? (
+            <SortDesc className="ml-2 h-4 w-4" />
+          ) : (
+            <SortAsc className="ml-2 h-4 w-4 opacity-50" />
+          )}
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const logins = row.getValue("total_sign_ins") as string | number;
+      return <p className="text-center">{logins}</p>;
+    },
   },
 
   {
@@ -245,7 +284,7 @@ const columns: ColumnDef<KindeUser>[] = [
   },
 ];
 
-export default function InvoiceDataTable({ data }: { data: KindeUser[] }) {
+export default function CustomersDataTable({ data }: { data: KindeUser[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -275,8 +314,7 @@ export default function InvoiceDataTable({ data }: { data: KindeUser[] }) {
 
   return (
     <div className="w-full p-2 sm:p-4">
-      <Alert />
-      <div className="py-4 flex items-center justify-between gap-4">
+      <div className="py-2 flex items-center justify-between gap-4">
         <h2 className="font-bold text-xl sm:text-2xl md:text-3xl ">
           Manage Users
         </h2>
@@ -289,6 +327,17 @@ export default function InvoiceDataTable({ data }: { data: KindeUser[] }) {
           <DownloadIcon className="h-4 w-4" /> Export
         </Button>
       </div>
+      <p className="text-sm xsm:text-xs text-muted-foreground mb-2">
+        Powered by{" "}
+        <a
+          href="https://sendit.kinde.com/admin"
+          target="_blank"
+          referrerPolicy="no-referrer"
+          rel="help"
+          className="text-blue-500 underline">
+          Kinde Auth
+        </a>
+      </p>
       <hr className="shadow dark:shadow-md dark:shadow-blue-500 " />
       <div className="flex flex-col md:flex-row items-center py-4 gap-2 sm:gap-4">
         {/* first child with two children */}
@@ -335,7 +384,17 @@ export default function InvoiceDataTable({ data }: { data: KindeUser[] }) {
                           column.toggleVisibility(e.target.checked)
                         }
                       />
-                      {column.id}
+                      {column.id === "full_name"
+                        ? "Full Name"
+                        : column.id == "created_on"
+                        ? "Date Joined"
+                        : column.id === "is_suspended"
+                        ? "Status"
+                        : column.id === "last_signed_in"
+                        ? "Last Login"
+                        : column.id == "total_sign_ins"
+                        ? "Total Logins"
+                        : column.id}
                     </label>
                   );
                 })}
