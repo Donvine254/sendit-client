@@ -101,7 +101,7 @@ const columns: ColumnDef<KindeUser>[] = [
               src={picture}
               height={24}
               width={24}
-              className="h-6 w-6 rounded-full"
+              className="h-6 w-6 rounded-lg"
               alt="user avatar"
             />
           ) : (
@@ -111,7 +111,7 @@ const columns: ColumnDef<KindeUser>[] = [
               }`}
               height={24}
               width={24}
-              className="h-6 w-6 rounded-full"
+              className="h-6 w-6 rounded-lg"
               alt="user avatar"
             />
           )}

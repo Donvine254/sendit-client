@@ -49,6 +49,7 @@ import { Badge } from "@/components/ui/badge";
 import { GenerateInvoicePDF } from "@/lib/actions/invoices";
 import { SatisfactionCard, StatsCard } from "@/components/dashboard/charts";
 import Alert from "@/components/ui/alert";
+import { toast } from "sonner";
 
 // TODO: Add row with email and phone number
 
@@ -322,6 +323,11 @@ const columns: ColumnDef<Invoice>[] = [
             {invoice.status === "DRAFT" && (
               <Button
                 variant="ghost"
+                onClick={() =>
+                  toast.info("Upcoming Feature", {
+                    position: "top-center",
+                  })
+                }
                 className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
                 <ShieldAlert className="mr-2 h-4 w-4" />
                 Mark as Overdue
@@ -330,7 +336,12 @@ const columns: ColumnDef<Invoice>[] = [
             {invoice.status === "OVERDUE" && (
               <Button
                 variant="ghost"
-                className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white">
+                className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white"
+                onClick={() =>
+                  toast.info("Upcoming Feature", {
+                    position: "top-center",
+                  })
+                }>
                 <HandCoins className="mr-2 h-4 w-4" />
                 Claim Payment
               </Button>
@@ -339,14 +350,26 @@ const columns: ColumnDef<Invoice>[] = [
               <Button
                 variant="ghost"
                 className="w-full justify-start text-destructive hover:bg-destructive hover:text-destructive-foreground">
-                <CircleAlert className="mr-2 h-4 w-4" />
+                <CircleAlert
+                  className="mr-2 h-4 w-4"
+                  onClick={() =>
+                    toast.info("Upcoming Feature", {
+                      position: "top-center",
+                    })
+                  }
+                />
                 Dispute Payment
               </Button>
             )}
             {invoice.status === "DISPUTED" && (
               <Button
                 variant="ghost"
-                className="w-full justify-start text-green-500 hover:text-white hover:bg-green-500">
+                className="w-full justify-start text-green-500 hover:text-white hover:bg-green-500"
+                onClick={() =>
+                  toast.info("Upcoming Feature", {
+                    position: "top-center",
+                  })
+                }>
                 <ShieldCheck className="mr-2 h-4 w-4 " />
                 Resolve Dispute
               </Button>
