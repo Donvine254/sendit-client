@@ -17,6 +17,7 @@ function Alert() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
+          aria-live="assertive"
           className="relative w-full rounded-lg border border-blue-500 p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-white mb-3 bg-blue-500 dark:bg-background text-white"
           role="alert">
           <InfoIcon className="h-4 w-4" />
@@ -28,7 +29,7 @@ function Alert() {
               Learn how to identify fraud and design a strategy to prevent it to
               keep the business running!{" "}
               <a
-                className="hover:text-blue-500 underline"
+                className=" hover:text-blue-800 dark:text-blue-500 underline"
                 href="https://docs.stripe.com/disputes/prevention"
                 target="_blank"
                 referrerPolicy="no-referrer"
