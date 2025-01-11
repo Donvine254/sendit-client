@@ -2,11 +2,12 @@
 import { motion } from "framer-motion";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
-import { ExternalLink, SettingsIcon } from "lucide-react";
+import { ExternalLink, PlusIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "sonner";
 const integrations = [
   {
     id: 1,
@@ -87,7 +88,7 @@ const IntegrationCard = ({
           alt={name}
           height={48}
           width={48}
-          className="h-12 w-12 rounded-lg ring-2 ring-input ring-offset-input dark:bg-gray-100"
+          className="h-12 w-12 rounded-lg ring-2 ring-input ring-offset-input dark:bg-gray-100 shadow"
         />
         <h2 className="text-lg font-semibold">{name}</h2>
         <p className="text-sm text-muted-foreground flex-grow">{description}</p>
@@ -129,7 +130,22 @@ const cardVariants = {
 export default function IntegrationCards() {
   return (
     <div className="space-y-2 py-2 p-2 sm:p-4 lg:px-8">
-      <h2 className="text-lg font-semibold">Integrations & Workflows</h2>
+      <div className="flex justify-between items-center">
+        {" "}
+        <h2 className="text-lg font-semibold">Integrations & Workflows</h2>
+        <Button
+          variant="outline"
+          className="justify-start gap-1"
+          onClick={() =>
+            toast.info("Upcoming Feature!", {
+              position: "top-center",
+            })
+          }
+          title="add integration">
+          <PlusIcon className="h-4 w-4" />{" "}
+          <span className="hidden sm:block">Add Integration</span>
+        </Button>
+      </div>
       <p className="text-sm text-muted-foreground">Manage your integrations</p>
       <motion.div
         className="grid gap-2 gap-y-4 md:gap-4 md:grid-cols-2 lg:grid-cols-3 items-center py-4"
