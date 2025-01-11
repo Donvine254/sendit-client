@@ -2,12 +2,15 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
-import { ExternalLink, SettingsIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ExternalLink, LogOut, SettingsIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import ThemeSelector from "./theme-selector";
+import TimezoneSelector from "./timezone-selector";
 
-const timezones = Intl.supportedValuesOf("timeZone");
+// const timezones = Intl.supportedValuesOf("timeZone");
 export default function Settings() {
   return (
     <div className="w-full">
@@ -47,31 +50,46 @@ export default function Settings() {
                 className="font-semibold block text-muted-foreground">
                 Timezone
               </label>
-              <select
-                defaultValue="Africa/Nairobi"
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1">
-                <option value="">Select Timezone</option>
-                {timezones.map((zone, index) => (
-                  <option key={index} value={zone}>
-                    {zone}
-                  </option>
-                ))}
-              </select>
+              <TimezoneSelector />
             </div>
           </div>
         </div>
       </div>
       <Separator />
+      <ThemeSelector />
+      <Separator />
       {/* div for integrations */}
-      <div className="space-y-2 py-2 p-2 sm:p-4">
+      <div className="space-y-2 py-2 p-2 sm:p-4 lg:px-8">
         <h2 className="text-lg font-semibold">Integrations & Workflows</h2>
         <p className="text-sm text-muted-foreground">
           Manage your integrations
         </p>
-        <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 space-y-2 items-center">
-          {integrations.map((int, index) => (
-            <IntegrationCard key={index} {...int} />
+        <div className="grid gap-2 gap-y-4 md:gap-4 md:grid-cols-2 lg:grid-cols-3  items-center py-4">
+          {integrations.map((int) => (
+            <IntegrationCard key={int.id} {...int} />
           ))}
+        </div>
+      </div>
+      {/* danger zone */}
+      <Separator />
+      <div className="space-y-2 py-2 p-2 sm:p-4">
+        <div className="grid sm:grid-cols-2 gap-2 lg:p-4">
+          <div>
+            <h2 className="text-lg font-semibold">Danger Zone</h2>
+            <p className="text-sm text-muted-foreground">Destructive Actions</p>
+          </div>
+          <div>
+            <div className="space-y-2">
+              <label
+                htmlFor="language"
+                className="font-semibold block text-muted-foreground">
+                Logout from all sessions across all devices
+              </label>
+              <Button className="justify-start" variant="secondary">
+                <LogOut className="h-5 w-5" /> Logout All Sessions
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -80,6 +98,7 @@ export default function Settings() {
 
 const integrations = [
   {
+    id: 1,
     name: "Stripe",
     description:
       "A suite of APIs powering online payment processing and e-commerce solutions.",
@@ -87,6 +106,7 @@ const integrations = [
     href: "https://dashboard.stripe.com/test/dashboard",
   },
   {
+    id: 2,
     name: "Vercel",
     description:
       "Deploy, scale, and manage web applications with a focus on performance and reliability.",
@@ -94,6 +114,7 @@ const integrations = [
     href: "https://vercel.com/donvine254s-projects/sendit",
   },
   {
+    id: 3,
     name: "Supabase",
     description:
       "An open-source backend as a service offering real-time databases, authentication, and APIs.",
@@ -101,6 +122,7 @@ const integrations = [
     href: "https://supabase.com/dashboard/project/hdmwhtvaedhkwulrhqns",
   },
   {
+    id: 4,
     name: "Kinde",
     description:
       "A modern authentication solution offering seamless user login, signup, and management features.",
@@ -108,6 +130,7 @@ const integrations = [
     href: "https://sendit.kinde.com/admin",
   },
   {
+    id: 5,
     name: "Github",
     description:
       "A platform for version control and collaboration, enabling teams to build and ship software together.",
@@ -115,15 +138,17 @@ const integrations = [
     href: "https://github.com/Donvine254/sendit-client",
   },
   {
-    name: "GMAIL",
+    id: 6,
+    name: "Gmail",
     description:
       "Send customer notifications and receive security alert emails via Google Gmail.",
     logo: "https://res.cloudinary.com/dipkbpinx/image/upload/v1736622242/logos/ubadg8tke9linn1hbfvu.png",
-    href: "#google",
+    href: "https://mail.google.com/mail",
   },
 ];
 
 interface IntegrationCardProps {
+  id: number;
   name: string;
   description: string;
   logo: string;
@@ -134,17 +159,18 @@ const IntegrationCard = ({
   description,
   logo,
   href,
+  id,
 }: IntegrationCardProps) => {
   return (
-    <div className="rounded-lg border border-input shadow dark:shadow-blue-500  relative">
-      <Link
-        href={href}
-        className="p-2 absolute top-2 right-2 "
-        prefetch={false}>
-        {" "}
-        <ExternalLink className="h-4 w-4 text-muted-foreground " />
+    <div
+      className={cn(
+        "rounded-lg border border-input shadow bg-card relative flex flex-col h-full",
+        id % 2 === 0 ? "dark:shadow-purple-500" : "dark:shadow-blue-600"
+      )}>
+      <Link href={href} className="p-2 absolute top-2 right-2" prefetch={false}>
+        <ExternalLink className="h-4 w-4 text-muted-foreground" />
       </Link>
-      <div className="p-6 space-y-2">
+      <div className="p-6 flex flex-col flex-grow space-y-2">
         <Image
           src={logo}
           alt={name}
@@ -153,7 +179,7 @@ const IntegrationCard = ({
           className="h-12 w-12 rounded-lg ring-2 ring-input ring-offset-input dark:bg-gray-100"
         />
         <h2 className="text-lg font-semibold">{name}</h2>
-        <p className="text-sm text-muted-foreground">{description}</p>
+        <p className="text-sm text-muted-foreground flex-grow">{description}</p>
       </div>
       <Separator />
       <div className="flex items-center justify-between px-6 py-2 space-y-2">

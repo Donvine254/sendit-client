@@ -34,7 +34,6 @@ export function ThemeToggle({ className }: { className: string }) {
     );
   }
   const isDark = theme === "dark";
-  // TODO: Use useEffect to only set the theme after the component has rendered
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
