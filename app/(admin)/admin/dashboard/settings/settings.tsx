@@ -72,23 +72,24 @@ export default function Settings() {
       </div>
       {/* danger zone */}
       <Separator />
-      <div className="space-y-2 py-2 p-2 sm:p-4">
+      <div className="space-y-2 py-2 pb-6 p-2 sm:p-4">
         <div className="grid sm:grid-cols-2 gap-2 lg:p-4">
           <div>
             <h2 className="text-lg font-semibold">Danger Zone</h2>
             <p className="text-sm text-muted-foreground">Destructive Actions</p>
           </div>
-          <div>
-            <div className="space-y-2">
-              <label
-                htmlFor="language"
-                className="font-semibold block text-muted-foreground">
-                Logout from all sessions across all devices
-              </label>
-              <Button className="justify-start" variant="secondary">
+          <div className="grid lg:grid-cols-2 space-y-1 gap-4">
+            <p className="text-sm text-muted-foreground">
+              Logout from all sessions across all devices and browsers.
+            </p>
+            <Button
+              className="justify-start xsm:w-fit "
+              variant="destructive"
+              asChild>
+              <Link href="/api/auth/logout">
                 <LogOut className="h-5 w-5" /> Logout All Sessions
-              </Button>
-            </div>
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
