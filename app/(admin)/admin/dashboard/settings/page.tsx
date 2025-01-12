@@ -8,11 +8,11 @@ export const metadata: Metadata = {
     "Sendit Courier provides courier delivery services that enables customers to send parcels from the comfort of their homes.",
 };
 
-export default async function page() {
-   return (
+export default async function SettingsPage() {
+  return (
     <section>
       <main>
-      <Settings />
+        <Settings />
       </main>
     </section>
   );
