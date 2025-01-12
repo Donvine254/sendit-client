@@ -1,7 +1,6 @@
-import { Input } from "@/components/ui/input";
 import { cn, getCookie, setCookie } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
+import { Check, ChevronsUpDown, Search } from "lucide-react";
+import { useEffect, useState, useRef, FormEvent } from "react";
 import { toast } from "sonner";
 
 const TimezoneSelector = () => {
@@ -10,10 +9,8 @@ const TimezoneSelector = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  //on click outside events sets the show dropdown to false
   useEffect(() => {
     setMounted(true);
-
     // Load timezones only on the client
     if (typeof Intl.supportedValuesOf === "function") {
       setTimezones(Intl.supportedValuesOf("timeZone"));
@@ -24,7 +21,7 @@ const TimezoneSelector = () => {
       setSelected(storedTimezone);
     } else setSelected("Africa/Nairobi");
   }, []);
-  // use effect to close the dropdown if we click outside
+  // use-effect to close the dropdown if we click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -40,7 +37,7 @@ const TimezoneSelector = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  // handle time zone change function.
+  // handle timezone change function.
   const handleTimezoneChange = (value: string) => {
     setSelected(value);
     setCookie("timezone", value, 365);
@@ -50,6 +47,7 @@ const TimezoneSelector = () => {
     setTimeout(() => {
       setShowDropdown(false);
     }, 100);
+    setTimezones(Intl.supportedValuesOf("timeZone"));
   };
 
   if (!mounted) {
@@ -66,46 +64,56 @@ const TimezoneSelector = () => {
 
   return (
     <div className="relative flex items-center" ref={dropdownRef}>
-      <Input
-        type="search"
-        placeholder="Select Timezone"
-        value={selected}
-        onInput={(e) => {
-          const inputValue = (e.target as HTMLInputElement).value;
-          setSelected(inputValue);
-          if (inputValue === "") {
-            setTimezones(Intl.supportedValuesOf("timeZone"));
-          } else {
-            setTimezones((currentTimezones) =>
-              currentTimezones.filter((tmz) =>
-                tmz.toLowerCase().includes(inputValue.toLowerCase())
-              )
-            );
-          }
-        }}
-        onChange={(e) => {
-          setSelected((e.target as HTMLInputElement).value);
-        }}
-        onClick={() => setShowDropdown(true)}
-        className="placeholder:text-gray-400  pr-8 w-full cursor-pointer"
-      />
-      <ChevronsUpDown className="h-4 w-4 text-gray-400 absolute right-2" />
+      <button
+        className="w-full flex items-center justify-between bg-white dark:bg-input px-3 py-2 border dark:border-input rounded-md text-sm"
+        onClick={() => setShowDropdown(!showDropdown)}
+        type="button"
+        title="Select timezone">
+        {selected || "Select Timezone"}
+        <ChevronsUpDown className="h-4 w-4 text-gray-400" />
+      </button>
+
       {showDropdown && (
         <div
-          className="border border-input w-full bg-card absolute top-full left-0 right-0 max-h-[200px] overflow-y-auto mt-2 z-50 rounded-b-md shadow shadow-blue-500 "
+          className="border border-input w-full bg-card absolute top-full left-0 right-0 max-h-[200px] overflow-y-auto mt-2 z-50 rounded-md shadow shadow-blue-500 "
           id="options-container">
-          <ol className="p-4 space-y-2 font-medium text-sm text-gray-600">
+          <div className="sticky flex items-center  top-0 z-20 bg-input">
+            <Search className="h-4 w-4 text-gray-400 absolute left-2" />
+            <input
+              type="search"
+              placeholder="Search timezone..."
+              onInput={(e: FormEvent<HTMLInputElement>) => {
+                const inputValue = (e.target as HTMLInputElement).value;
+                if (inputValue === "") {
+                  setTimezones(Intl.supportedValuesOf("timeZone"));
+                } else {
+                  setTimezones((currentTimezones) =>
+                    currentTimezones.filter((tmz) =>
+                      tmz.toLowerCase().includes(inputValue.toLowerCase())
+                    )
+                  );
+                }
+              }}
+              className="placeholder:text-gray-400 text-sm pl-8 w-full border-b border-b-input focus:border-b-blue-500 focus:outline-none focus:ring-none px-3 py-2 "
+            />
+          </div>
+
+          <ol className="p-4 space-y-1 font-medium text-sm text-gray-600 dark:text-muted-foreground">
             {timezones && timezones.length > 0 ? (
               <>
                 {timezones.map((tmz) => (
                   <li
                     key={tmz}
-                    className="flex justify-between gap-2 cursor-pointer"
+                    className={cn(
+                      "flex justify-between gap-2 cursor-pointer px-2 py-1 rounded-md hover:bg-blue-200 hover:text-gray-600",
+                      selected === tmz &&
+                        "bg-blue-500 text-white hover:bg-blue-500 hover:text-white"
+                    )}
                     onClick={() => handleTimezoneChange(tmz)}>
                     {tmz}
                     <Check
                       className={cn(
-                        "ml-auto",
+                        "ml-auto h-4 w-4",
                         selected === tmz ? "opacity-100" : "opacity-0"
                       )}
                     />
