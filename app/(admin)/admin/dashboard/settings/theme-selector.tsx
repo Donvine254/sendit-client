@@ -116,8 +116,8 @@ export default function ThemeSelector() {
           </p>
         </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-4 py-2">
-          {renderThemeOption("system", "System", true)}
           {renderThemeOption("light", "Light")}
+          {renderThemeOption("system", "System", true)}
           {renderThemeOption("dark", "Dark")}
         </div>
       </div>

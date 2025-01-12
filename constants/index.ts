@@ -596,41 +596,4 @@ export const visitorsData = [
   { month: "Jun", visitors: 600 },
   { month: "Jul", visitors: 1000 },
 ];
-// To be deleted once i begin fetching data from the database
-export const recentTransactions = [
-  {
-    id: "1",
-    customer: "John Doe",
-    date: "2024-01-05",
-    amount: 150.0,
-    status: "Delivered",
-  },
-  {
-    id: "2",
-    customer: "Jane Smith",
-    date: "2024-01-04",
-    amount: 89.99,
-    status: "In Transit",
-  },
-  {
-    id: "3",
-    customer: "Bob Johnson",
-    date: "2024-01-04",
-    amount: 245.5,
-    status: "Pending",
-  },
-  {
-    id: "4",
-    customer: "Alice Brown",
-    date: "2024-01-03",
-    amount: 175.25,
-    status: "Delivered",
-  },
-  {
-    id: "5",
-    customer: "Charlie Wilson",
-    date: "2024-01-03",
-    amount: 320.0,
-    status: "In Transit",
-  },
-];
+
