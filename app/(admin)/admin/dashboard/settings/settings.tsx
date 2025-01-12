@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 import ThemeSelector from "./theme-selector";
 import TimezoneSelector from "./timezone-selector";
 import IntegrationCards from "./integration-cards";
 import { LogOut } from "lucide-react";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 export default function Settings() {
   return (
     <div className="w-full">
@@ -71,9 +71,9 @@ export default function Settings() {
               className="justify-start xsm:w-fit "
               variant="destructive"
               asChild>
-              <Link href="/api/auth/logout">
+              <LogoutLink>
                 <LogOut className="h-5 w-5" /> Logout All Sessions
-              </Link>
+              </LogoutLink>
             </Button>
           </div>
         </div>

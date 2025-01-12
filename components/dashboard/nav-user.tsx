@@ -27,6 +27,7 @@ import {
 import Image from "next/image";
 import { sessionUser } from "@/types";
 import Link from "next/link";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 export function NavUser({ user }: { user?: sessionUser }) {
   const { isMobile } = useSidebar();
@@ -141,10 +142,10 @@ export function NavUser({ user }: { user?: sessionUser }) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/api/auth/logout">
+              <LogoutLink>
                 <LogOut />
                 Log out
-              </Link>
+              </LogoutLink>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
