@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { cn, getCookie, setCookie } from "@/lib/utils";
-import { Check, ChevronsUpDown, Search } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -48,13 +48,25 @@ const TimezoneSelector = () => {
 
   return (
     <div className="relative flex items-center">
-      <Search className="h-4 w-4 text-gray-400 absolute left-2" />
       <Input
         type="search"
         placeholder="Select Timezone"
         value={selected}
+        onChange={(e) => {
+          const inputValue = e.target.value;
+          setSelected(inputValue);
+          if (inputValue === "") {
+            setTimezones(Intl.supportedValuesOf("timeZone"));
+          } else {
+            setTimezones((currentTimezones) =>
+              currentTimezones.filter((tmz) =>
+                tmz.toLowerCase().includes(inputValue.toLowerCase())
+              )
+            );
+          }
+        }}
         onClick={() => setShowDropdown(true)}
-        className="placeholder:text-gray-400 pl-8 pr-8 w-full cursor-pointer"
+        className="placeholder:text-gray-400  pr-8 w-full cursor-pointer"
       />
       <ChevronsUpDown className="h-4 w-4 text-gray-400 absolute right-2" />
       {showDropdown && (
@@ -62,20 +74,26 @@ const TimezoneSelector = () => {
           className="border border-input w-full bg-card absolute top-full left-0 right-0 max-h-[200px] overflow-y-auto mt-2 z-50 rounded-b-md shadow shadow-blue-500 "
           id="options-container">
           <ol className="p-4 space-y-2 font-medium text-sm text-gray-600">
-            {timezones.map((tmz) => (
-              <li
-                key={tmz}
-                className="flex justify-between gap-2 cursor-pointer"
-                onClick={() => handleTimezoneChange(tmz)}>
-                {tmz}
-                <Check
-                  className={cn(
-                    "ml-auto",
-                    selected === tmz ? "opacity-100" : "opacity-0"
-                  )}
-                />
-              </li>
-            ))}
+            {timezones && timezones.length > 0 ? (
+              <>
+                {timezones.map((tmz) => (
+                  <li
+                    key={tmz}
+                    className="flex justify-between gap-2 cursor-pointer"
+                    onClick={() => handleTimezoneChange(tmz)}>
+                    {tmz}
+                    <Check
+                      className={cn(
+                        "ml-auto",
+                        selected === tmz ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </li>
+                ))}
+              </>
+            ) : (
+              <li className="text-muted-foreground">No timezones found</li>
+            )}
           </ol>
         </div>
       )}
