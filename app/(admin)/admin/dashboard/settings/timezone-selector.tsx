@@ -1,14 +1,15 @@
 import { Input } from "@/components/ui/input";
-import { getCookie, setCookie } from "@/lib/utils";
-import { ChevronsUpDown, Search } from "lucide-react";
-import { ChangeEvent, useEffect, useState } from "react";
+import { cn, getCookie, setCookie } from "@/lib/utils";
+import { Check, ChevronsUpDown, Search } from "lucide-react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const TimezoneSelector = () => {
   const [timezones, setTimezones] = useState<string[]>([]);
   const [selected, setSelected] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
   const [mounted, setMounted] = useState(false);
-
+  //on click outside events sets the show dropdown to false
   useEffect(() => {
     setMounted(true);
 
@@ -22,14 +23,17 @@ const TimezoneSelector = () => {
       setSelected(storedTimezone);
     } else setSelected("Africa/Nairobi");
   }, []);
-  const handleTimezoneChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newTimezone = event.target.value;
-    setSelected(newTimezone);
-    setCookie("timezone", newTimezone, 365);
+  const handleTimezoneChange = (value: string) => {
+    setSelected(value);
+    setCookie("timezone", value, 365);
     toast.success("Timezone updated", {
       position: "top-right",
     });
+    setTimeout(() => {
+      setShowDropdown(false);
+    }, 100);
   };
+
   if (!mounted) {
     return (
       <select
@@ -48,9 +52,33 @@ const TimezoneSelector = () => {
       <Input
         type="search"
         placeholder="Select Timezone"
-        className="placeholder:text-gray-400 pl-8 pr-8 w-full"
+        value={selected}
+        onClick={() => setShowDropdown(true)}
+        className="placeholder:text-gray-400 pl-8 pr-8 w-full cursor-pointer"
       />
       <ChevronsUpDown className="h-4 w-4 text-gray-400 absolute right-2" />
+      {showDropdown && (
+        <div
+          className="border border-input w-full bg-card absolute top-full left-0 right-0 max-h-[200px] overflow-y-auto mt-2 z-50 rounded-b-md shadow shadow-blue-500 "
+          id="options-container">
+          <ol className="p-4 space-y-2 font-medium text-sm text-gray-600">
+            {timezones.map((tmz) => (
+              <li
+                key={tmz}
+                className="flex justify-between gap-2 cursor-pointer"
+                onClick={() => handleTimezoneChange(tmz)}>
+                {tmz}
+                <Check
+                  className={cn(
+                    "ml-auto",
+                    selected === tmz ? "opacity-100" : "opacity-0"
+                  )}
+                />
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
     </div>
   );
 };
