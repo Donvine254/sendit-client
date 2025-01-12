@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
 import Settings from "./settings";
-export const revalidate = 600;
 export const metadata: Metadata = {
   title: "Admin Dashboard | Sendit Kenya",
   description:
