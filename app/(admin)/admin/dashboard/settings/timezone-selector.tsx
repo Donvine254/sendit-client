@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { cn, getCookie, setCookie } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "sonner";
 
 const TimezoneSelector = () => {
@@ -9,6 +9,7 @@ const TimezoneSelector = () => {
   const [selected, setSelected] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   //on click outside events sets the show dropdown to false
   useEffect(() => {
     setMounted(true);
@@ -23,6 +24,23 @@ const TimezoneSelector = () => {
       setSelected(storedTimezone);
     } else setSelected("Africa/Nairobi");
   }, []);
+  // use effect to close the dropdown if we click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  // handle time zone change function.
   const handleTimezoneChange = (value: string) => {
     setSelected(value);
     setCookie("timezone", value, 365);
@@ -47,13 +65,13 @@ const TimezoneSelector = () => {
   }
 
   return (
-    <div className="relative flex items-center">
+    <div className="relative flex items-center" ref={dropdownRef}>
       <Input
         type="search"
         placeholder="Select Timezone"
         value={selected}
-        onChange={(e) => {
-          const inputValue = e.target.value;
+        onInput={(e) => {
+          const inputValue = (e.target as HTMLInputElement).value;
           setSelected(inputValue);
           if (inputValue === "") {
             setTimezones(Intl.supportedValuesOf("timeZone"));
@@ -64,6 +82,9 @@ const TimezoneSelector = () => {
               )
             );
           }
+        }}
+        onChange={(e) => {
+          setSelected((e.target as HTMLInputElement).value);
         }}
         onClick={() => setShowDropdown(true)}
         className="placeholder:text-gray-400  pr-8 w-full cursor-pointer"
