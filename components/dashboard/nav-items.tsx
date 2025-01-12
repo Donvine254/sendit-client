@@ -1,5 +1,4 @@
 "use client";
-
 import { type LucideIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
@@ -36,6 +35,7 @@ export function NavItems({
               <Link
                 href={item.url}
                 title={item.title}
+                prefetch={false}
                 target={item.target ?? "_parent"}>
                 <item.icon />
                 <span>{item.name}</span>
