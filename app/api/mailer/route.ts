@@ -8,8 +8,8 @@ interface EmailOptions {
   to: string;
   html: string; // Typically HTML content for email body
 }
-
-const sender = "Sendit Kenya <senditcourrier@gmail.com>";
+const email = process.env.NEXT_PUBLIC_EMAIL!;
+const sender = `Sendit Kenya <${email}>`;
 
 const createTransporter = async (): Promise<Transporter> => {
   const oauth2Client = new OAuth2Client(
@@ -32,7 +32,7 @@ const createTransporter = async (): Promise<Transporter> => {
     service: "gmail",
     auth: {
       type: "OAuth2",
-      user: process.env.NEXT_PUBLIC_EMAIL!,
+      user: email,
       accessToken: accessToken.token,
       clientId: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
       clientSecret: process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET!,
