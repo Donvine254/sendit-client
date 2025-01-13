@@ -75,13 +75,13 @@ const TimezoneSelector = () => {
 
       {showDropdown && (
         <div
-          className="border border-input w-full bg-card absolute top-full left-0 right-0 max-h-[200px] overflow-y-auto mt-2 z-50 rounded-md shadow shadow-blue-500 "
+          className="border border-input w-full bg-card absolute top-full left-0 right-0 mt-2 z-50 rounded-md shadow"
           id="options-container">
-          <div className="sticky flex items-center  top-0 z-20 bg-input">
-            <Search className="h-4 w-4 text-gray-400 absolute left-2" />
+          <div className="sticky flex items-center top-0 z-20 bg-input group">
+            <Search className="h-4 w-4 text-gray-400 absolute left-2 group-hover:text-primary" />
             <input
               type="search"
-              placeholder="Search timezone..."
+              placeholder="Search a timezone..."
               onInput={(e: FormEvent<HTMLInputElement>) => {
                 const inputValue = (e.target as HTMLInputElement).value;
                 if (inputValue === "") {
@@ -94,18 +94,18 @@ const TimezoneSelector = () => {
                   );
                 }
               }}
-              className="placeholder:text-gray-400 text-sm pl-8 w-full border-b border-b-input focus:border-b-blue-500 focus:outline-none focus:ring-none px-3 py-2 "
+              className="placeholder:text-gray-400 text-sm pl-8 w-full border-b border-b-input focus:bg-input focus:outline-none focus:ring-none px-3 py-2 rounded-t-md group-hover:text-primary "
             />
           </div>
 
-          <ol className="p-4 space-y-1 font-medium text-sm text-gray-600 dark:text-muted-foreground">
+          <ol className="p-4 space-y-1 font-medium text-sm text-gray-600 dark:text-muted-foreground max-h-[200px] overflow-y-auto">
             {timezones && timezones.length > 0 ? (
               <>
                 {timezones.map((tmz) => (
                   <li
                     key={tmz}
                     className={cn(
-                      "flex justify-between gap-2 cursor-pointer px-2 py-1 rounded-md hover:bg-blue-200 hover:text-gray-600",
+                      "flex justify-between gap-2 cursor-pointer px-2 py-1 rounded-md hover:bg-input",
                       selected === tmz &&
                         "bg-blue-500 text-white hover:bg-blue-500 hover:text-white"
                     )}
