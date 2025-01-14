@@ -13,23 +13,21 @@ export async function sendOrderConfirmationEmail({ ...props }: OrderDetails) {
     receiver: props.email,
     message: orderConfirmationEmail(props),
   };
-  const response = await fetch(baseUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", accept: "application/json" },
-    body: JSON.stringify(emailBody),
-  });
-  return response;
+  try {
+    const response = await fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify(emailBody),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to send email: ${response.statusText}`);
+    }
+    return response;
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw error;
+  }
 }
-
-sendOrderConfirmationEmail({
-  email: "donvinemugendi@gmail.com",
-  name: "Donvine mugendi",
-  orderId: "cr23123",
-  deliveryAddress: "Kahawa West, Roysambu, Nairobi",
-  pickupAddress: "Bima Road, Kahawa West, Nairobi",
-  parcelDescription: "Techno Pova Neo 6 Starry Black",
-  parcelWeight: 2,
-  totalPrice: 780,
-}).then((res) => console.log(res));
-
-// add email for order cancellation and payment request

@@ -106,6 +106,7 @@ export interface ShippingAddressData {
 export interface OrderDetails {
   email: string;
   name: string;
+  recipient: string;
   orderId: string;
   pickupAddress: string;
   deliveryAddress: string;

@@ -16,10 +16,11 @@ export const orderConfirmationEmail = ({
   <ul>
     <li><strong>Order Reference Number:</strong> #${props.orderId}</li>
     <li><strong>Pickup Address:</strong> ${props.pickupAddress}</li>
+    <li><strong>Recipient:</strong> ${props.recipient}</li>
     <li><strong>Delivery Address:</strong> ${props.deliveryAddress}</li>
     <li><strong>Parcel Description:</strong> ${props.parcelDescription}</li>
     <li><strong>Parcel Weight:</strong> ${props.parcelWeight}</li>
-    <li><strong>Estimated Delivery Fee:</strong> $${props.totalPrice}</li>
+    <li><strong>Estimated Delivery Fee:</strong> KES ${props.totalPrice}</li>
   </ul>
   <h4>Important Information</h4>
   <ul>

@@ -1,14 +1,45 @@
 "use server";
+import { sendOrderConfirmationEmail } from "@/emails";
 import { prisma } from "@/prisma/prisma";
 import { ParcelOrderData } from "@/types";
+import { Parcel } from "@prisma/client";
 import { revalidateTag } from "next/cache";
+
 export async function createOrder(parcelData: ParcelOrderData) {
   try {
-    const parcel = await prisma.parcel.create({
+    const order = await prisma.parcel.create({
       data: parcelData,
     });
     await revalidateTag("statistics");
     await revalidateTag("orders");
+    if (order satisfies Parcel) {
+      const { address, district, region, email, fullName } =
+        order.pickupAddress as {
+          email: string;
+          fullName: string;
+          address: string;
+          district: string;
+          region: string;
+        };
+      const deliveryAddress = order.deliveryAddress as {
+        email?: string;
+        fullName: string;
+        address: string;
+        district: string;
+        region: string;
+      };
+      await sendOrderConfirmationEmail({
+        orderId: order.id,
+        name: fullName,
+        email: email,
+        recipient: deliveryAddress.fullName,
+        parcelDescription: order.description!,
+        parcelWeight: order.weight,
+        totalPrice: order.price!,
+        pickupAddress: `${address}, ${district}, ${region}`,
+        deliveryAddress: `${deliveryAddress.address}, ${deliveryAddress.district}, ${deliveryAddress.region}`,
+      });
+    }
     return {
       success: true,
       message: "Order created successfully",
