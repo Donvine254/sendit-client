@@ -110,6 +110,6 @@ export interface OrderDetails {
   pickupAddress: string;
   deliveryAddress: string;
   parcelDescription: string;
-  parcelWeight: string;
+  parcelWeight: number;
   totalPrice: number;
 }

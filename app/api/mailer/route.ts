@@ -2,12 +2,6 @@ import nodemailer, { Transporter } from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 import { NextRequest, NextResponse } from "next/server";
 
-interface EmailOptions {
-  subject: string;
-  from: string;
-  to: string;
-  html: string; // Typically HTML content for email body
-}
 const email = process.env.NEXT_PUBLIC_EMAIL!;
 const sender = `Sendit Kenya <${email}>`;
 
@@ -17,17 +11,13 @@ const createTransporter = async (): Promise<Transporter> => {
     process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET!,
     "https://developers.google.com/oauthplayground"
   );
-
   oauth2Client.setCredentials({
     refresh_token: process.env.NEXT_PUBLIC_OAUTH_REFRESH_TOKEN!,
   });
-
   const accessToken = await oauth2Client.getAccessToken();
-
   if (!accessToken.token) {
     throw new Error("Failed to retrieve access token");
   }
-
   return nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -41,15 +31,11 @@ const createTransporter = async (): Promise<Transporter> => {
   });
 };
 
-export const sendEmail = async (emailOptions: EmailOptions) => {
-  const transporter = await createTransporter();
-  await transporter.sendMail(emailOptions);
-};
-
 export async function POST(req: NextRequest) {
   const { subject, receiver, message } = await req.json();
   try {
-    await sendEmail({
+    const transporter = await createTransporter();
+    await transporter.sendMail({
       subject,
       to: receiver,
       from: sender,
@@ -64,7 +50,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        message: "Error occured when sending the email",
+        message: "Error occurred when sending the email",
         error,
       },
       { status: 401 }

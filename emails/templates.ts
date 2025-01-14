@@ -2,7 +2,9 @@
 
 import { OrderDetails } from "@/types";
 
-export const orderConfirmationEmail = ({...props}:OrderDetails)=>`<div style="margin:5px auto; max-width: 768px; padding:5px;">
+export const orderConfirmationEmail = ({
+  ...props
+}: OrderDetails) => `<div style="margin:5px auto; max-width: 768px; padding:5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
     <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Carhub Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
@@ -25,7 +27,7 @@ export const orderConfirmationEmail = ({...props}:OrderDetails)=>`<div style="ma
     <li><strong>Weight Verification:</strong> The price is based on the weight you provided during the order. Our team will weigh the parcel at pickup, and the final price may be adjusted if there is a discrepancy.</li>
     <li><strong>FAQs and Pricing:</strong> For more details about our pricing and policies, please visit our <a href="https://senditkenya.vercel.app/faqs" style="color: #2563eb;">FAQs</a> and <a href="https://senditkenya.vercel.app/pricing" style="color: #2563eb;">Pricing Page</a>.</li>
   </ul>
-
+<a href="https://senditkenya.vercel.app/me/orders/${props.orderId}" style="display:block; background-color:#2563eb; color:#fff; padding:10px 5px; border-radius:5px; text-align:center; width:50%; margin:10px auto; text-decoration:none;">View Your Order </a>
   <p>If you have any questions or need further assistance, feel free to contact our support team. We're here to help!</p>
   <p>Thank you for trusting Sendit. We’re committed to delivering your parcel with care!</p>
   <p>Warm regards,</p>
@@ -55,4 +57,4 @@ export const orderConfirmationEmail = ({...props}:OrderDetails)=>`<div style="ma
     <p style="font-weight:bold; color:#2563eb">123 Kimathi Street, Nairobi, Kenya</p>
     <p><a href="https://carhubke.vercel.app/privacy">Privacy Policy</a> | <a href="https://carhubke.vercel.app/help">Contact Details</a></p>
   </footer>
-</div>`
+</div>`;

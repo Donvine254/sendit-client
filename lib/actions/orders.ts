@@ -4,12 +4,15 @@ import { ParcelOrderData } from "@/types";
 import { revalidateTag } from "next/cache";
 export async function createOrder(parcelData: ParcelOrderData) {
   try {
-    await prisma.parcel.create({
+    const parcel = await prisma.parcel.create({
       data: parcelData,
     });
     await revalidateTag("statistics");
     await revalidateTag("orders");
-    return { success: true, message: "Order created successfully" };
+    return {
+      success: true,
+      message: "Order created successfully",
+    };
   } catch (error: any) {
     console.log(error);
     return { success: true, error: "Something went wrong" };
