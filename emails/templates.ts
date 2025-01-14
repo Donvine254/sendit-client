@@ -77,6 +77,6 @@ export const orderConfirmationEmail = ({
       </tr>
     </table>
     <p style="font-weight:bold; color:#2563eb">123 Kimathi Street, Nairobi, Kenya</p>
-    <p><a href="https://carhubke.vercel.app/privacy">Privacy Policy</a> | <a href="https://carhubke.vercel.app/help">Contact Details</a></p>
+    <p><a href="https://senditkenya.vercel.app/privacy">Privacy Policy</a> | <a href="https://senditkenya.vercel.app/help">Contact Details</a></p>
   </footer>
 </div>`;
