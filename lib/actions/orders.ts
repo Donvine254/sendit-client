@@ -60,13 +60,22 @@ export async function createOrder(parcelData: ParcelOrderData) {
   }
 }
 // export async function createOrder(parcelData: ParcelOrderData) {
+//   let order: Parcel | null = null;
 //   try {
-//     const order = await prisma.parcel.create({
+//     order = await prisma.parcel.create({
 //       data: parcelData,
 //     });
 //     await revalidateTag("statistics");
 //     await revalidateTag("orders");
-//     if (order satisfies Parcel) {
+//     return {
+//       success: true,
+//       message: "Order created successfully",
+//     };
+//   } catch (error: any) {
+//     console.log(error);
+//     return { success: true, error: "Something went wrong" };
+//   } finally {
+//     if (order && (order satisfies Parcel)) {
 //       const { address, district, region, email, fullName } =
 //         order.pickupAddress as {
 //           email: string;
@@ -94,14 +103,6 @@ export async function createOrder(parcelData: ParcelOrderData) {
 //         deliveryAddress: `${deliveryAddress.address}, ${deliveryAddress.district}, ${deliveryAddress.region}`,
 //       });
 //     }
-//     return {
-//       success: true,
-//       message: "Order created successfully",
-//     };
-//   } catch (error: any) {
-//     console.log(error);
-//     return { success: true, error: "Something went wrong" };
-//   } finally {
 //     await prisma.$disconnect();
 //   }
 // }
