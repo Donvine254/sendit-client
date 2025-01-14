@@ -102,3 +102,14 @@ export interface ShippingAddressData {
   district: string;
   address: string;
 }
+
+export interface OrderDetails {
+  email: string;
+  name: string;
+  orderId: string;
+  pickupAddress: string;
+  deliveryAddress: string;
+  parcelDescription: string;
+  parcelWeight: string;
+  totalPrice: number;
+}
