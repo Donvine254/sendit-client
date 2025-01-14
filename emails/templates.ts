@@ -13,15 +13,36 @@ export const orderConfirmationEmail = ({
   <p>Thank you for choosing Sendit! We’re excited to help you send your parcel conveniently and securely</p>
   <p>Here are the details of your order:</p>
   <h4>Order Details:</h4>
-  <ul>
-    <li><strong>Order Reference Number:</strong> #${props.orderId}</li>
-    <li><strong>Pickup Address:</strong> ${props.pickupAddress}</li>
-    <li><strong>Recipient:</strong> ${props.recipient}</li>
-    <li><strong>Delivery Address:</strong> ${props.deliveryAddress}</li>
-    <li><strong>Parcel Description:</strong> ${props.parcelDescription}</li>
-    <li><strong>Parcel Weight:</strong> ${props.parcelWeight}</li>
-    <li><strong>Estimated Delivery Fee:</strong> KES ${props.totalPrice}</li>
-  </ul>
+   <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Order Reference Number:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">#${props.orderId}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Pickup Address:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.pickupAddress}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Recipient:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.recipient}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Delivery Address:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.deliveryAddress}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Parcel Description:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.parcelDescription}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Parcel Weight:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.parcelWeight}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Estimated Delivery Fee:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">KES ${props.totalPrice}</td>
+    </tr>
+  </table>
   <h4>Important Information</h4>
   <ul>
     <li><strong>Packaging Tips:</strong> Properly package your parcel to ensure its safety during transit. <a href="https://senditkenya.vercel.app/help/packaging-tips" style="color: #2563eb;">Click here</a> for tips on how to package your items securely.</li>
