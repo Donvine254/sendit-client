@@ -40,8 +40,9 @@ const OrderSummary = ({
     };
     try {
       const res = await createOrder(orderData);
+      console.log(res)
       if (res.success) {
-        toast.success(res.message, { position: "top-center" });
+        toast.success("Order created successfully", { position: "top-center" });
         confetti({
           particleCount: 1000,
           spread: 100,
@@ -51,7 +52,7 @@ const OrderSummary = ({
           router.replace("/me/orders");
         }, 2000);
       } else {
-        toast.error(res.error || "Something went wrong");
+        toast.error("Something went wrong");
       }
     } catch (error) {
       console.error(error);
