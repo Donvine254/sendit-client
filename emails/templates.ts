@@ -81,7 +81,7 @@ export const orderConfirmationEmail = ({
   </footer>
 </div>`;
 
-export const invoiceReminderEmail = ({
+export const invoiceReminderEmailTemplate = ({
   invoice_number,
   fullName,
   shipping_address,
