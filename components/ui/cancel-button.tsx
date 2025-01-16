@@ -32,9 +32,6 @@ export default function CancelButton({ order }: { order: Order }) {
         toast.success("Order Cancelled successfully", {
           position: "top-center",
         });
-        if (typeof window !== "undefined" && window) {
-          window.location.reload();
-        }
         setImmediate(async () => {
           const { address, district, region, email, fullName } =
             order.pickupAddress as {
@@ -69,6 +66,10 @@ export default function CancelButton({ order }: { order: Order }) {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");
+    } finally {
+      if (typeof window !== "undefined" && window) {
+        window.location.reload();
+      }
     }
   }
   return (
