@@ -8,11 +8,11 @@ const sender = `Sendit Kenya <${email}>`;
 const createTransporter = async (): Promise<Transporter> => {
   const oauth2Client = new OAuth2Client(
     process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
-    process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET!,
+    process.env.CLIENT_SECRET!,
     "https://developers.google.com/oauthplayground"
   );
   oauth2Client.setCredentials({
-    refresh_token: process.env.NEXT_PUBLIC_OAUTH_REFRESH_TOKEN!,
+    refresh_token: process.env.OAUTH_REFRESH_TOKEN!,
   });
   const accessToken = await oauth2Client.getAccessToken();
   if (!accessToken.token) {
@@ -25,8 +25,8 @@ const createTransporter = async (): Promise<Transporter> => {
       user: email,
       accessToken: accessToken.token,
       clientId: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
-      clientSecret: process.env.NEXT_PUBLIC_OAUTH_CLIENT_SECRET!,
-      refreshToken: process.env.NEXT_PUBLIC_OAUTH_REFRESH_TOKEN!,
+      clientSecret: process.env.OAUTH_CLIENT_SECRET!,
+      refreshToken: process.env.OAUTH_REFRESH_TOKEN!,
     },
   });
 };
