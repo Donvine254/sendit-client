@@ -75,6 +75,7 @@ export type Order = {
   createdAt: Date;
   updatedAt?: Date | null;
   status: string;
+  weight: number;
   pickupAddress: {
     fullName?: string;
     phone: string;

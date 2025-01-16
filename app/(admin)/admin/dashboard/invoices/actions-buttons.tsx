@@ -12,24 +12,28 @@ import {
 } from "@/components/ui/tooltip";
 import { Invoice } from "@prisma/client";
 import { sendInvoicePaymentReminder } from "@/emails";
-export function MarkOverdueButton({ invoiceId }: { invoiceId: string }) {
+export function MarkOverdueButton({ invoice }: { invoice: Invoice }) {
   const router = useRouter();
   async function handleMarkOverdue() {
     const toastId = toast.loading("Processing Request...", {
       position: "top-center",
     });
     try {
-      const res = await UpdateInvoiceStatus(invoiceId, "OVERDUE");
+      const res = await UpdateInvoiceStatus(invoice.id, "OVERDUE");
       toast.dismiss(toastId);
       if (res.success) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/invoices");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else toast.error(res.error);
     } catch (error) {
       console.error(error);
       toast.dismiss(toastId);
       toast.error("Something went wrong");
+    } finally {
+      sendInvoicePaymentReminder(invoice);
     }
   }
   return (
@@ -71,7 +75,9 @@ export function DisputeButton({ invoiceId }: { invoiceId: string }) {
       if (res.success) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/invoices");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else toast.error(res.error);
     } catch (error) {
       console.error(error);
@@ -169,7 +175,9 @@ export function MarkResolved({ invoiceId }: { invoiceId: string }) {
       if (res.success) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/invoices");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else toast.error(res.error);
     } catch (error) {
       console.error(error);

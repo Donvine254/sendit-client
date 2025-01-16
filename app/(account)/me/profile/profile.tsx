@@ -162,7 +162,7 @@ export default function ProfilePage({ recentOrders, orderStats }: Props) {
                                 </Link>
                               </Button>
                               {order.status === "PENDING" && (
-                                <CancelButton orderId={order.id} />
+                                <CancelButton order={order} />
                               )}
                             </PopoverContent>
                           </Popover>

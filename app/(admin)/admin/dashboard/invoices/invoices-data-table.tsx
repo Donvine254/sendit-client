@@ -325,7 +325,7 @@ const columns: ColumnDef<Invoice>[] = [
               Download
             </Button>
             {invoice.status === "DRAFT" && (
-              <MarkOverdueButton invoiceId={invoice.id} />
+              <MarkOverdueButton invoice={invoice} />
             )}
             {invoice.status === "OVERDUE" && (
               <ClaimPaymentButton invoice={invoice} />

@@ -46,6 +46,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { StatsCard, SatisfactionCard } from "@/components/dashboard/charts";
 import ExportButton from "@/components/dashboard/export-button";
+import { Order } from "@/types";
 
 // TODO: Add row with customer name
 
@@ -309,7 +310,7 @@ const columns: ColumnDef<Parcel>[] = [
             {parcel.status === "PENDING" && (
               <>
                 <ProgressButton Parcel={parcel} />
-                <CancelButton orderId={parcel.id} />
+                <CancelButton order={parcel as Order} />
               </>
             )}
           </PopoverContent>
