@@ -6,7 +6,7 @@ export const orderConfirmationEmail = ({
   ...props
 }: OrderDetails) => `<div style="margin:5px auto; max-width: 768px; padding:5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
-    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Carhub Logo" height="50" width="200" style="margin: 5px auto"/>
+    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
   <h3 style="font-weight:bold; color:#2563eb"> Your Parcel Delivery Order with Sendit is Confirmed! 🚚</h3>
   <p>Hi ${props.name},</p>
@@ -97,7 +97,7 @@ export const invoiceReminderEmail = ({
   amount: number;
 }) => `<div style="margin: 5px auto; max-width: 768px; padding: 5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
-    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Carhub Logo" height="50" width="200" style="margin: 5px auto"/>
+    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
   <h3 style="font-weight: bold; color: #2563eb;"> Payment Reminder: Invoice #${invoice_number}</h3>
   <p>Hi ${fullName},</p>
@@ -132,7 +132,7 @@ export const invoiceReminderEmail = ({
   <p>If you have already made the payment, please ignore this email. If you have any questions or need assistance, feel free to contact us.</p>
   <p>Thank you for your prompt attention to this matter!</p>
   <p>Best regards,</p>
-  <p>The Carhub Kenya Team</p>
+  <p>The Sendit Kenya Team</p>
   <small>This email is for informational purposes only. Please do not reply to this email.</small>
   <hr style="border-color: #2563eb;"/>
   <footer style="font-size: 12px; padding: 5px; margin: 10px 0px; text-align: center;">
