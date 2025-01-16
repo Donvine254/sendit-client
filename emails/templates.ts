@@ -1,6 +1,7 @@
 // Add html templates for emails
 
 import { OrderDetails } from "@/types";
+import { Invoice } from "@prisma/client";
 
 export const orderConfirmationEmail = ({
   ...props
@@ -82,51 +83,39 @@ export const orderConfirmationEmail = ({
 </div>`;
 
 export const invoiceReminderEmailTemplate = ({
-  invoice_number,
-  fullName,
-  shipping_address,
-  item,
-  amount,
-}: {
-  invoice_number: number;
-  fullName: string;
-  shipping_address: string;
-  item: string;
-  email?: string;
-  phone?: string;
-  amount: number;
-}) => `<div style="margin: 5px auto; max-width: 768px; padding: 5px;">
+  ...props
+}: Invoice) => `<div style="margin: 5px auto; max-width: 768px; padding: 5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
     <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
-  <h3 style="font-weight: bold; color: #2563eb;"> Payment Reminder: Invoice #${invoice_number}</h3>
-  <p>Hi ${fullName},</p>
+  <h3 style="font-weight: bold; color: #2563eb;"> Payment Reminder: Invoice #${props.invoice_number}</h3>
+  <p>Hi ${props.fullName},</p>
   <p>This is a friendly reminder that payment is due for the following invoice:</p>
   <h4>Invoice Details:</h4>
   <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Invoice Number:</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">#${invoice_number}</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">#${props.invoice_number}</td>
     </tr>
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Recipient Name:</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${fullName}</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.fullName}</td>
     </tr>
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Shipping Address:</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${shipping_address}</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.shipping_address}</td>
     </tr>
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Item Description:</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${item}</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.item}</td>
     </tr>
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Total Amount:</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">KES ${amount}</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">KES ${props.amount}</td>
     </tr>
   </table>
   <p>To avoid any service interruptions, please settle the payment as soon as possible.</p>
-  <a href="https://senditkenya.vercel.app/api/invoices/download/${invoice_number}" style="display: block; background-color: #2563eb; color: #fff; padding: 10px 5px; border-radius: 5px; text-align: center; width: 50%; margin: 10px auto; text-decoration: none;">
+  <a href="https://senditkenya.vercel.app/api/invoices/download/${props.invoice_number}" style="display: block; background-color: #2563eb; color: #fff; padding: 10px 5px; border-radius: 5px; text-align: center; width: 50%; margin: 10px auto; text-decoration: none;">
     Download Invoice
   </a>
   <p>If you have already made the payment, please ignore this email. If you have any questions or need assistance, feel free to contact us.</p>
