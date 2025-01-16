@@ -95,7 +95,7 @@ export const invoiceReminderEmailTemplate = ({
   <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Invoice Number:</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">#${props.invoice_number}</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">#00${props.invoice_number}</td>
     </tr>
     <tr>
       <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Recipient Name:</td>
@@ -115,7 +115,7 @@ export const invoiceReminderEmailTemplate = ({
     </tr>
   </table>
   <p>To avoid any service interruptions, please settle the payment as soon as possible.</p>
-  <a href="https://senditkenya.vercel.app/api/invoices/download/${props.invoice_number}" style="display: block; background-color: #2563eb; color: #fff; padding: 10px 5px; border-radius: 5px; text-align: center; width: 50%; margin: 10px auto; text-decoration: none;">
+  <a href="https://senditkenya.vercel.app/api/invoices/download/${props.id}" style="display: block; background-color: #2563eb; color: #fff; padding: 10px 5px; border-radius: 5px; text-align: center; width: 50%; margin: 10px auto; text-decoration: none;">
     Download Invoice
   </a>
   <p>If you have already made the payment, please ignore this email. If you have any questions or need assistance, feel free to contact us.</p>
