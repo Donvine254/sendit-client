@@ -24,7 +24,9 @@ export function MarkOverdueButton({ invoice }: { invoice: Invoice }) {
       if (res.success) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/invoices");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else toast.error(res.error);
     } catch (error) {
       console.error(error);
@@ -73,7 +75,9 @@ export function DisputeButton({ invoiceId }: { invoiceId: string }) {
       if (res.success) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/invoices");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else toast.error(res.error);
     } catch (error) {
       console.error(error);
@@ -171,7 +175,9 @@ export function MarkResolved({ invoiceId }: { invoiceId: string }) {
       if (res.success) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/invoices");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else toast.error(res.error);
     } catch (error) {
       console.error(error);

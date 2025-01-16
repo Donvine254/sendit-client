@@ -18,7 +18,9 @@ export function ProgressButton({ Parcel }: { Parcel: any }) {
       if (res.message) {
         toast.success(res.message);
         router.refresh();
-        router.push("/admin/dashboard/deliveries");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else {
         toast.error(res.error);
       }
@@ -55,7 +57,9 @@ export function MarkCompleteButton({ orderId }: { orderId: string }) {
           position: "top-center",
         });
         router.refresh();
-        router.push("/admin/dashboard/deliveries");
+        if (typeof window !== "undefined" && window) {
+          window.location.reload();
+        }
       } else {
         toast.error(res.error || "Something went wrong");
       }
