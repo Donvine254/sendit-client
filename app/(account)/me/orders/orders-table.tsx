@@ -158,7 +158,7 @@ const columns: ColumnDef<Order>[] = [
                 View Details
               </Link>
             </Button>
-            {order.status === "PENDING" && <CancelButton orderId={order.id} />}
+            {order.status === "PENDING" && <CancelButton order={order} />}
           </PopoverContent>
         </Popover>
       );

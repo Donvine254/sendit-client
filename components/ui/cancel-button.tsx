@@ -4,8 +4,10 @@ import { Button } from "./button";
 import { X } from "lucide-react";
 import { updateOrderStatus } from "@/lib/actions/orders";
 import { toast } from "sonner";
+import { Order } from "@/types";
+import { sendCancellationEmail } from "@/emails";
 
-export default function CancelButton({ orderId }: { orderId: string }) {
+export default function CancelButton({ order }: { order: Order }) {
   function handleClick() {
     toast.message("Are you sure you?", {
       position: "top-center",
@@ -24,7 +26,7 @@ export default function CancelButton({ orderId }: { orderId: string }) {
       position: "top-center",
     });
     try {
-      const res = await updateOrderStatus(orderId, "CANCELLED");
+      const res = await updateOrderStatus(order.id, "CANCELLED");
       toast.dismiss(toastId);
       if (res.success) {
         toast.success("Order Cancelled successfully", {
@@ -33,6 +35,34 @@ export default function CancelButton({ orderId }: { orderId: string }) {
         if (typeof window !== "undefined" && window) {
           window.location.reload();
         }
+        setImmediate(async () => {
+          const { address, district, region, email, fullName } =
+            order.pickupAddress as {
+              email: string;
+              fullName: string;
+              address: string;
+              district: string;
+              region: string;
+            };
+          const deliveryAddress = order.deliveryAddress as {
+            email?: string;
+            fullName: string;
+            address: string;
+            district: string;
+            region: string;
+          };
+          await sendCancellationEmail({
+            orderId: order.id,
+            name: fullName,
+            email: email,
+            recipient: deliveryAddress.fullName,
+            parcelDescription: order.description!,
+            parcelWeight: order.weight,
+            totalPrice: order.price!,
+            pickupAddress: `${address}, ${district}, ${region}`,
+            deliveryAddress: `${deliveryAddress.address}, ${deliveryAddress.district}, ${deliveryAddress.region}`,
+          });
+        });
       } else {
         toast.error(res.error || "Something went wrong");
       }
