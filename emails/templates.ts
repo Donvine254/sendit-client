@@ -148,3 +148,75 @@ export const invoiceReminderEmailTemplate = ({
     <p><a href="https://senditkenya.vercel.app/privacy">Privacy Policy</a> | <a href="https://senditkenya.vercel.app/contact">Contact Details</a></p>
   </footer>
 </div>`;
+
+export const OrderCancellationTemplate = ({
+  ...props
+}: OrderDetails) => `<div style="margin:5px auto; max-width: 768px; padding:5px;">
+  <div style="text-align: center; padding: 5px; width: 100%;">
+    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
+  </div>
+  <h2 style="font-weight:bold; color:#2563eb"> Your Parcel Delivery Order has been Cancelled ❌</h2>
+  <p>Hi ${props.name},</p>
+  <p>Your cancellation request for order #${props.orderId} has been processed successfully. Please let us know the reason for cancellation to help us improve our services.</p>
+  <p>Here are the details of your order:</p>
+  <h4>Cancelled Items:</h4>
+   <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Order Number:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">#${props.orderId}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Pickup Address:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.pickupAddress}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Recipient:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.recipient}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Delivery Address:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.deliveryAddress}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Parcel Description:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.parcelDescription}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Parcel Weight:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">${props.parcelWeight}</td>
+    </tr>
+    <tr>
+      <td style="font-weight: bold; padding: 8px; border: 1px solid #ddd;">Delivery Fee:</td>
+      <td style="padding: 8px; border: 1px solid #ddd;">KES ${props.totalPrice}</td>
+    </tr>
+  </table>
+<a href="https://senditkenya.vercel.app/me/orders/${props.orderId}" style="display:block; background-color:#2563eb; color:#fff; padding:10px 5px; border-radius:5px; text-align:center; width:50%; margin:10px auto; text-decoration:none;">View Your Order </a>
+  <p>If you have any questions or need further assistance, feel free to contact our support team. We're here to help!</p>
+  <p>Thank you for trusting Sendit. We’re committed to delivering your parcel with care!</p>
+  <p>Warm regards,</p>
+  <p>The Sendit Team 🚚</p>
+  <hr style="border-color: #2563eb"/>
+  <footer style="font-size: 12px; padding: 5px; margin: 10px 0px; text-align:center; ">  
+    <table align="center" style="margin: 10px auto;">
+      <tr>
+        <td style="padding: 0 5px;">
+          <a href="https://www.facebook.com/diamond.degesh.3" title="Facebook">
+            <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697311304/logos/facebook-logo-removebg-preview_k2pief.png" alt="Facebook" width="30" height="30">
+          </a>
+        </td>
+        <td style="padding: 0 5px;">
+          <a href="https://x.com/diamonddegesh" title="Twitter">
+            <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697311304/logos/twitter-logo-removebg-preview_hc45pq.png" alt="Twitter" width="30">
+          </a>
+        </td>
+        <td style="padding: 0 5px;">
+          <a href="https://instagram.com/Donvine254" title="Instagram">
+            <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697311304/logos/instagram-logo-removebg-preview_jh0wxb.png" alt="Instagram" width="30" height="30">
+          </a>
+        </td>
+      </tr>
+    </table>
+    <p style="font-weight:bold; color:#2563eb">123 Kimathi Street, Nairobi, Kenya</p>
+    <p><a href="https://senditkenya.vercel.app/privacy">Privacy Policy</a> | <a href="https://senditkenya.vercel.app/contact">Contact Details</a></p>
+  </footer>
+</div>`;
