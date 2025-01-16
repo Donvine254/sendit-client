@@ -32,7 +32,7 @@ export default function CancelButton({ order }: { order: Order }) {
         toast.success("Order Cancelled successfully", {
           position: "top-center",
         });
-        setImmediate(async () => {
+        setTimeout(async () => {
           const { address, district, region, email, fullName } =
             order.pickupAddress as {
               email: string;
@@ -59,7 +59,7 @@ export default function CancelButton({ order }: { order: Order }) {
             pickupAddress: `${address}, ${district}, ${region}`,
             deliveryAddress: `${deliveryAddress.address}, ${deliveryAddress.district}, ${deliveryAddress.region}`,
           });
-        });
+        }, 0);
       } else {
         toast.error(res.error || "Something went wrong");
       }
