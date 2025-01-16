@@ -1,7 +1,10 @@
 "use server";
 import { Invoice } from "@prisma/client";
 // file for functions to send emails
-import { orderConfirmationEmail, invoiceReminderEmailTemplate } from "./templates";
+import {
+  orderConfirmationEmail,
+  invoiceReminderEmailTemplate,
+} from "./templates";
 import { OrderDetails } from "@/types";
 const baseUrl =
   process.env.NODE_ENV !== "production"
@@ -48,11 +51,14 @@ export async function sendInvoicePaymentReminder({ ...props }: Invoice) {
       body: JSON.stringify(emailBody),
     });
     if (!response.ok) {
-      throw new Error(`Failed to send email: ${response.statusText}`);
+      return {
+        success: false,
+        error: `Failed to send email: ${response.statusText}`,
+      };
     }
-    return response;
+    return { success: true, message: "Payment reminder sent successfully!" };
   } catch (error) {
     console.error("Error sending email:", error);
-    throw error;
+    return { success: false, error: "Email delivery failed" };
   }
 }

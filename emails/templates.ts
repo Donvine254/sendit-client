@@ -78,7 +78,7 @@ export const orderConfirmationEmail = ({
       </tr>
     </table>
     <p style="font-weight:bold; color:#2563eb">123 Kimathi Street, Nairobi, Kenya</p>
-    <p><a href="https://senditkenya.vercel.app/privacy">Privacy Policy</a> | <a href="https://senditkenya.vercel.app/help">Contact Details</a></p>
+    <p><a href="https://senditkenya.vercel.app/privacy">Privacy Policy</a> | <a href="https://senditkenya.vercel.app/contact">Contact Details</a></p>
   </footer>
 </div>`;
 
@@ -124,8 +124,27 @@ export const invoiceReminderEmailTemplate = ({
   <p>The Sendit Kenya Team</p>
   <small>This email is for informational purposes only. Please do not reply to this email.</small>
   <hr style="border-color: #2563eb;"/>
-  <footer style="font-size: 12px; padding: 5px; margin: 10px 0px; text-align: center;">
-    <p style="font-weight: bold; color: #2563eb;">123 Kimathi Street, Nairobi, Kenya</p>
+  <footer style="font-size: 12px; padding: 5px; margin: 10px 0px; text-align:center; ">  
+    <table align="center" style="margin: 10px auto;">
+      <tr>
+        <td style="padding: 0 5px;">
+          <a href="https://www.facebook.com/diamond.degesh.3" title="Facebook">
+            <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697311304/logos/facebook-logo-removebg-preview_k2pief.png" alt="Facebook" width="30" height="30">
+          </a>
+        </td>
+        <td style="padding: 0 5px;">
+          <a href="https://x.com/diamonddegesh" title="Twitter">
+            <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697311304/logos/twitter-logo-removebg-preview_hc45pq.png" alt="Twitter" width="30">
+          </a>
+        </td>
+        <td style="padding: 0 5px;">
+          <a href="https://instagram.com/Donvine254" title="Instagram">
+            <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697311304/logos/instagram-logo-removebg-preview_jh0wxb.png" alt="Instagram" width="30" height="30">
+          </a>
+        </td>
+      </tr>
+    </table>
+    <p style="font-weight:bold; color:#2563eb">123 Kimathi Street, Nairobi, Kenya</p>
     <p><a href="https://senditkenya.vercel.app/privacy">Privacy Policy</a> | <a href="https://senditkenya.vercel.app/contact">Contact Details</a></p>
   </footer>
 </div>`;

@@ -11,6 +11,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Invoice } from "@prisma/client";
+import { sendInvoicePaymentReminder } from "@/emails";
 export function MarkOverdueButton({ invoiceId }: { invoiceId: string }) {
   const router = useRouter();
   async function handleMarkOverdue() {
@@ -112,7 +113,24 @@ export function DisputeButton({ invoiceId }: { invoiceId: string }) {
 }
 
 export function ClaimPaymentButton({ invoice }: { invoice: Invoice }) {
-  console.log(invoice);
+  async function handleClaim() {
+    const toastId = toast.loading("Processing Request...", {
+      position: "top-center",
+    });
+    try {
+      const res = await sendInvoicePaymentReminder(invoice);
+      toast.dismiss(toastId);
+      if (res.success) {
+        toast.success("Payment claim email sent successfully");
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.dismiss(toastId);
+      toast.error("Something went wrong");
+    }
+  }
   return (
     <TooltipProvider>
       <Tooltip>
@@ -120,11 +138,7 @@ export function ClaimPaymentButton({ invoice }: { invoice: Invoice }) {
           <Button
             variant="ghost"
             className="w-full justify-start text-green-500  hover:bg-green-500 hover:text-white"
-            onClick={() =>
-              toast.info("Upcoming Feature", {
-                position: "top-center",
-              })
-            }>
+            onClick={handleClaim}>
             <HandCoins className="mr-2 h-4 w-4" />
             Claim Payment
           </Button>
