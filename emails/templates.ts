@@ -88,7 +88,7 @@ export const invoiceReminderEmailTemplate = ({
   <div style="text-align: center; padding: 5px; width: 100%;">
     <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
-  <h3 style="font-weight: bold; color: #2563eb;"> Payment Reminder: Invoice #${props.invoice_number}</h3>
+  <h3 style="font-weight: bold; color: #2563eb;"> Payment Reminder for Invoice #${props.invoice_number}</h3>
   <p>Hi ${props.fullName},</p>
   <p>This is a friendly reminder that payment is due for the following invoice:</p>
   <h4>Invoice Details:</h4>
