@@ -9,7 +9,7 @@ export const orderConfirmationEmail = ({
   <div style="text-align: center; padding: 5px; width: 100%;">
     <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
-  <h3 style="font-weight:bold; color:#2563eb"> Your Parcel Delivery Order with Sendit is Confirmed! 🚚</h3>
+  <h2 style="font-weight:bold; color:#2563eb"> Your Parcel Delivery Order with Sendit is Confirmed! 🚚</h2>
   <p>Hi ${props.name},</p>
   <p>Thank you for choosing Sendit! We’re excited to help you send your parcel conveniently and securely</p>
   <p>Here are the details of your order:</p>
@@ -88,7 +88,7 @@ export const invoiceReminderEmailTemplate = ({
   <div style="text-align: center; padding: 5px; width: 100%;">
     <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
   </div>
-  <h3 style="font-weight: bold; color: #2563eb;"> Payment Reminder for Invoice #${props.invoice_number}</h3>
+  <h2 style="font-weight: bold; color: #2563eb;"> Payment Reminder for Invoice #${props.invoice_number}</h2>
   <p>Hi ${props.fullName},</p>
   <p>This is a friendly reminder that payment is due for the following invoice:</p>
   <h4>Invoice Details:</h4>
@@ -118,10 +118,10 @@ export const invoiceReminderEmailTemplate = ({
   <a href="https://senditkenya.vercel.app/api/invoices/download/${props.id}" style="display: block; background-color: #2563eb; color: #fff; padding: 10px 5px; border-radius: 5px; text-align: center; width: 50%; margin: 10px auto; text-decoration: none;">
     Download Invoice
   </a>
-  <p>If you have already made the payment, please ignore this email. If you have any questions or need assistance, feel free to contact us.</p>
-  <p>Thank you for your prompt attention to this matter!</p>
-  <p>Best regards,</p>
-  <p>The Sendit Kenya Team</p>
+  <p>If you have already made the payment, please ignore this email. If you have any questions or need further assistance, feel free to contact our support team. We're here to help!</p>
+  <p>Thank you for trusting Sendit. We’re committed to delivering your parcel with care!</p>
+  <p>Warm regards,</p>
+  <p>The Sendit Team 🚚</p>
   <small>This email is for informational purposes only. Please do not reply to this email.</small>
   <hr style="border-color: #2563eb;"/>
   <footer style="font-size: 12px; padding: 5px; margin: 10px 0px; text-align:center; ">  
