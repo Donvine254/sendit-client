@@ -7,7 +7,7 @@ export const orderConfirmationEmail = ({
   ...props
 }: OrderDetails) => `<div style="margin:5px auto; max-width: 768px; padding:5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
-    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
+    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="40" width="120"     style="margin: 5px auto; width:120px; height:40px; vertical-align:middle; aspect-ratio: 16 / 9;"/>
   </div>
   <h2 style="font-weight:bold; color:#2563eb"> Your Parcel Delivery Order with Sendit is Confirmed! 🚚</h2>
   <p>Hi ${props.name},</p>
@@ -86,7 +86,7 @@ export const invoiceReminderEmailTemplate = ({
   ...props
 }: Invoice) => `<div style="margin: 5px auto; max-width: 768px; padding: 5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
-    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
+    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="40" width="120"     style="margin: 5px auto; width:120px; height:40px; vertical-align:middle; aspect-ratio: 16 / 9;"/>
   </div>
   <h2 style="font-weight: bold; color: #2563eb;"> Payment Reminder for Invoice #${props.invoice_number}</h2>
   <p>Hi ${props.fullName},</p>
@@ -153,7 +153,7 @@ export const OrderCancellationTemplate = ({
   ...props
 }: OrderDetails) => `<div style="margin:5px auto; max-width: 768px; padding:5px;">
   <div style="text-align: center; padding: 5px; width: 100%;">
-    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="50" width="200" style="margin: 5px auto"/>
+    <img src="https://res.cloudinary.com/dipkbpinx/image/upload/v1697144067/logos/sendit-logo.png" alt="Sendit Logo" height="40" width="120"     style="margin: 5px auto; width:120px; height:40px; vertical-align:middle; aspect-ratio: 16 / 9;"/>
   </div>
   <h2 style="font-weight:bold; color:#2563eb"> Your Parcel Delivery Order has been Cancelled ❌</h2>
   <p>Hi ${props.name},</p>
