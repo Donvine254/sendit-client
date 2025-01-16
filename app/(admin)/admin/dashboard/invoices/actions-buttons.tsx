@@ -12,14 +12,14 @@ import {
 } from "@/components/ui/tooltip";
 import { Invoice } from "@prisma/client";
 import { sendInvoicePaymentReminder } from "@/emails";
-export function MarkOverdueButton({ invoiceId }: { invoiceId: string }) {
+export function MarkOverdueButton({ invoice }: { invoice: Invoice }) {
   const router = useRouter();
   async function handleMarkOverdue() {
     const toastId = toast.loading("Processing Request...", {
       position: "top-center",
     });
     try {
-      const res = await UpdateInvoiceStatus(invoiceId, "OVERDUE");
+      const res = await UpdateInvoiceStatus(invoice.id, "OVERDUE");
       toast.dismiss(toastId);
       if (res.success) {
         toast.success(res.message);
@@ -30,6 +30,8 @@ export function MarkOverdueButton({ invoiceId }: { invoiceId: string }) {
       console.error(error);
       toast.dismiss(toastId);
       toast.error("Something went wrong");
+    } finally {
+      sendInvoicePaymentReminder(invoice);
     }
   }
   return (
