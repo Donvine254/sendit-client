@@ -8,5 +8,6 @@ export async function GET(request: NextRequest) {
     });
   }
   const data = await prisma.parcel.findMany();
+  console.log("chron job run successfully", data.length, "parcels found");
   return Response.json(data);
 }
